@@ -2,34 +2,27 @@
 
 ### Installations ###
 * [Install WebStorm](https://www.jetbrains.com/student/)
-* [Install Sourcetree](https://www.sourcetreeapp.com/)
 * [Install Node.js](https://nodejs.org/en/)
-* [Install MongoDB](https://www.mongodb.com/)
 * [Install Git](https://git-scm.com/download/win)
 * [Install WebStorm IDE Debugging Extension for Chrome](https://chrome.google.com/webstore/detail/jetbrains-ide-support/hmhgeddbohgjknpmjagkdomcpobmllji)
 
 ### Set-Up (Initialization) ###
-* Connect SourceTree to the Repository at `https://bitbucket.org/sebastianober/sebaprojekt`
-* create folders `C:\data\db\` and `C:\data\log\`
-* Open WebStorm, load our project
-* At bottom left of the screen, click on symbol, open Terminal
-* Run `npm install mongoose --save-dev`
+* Open WebStorm
+* Check out from Version Control, Github, browse to correct repo
+* Ask for config folder with database info
 * Download plugin Mongo (from repository), restart WebStorm
 * Settings, Other Settings, Mongo Servers
-* In top box, enter path `C:\Program Files\MongoDB\Server\3.2\bin\mongo.exe`
-* Click on "+" for new connection, label "jetbrains", user database "jetbrains", test connection, ok
-* Run `npm install express --save-dev`
-* Run `npm install -g bower`
-* Run `cd public`
-* Run `bower install angular`
-* `npm install cors --save-dev`
-* `npm install body-parser --save-dev`
+* Click on "+" for new connection, label "wecarebest", user database "wecarebest", username and password from config file, test connection, ok
 
-### Every time ###
-* Run `C:\Program Files\MongoDB\Server\3.2\bin\mongod.exe`
+## To submit new code ##
+* Bottom menu line has tab "Version Control"
+* Somehow use / create the correct branch (not sure yet how to...)
+* If there are unstaged files, easiest fix: rightclick on root folder, Git, Add
+* To the left in the bottom Version Control tab, click the green arrow pointing up (VCS Commit)
+* Write commit message, select Commit and Push
 
 ## Video Tutorials ##
-* [Set-Up](https://www.youtube.com/watch?v=JnMvok0Yks8)
+* [Set-Up Tutorial used](https://www.youtube.com/watch?v=JnMvok0Yks8)
 * [TheNewBoston](https://www.youtube.com/watch?v=-u-j7uqU7sI&list=PL6gx4Cwl9DGBMdkKFn3HasZnnAqVjzHn_)
 * [Einführung in Express](https://www.youtube.com/watch?v=FqMIyTH9wSg&index=5&list=PLoYCgNOIyGAApoDfJHjmMgGNlYenKg5jO)
 * [MongoDB Connection](https://www.youtube.com/watch?v=5e1NEdfs4is&list=PLoYCgNOIyGAApoDfJHjmMgGNlYenKg5jO&index=5#t=189.394242)
@@ -42,10 +35,3 @@
 
 ## Stuff ##
 * [Markdown Syntax](https://bitbucket.org/tutorials/markdowndemo)
-
-## Database backup and sharing ##
-* [Source](https://docs.mongodb.com/manual/tutorial/backup-and-restore-tools/)
-* Run Mongodb Server
-* Run `mongodump.exe --out {{folder}}`
-* To restore: `mongorestore.exe {{path to backup}}`
-* Human readable: `mongoexport.exe --type={{csv|json}} --out {{folder}}`
