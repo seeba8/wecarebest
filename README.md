@@ -17,6 +17,7 @@
 ## To submit new code ##
 * Bottom menu line has tab "Version Control"
 * Somehow use / create the correct branch (not sure yet how to...)
+	* VCS, Git, Branches, create Branch
 * If there are unstaged files, easiest fix: rightclick on root folder, Git, Add
 * To the left in the bottom Version Control tab, click the green arrow pointing up (VCS Commit)
 * Write commit message, select Commit and Push
