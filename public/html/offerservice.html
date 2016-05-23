@@ -8,21 +8,29 @@
 <body>
 
 <div class="container">
-    <h2>Vertical (basic) form</h2>
+    <h2>Please enter your time of availability and location to offer a service</h2>
     <form role="form">
-        <div class="form-group">
-            <label for="typeofcare">Type of care:</label>
-            <input type="email" class="form-control" id="email" placeholder="Enter email">
+        <div class="form-group" >
+            <label for="typeofcare">Timeframe</label>
+            <input type="datetime-local" class="form-control" id="typeofcare" name="bdaytime">
         </div>
-        <div class="form-group">
+        <div class="form-group" >
+            <label for="typeofcare">Type of care:</label>
+            <input type="text" class="form-control" id="typeofcare" placeholder="Enter type of care">
+        </div>
+        <div class="form-group" >
             <label for="wage">Wage per hour in €/h</label>
-            <input type="number" class="form-control" id="wage" placeholder="Enter your wage per hour">
+            <input type="number" class="form-control" id="wage" placeholder="Enter wage per hour">
+        </div>
+        <div class="form-group" >
+            <label for="googlemaps">Supported area</label>
+            <input type="text" class="form-control" id="googlemaps" placeholder="Enter supported area">
         </div>
         <div class="form-group">
             <label for="notes">Notes</label>
-            <input type="text" class="form-control" id="notes" placeholder="Enter your notes">
+            <textarea class="form-control" rows="5" id="notes" placeholder="Enter notes"></textarea>
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-default">Offer Service</button>
     </form>
 </div>
 
