@@ -10,6 +10,8 @@ app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 
 var mongo = require("./config/config");
+var passport = require("passport");
+var passportLocal = require("passport-local");
 var mongostring =  "mongodb://" + mongo.username + ":" + mongo.password + "@" +
     mongo.url;
 
