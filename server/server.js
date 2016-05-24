@@ -23,6 +23,8 @@ db.once("open", function() {
     console.log("open");
 
 });
+
+/*
 var kittySchema = mongoose.Schema({
     name: String
 });
@@ -31,8 +33,10 @@ var silence = new Kitten({name:"loud"});
 silence.save(function(err){
     if(err) console.log("KITTEN DIED");
 });
+
+
+
 //
-/*
 var product = new Product({name : "WebStorm"});
 product.save(function (err) {
     if(err){
@@ -42,7 +46,7 @@ product.save(function (err) {
         console.log("saved");
     }
 
-})*/
+})
 app.get("/", function(req,res) {
     Kitten.find(function (err, products) {
         res.send(products);
@@ -56,4 +60,20 @@ app.post("/add", function(req,res) {
         res.send();
     })
 })
+
+app.post("/createoffer", function(req,res) {
+    var name = req.body.name;
+    var product = new Kitten({name: name});
+    product.save(function (err) {
+        res.send();
+    })
+})
+*/
+var offerRoutes = require("./requests_offers/offerRoutes");
+
+app.use("/api", offerRoutes());
+
+
+module.exports = app;
+
 app.listen(3000);

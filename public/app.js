@@ -1,21 +1,11 @@
 /**
  * Created by sebas on 15/05/2016.
  */
-var jetbrains = angular.module("jetbrains", []);
-jetbrains.controller("AppCtrl", function ($http) {
-    var app = this;
-    var url = "http://localhost:3000";
-    app.saveProduct = function(newProduct) {
-        $http.post(url + "/add", {name:newProduct}).success(function () {
-            loadProducts();
-        })
-    }
+angular.module("myApp", ['myApp.offers'])
 
-    function loadProducts() {
-        $http.get(url).success(function (products) {
-            app.products = products;
-        })
-    }
+    .config(function($stateProvider, $urlRouterProvider) {
 
-    loadProducts();
-})
+        // For any unmatched url, redirect to /movies
+        $urlRouterProvider.otherwise("/offers");
+
+});
