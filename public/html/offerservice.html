@@ -9,12 +9,12 @@
 
     <div class="container">
         <h2>Please enter your time of availability and location to offer a service</h2>
-        <form role="form">
-           <div class="form-group" >
+        <form role="form" >
+           <div class="form-group" ng-class="{ 'has-error': form.timeframe.$invalid }" >
                 <label for="typeofcare">Timeframe</label>
-                <input ng-model="offer.timeframe" type="datetime-local" class="form-control" id="typeofcare" name="bdaytime">
+                <input ng-model="offer.timeframe" type="datetime-local" class="form-control" id="timeframe" name="timeframe">
             </div>
-            <div class="form-group" >
+            <div class="form-group" ng-class="{ 'has-error': offer.typeofcare.$invalid }" >
                 <label for="typeofcare">Type of care:</label>
                 <input ng-model="offer.typeofcare" type="text" class="form-control" id="typeofcare" placeholder="Enter type of care">
             </div>
@@ -33,7 +33,7 @@
             <button ng-click="app.saveOffer()" class="btn btn-default">Offer Service</button>
         </form>
 
-        <p>{{offer | json}}} </p>
+        <p>{{offer | json }} </p>
     </div>
 
     <script src="../bower_components/angular/angular.js"></script>

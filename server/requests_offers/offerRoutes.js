@@ -15,7 +15,6 @@ function offerRoutes() {
 
     router.use(express.static(path.join(__dirname, '/../../public/')));
 
-
     router.use(function(req, res, next) {
         console.log('%s %s %s', req.method, req.url, req.path);
         next();
@@ -23,7 +22,6 @@ function offerRoutes() {
 
     router.route("/offers")
        .post(offerController.postOffer);
-
     return router;
 
 }
