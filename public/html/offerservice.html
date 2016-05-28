@@ -22,9 +22,40 @@
                 <label for="wage">Wage per hour in €/h</label>
                 <input ng-model="offer.wageperhour" type="number" class="form-control" id="wage" placeholder="Enter wage per hour">
             </div>
-            <div class="form-group" >
-                <label for="googlemaps">Supported area</label>
-                <input ng-model="offer.supportedarea" type="text" class="form-control" id="googlemaps" placeholder="Enter supported area">
+            <div class="form-group">
+                <label for="searchbox">Supported area</label>
+                <div id="searchBoxParent" class="form-group">
+                <!--<input type="text" class="form-control" id="searchbox" placeholder="Enter city">-->
+                </div>
+
+                <div class="form-group" >
+                    <label for="radius">Radius</label>
+                    <input ng-model="circle.radius" type="number" class="form-control" id="radius" placeholder="5000" onkeydown="if (event.keyCode == 13) {event.preventDefault(); event.stopPropagation();}">
+                </div>
+                <div class="form-group div-wrapper" data-tap-disabled="true">
+
+                    <ui-gmap-google-map id="gmap" center='map.center' zoom='map.zoom' events="map.events" options="map.options">
+                        <ui-gmap-search-box
+                                template='search.template'
+                                events='search.events'
+                                position='search.position'
+                                parentdiv='search.parentDiv'
+                                options='search.options'>
+                        </ui-gmap-search-box>
+                        <ui-gmap-circle center='circle.center'
+                                radius='circle.radius'
+                                fill='circle.fill'
+                                stroke='circle.stroke'
+                                clickable='circle.clickable'
+                                draggable='circle.draggable'
+                                editable='circle.editable'
+                                visible='circle.visible'
+                                events='circle.events'
+                                control="circle.control">
+
+                        </ui-gmap-circle>
+                    </ui-gmap-google-map>
+                </div>
             </div>
             <div class="form-group">
                 <label for="notes">Notes</label>
@@ -33,13 +64,18 @@
             <button ng-click="app.saveOffer()" class="btn btn-default">Offer Service</button>
         </form>
 
-        <p>{{offer | json }} </p>
+        <p>{{circle | json }} </p>
     </div>
 
     <script src="../bower_components/angular/angular.js"></script>
     <script src="offerservice.js"></script>
     <script src="../bower_components/jquery/dist/jquery.js"></script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
-
+    <script src="../bower_components/lodash/dist/lodash.min.js"></script>
+    <script src="../bower_components/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
+    <script src="../bower_components/angular-google-maps/dist/angular-google-maps.min.js"></script>
+    <!--<script src="https://maps.googleapis.com/maps/api/js?callback=initMap&key=AIzaSyCLOfEshWapwoqrg5qMVjhpG1DB75lvjTE"
+            async defer></script>-->
+    <link rel="stylesheet" href="offerservice.css">
 </body>
 </html>
