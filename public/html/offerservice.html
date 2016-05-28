@@ -8,7 +8,10 @@
 <body ng-app="jetbrains" ng-controller="CreateOfferCtrl as app">
 
     <div class="container">
-        <h2>Please enter your time of availability and location to offer a service</h2>
+        <h2>Create your offer</h2>
+        <p>
+        Insert your information in order for customers to use your service.
+        </p>
         <form name="Offer" role="form" ng-submit="submit()" novalidate>
 
             <!--###############################################
@@ -72,13 +75,13 @@
                        required />
                 <div ng-if="interacted(Offer.wageperhour)" ng-messages="Offer.wageperhour.$error" role="alert">
                     <div class="alert alert-danger" ng-message="required">
-                        Please enter your wage per hour.
+                        Please enter your wage per hour as positive numeric value with maximum of two decimals.
                     </div>
                     <div class="alert alert-danger" ng-message="minlength">
                         Not a valid wage! Please enter at least one digit as wage.
                     </div>
                     <div class="alert alert-danger" ng-message="pattern">
-                        Not a valid wage! Please use a positive value with a maximum of two decimals.
+                        Not a valid wage! Please use a positive numeric value with a maximum of two decimals.
                     </div>
                     <div class="alert alert-danger" ng-message="range">
                         Not a valid wage! Please enter your wage in range between 0 and 100.
@@ -119,14 +122,14 @@
                 <textarea ng-model="offer.notes" class="form-control" rows="5" id="notes" placeholder="Enter notes"></textarea>
             </div>
             <button type="submit" class="btn btn-default">Offer Service</button>
-            <div role="alert">
-                <div class="alert alert-success" ng-show="offer.$valid">
-                    Updated succesfully.
-                </div>
-            </div>
+            <div id="messages" class="alert alert-success" data-ng-show="messages" data-ng-bind="messages"></div>
+            <div id="statusmessages" class="alert alert-info" data-ng-show="statusmessages" data-ng-bind="statusmessages"></div>
+            <div id="errormessages" class="alert alert-warning" data-ng-show="errormessages" data-ng-bind="errormessages"></div>
+            <div data-ng-show="progress.active()" style="color: #0037ff; font-size: 50px;">Sending…</div>
         </form>
 
         <p>{{offer | json }} </p>
+
     </div>
 
     <script src="../bower_components/angular/angular.js"></script>
@@ -135,6 +138,7 @@
     <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="../bower_components/angular-bootstrap-show-errors/src/showErrors.js"></script>
     <script src="../bower_components/angular-messages/angular-messages.js"></script>
+
 
 
 </body>

@@ -11,6 +11,14 @@ jetbrains.controller('CreateOfferCtrl', ['$scope', '$http',  function($scope, $h
     var app = this;
 
     $scope.offer = {};
+    data = $scope.offer;
+
+    var config = {
+        headers : {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+        }
+    }
+
     $scope.onlyNumbers = /^[0-9]+$/;
 
     $scope.typeofcares = [
@@ -19,24 +27,48 @@ jetbrains.controller('CreateOfferCtrl', ['$scope', '$http',  function($scope, $h
         'Full Service'
         ];
 
+
+
+
+
     $scope.submitted = false;
     $scope.submit = function() {
+
+        // Trigger validation flag. True because user clicked on submit.
+        $scope.submitted = true;
+        $scope.errormessages = null;
+
         console.log("Clicked Submit Offer...");
+
+        //Validate form input. If fine then send data via HTTP POST to server. Otherwise show error.
         if($scope.Offer.$valid){
             console.log("Form is valid. Insert it...")
-            $http.post("../offers", $scope.offer).success(function(){
+            $scope.statusmessages = 'OK! Sending offer.';
+            $http.post("../offers", data).success(function(){
+                $scope.PostDataResponse = data;
+                $scope.messages = 'Success! Your offer has been created!';
+                $scope.statusmessages = null;
                 console.log("...Inserted Successfully!");
-            });
-        } else {
+            })
+                //IF error in HTTP POST then log it and show to user
+                .error(function (data, status, header, config) {
+                    $scope.ResponseDetails = "Data: " + data +
+                        "<hr />status: " + status +
+                        "<hr />headers: " + header +
+                        "<hr />config: " + config;
+                    $scope.errormessages = 'Sorry! There was a network error. Try again later.';
+                    $scope.statusmessages = null;
+                    $log.error(data);
+                });
+        } else if (!$scope.Offer.$valid) {
+            $scope.errormessages = 'Sorry! Offer is not valid. Please consider remarks.';
             console.log("...Form not valid.")
         }
-        $scope.submitted = true;
     };
 
     $scope.interacted = function(field) {
         return $scope.submitted || field.$dirty;
     };
-
 
 }]);
 
