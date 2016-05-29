@@ -10,8 +10,23 @@ app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 
 var mongo = require("./config/config");
-var passport = require("passport");
-var passportLocal = require("passport-local");
+var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
+//var passportLocal = require("passport-local");
+var expressSession = require('express-session');
+app.use(expressSession({secret: 'mySecretKey'}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(function(user, done) {
+    done(null, user._id);
+});
+
+passport.deserializeUser(function(id, done) {
+    User.findById(id, function(err, user) {
+        done(err, user);
+    });
+});
+
 var mongostring =  "mongodb://" + mongo.username + ":" + mongo.password + "@" +
     mongo.url;
 
@@ -65,13 +80,13 @@ app.get("/", function(req,res) {
     Kitten.find(function (err, products) {
         res.send(products);
     })
-})
+});
 
 app.get("/users", function (reg,res) {
     UserStructure.User.find(function (err,users) {
         res.send(users);
     })
-})
+});
 
 app.post("/addUser", function(req,res) {
     var type = req.body.type;
@@ -101,7 +116,39 @@ app.post("/addUser", function(req,res) {
     user.save(function (err) {
         res.send();
     })
-})
+});
+
+var isValidPassword = function(user, password){
+    var compare;
+    console.log("es wird was verglichen");
+    compare = user.pwd == password;
+    return compare;
+};
+
+passport.use('login',new LocalStrategy({
+        usernameField: 'email',
+        passwordField: 'pwd'
+    },
+    function(searched_username, password, done) {
+        console.log("test hier");
+        UserStructure.User.findOne({ email: searched_username }, function(err, found_username) {
+            if (err) { return done(err); }
+            if (!found_username) {
+                console.log('user not found');
+                return done(null, false, { message: 'Incorrect email address.' });
+            }
+            if (!isValidPassword(found_username, password)) {
+                console.log('incorrect PWD');
+                return done(null, false, { message: 'Incorrect password.' });
+            }
+            return done(null, user);
+        });
+    },
+    console.log("hier passiert was")
+));
+
+app.post('/login', passport.authenticate('login', { successRedirect: '/',
+    failureRedirect: '/failure'}));
 
 app.post("/add", function(req,res) {
     var name = req.body.name;
@@ -109,5 +156,10 @@ app.post("/add", function(req,res) {
     product.save(function (err) {
         res.send();
     })
-})
+});
+
+app.get("/failure", function(req,res) {
+    res.send(200,"Hello World");
+});
+
 app.listen(3000);

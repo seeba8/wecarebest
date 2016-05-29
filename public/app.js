@@ -28,6 +28,17 @@ jetbrains.controller("AppCtrl", function ($http) {
             loadUsers();
         })
     }
+    
+    app.login = function (email, pwd) {
+        $http.post(url + "/login", {
+            email: email,
+            pwd: pwd
+        }).success(function () {
+            console.log('success');
+        })
+    }
+    
+    
 
     function loadProducts() {
         $http.get(url).success(function (products) {
