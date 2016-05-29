@@ -6,16 +6,26 @@
     <title>Title</title>
 </head>
 <body ng-app="jetbrains" ng-controller="AppCtrl as app">
-<ul>
+<!--<ul>
     <li ng-repeat="product in app.products">
         {{product.name}}
 
     </li>
+</ul>-->
+<h1>Users:</h1>
+<ul>
+    <li ng-repeat="user in app.users">
+        {{user.firstName}}|{{user.name}}|{{user.email}}
+    </li>
 </ul>
 {{2+2}}
 
+
 <input type="text" ng-model="app.newProduct">
 <button ng-click="app.saveProduct(app.newProduct)">Save Product</button>
+<br><br>Neuen User Hinzufügen
+<input type="text" ng-model="app.newUser">
+<button ng-click="app.saveUser(app.newUser)">Save User</button>
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
