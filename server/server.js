@@ -17,6 +17,9 @@ app.use(expressSession({secret: 'mySecretKey'}));
 app.use(passport.initialize());
 app.use(passport.session());
 
+// pass passport for configuration
+require('./auth/passport')(passport);
+
 passport.serializeUser(function(user, done) {
     done(null, user._id);
 });
@@ -30,11 +33,6 @@ passport.deserializeUser(function(id, done) {
 var mongostring =  "mongodb://" + mongo.username + ":" + mongo.password + "@" +
     mongo.url;
 
-
-
-
-
-
 var mongoose = require("mongoose");
 mongoose.connect(mongostring);
 var db = mongoose.connection;
@@ -46,44 +44,16 @@ db.once("open", function() {
 
 var register = require("./auth/register");
 var login = require("./auth/login");
-var UserStructure = require("./users/structure");
+var User = require("./users/structure");
 
-
-var kittySchema = mongoose.Schema({
-    name: String
-});
-var Kitten = mongoose.model("Kitten", kittySchema);
-var silence = new Kitten({name:"loud"});
-silence.save(function(err){
-    if(err) console.log("KITTEN DIED");
-});
-
-
-
-
-
-
-
-//
-/*
-var product = new Product({name : "WebStorm"});
-product.save(function (err) {
-    if(err){
-        console.log("failed");
-    }
-    else {
-        console.log("saved");
-    }
-
-})*/
 app.get("/", function(req,res) {
-    Kitten.find(function (err, products) {
-        res.send(products);
+    User.find(function (err, users) {
+        res.send(users);
     })
 });
 
 app.get("/users", function (reg,res) {
-    UserStructure.User.find(function (err,users) {
+    User.find(function (err,users) {
         res.send(users);
     })
 });
@@ -100,7 +70,7 @@ app.post("/addUser", function(req,res) {
     var gender = req.body.gender;
     var email = req.body.email;
     var pwd = req.body.pwd;
-    var user = new UserStructure.User({
+    var user = new User({
         type: type,
         firstName: firstName,
         name: name,
@@ -118,37 +88,31 @@ app.post("/addUser", function(req,res) {
     })
 });
 
-var isValidPassword = function(user, password){
-    var compare;
-    console.log("es wird was verglichen");
-    compare = user.pwd == password;
-    return compare;
-};
+app.post('/login', function(req, res) {
+    User.findOne({
+        email: req.body.email
+    }, function(err, user) {
+        if (err) throw err;
+        console.log(user);
+        if (!user) {
+            res.send({success: false, msg: 'Authentication failed. User not found.'});
+        } else {
+            // check if password matches
+            user.comparePassword(req.body.pwd, function (err, isMatch) {
+                if (isMatch && !err) {
+                    // if user is found and password is right create a token
+                    var token = jwt.encode(user, config.secret);
+                    // return the information including token as JSON
+                    res.json({success: true, token: 'JWT ' + token});
+                } else {
+                    res.send({success: false, msg: 'Authentication failed. Wrong password. isMatch: ' + isMatch + 'is error:' + err});
+                }
+            });
+        }
+    });
+});
 
-passport.use('login',new LocalStrategy({
-        usernameField: 'email',
-        passwordField: 'pwd'
-    },
-    function(searched_username, password, done) {
-        console.log("test hier");
-        UserStructure.User.findOne({ email: searched_username }, function(err, found_username) {
-            if (err) { return done(err); }
-            if (!found_username) {
-                console.log('user not found');
-                return done(null, false, { message: 'Incorrect email address.' });
-            }
-            if (!isValidPassword(found_username, password)) {
-                console.log('incorrect PWD');
-                return done(null, false, { message: 'Incorrect password.' });
-            }
-            return done(null, user);
-        });
-    },
-    console.log("hier passiert was")
-));
-
-app.post('/login', passport.authenticate('login', { successRedirect: '/',
-    failureRedirect: '/failure'}));
+app.post('/logout', function(req, res){ req.logOut(); res.send(200); });
 
 app.post("/add", function(req,res) {
     var name = req.body.name;

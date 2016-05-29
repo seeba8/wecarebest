@@ -9,7 +9,7 @@ jetbrains.controller("AppCtrl", function ($http) {
         $http.post(url + "/add", {name:newProduct}).success(function () {
             loadProducts();
         })
-    }
+    };
 
     app.saveUser = function (type, firstName, name, street, city, postalCode, country, phone, gender, email, pwd) {
         $http.post(url + "/addUser", {
@@ -27,16 +27,29 @@ jetbrains.controller("AppCtrl", function ($http) {
         }).success(function () {
             loadUsers();
         })
-    }
+    };
     
-    app.login = function (email, pwd) {
+/*    app.login = function (e, p) {
         $http.post(url + "/login", {
-            email: email,
-            pwd: pwd
-        }).success(function () {
-            console.log('success');
-        })
-    }
+            email: e,
+            pwd: p
+        }).then(function(response) {
+            $httpProvider.defaults.headers.common["X-AUTH-TOKEN"] = response.data.token;
+        });
+    };*/
+
+    app.login = function(user) {
+        return $q(function(resolve, reject) {
+            $http.post(API_ENDPOINT.url + '/login', user).then(function(result) {
+                if (result.data.success) {
+                    storeUserCredentials(result.data.token);
+                    resolve(result.data.msg);
+                } else {
+                    reject(result.data.msg);
+                }
+            });
+        });
+    };
     
     
 
@@ -54,4 +67,4 @@ jetbrains.controller("AppCtrl", function ($http) {
 
     loadProducts();
     loadUsers();
-})
+});
