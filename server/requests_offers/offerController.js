@@ -83,3 +83,30 @@ module.exports.postOffer = function(req, res){
 module.exports.getOffer = function(req, res){
     res.sendFile("/html/offerservice.html", { root: path.join(__dirname, '/../../public') });
 }
+
+module.exports.showmyOffer = function(req, res){
+    res.sendFile("/html/myoffers.html", { root: path.join(__dirname, '/../../public') });
+}
+
+module.exports.getmyOffer = function (req, res){
+    console.log("getmyOffer aufgerufen!")
+    Offer.find(function(err, offers){
+        console.log("Offer find ausgeführt.")
+        res.send(offers);
+    })
+}
+
+module.exports.deletemyOffer = function (req, res){
+    console.log("deletemyOffer aufgerufen!");
+    console.log(req.body.id);
+    var id = req.body.id;
+    Offer.findByIdAndRemove(id, function (err,offer){
+        if(err) {
+            throw err;
+        } else {
+            console.log("erfolgreich gelöscht:" + id);
+            res.send();
+        };
+    });
+
+};

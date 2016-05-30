@@ -15,14 +15,23 @@ function offerRoutes() {
 
     router.use(express.static(path.join(__dirname, '/../../public/')));
 
-    router.use(function(req, res, next) {
-        console.log('%s %s %s', req.method, req.url, req.path);
-        next();
-    });
-
+router.use(function(req, res, next) {
+    console.log('%s %s %s', req.method, req.url, req.path);
+    next();
+});
+    
     router.route("/offers")
         .post(offerController.postOffer)
         .get(offerController.getOffer);
-    return router;
+    router.route("/getmyoffers")
+        .get(offerController.getmyOffer);
+    router.route("/showmyoffers")
+        .get(offerController.showmyOffer);
+    router.route("/deletemyoffer")
+        .post(offerController.deletemyOffer);    
+return router;
+
+
 
 }
+

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
     <title>Title</title>
 </head>
 <body ng-app="myOffersApp" ng-controller="ShowMyOffersCtrl as app">
@@ -20,7 +20,7 @@
             </form>
         </div>
     </div>
-    <div class="row">
+    <div class="row" >
         <div class="col-sm-6 col-md-6">
             <h4>My bookings and requests</h4>
         </div>
@@ -33,24 +33,19 @@
     </div>
     <hr>
 
-    <div class="row">
+    <div class="row" ng-repeat="offer in app.offers" style="margin-bottom: 30px;">
         <div class="col-sm-8 col-md-8">
             <div class="media">
-                <div class="media-left">
-                    <a href="#">
-                        <img class="media-object"
-                             src="../images/clint.jpg"
-                             alt="Picture of careseeker"
-                             style="height:165px;border:rgb(221, 221, 221)  1px solid"
-                        >
-                    </a>
-                </div>
                 <div class="media-body">
                     <ul class="list-group">
-                        <h4 class="media-heading list-group-item-heading" style="background-color: #2b669a;padding:10px;color:white;margin-bottom: 0px;">Max Mustermann</h4>
-                        <li class="list-group-item"><b>Amount of care:</b> Basic </li>
-                        <li class="list-group-item"><b>Location:</b> Mustermannweg 3, 80799 München</li>
-                        <li class="list-group-item"><b>Notes:</b> Requires meal and assistance for stroll.</li>
+                        <h4 class="media-heading list-group-item-heading"
+                            style="background-color: #2b669a;padding:10px;color:white;margin-bottom: 0px;">
+                            {{offer.typeofcare}} | {{offer.timeframe}} |
+                        </h4>
+                        <li class="list-group-item"><b>Date created:</b> {{offer.timestamp}} </li>
+                        <li class="list-group-item"><b>Wage:</b> {{offer.wageperhour}} € / h</li>
+                        <li class="list-group-item"><b>Location:</b> {{offer.supportedarea}}</li>
+                        <li class="list-group-item"><b>Notes:</b> {{offer.notes}}</li>
                     </ul>
                 </div>
             </div>
@@ -60,51 +55,52 @@
                 Open request.</p>
         </div>
         <div class="col-sm-2 col-md-2 pull-right">
-            <a href="#" class="btn btn-primary btn-success" style="min-width:80%;margin-top:10px;"><span class="glyphicon glyphicon-ok"></span> Accept</a>
-            <a href="#" class="btn btn-danger" style="min-width:80%;margin-top:10px;"><span class="glyphicon glyphicon-remove-sign"></span> Reject</a>
-            <a href="#" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;"><span class="glyphicon glyphicon-envelope"></span> Contact</a>
+            <a href="#" class="btn btn-primary btn-success" style="min-width:80%;margin-top:10px;"><span class="glyphicon glyphicon-ok"></span> Ansehen</a>
+            <a href="" ng-click="deleteOffer(offer._id, $index)" class="btn btn-danger" style="min-width:80%;margin-top:10px;"><span class="glyphicon glyphicon-remove-sign"></span> Löschen</a>
+            <a href="#" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;"><span class="glyphicon glyphicon-envelope"></span> Bearbeiten</a>
         </div>
+
     </div>
 
 
-<!--    <div class="row" style="margin-top:20px;">
-        <div class="col-sm-8 col-md-8">
-            <div class="media">
-                <div class="media-left">
-                    <a href="#">
-                        <img class="media-object"
-                             src="../images/senior.jpg"
-                             alt="..."
-                             style="height:165px;border:rgb(221, 221, 221)  1px solid"
-                        >
-                    </a>
-                </div>
-                <div class="media-body">
-                    <ul class="list-group">
-                        <h4 class="media-heading list-group-item-heading" style="background-color: #2b669a;padding:10px;color:white;margin-bottom: 0px;">Matthias Mustermensch</h4>
-                        <li class="list-group-item"><b>Amount of care:</b> Premium</li>
-                        <li class="list-group-item"><b>Location:</b> Mustermannweg 3, 80799 München</li>
-                        <li class="list-group-item"><b>Notes:</b> Requires meal and assistance for stroll.</li>
-                    </ul>
+    <!--    <div class="row" style="margin-top:20px;">
+            <div class="col-sm-8 col-md-8">
+                <div class="media">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object"
+                                 src="../images/senior.jpg"
+                                 alt="..."
+                                 style="height:165px;border:rgb(221, 221, 221)  1px solid"
+                            >
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <ul class="list-group">
+                            <h4 class="media-heading list-group-item-heading" style="background-color: #2b669a;padding:10px;color:white;margin-bottom: 0px;">Matthias Mustermensch</h4>
+                            <li class="list-group-item"><b>Amount of care:</b> Premium</li>
+                            <li class="list-group-item"><b>Location:</b> Mustermannweg 3, 80799 München</li>
+                            <li class="list-group-item"><b>Notes:</b> Requires meal and assistance for stroll.</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-2 col-md-2" style="height:100% !important">
-            <p>Status:</br>
-                To be paid.</p>
-        </div>
-        <div class="col-sm-2 col-md-2 pull-right">
-            <a href="#" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;"><span class="glyphicon glyphicon-envelope"></span> Contact</a>
-        </div>
-    </div>-->
+            <div class="col-sm-2 col-md-2" style="height:100% !important">
+                <p>Status:</br>
+                    To be paid.</p>
+            </div>
+            <div class="col-sm-2 col-md-2 pull-right">
+                <a href="#" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;"><span class="glyphicon glyphicon-envelope"></span> Contact</a>
+            </div>
+        </div>-->
 
 
 </div>
 
-<script src="../bower_components/angular/angular.js"></script>
-<script src="mybookings.js"></script>
-<script src="../bower_components/jquery/dist/jquery.js"></script>
-<script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="/bower_components/angular/angular.js"></script>
+<script src="/html/myoffers.js"></script>
+<script src="/bower_components/jquery/dist/jquery.js"></script>
+<script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
 
 
 </body>
