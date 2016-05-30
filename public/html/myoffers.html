@@ -26,33 +26,29 @@
         </div>
         <div class="col-sm-6 col-md-6 pull-right">
             <div class="btn-group" style="float:right">
-                <a href="#" class="btn btn-primary btn-primary"><span class="glyphicon glyphicon-export"></span> Show recent entries</a>
+                <a href="#" ng-click="app.recent = !app.recent" class="btn btn-primary btn-primary"><span class="glyphicon glyphicon-export"></span> Show recent entries</a>
                 <a href="#" class="btn btn-primary btn-info"><span class="glyphicon glyphicon-stats"></span> Filter entries</a>
             </div>
         </div>
     </div>
     <hr>
 
-    <div class="row" ng-repeat="offerfinal in app.offerfinals" style="margin-bottom: 30px;">
-        <div class="col-sm-8 col-md-8">
+    <div class="row" ng-repeat="offerfinal in app.offerfinals | orderBy:'timestamp': app.recent" style="margin-bottom: 30px;">
+        <div class="col-sm-10 col-md-10">
             <div class="media">
                 <div class="media-body">
                     <ul class="list-group">
                         <h4 class="media-heading list-group-item-heading"
                             style="background-color: #2b669a;padding:10px;color:white;margin-bottom: 0px;">
-                            {{offerfinal.typeofcare}} | {{offerfinal.timeframe}} |
+                            {{offerfinal.typeofcare}} | {{offerfinal.timeframe | datetime1}} |
                         </h4>
-                        <li class="list-group-item"><b>Date created:</b> {{offerfinal.timestamp}} </li>
+                        <li class="list-group-item"><b>Date created:</b> {{offerfinal.timestamp | datetime1}} </li>
                         <li class="list-group-item"><b>Wage:</b> {{offerfinal.wageperhour}} € / h</li>
                         <li class="list-group-item"><b>Location:</b> {{offerfinal.supportedarea}}</li>
                         <li class="list-group-item"><b>Notes:</b> {{offerfinal.notes}}</li>
                     </ul>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-2 col-md-2" style="height:100% !important">
-            <p>Status:</br>
-                Open request.</p>
         </div>
         <div class="col-sm-2 col-md-2 pull-right">
             <a href="#" class="btn btn-primary btn-success" style="min-width:80%;margin-top:10px;"><span class="glyphicon glyphicon-ok"></span> View</a>

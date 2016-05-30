@@ -7,8 +7,10 @@ var myOffersApp = angular.module('myOffersApp', []);
 myOffersApp.controller('ShowMyOffersCtrl', ['$scope', '$http',  function($scope, $http) {
     var app = this;
     var url = "http://localhost:3000";
+    app.recent = true;
 
     $http.get(url + "/getmyOffers").success(function(offers){
+        
         app.offerfinals = offers;
     })
 
@@ -81,3 +83,17 @@ myOffersApp.controller('ShowMyOffersCtrl', ['$scope', '$http',  function($scope,
 
 
 }]);
+
+myOffersApp.filter('datetime1', function($filter)
+{
+    return function(input)
+    {
+        if(input == null){ return ""; }
+
+        var _date = $filter('date')(new Date(input),
+            'MM/dd/yyyy - HH:mm UTC');
+
+        return _date.toUpperCase();
+
+    };
+});
