@@ -39,21 +39,10 @@ jetbrains.controller("AppCtrl", function ($http) {
             //$httpProvider.defaults.headers.common["X-AUTH-TOKEN"] = response.data.token;
         });
     };
-
-    
-
-    function loadProducts() {
-        $http.get(url).success(function (products) {
-            app.products = products;
-        })
-    }
-
     function loadUsers() {
         $http.get(url + "/users").success(function (users) {
             app.users = users;
         })
     }
 
-    //loadProducts();
-    //loadUsers();
 });
