@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 console.log("Schema geladen.");
 //define offer mongoose Schema
 var offerSchema = mongoose.Schema({
+    timestamp : Date,
     timeframe : Date,
     typeofcare : String,
     wageperhour: Number,

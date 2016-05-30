@@ -3,7 +3,7 @@
  * Logic: Is forwarded by offerRoutes and saves request to database. In this case a new offer according to Schema.
  */
 
-// Load Schema of OFfer
+// Load Schema of Offer
 var Offer = require('./offerSchema');
 
 //For debugging purposes
@@ -13,9 +13,10 @@ console.log("offerController File geladen.");
 module.exports.postOffer = function(req, res){
 
     //For debugging purposes
-    console.log("Test wageperhour:" + req.body.wageperhour);
+    console.log("Test date:" + req.body.date);
 
     //rename for easier usage
+    var date = req.body.date;
     var timeframe = req.body.timeframe;
     var typeofcare = req.body.typeofcare;
     var wageperhour = req.body.wageperhour;
@@ -33,7 +34,7 @@ module.exports.postOffer = function(req, res){
     */
 
     //define new Offer object with given parts
-    var offer = new Offer({timeframe:timeframe, typeofcare:typeofcare, wageperhour:wageperhour, supportedarea: supportedarea, notes: notes});
+    var offer = new Offer({timestamp:date, timeframe:timeframe, typeofcare:typeofcare, wageperhour:wageperhour, supportedarea: supportedarea, notes: notes});
     
     //according to mongoose function save offer to database
     offer.save(function(err) {

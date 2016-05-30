@@ -1,13 +1,13 @@
 /**
  * Created by MS on 23.05.2016.
  */
-var jetbrains = angular.module('jetbrains', ['ui.bootstrap.showErrors', 'ngMessages']);
+var offerApp = angular.module('offerApp', ['ui.bootstrap.showErrors', 'ngMessages']);
 
-jetbrains.config(['showErrorsConfigProvider', function(showErrorsConfigProvider) {
+offerApp.config(['showErrorsConfigProvider', function(showErrorsConfigProvider) {
     showErrorsConfigProvider.showSuccess(true);
 }]);
 
-jetbrains.controller('CreateOfferCtrl', ['$scope', '$http',  function($scope, $http) {
+offerApp.controller('CreateOfferCtrl', ['$scope', '$http',  function($scope, $http) {
     var app = this;
 
     $scope.offer = {};
@@ -27,13 +27,8 @@ jetbrains.controller('CreateOfferCtrl', ['$scope', '$http',  function($scope, $h
         'Full Service'
         ];
 
-
-
-
-
     $scope.submitted = false;
     $scope.submit = function() {
-
         // Trigger validation flag. True because user clicked on submit.
         $scope.submitted = true;
         $scope.errormessages = null;
@@ -42,6 +37,7 @@ jetbrains.controller('CreateOfferCtrl', ['$scope', '$http',  function($scope, $h
 
         //Validate form input. If fine then send data via HTTP POST to server. Otherwise show error.
         if($scope.Offer.$valid){
+            $scope.offer.date = new Date();
             console.log("Form is valid. Insert it...")
             $scope.statusmessages = 'OK! Sending offer.';
             $http.post("../offers", data).success(function(){
@@ -72,7 +68,7 @@ jetbrains.controller('CreateOfferCtrl', ['$scope', '$http',  function($scope, $h
 
 }]);
 
-jetbrains.directive("range", function() {
+offerApp.directive("range", function() {
     return {
         restrict: "A",
 

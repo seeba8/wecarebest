@@ -2,7 +2,7 @@
  * Created by MS on 23.05.2016.
  */
 module.exports = offerRoutes;
-var Offer = require('./offerSchema');
+//var Offer = require('./offerSchema');
 
 console.log("OfferRoutes geladen");
 
