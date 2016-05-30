@@ -3,8 +3,10 @@
  */
 var jetbrains = angular.module("jetbrains", []);
 jetbrains.controller("AppCtrl", function ($http) {
+
     var app = this;
     var url = "http://localhost:3000";
+
     app.saveProduct = function(newProduct) {
         $http.post(url + "/add", {name:newProduct}).success(function () {
             loadProducts();
@@ -29,29 +31,14 @@ jetbrains.controller("AppCtrl", function ($http) {
         })
     };
     
-/*    app.login = function (e, p) {
+     app.login = function (e, p) {
         $http.post(url + "/login", {
             email: e,
             pwd: p
         }).then(function(response) {
-            $httpProvider.defaults.headers.common["X-AUTH-TOKEN"] = response.data.token;
-        });
-    };*/
-
-    app.login = function(user) {
-        return $q(function(resolve, reject) {
-            $http.post(API_ENDPOINT.url + '/login', user).then(function(result) {
-                if (result.data.success) {
-                    storeUserCredentials(result.data.token);
-                    resolve(result.data.msg);
-                } else {
-                    reject(result.data.msg);
-                }
-            });
+            //$httpProvider.defaults.headers.common["X-AUTH-TOKEN"] = response.data.token;
         });
     };
-    
-    
 
     function loadProducts() {
         $http.get(url).success(function (products) {
@@ -65,6 +52,6 @@ jetbrains.controller("AppCtrl", function ($http) {
         })
     }
 
-    loadProducts();
-    loadUsers();
+    //loadProducts();
+    //loadUsers();
 });

@@ -46,11 +46,7 @@ var register = require("./auth/register");
 var login = require("./auth/login");
 var User = require("./users/structure");
 
-app.get("/", function(req,res) {
-    User.find(function (err, users) {
-        res.send(users);
-    })
-});
+
 
 app.get("/users", function (reg,res) {
     User.find(function (err,users) {
@@ -124,6 +120,12 @@ app.post("/add", function(req,res) {
 
 app.get("/failure", function(req,res) {
     res.send(200,"Hello World");
+});
+
+app.get("/", function(req,res) {
+    User.find(function (err, users) {
+        res.send(users);
+    })
 });
 
 app.listen(3000);
