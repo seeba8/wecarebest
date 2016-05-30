@@ -18,7 +18,7 @@ offerApp.controller('CreateOfferCtrl', ['$scope', '$http',  function($scope, $ht
         headers : {
             'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
         }
-    }
+    };
 
     $scope.onlyNumbers = /^[0-9]+$/;
 

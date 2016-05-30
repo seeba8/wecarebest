@@ -78,3 +78,7 @@ module.exports.postOffer = function(req, res){
         }
     });
 };
+
+module.exports.getOffer = function(req, res){
+    res.sendfile("public/html/offerservice.html");
+}
