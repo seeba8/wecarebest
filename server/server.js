@@ -9,6 +9,8 @@ app.use(cors());
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 
+var path = require("path");
+
 var mongo = require("./config/config");
 var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
 //var passportLocal = require("passport-local");
@@ -48,7 +50,8 @@ var login = require("./auth/login");
 var passportConfig = require ("./config/passportConfig");
 var User = require("./users/structure");
 
-
+var authRoutes = require("./auth/authRouter");
+app.use("/",authRoutes());
 
 app.get("/users", function (reg,res) {
     User.find(function (err,users) {
@@ -56,7 +59,7 @@ app.get("/users", function (reg,res) {
     })
 });
 
-app.post("/addUser", function(req,res) {
+/*app.post("/addUser", function(req,res) {
     var type = req.body.type;
     var firstName = req.body.firstName;
     var name = req.body.name;
@@ -84,9 +87,10 @@ app.post("/addUser", function(req,res) {
     user.save(function (err) {
         res.send();
     })
-});
+});*/
 
-app.post('/login', function(req, res) {
+
+/*app.post('/login', function(req, res) {
     User.findOne({
         email: req.body.email
     }, function(err, user) {
@@ -108,7 +112,7 @@ app.post('/login', function(req, res) {
             });
         }
     });
-});
+});*/
 
 app.post('/logout', function(req, res){ req.logOut(); res.send(200); });
 
