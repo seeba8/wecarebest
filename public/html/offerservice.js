@@ -9,6 +9,7 @@ offerApp.config(['showErrorsConfigProvider', function(showErrorsConfigProvider) 
 
 offerApp.controller('CreateOfferCtrl', ['$scope', '$http',  function($scope, $http) {
     var app = this;
+    var url = 'http://localhost:3000';
 
     $scope.offer = {};
     data = $scope.offer;
@@ -40,7 +41,7 @@ offerApp.controller('CreateOfferCtrl', ['$scope', '$http',  function($scope, $ht
             $scope.offer.date = new Date();
             console.log("Form is valid. Insert it...")
             $scope.statusmessages = 'OK! Sending offer.';
-            $http.post("../offers", data).success(function(){
+            $http.post(url + "/offers", data).success(function(){
                 $scope.PostDataResponse = data;
                 $scope.messages = 'Success! Your offer has been created!';
                 $scope.statusmessages = null;

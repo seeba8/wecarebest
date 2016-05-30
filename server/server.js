@@ -71,7 +71,7 @@ app.post("/createoffer", function(req,res) {
 */
 var offerRoutes = require("./requests_offers/offerRoutes");
 
-app.use("/api", offerRoutes());
+app.use("/", offerRoutes());
 
 
 module.exports = app;

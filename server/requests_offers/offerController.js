@@ -23,15 +23,44 @@ module.exports.postOffer = function(req, res){
     var supportedarea = req.body.supportedarea;
     var notes = req.body.notes;
 
-    /*
-    TODO Data Validation on Backend
-    TODO Authentification Validation on Backend
+
+    //######################
+    //##### VALIDATION #####
+    //######################
+    if(!date){
+        res.status(400).send('date is required');
+        console.log("date is not defined");
+        return;
+    }
+
+    if(!timeframe){
+        res.status(400).send('timeframe is required');
+        console.log("timeframe is not defined");
+        return;
+    }
+
+    if(!typeofcare){
+        res.status(400).send('typeofcare is required');
+        console.log("typeofcare is not defined");
+        return;
+    }
+
+    if(!wageperhour){
+        res.status(400).send('wageperhour is required');
+        console.log("wageperhour is not defined");
+        return;
+    }
+
     if(!supportedarea){
-        res.status(400).send('username required');
+        res.status(400).send('Supported area is required');
         console.log("Supported area not defined");
         return;
     }
-    */
+
+
+    //#############################
+    //##### SAVE TO DATABASE  #####
+    //#############################
 
     //define new Offer object with given parts
     var offer = new Offer({timestamp:date, timeframe:timeframe, typeofcare:typeofcare, wageperhour:wageperhour, supportedarea: supportedarea, notes: notes});
