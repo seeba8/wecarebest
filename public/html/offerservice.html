@@ -31,6 +31,63 @@
                 <div class="alert alert-danger" ng-message="required">Please select the time of your offered services</div>
             </div>
 
+            <!-- Advanced Time Options -->
+            <div class="form-group">
+                <div class="checkbox form-group" id="weekdays">
+                    <label class="checkbox-inline">
+                        <input id="chk-mon" name="mon" type="checkbox" aria-label="Monday" />
+                        Monday
+                    </label>
+                    <label class="checkbox-inline">
+                        <input id="chk-tue" value="tue" name="tue" type="checkbox" aria-label="Tuesday" />
+                        Tuesday
+                    </label>
+                    <label class="checkbox-inline">
+                        <input id="chk-wed" name="wed" type="checkbox" aria-label="Wednesday" />
+                        Wednesday
+                    </label>
+                    <label class="checkbox-inline">
+                        <input id="chk-thu" name="thu" type="checkbox" aria-label="Thursday" />
+                        Thursday
+                    </label>
+                    <label class="checkbox-inline">
+                        <input id="chk-fri" name="fri" type="checkbox" aria-label="Friday" />
+                        Friday
+                    </label>
+                    <label class="checkbox-inline">
+                        <input id="chk-sat" name="sat" type="checkbox" aria-label="Saturday" />
+                        Saturday
+                    </label>
+                    <label class="checkbox-inline">
+                        <input id="chk-sun" name="sun" type="checkbox" aria-label="Sunday" />
+                        Sunday
+                    </label>
+                </div>
+                <div class="radio form-group">
+                    <label class="radio-inline">
+                        <input type="radio" name="frequency" id="weekly" />
+                        Weekly
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="frequency" id="biweekly" />
+                        Bi-Weekly
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="frequency" id="monthly" />
+                        Monthly
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="enddate">Until</label>
+                    <input ng-model="offer.enddate"
+                           type="date"
+                           class="form-control"
+                           id="enddate"
+                           name="enddate"
+                           required>
+                </div>
+            </div>
+
 
 
             <!--###############################################
@@ -62,6 +119,7 @@
                 -->
             <div class="form-group">
                 <label for="wage">Wage per hour in €/h</label>
+                <div class="input-group">
                 <input ng-model="offer.wageperhour"
                        type="number"
                        class="form-control"
@@ -73,6 +131,8 @@
                        ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/"
                        step="0.01"
                        required />
+                <span class="input-group-addon">&euro;</span>
+                </div>
                 <div ng-if="interacted(Offer.wageperhour)" ng-messages="Offer.wageperhour.$error" role="alert">
                     <div class="alert alert-danger" ng-message="required">
                         Please enter your wage per hour as positive numeric value with maximum of two decimals.
