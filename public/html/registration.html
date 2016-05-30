@@ -10,12 +10,6 @@
     </style>
 </head>
 <body ng-app="jetbrains" ng-controller="AppCtrl as app">
-<h1>Users:</h1>
-<ul>
-    <li ng-repeat="user in app.users">
-        {{user.firstName}}|{{user.name}}|{{user.email}}
-    </li>
-</ul>
 <div class="container">
 
     <div class="col-sm-6 col-sm-offset-3">
@@ -26,57 +20,61 @@
 
         <div class="form-group">
             <label>Type</label>
-            <input type="text" ng-model="app.type">
+            <!--<input type="text" class="form-control" ng-model="app.type" required>-->
+            <select ng-model="app.type" ng-options="caregiver careseeker" type="text" class="form-control" required>
+                <option value="1">Caregiver</option>
+                <option value="2">Careseeker</option>
+            </select>
         </div>
 
         <div class="form-group">
             <label>First Name</label>
-            <input type="text" ng-model="app.firstName">
+            <input type="text" class="form-control" placeholder="First Name" ng-model="app.firstName" required>
         </div>
 
         <div class="form-group">
             <label>Name</label>
-            <input type="text" ng-model="app.name">
+            <input type="text" class="form-control" placeholder="Name" ng-model="app.name" required>
         </div>
 
         <div class="form-group">
             <label>Street</label>
-            <input type="text" ng-model="app.street">
+            <input type="text" class="form-control" placeholder="Street" ng-model="app.street" required>
         </div>
 
         <div class="form-group">
             <label>City</label>
-            <input type="text" ng-model="app.city">
+            <input type="text" class="form-control" ng-model="app.city" required>
         </div>
 
         <div class="form-group">
             <label>Postal Code</label>
-            <input type="text" ng-model="app.postalCode">
+            <input type="text" class="form-control" ng-model="app.postalCode" required>
         </div>
 
         <div class="form-group">
             <label>Country</label>
-            <input type="text" ng-model="app.country">
+            <input type="text" class="form-control" ng-model="app.country" required>
         </div>
 
         <div class="form-group">
             <label>Phone</label>
-            <input type="text" ng-model="app.phone">
+            <input type="text" class="form-control" ng-model="app.phone" required>
         </div>
 
         <div class="form-group">
             <label>Gender</label>
-            <input type="text" ng-model="app.gender">
+            <input type="text" class="form-control" ng-model="app.gender" required>
         </div>
 
         <div class="form-group">
             <label>Email</label>
-            <input type="text" ng-model="app.email">
+            <input type="text" class="form-control" ng-model="app.email" required>
         </div>
 
         <div class="form-group">
             <label>Password</label>
-            <input type="password" ng-model="app.pwd">
+            <input type="password" class="form-control" ng-model="app.pwd" required>
         </div>
 
         <button ng-click="app.saveUser(app.type, app.firstName, app.name, app.street, app.city, app.postalCode, app.country, app.phone, app.gender, app.email, app.pwd)" class="btn btn-warning btn-lg">Signup</button>
@@ -91,7 +89,7 @@
 
 </div>
 
-<script src="../bower_components/angular/angular.js"></script>
+<script src="../bower_components/angular/angular.min.js"></script>
 <script src="../bower_components/jquery/dist/jquery.js"></script>
 <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script src="../app.js"></script>

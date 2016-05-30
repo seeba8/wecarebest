@@ -19,6 +19,7 @@ app.use(passport.session());
 
 // pass passport for configuration
 require('./auth/passport')(passport);
+var jwt = require('jwt-simple');
 
 passport.serializeUser(function(user, done) {
     done(null, user._id);
@@ -44,6 +45,7 @@ db.once("open", function() {
 
 var register = require("./auth/register");
 var login = require("./auth/login");
+var passportConfig = require ("./config/passportConfig");
 var User = require("./users/structure");
 
 
@@ -97,11 +99,11 @@ app.post('/login', function(req, res) {
             user.comparePassword(req.body.pwd, function (err, isMatch) {
                 if (isMatch && !err) {
                     // if user is found and password is right create a token
-                    var token = jwt.encode(user, config.secret);
+                    var token = jwt.encode(user, passportConfig.secret);
                     // return the information including token as JSON
                     res.json({success: true, token: 'JWT ' + token});
                 } else {
-                    res.send({success: false, msg: 'Authentication failed. Wrong password. isMatch: ' + isMatch + 'is error:' + err});
+                    res.send({success: false, msg: 'Authentication failed. Wrong password.'});
                 }
             });
         }

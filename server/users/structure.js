@@ -14,7 +14,11 @@ var userSchema = mongoose.Schema({
     postalCode: String, /** this must be a string, as postal codes can potentially start with 0 (or user can be located abroad ...) */
     country: String,
     phone: String, /** begins with 0, thus String */
-    email: String,
+    email: {
+        unique: true,
+        type: String,
+        required: true
+    },
     pwd: String,
     gender: { type: Number, min: 1, max: 2 } /** 1 for female, 2 for male */
 });

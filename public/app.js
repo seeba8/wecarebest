@@ -40,6 +40,8 @@ jetbrains.controller("AppCtrl", function ($http) {
         });
     };
 
+    
+
     function loadProducts() {
         $http.get(url).success(function (products) {
             app.products = products;
