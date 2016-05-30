@@ -44,7 +44,6 @@ db.once("open", function() {
     console.log("open");
 
 });
-
 var register = require("./auth/register");
 var login = require("./auth/login");
 var passportConfig = require ("./config/passportConfig");
@@ -116,13 +115,24 @@ app.get("/users", function (reg,res) {
 
 app.post('/logout', function(req, res){ req.logOut(); res.send(200); });
 
-app.post("/add", function(req,res) {
+
+
+app.post("/createoffer", function(req,res) {
     var name = req.body.name;
     var product = new Kitten({name: name});
     product.save(function (err) {
         res.send();
     })
 });
+
+var offerRoutes = require("./requests_offers/offerRoutes");
+
+app.use("/", offerRoutes());
+
+
+
+
+
 
 app.get("/failure", function(req,res) {
     res.send(200,"Hello World");
@@ -135,3 +145,4 @@ app.get("/", function(req,res) {
 });
 
 app.listen(3000);
+module.exports = app;

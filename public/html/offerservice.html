@@ -5,32 +5,260 @@
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
     <title>Title</title>
 </head>
-<body>
+<body ng-app="offerApp" ng-controller="CreateOfferCtrl as app">
 
-<div class="container">
-    <h2>Vertical (basic) form</h2>
-    <form role="form">
-        <div class="form-group">
-            <label for="typeofcare">Type of care:</label>
-            <input type="email" class="form-control" id="email" placeholder="Enter email">
-        </div>
-        <div class="form-group">
-            <label for="wage">Wage per hour in €/h</label>
-            <input type="number" class="form-control" id="wage" placeholder="Enter your wage per hour">
-        </div>
-        <div class="form-group">
-            <label for="notes">Notes</label>
-            <input type="text" class="form-control" id="notes" placeholder="Enter your notes">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-    </form>
-</div>
+    <div class="container">
+        <h2>Create your offer</h2>
+        <p>
+        Insert your information in order for customers to use your service.
+        </p>
+        <form name="Offer" role="form" ng-submit="submit()" novalidate>
+
+            <!--###############################################
+                ########FORM INPUT FOR timefrarme ############
+                ###############################################
+                -->
+            <div class="form-group">
+                <label for="timeframe">Timeframe</label>
+                <input ng-model="offer.timeframe"
+                       type="datetime-local"
+                       class="form-control"
+                       id="timeframe"
+                       name="timeframe"
+                       required>
+            </div>
+            <div ng-if="interacted(Offer.timeframe)" ng-messages="Offer.timeframe.$error" role="alert">
+                <div class="alert alert-danger" ng-message="required">Please select the time of your offered services</div>
+            </div>
+
+            <!-- Advanced Time Options -->
+            <div class="form-group">
+                <div class="checkbox form-group" id="weekdays">
+                    <label class="checkbox-inline">
+                        <input id="chk-mon" name="mon" type="checkbox" aria-label="Monday" />
+                        Monday
+                    </label>
+                    <label class="checkbox-inline">
+                        <input id="chk-tue" value="tue" name="tue" type="checkbox" aria-label="Tuesday" />
+                        Tuesday
+                    </label>
+                    <label class="checkbox-inline">
+                        <input id="chk-wed" name="wed" type="checkbox" aria-label="Wednesday" />
+                        Wednesday
+                    </label>
+                    <label class="checkbox-inline">
+                        <input id="chk-thu" name="thu" type="checkbox" aria-label="Thursday" />
+                        Thursday
+                    </label>
+                    <label class="checkbox-inline">
+                        <input id="chk-fri" name="fri" type="checkbox" aria-label="Friday" />
+                        Friday
+                    </label>
+                    <label class="checkbox-inline">
+                        <input id="chk-sat" name="sat" type="checkbox" aria-label="Saturday" />
+                        Saturday
+                    </label>
+                    <label class="checkbox-inline">
+                        <input id="chk-sun" name="sun" type="checkbox" aria-label="Sunday" />
+                        Sunday
+                    </label>
+                </div>
+                <div class="radio form-group">
+                    <label class="radio-inline">
+                        <input type="radio" name="frequency" id="weekly" />
+                        Weekly
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="frequency" id="biweekly" />
+                        Bi-Weekly
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="frequency" id="monthly" />
+                        Monthly
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="enddate">Until</label>
+                    <input ng-model="offer.enddate"
+                           type="date"
+                           class="form-control"
+                           id="enddate"
+                           name="enddate"
+                           required>
+                </div>
+            </div>
 
 
-<script src="../bower_components/angular/angular.js"></script>
-<script src="../bower_components/jquery/dist/jquery.js"></script>
-<script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
-<script src="../app.js"></script>
 
+            <!--###############################################
+                ########FORM INPUT FOR typeofcare #############
+                ###############################################
+                -->
+            <div class="form-group" >
+                <label for="typeofcare">Amount of care:</label>
+                <select ng-model="offer.typeofcare"
+                        ng-options="typeofcare for typeofcare in typeofcares"
+                        type="text"
+                        class="form-control"
+                        id="typeofcare"
+                        name="typeofcare"
+                        placeholder="Enter type of care"
+                        required
+                         >
+                </select>
+                <div ng-if="interacted(Offer.typeofcare)" ng-messages="Offer.typeofcare.$error" role="alert">
+                    <div class="alert alert-danger" ng-message="required">Please select your offered type of service.</div>
+                </div>
+            </div>
+
+
+
+            <!--###############################################
+                ########FORM INPUT FOR wageperhour ############
+                ###############################################
+                -->
+            <div class="form-group">
+                <label for="wage">Wage per hour in €/h</label>
+                <div class="input-group">
+                <input ng-model="offer.wageperhour"
+                       type="number"
+                       class="form-control"
+                       id="wage"
+                       name="wageperhour"
+                       range
+                       placeholder="Enter wage per hour"
+                       ng-minlength="1"
+                       ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/"
+                       step="0.01"
+                       required />
+                <span class="input-group-addon">&euro;</span>
+                </div>
+                <div ng-if="interacted(Offer.wageperhour)" ng-messages="Offer.wageperhour.$error" role="alert">
+                    <div class="alert alert-danger" ng-message="required">
+                        Please enter your wage per hour as positive numeric value with maximum of two decimals.
+                    </div>
+                    <div class="alert alert-danger" ng-message="minlength">
+                        Not a valid wage! Please enter at least one digit as wage.
+                    </div>
+                    <div class="alert alert-danger" ng-message="pattern">
+                        Not a valid wage! Please use a positive numeric value with a maximum of two decimals.
+                    </div>
+                    <div class="alert alert-danger" ng-message="range">
+                        Not a valid wage! Please enter your wage in range between 0 and 100.
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!--#################################################
+                ########FORM INPUT FOR supportedarea ############
+                #################################################
+                -->
+            <div class="form-group">
+                <label for="googlemaps">Supported area</label>
+                <input ng-model="offer.supportedarea"
+                       name="supportedarea"
+                       type="text"
+                       class="form-control"
+                       id="googlemaps"
+                       placeholder="Enter supported area"
+                       ng-minlength="3"
+                       required />
+                <div ng-if="interacted(Offer.supportedarea)" ng-messages="Offer.supportedarea.$error" role="alert">
+                    <div class="alert alert-danger" ng-message="required">Please enter a value for this field.</div>
+                    <div class="alert alert-danger" ng-message="minlength">This field can be at most 15 characters long.</div>
+                </div>
+            <div class="form-group">
+                <label for="searchbox">Supported area</label>
+                <div id="searchBoxParent" class="form-group">
+                <!--<input type="text" class="form-control" id="searchbox" placeholder="Enter city">-->
+                </div>
+
+                <div class="form-group" >
+                    <label for="radius">Radius</label>
+                    <input ng-model="circle.radius" type="number" class="form-control" id="radius" placeholder="5000" onkeydown="if (event.keyCode == 13) {event.preventDefault(); event.stopPropagation();}">
+                    <!-- TODO Einheit! -->
+                </div>
+                <div class="form-group div-wrapper" data-tap-disabled="true">
+
+                    <ui-gmap-google-map id="gmap" center='map.center' zoom='map.zoom' events="map.events" options="map.options">
+                        <ui-gmap-search-box
+                                template='search.template'
+                                events='search.events'
+                                position='search.position'
+                                parentdiv='search.parentDiv'
+                                options='search.options'>
+                        </ui-gmap-search-box>
+                        <ui-gmap-circle center='circle.center'
+                                radius='circle.radius'
+                                fill='circle.fill'
+                                stroke='circle.stroke'
+                                clickable='circle.clickable'
+                                draggable='circle.draggable'
+                                editable='circle.editable'
+                                visible='circle.visible'
+                                events='circle.events'
+                                control="circle.control">
+
+                        </ui-gmap-circle>
+                    </ui-gmap-google-map>
+
+                </div>
+            </div>
+
+
+
+            <!--###############################################
+                ########FORM INPUT FOR notes ##################
+                ###############################################
+                -->
+            <div class="form-group">
+                <label for="notes">Notes (max. 400 chars)</label>
+                <textarea ng-model="offer.notes"
+                          class="form-control"
+                          name="notes"
+                          rows="5"
+                          id="notes"
+                          ng-maxlength="400";
+                          placeholder="Enter your additional notes regarding your offer"></textarea>
+                <div ng-if="interacted(Offer.notes)" ng-messages="Offer.notes.$error" role="alert">
+                    <div class="alert alert-danger" ng-message="maxlength">Please explain your offer in less than 400 characters.</div>
+                </div>
+            </div>
+
+
+
+
+            <!--###############################################
+               ########SUBMIT BUTTON ##################
+               ###############################################
+               -->
+            <button type="submit" class="btn btn-default">Offer Service</button>
+            <div id="messages" class="alert alert-success" data-ng-show="messages" data-ng-bind="messages"></div>
+            <div id="statusmessages" class="alert alert-info" data-ng-show="statusmessages" data-ng-bind="statusmessages"></div>
+            <div id="errormessages" class="alert alert-warning" data-ng-show="errormessages" data-ng-bind="errormessages"></div>
+            <div data-ng-show="progress.active()" style="color: #0037ff; font-size: 50px;">Sending…</div>
+        </form>
+
+
+        <p>{{offer | json }} </p>
+
+        <p>{{circle | json }} </p>
+    </div>
+
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="offerservice.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../bower_components/angular-bootstrap-show-errors/src/showErrors.js"></script>
+    <script src="../bower_components/angular-messages/angular-messages.js"></script>
+
+    <script src="../bower_components/lodash/dist/lodash.min.js"></script>
+    <script src="../bower_components/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
+    <script src="../bower_components/angular-google-maps/dist/angular-google-maps.min.js"></script>
+    <!--<script src="https://maps.googleapis.com/maps/api/js?callback=initMap&key=AIzaSyCLOfEshWapwoqrg5qMVjhpG1DB75lvjTE"
+            async defer></script>-->
+    <link rel="stylesheet" href="offerservice.css">
 </body>
 </html>
