@@ -110,3 +110,17 @@ module.exports.deletemyOffer = function (req, res){
     });
 
 };
+
+module.exports.updatemyOffer = function (req, res){
+    console.log("updatemyOffer aufgerufen!");
+    console.log(req.body);
+    Offer.findByIdAndUpdate(id, function (err,offer){
+        if(err) {
+            throw err;
+        } else {
+            console.log("erfolgreich gelöscht:" + id);
+            res.send();
+        };
+    });
+
+};

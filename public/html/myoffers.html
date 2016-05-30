@@ -33,19 +33,19 @@
     </div>
     <hr>
 
-    <div class="row" ng-repeat="offer in app.offers" style="margin-bottom: 30px;">
+    <div class="row" ng-repeat="offerfinal in app.offerfinals" style="margin-bottom: 30px;">
         <div class="col-sm-8 col-md-8">
             <div class="media">
                 <div class="media-body">
                     <ul class="list-group">
                         <h4 class="media-heading list-group-item-heading"
                             style="background-color: #2b669a;padding:10px;color:white;margin-bottom: 0px;">
-                            {{offer.typeofcare}} | {{offer.timeframe}} |
+                            {{offerfinal.typeofcare}} | {{offerfinal.timeframe}} |
                         </h4>
-                        <li class="list-group-item"><b>Date created:</b> {{offer.timestamp}} </li>
-                        <li class="list-group-item"><b>Wage:</b> {{offer.wageperhour}} € / h</li>
-                        <li class="list-group-item"><b>Location:</b> {{offer.supportedarea}}</li>
-                        <li class="list-group-item"><b>Notes:</b> {{offer.notes}}</li>
+                        <li class="list-group-item"><b>Date created:</b> {{offerfinal.timestamp}} </li>
+                        <li class="list-group-item"><b>Wage:</b> {{offerfinal.wageperhour}} € / h</li>
+                        <li class="list-group-item"><b>Location:</b> {{offerfinal.supportedarea}}</li>
+                        <li class="list-group-item"><b>Notes:</b> {{offerfinal.notes}}</li>
                     </ul>
                 </div>
             </div>
@@ -55,44 +55,31 @@
                 Open request.</p>
         </div>
         <div class="col-sm-2 col-md-2 pull-right">
-            <a href="#" class="btn btn-primary btn-success" style="min-width:80%;margin-top:10px;"><span class="glyphicon glyphicon-ok"></span> Ansehen</a>
-            <a href="" ng-click="deleteOffer(offer._id, $index)" class="btn btn-danger" style="min-width:80%;margin-top:10px;"><span class="glyphicon glyphicon-remove-sign"></span> Löschen</a>
-            <a href="#" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;"><span class="glyphicon glyphicon-envelope"></span> Bearbeiten</a>
+            <a href="#" class="btn btn-primary btn-success" style="min-width:80%;margin-top:10px;"><span class="glyphicon glyphicon-ok"></span> View</a>
+            <a href="" ng-click="deleteOffer(offerfinal._id, $index)" class="btn btn-danger" style="min-width:80%;margin-top:10px;"><span class="glyphicon glyphicon-remove-sign"></span> Delete</a>
+            <a href="" data-toggle="modal" data-target="#myModal"  ng-click="updateOffer(offerfinal)" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;"><span class="glyphicon glyphicon-envelope"></span> Update</a>
         </div>
 
     </div>
 
 
-    <!--    <div class="row" style="margin-top:20px;">
-            <div class="col-sm-8 col-md-8">
-                <div class="media">
-                    <div class="media-left">
-                        <a href="#">
-                            <img class="media-object"
-                                 src="../images/senior.jpg"
-                                 alt="..."
-                                 style="height:165px;border:rgb(221, 221, 221)  1px solid"
-                            >
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <ul class="list-group">
-                            <h4 class="media-heading list-group-item-heading" style="background-color: #2b669a;padding:10px;color:white;margin-bottom: 0px;">Matthias Mustermensch</h4>
-                            <li class="list-group-item"><b>Amount of care:</b> Premium</li>
-                            <li class="list-group-item"><b>Location:</b> Mustermannweg 3, 80799 München</li>
-                            <li class="list-group-item"><b>Notes:</b> Requires meal and assistance for stroll.</li>
-                        </ul>
-                    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Edit offer</h4>
+                </div>
+                <div class="modal-body" ng-include="'/html/offerservice_stripped.html'" style="width:100%;">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="cancelUpdate()" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
-            <div class="col-sm-2 col-md-2" style="height:100% !important">
-                <p>Status:</br>
-                    To be paid.</p>
-            </div>
-            <div class="col-sm-2 col-md-2 pull-right">
-                <a href="#" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;"><span class="glyphicon glyphicon-envelope"></span> Contact</a>
-            </div>
-        </div>-->
+        </div>
+    </div>
 
 
 </div>

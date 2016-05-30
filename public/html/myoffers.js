@@ -9,16 +9,26 @@ myOffersApp.controller('ShowMyOffersCtrl', ['$scope', '$http',  function($scope,
     var url = "http://localhost:3000";
 
     $http.get(url + "/getmyOffers").success(function(offers){
-        app.offers = offers;
+        app.offerfinals = offers;
     })
 
+    /*
+    * #############################################################################
+    * ##### INVOKED BY CLICK ON DELETE BUTTON IN myoffers.html ####################
+    * ##### DELETE DOCUMENT BY ID FROM DATABASE AND ARRAY IN FRONTEND #############
+    * #############################################################################
+    * */
     $scope.deleteOffer = function(id, index) {
         var index = index;
-        app.offers.splice(index, 1);
+
+        //delete offer from array in frontend.
+        app.offerfinals.splice(index, 1);
 
         var data = {};
         data.id = id;
         console.log(data);
+
+        //send it as http post to backend in order to delete it in database
         $http.post(url + "/deletemyoffer", data).success(function(){
             console.log("clicked:" + data);
             $scope.PostDataResponse = data;
@@ -33,24 +43,41 @@ myOffersApp.controller('ShowMyOffersCtrl', ['$scope', '$http',  function($scope,
                     console.log($scope.ResponseDetails);
             });
     };
-/*
-    $scope.offers = [
-        {
-            timestamp: "test",
-            timeframe: "test2",
-            typeofcare: "Basic",
-            wageperhour: 12,
-            supportedarea: "abcdefgh"
-        },
-        {
-            timestamp: "test",
-            timeframe: "test2",
-            typeofcare: "Basic",
-            wageperhour: 12,
-            supportedarea: "abcdefgh"
+    /*
+     * #############################################################################
+     * ##### INVOKED BY CLICK ON Update BUTTON IN myoffers.html ####################
+     * ##### UPDATE DOCUMENT BY ID FROM DATABASE AND ARRAY IN FRONTEND #############
+     * #############################################################################
+     * */
+    $scope.updateOffer = function(offerItem) {
+
+        $scope.editing = {};
+
+        var data = offerItem;
+        console.log(data.timeframe);
+        $scope.typeofcares = [
+            'Basic',
+            'Premium',
+            'Full Service'
+        ];
+        data.timeframe = new Date(data.timeframe);
+        $scope.offer = data;
+
+        $scope.onChange = function() {
+            console.log("oNChange wurde aufgerufen!");
+            if ($scope.currentAlbum) {
+                $scope.editing.title = $scope.currentAlbum.title;
+                $scope.editing.artist = $scope.currentAlbum.artist;
+            } else {
+                $scope.editing = {};
+            }
+        };
+        
+        $scope.cancelUpdate = function(){
+            $scope.offer = app.offerfinals;
         }
 
+    };
 
 
-    ]*/
 }]);

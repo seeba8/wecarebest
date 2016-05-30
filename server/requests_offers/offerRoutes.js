@@ -20,16 +20,29 @@ router.use(function(req, res, next) {
     next();
 });
     
+    //Create Offer Form
     router.route("/offers")
+        //put offer form into database
         .post(offerController.postOffer)
+        //get offer form
         .get(offerController.getOffer);
+    
+    //invokes backend functionality to get all offers documents in mongodb
     router.route("/getmyoffers")
         .get(offerController.getmyOffer);
+    //Show List of offers
     router.route("/showmyoffers")
         .get(offerController.showmyOffer);
+    
+    //Invokes backend functionality to delete offers document in mongodb
     router.route("/deletemyoffer")
-        .post(offerController.deletemyOffer);    
-return router;
+        .post(offerController.deletemyOffer);
+
+    //Invokes backend functionality to delete offers document in mongodb
+    router.route("/updatemyoffer")
+        .post(offerController.updatemyOffer);
+
+    return router;
 
 
 
