@@ -50,7 +50,7 @@ var passportConfig = require ("./config/passportConfig");
 var User = require("./users/structure");
 
 var authRoutes = require("./auth/authRouter");
-app.use("/",authRoutes());
+//app.use("/",authRoutes());
 
 app.get("/users", function (reg,res) {
     User.find(function (err,users) {
@@ -115,15 +115,6 @@ app.get("/users", function (reg,res) {
 
 app.post('/logout', function(req, res){ req.logOut(); res.send(200); });
 
-
-
-app.post("/createoffer", function(req,res) {
-    var name = req.body.name;
-    var product = new Kitten({name: name});
-    product.save(function (err) {
-        res.send();
-    })
-});
 
 var offerRoutes = require("./requests_offers/offerRoutes");
 
