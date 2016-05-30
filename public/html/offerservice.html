@@ -169,6 +169,42 @@
                     <div class="alert alert-danger" ng-message="required">Please enter a value for this field.</div>
                     <div class="alert alert-danger" ng-message="minlength">This field can be at most 15 characters long.</div>
                 </div>
+            <div class="form-group">
+                <label for="searchbox">Supported area</label>
+                <div id="searchBoxParent" class="form-group">
+                <!--<input type="text" class="form-control" id="searchbox" placeholder="Enter city">-->
+                </div>
+
+                <div class="form-group" >
+                    <label for="radius">Radius</label>
+                    <input ng-model="circle.radius" type="number" class="form-control" id="radius" placeholder="5000" onkeydown="if (event.keyCode == 13) {event.preventDefault(); event.stopPropagation();}">
+                    <!-- TODO Einheit! -->
+                </div>
+                <div class="form-group div-wrapper" data-tap-disabled="true">
+
+                    <ui-gmap-google-map id="gmap" center='map.center' zoom='map.zoom' events="map.events" options="map.options">
+                        <ui-gmap-search-box
+                                template='search.template'
+                                events='search.events'
+                                position='search.position'
+                                parentdiv='search.parentDiv'
+                                options='search.options'>
+                        </ui-gmap-search-box>
+                        <ui-gmap-circle center='circle.center'
+                                radius='circle.radius'
+                                fill='circle.fill'
+                                stroke='circle.stroke'
+                                clickable='circle.clickable'
+                                draggable='circle.draggable'
+                                editable='circle.editable'
+                                visible='circle.visible'
+                                events='circle.events'
+                                control="circle.control">
+
+                        </ui-gmap-circle>
+                    </ui-gmap-google-map>
+
+                </div>
             </div>
 
 
@@ -205,8 +241,10 @@
             <div data-ng-show="progress.active()" style="color: #0037ff; font-size: 50px;">Sending…</div>
         </form>
 
+
         <p>{{offer | json }} </p>
 
+        <p>{{circle | json }} </p>
     </div>
 
     <script src="../bower_components/angular/angular.js"></script>
@@ -216,7 +254,11 @@
     <script src="../bower_components/angular-bootstrap-show-errors/src/showErrors.js"></script>
     <script src="../bower_components/angular-messages/angular-messages.js"></script>
 
-
-
+    <script src="../bower_components/lodash/dist/lodash.min.js"></script>
+    <script src="../bower_components/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
+    <script src="../bower_components/angular-google-maps/dist/angular-google-maps.min.js"></script>
+    <!--<script src="https://maps.googleapis.com/maps/api/js?callback=initMap&key=AIzaSyCLOfEshWapwoqrg5qMVjhpG1DB75lvjTE"
+            async defer></script>-->
+    <link rel="stylesheet" href="offerservice.css">
 </body>
 </html>
