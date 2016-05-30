@@ -5,6 +5,7 @@
 
 // Load Schema of Offer
 var Offer = require('./offerSchema');
+var path = require('path');
 
 //For debugging purposes
 console.log("offerController File geladen.");
@@ -80,5 +81,5 @@ module.exports.postOffer = function(req, res){
 };
 
 module.exports.getOffer = function(req, res){
-    res.sendfile("public/html/offerservice.html");
+    res.sendFile("/html/offerservice.html", { root: path.join(__dirname, '/../../public') });
 }
