@@ -13,7 +13,7 @@ function offerRoutes() {
     var express = require("express");
     var path = require("path");
 
-    //router.use(express.static(path.join(__dirname, '/../../public/')));
+    router.use(express.static(path.join(__dirname, '/../../public/')));
 
     router.use(function(req, res, next) {
         console.log('%s %s %s', req.method, req.url, req.path);
@@ -21,7 +21,8 @@ function offerRoutes() {
     });
 
     router.route("/offers")
-       .post(offerController.postOffer);
+        .post(offerController.postOffer)
+        .get(offerController.getOffer);
     return router;
 
 }

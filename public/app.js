@@ -1,6 +1,7 @@
 /**
  * Created by sebas on 15/05/2016.
  */
+
 var jetbrains = angular.module("jetbrains", []);
 jetbrains.controller("AppCtrl", function ($http) {
 
@@ -46,3 +47,4 @@ jetbrains.controller("AppCtrl", function ($http) {
     }
 
 });
+
