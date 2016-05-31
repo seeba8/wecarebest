@@ -149,6 +149,87 @@ offerApp.controller('CreateOfferCtrl', ['$scope', '$http',  function($scope, $ht
         return $scope.submitted || field.$dirty;
     };
 
+
+    /*
+     * #############################################################################
+     * #############################################################################
+     * ############################## MYOFFERS.HTML ################################
+     * #############################################################################
+     * #############################################################################
+     * ########### HANDLE SHOW OFFERS [myoffers.html] AND DELETE/UPDATE ############
+     * #############################################################################
+     * #############################################################################
+     * */
+    app.recent = true;
+
+    $http.get(url + "/getmyOffers").success(function(offers){
+        console.log("go get it.");
+        app.offerfinals = offers;
+    })
+
+    /*
+     * #############################################################################
+     * ##### INVOKED BY CLICK ON DELETE BUTTON IN myoffers.html ####################
+     * ##### DELETE DOCUMENT BY ID FROM DATABASE AND ARRAY IN FRONTEND #############
+     * #############################################################################
+     * */
+    $scope.deleteOffer = function(id, index) {
+        var index = index;
+
+        //delete offer from array in frontend.
+        app.offerfinals.splice(index, 1);
+
+        var data = {};
+        data.id = id;
+        console.log(data);
+
+        //send it as http post to backend in order to delete it in database
+        $http.post(url + "/deletemyoffer", data).success(function(){
+            console.log("clicked:" + data);
+            $scope.PostDataResponse = data;
+            console.log("Löschung beendet.");
+        })
+        //IF error in HTTP POST then log it and show to user
+            .error(function (data, status, header, config) {
+                $scope.ResponseDetails = "Data: " + data +
+                    "<hr />status: " + status +
+                    "<hr />headers: " + header +
+                    "<hr />config: " + config;
+                console.log($scope.ResponseDetails);
+            });
+    };
+    /*
+     * #############################################################################
+     * ##### INVOKED BY CLICK ON Update BUTTON IN myoffers.html ####################
+     * ##### UPDATE DOCUMENT BY ID FROM DATABASE AND ARRAY IN FRONTEND #############
+     * #############################################################################
+     * */
+    $scope.updateOffer = function(offerItem) {
+
+        $scope.editing = {};
+
+        var data = offerItem;
+        console.log(data.timeframe);
+
+        data.timeframe = new Date(data.timeframe);
+        $scope.offer = data;
+
+        $scope.onChange = function() {
+            console.log("oNChange wurde aufgerufen!");
+            if ($scope.currentAlbum) {
+                $scope.editing.title = $scope.currentAlbum.title;
+                $scope.editing.artist = $scope.currentAlbum.artist;
+            } else {
+                $scope.editing = {};
+            }
+        };
+
+        $scope.cancelUpdate = function(){
+            $scope.offer = app.offerfinals;
+        }
+
+    };
+    
 }]);
 
 
@@ -168,5 +249,20 @@ offerApp.directive("range", function() {
                 }
             }
         }
+    };
+});
+
+
+offerApp.filter('datetime1', function($filter)
+{
+    return function(input)
+    {
+        if(input == null){ return ""; }
+
+        var _date = $filter('date')(new Date(input),
+            'MM/dd/yyyy - HH:mm UTC');
+
+        return _date.toUpperCase();
+
     };
 });
