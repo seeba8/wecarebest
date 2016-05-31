@@ -95,12 +95,13 @@ offerApp.controller('CreateOfferCtrl', ['$scope', '$http',  function($scope, $ht
         visible: true, // optional: defaults to true
         control: {}
     };
-
-    app.saveOffer = function () {
-        $http.post("../offers", $scope.offer).success(function () {
+    var PushCandidate = $scope.offer;
+    app.saveOffer = function ( PushCandidate) {
+        $http.post("../offers",  PushCandidate).success(function () {
             console.log("Inserted Successfully");
         })
     };
+
 
     $scope.onlyNumbers = /^[0-9]+$/;
 
@@ -174,8 +175,7 @@ offerApp.controller('CreateOfferCtrl', ['$scope', '$http',  function($scope, $ht
      * #############################################################################
      * */
     $scope.deleteOffer = function(id, index) {
-        var index = index;
-
+        console.log(index);
         //delete offer from array in frontend.
         app.offerfinals.splice(index, 1);
 
@@ -204,30 +204,43 @@ offerApp.controller('CreateOfferCtrl', ['$scope', '$http',  function($scope, $ht
      * ##### UPDATE DOCUMENT BY ID FROM DATABASE AND ARRAY IN FRONTEND #############
      * #############################################################################
      * */
-    $scope.updateOffer = function(offerItem) {
+    $scope.updateOffer = function(offerItem, index) {
 
-        $scope.editing = {};
+        // $scope.editing = {};
+        offerItem.timeframe = new Date(offerItem.timeframe);
+        console.log(index);
+        console.log(offerItem);
 
-        var data = offerItem;
-        console.log(data.timeframe);
+        $scope.offer.timeframe = offerItem.timeframe;
+        $scope.offer.typeofcare = offerItem.typeofcare;
+        $scope.offer.wageperhour = offerItem.wageperhour;
+        $scope.offer.supportedarea = offerItem.supportedarea;
+        $scope.offer.notes = offerItem.notes;
 
-        data.timeframe = new Date(data.timeframe);
-        $scope.offer = data;
 
-        $scope.onChange = function() {
-            console.log("oNChange wurde aufgerufen!");
-            if ($scope.currentAlbum) {
-                $scope.editing.title = $scope.currentAlbum.title;
-                $scope.editing.artist = $scope.currentAlbum.artist;
+        $scope.saveUpdate = function(item){
+            console.log($scope.Offer.$valid);
+            if($scope.Offer.$valid){
+                console.log("Saved Changes.");
+                offerItem.timeframe = item.timeframe;
+                offerItem.typeofcare = item.typeofcare;
+                offerItem.wageperhour = item.wageperhour;
+                offerItem.supportedarea = item.supportedarea;
+                offerItem.notes = item.notes;
+                offerItem.id = offerItem._id;
+                app.updateOffer(offerItem);
+
             } else {
-                $scope.editing = {};
+                console.log("Not valid form.");
             }
-        };
-
-        $scope.cancelUpdate = function(){
-            $scope.offer = app.offerfinals;
         }
 
+    };
+
+    app.updateOffer = function ( PushCandidate) {
+        $http.post("../updatemyoffer",  PushCandidate).success(function () {
+            console.log("Updated successfully");
+        })
     };
     
 }]);

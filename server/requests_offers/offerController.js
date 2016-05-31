@@ -114,13 +114,24 @@ module.exports.deletemyOffer = function (req, res){
 module.exports.updatemyOffer = function (req, res){
     console.log("updatemyOffer aufgerufen!");
     console.log(req.body);
-    Offer.findByIdAndUpdate(id, function (err,offer){
-        if(err) {
-            throw err;
+
+    //rename for easier usage
+    var id = req.body.id;
+    console.log(id);
+    var timeframe = req.body.timeframe;
+    var typeofcare = req.body.typeofcare;
+    var wageperhour = req.body.wageperhour;
+    var supportedarea = req.body.supportedarea;
+    var notes = req.body.notes;
+
+    Offer.findByIdAndUpdate(id, {timeframe:timeframe, typeofcare:typeofcare, wageperhour:wageperhour, supportedarea:supportedarea,notes:notes}, {new: true}, function(err, offer){
+        if (err) {
+            console.log("schade");
+            return;
         } else {
-            console.log("erfolgreich gelöscht:" + id);
+            console.log("yo");
             res.send();
         };
     });
-
+    
 };
