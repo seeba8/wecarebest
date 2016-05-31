@@ -16,7 +16,7 @@ offerApp.config(function (uiGmapGoogleMapApiProvider) {
 });
 
 offerApp.run(['$templateCache', function ($templateCache) {
-    $templateCache.put('searchbox.tpl.html', '<input type="text" class="form-control" id="searchbox" onkeydown="if (event.keyCode == 13) {event.preventDefault(); event.stopPropagation();}" placeholder="Enter city">');
+    $templateCache.put('searchbox.tpl.html', '<input type="text" class="form-control" id="searchbox" onkeydown="if (event.keyCode == 13) {event.preventDefault(); event.stopPropagation();}"  name="supportedarea" ng-model="test" ng-minlength="3" placeholder="Enter city" required>');
 }]);
 offerApp.controller('CreateOfferCtrl', ['$scope', '$http',  function($scope, $http) {
     var app = this;
@@ -24,6 +24,7 @@ offerApp.controller('CreateOfferCtrl', ['$scope', '$http',  function($scope, $ht
 
     $scope.offer = {};
     data = $scope.offer;
+
 
     var config = {
         headers : {
@@ -103,13 +104,30 @@ offerApp.controller('CreateOfferCtrl', ['$scope', '$http',  function($scope, $ht
     };
 
 
-    $scope.onlyNumbers = /^[0-9]+$/;
+    // $scope.onlyNumbers = /^[0-9]+$/;
 
     $scope.typeofcares = [
         'Basic',
         'Premium',
         'Full Service'
         ];
+
+    $scope.weekdays = [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday'
+    ];
+
+
+    $scope.frequencies = [
+        'Weekly',
+        'Bi-weekly',
+        'Monthly'
+    ];
 
     $scope.submitted = false;
     $scope.submit = function() {
@@ -119,8 +137,10 @@ offerApp.controller('CreateOfferCtrl', ['$scope', '$http',  function($scope, $ht
 
         console.log("Clicked Submit Offer...");
 
+
         //Validate form input. If fine then send data via HTTP POST to server. Otherwise show error.
         if($scope.Offer.$valid){
+            console.log($scope.offer.supportedarea);
             $scope.offer.date = new Date();
             console.log("Form is valid. Insert it...")
             $scope.statusmessages = 'OK! Sending offer.';
@@ -242,7 +262,9 @@ offerApp.controller('CreateOfferCtrl', ['$scope', '$http',  function($scope, $ht
             console.log("Updated successfully");
         })
     };
-    
+
+
+
 }]);
 
 
@@ -264,7 +286,6 @@ offerApp.directive("range", function() {
         }
     };
 });
-
 
 offerApp.filter('datetime1', function($filter)
 {

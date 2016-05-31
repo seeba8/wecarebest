@@ -8,7 +8,7 @@
 <body ng-app="offerApp" ng-controller="CreateOfferCtrl as app">
 
     <div class="container">
-        <h2>Create your offer</h2>
+        <h2>Create y                    {{test | json }}our offer</h2>
         <p>
         Insert your information in order for customers to use your service.
         </p>
@@ -18,66 +18,21 @@
                 ########FORM INPUT FOR timefrarme ############
                 ###############################################
                 -->
-            <div class="form-group">
-                <label for="timeframe">Timeframe</label>
-                <input ng-model="offer.timeframe"
-                       type="datetime-local"
-                       class="form-control"
-                       id="timeframe"
-                       name="timeframe"
-                       required>
-            </div>
-            <div ng-if="interacted(Offer.timeframe)" ng-messages="Offer.timeframe.$error" role="alert">
-                <div class="alert alert-danger" ng-message="required">Please select the time of your offered services</div>
-            </div>
 
-            <!-- Advanced Time Options -->
-            <div class="form-group">
-                <div class="checkbox form-group" id="weekdays">
-                    <label class="checkbox-inline">
-                        <input id="chk-mon" name="mon" type="checkbox" aria-label="Monday" />
-                        Monday
-                    </label>
-                    <label class="checkbox-inline">
-                        <input id="chk-tue" value="tue" name="tue" type="checkbox" aria-label="Tuesday" />
-                        Tuesday
-                    </label>
-                    <label class="checkbox-inline">
-                        <input id="chk-wed" name="wed" type="checkbox" aria-label="Wednesday" />
-                        Wednesday
-                    </label>
-                    <label class="checkbox-inline">
-                        <input id="chk-thu" name="thu" type="checkbox" aria-label="Thursday" />
-                        Thursday
-                    </label>
-                    <label class="checkbox-inline">
-                        <input id="chk-fri" name="fri" type="checkbox" aria-label="Friday" />
-                        Friday
-                    </label>
-                    <label class="checkbox-inline">
-                        <input id="chk-sat" name="sat" type="checkbox" aria-label="Saturday" />
-                        Saturday
-                    </label>
-                    <label class="checkbox-inline">
-                        <input id="chk-sun" name="sun" type="checkbox" aria-label="Sunday" />
-                        Sunday
-                    </label>
+            <div class="row">
+                <div class="form-group col-xs-6">
+                    <label for="timeframe">Start</label>
+                    <input ng-model="offer.timeframe"
+                           type="datetime-local"
+                           class="form-control"
+                           id="timeframe"
+                           name="timeframe"
+                           required>
+                    <div ng-if="interacted(Offer.timeframe)" ng-messages="Offer.timeframe.$error" role="alert">
+                        <div class="alert alert-danger" ng-message="required">Please select the time of your offered services</div>
+                    </div>
                 </div>
-                <div class="radio form-group">
-                    <label class="radio-inline">
-                        <input type="radio" name="frequency" id="weekly" />
-                        Weekly
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="frequency" id="biweekly" />
-                        Bi-Weekly
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="frequency" id="monthly" />
-                        Monthly
-                    </label>
-                </div>
-                <div class="form-group">
+                <div class="form-group col-xs-6">
                     <label for="enddate">Until</label>
                     <input ng-model="offer.enddate"
                            type="date"
@@ -85,9 +40,47 @@
                            id="enddate"
                            name="enddate"
                            required>
+                    <div ng-if="interacted(Offer.enddate)" ng-messages="Offer.enddate.$error" role="alert">
+                        <div class="alert alert-danger" ng-message="required">Please select the time of your offered services</div>
+                    </div>
+                </div>
+
+
+            </div>
+            <!--<div class="form-group">-->
+                <!--<label for="timeframe">Start</label>-->
+                <!--<input ng-model="offer.timeframe"-->
+                       <!--type="datetime-local"-->
+                       <!--class="form-control"-->
+                       <!--id="timeframe"-->
+                       <!--name="timeframe"-->
+                       <!--required>-->
+            <!--</div>-->
+            <!--<div ng-if="interacted(Offer.timeframe)" ng-messages="Offer.timeframe.$error" role="alert">-->
+                <!--<div class="alert alert-danger" ng-message="required">Please select the time of your offered services</div>-->
+            <!--</div>-->
+
+            <!-- Advanced Time Options -->
+            <div class="well form-group">
+                <div class="row" style="margin-bottom:0px;">
+                    <div class=" form-group" id="weekdays" >
+                        <label class="col-md-2 control-label">Day(s) of Week</label>
+                        <div class="checkbox" >
+                            <label class="checkbox-inline" name="weekdays" ng-repeat="weekday in weekdays">
+                                <input type="checkbox" value="">{{ weekday }}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group" id="frequencies" >
+                        <label class="col-md-2 control-label">Frequency</label>
+                        <div class="checkbox" >
+                            <label class="checkbox-inline" name="frequency" ng-repeat="frequency in frequencies">
+                                <input type="checkbox" value="">{{ frequency }}
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
-
 
 
             <!--###############################################
@@ -102,9 +95,10 @@
                         class="form-control"
                         id="typeofcare"
                         name="typeofcare"
-                        placeholder="Enter type of care"
+                        placeholder="Basic"
                         required
                          >
+                    <option ng-show="true" value="">- Please Choose -</option>
                 </select>
                 <div ng-if="interacted(Offer.typeofcare)" ng-messages="Offer.typeofcare.$error" role="alert">
                     <div class="alert alert-danger" ng-message="required">Please select your offered type of service.</div>
@@ -155,56 +149,72 @@
                 ########FORM INPUT FOR supportedarea ############
                 #################################################
                 -->
-            <div class="form-group">
-                <label for="googlemaps">Supported area</label>
-                <input ng-model="offer.supportedarea"
-                       name="supportedarea"
-                       type="text"
-                       class="form-control"
-                       id="googlemaps"
-                       placeholder="Enter supported area"
-                       ng-minlength="3"
-                       required />
-                <div ng-if="interacted(Offer.supportedarea)" ng-messages="Offer.supportedarea.$error" role="alert">
-                    <div class="alert alert-danger" ng-message="required">Please enter a value for this field.</div>
-                    <div class="alert alert-danger" ng-message="minlength">This field can be at most 15 characters long.</div>
-                </div>
-            <div class="form-group">
-                <label for="searchbox">Supported area</label>
-                <div id="searchBoxParent" class="form-group">
-                <!--<input type="text" class="form-control" id="searchbox" placeholder="Enter city">-->
-                </div>
+            <!--<div class="form-group">-->
+                <!--<label for="googlemaps">Supported area</label>-->
+                <!--<input ng-model="offer.supportedarea"-->
+                       <!--name="supportedarea"-->
+                       <!--type="text"-->
+                       <!--class="form-control"-->
+                       <!--id="googlemaps"-->
+                       <!--placeholder="Enter supported area"-->
+                       <!--ng-minlength="3"-->
+                       <!--required />-->
+                <!--<div ng-if="interacted(Offer.supportedarea)" ng-messages="Offer.supportedarea.$error" role="alert">-->
+                    <!--<div class="alert alert-danger" ng-message="required">Please enter a value for this field.</div>-->
+                    <!--<div class="alert alert-danger" ng-message="minlength">This field can be at most 15 characters long.</div>-->
+                <!--</div>-->
 
-                <div class="form-group" >
+
+            <div class ="row">
+                <div class="form-group col-xs-6">
+                    <label for="searchbox">Supported area</label>
+                    <div id="searchBoxParent">
+                        <!--<input type="text" class="form-control" id="searchbox" placeholder="Enter supported area">-->
+                    </div>
+                    <!--<div ng-if="interacted(Offer.supportedarea)" ng-messages="Offer.supportedarea.$error" role="alert">-->
+                        <!--<div class="alert alert-danger" ng-message="required">Please enter a value for this field.</div>-->
+                        <!--<div class="alert alert-danger" ng-message="minlength">This field can be at most 15 characters long.</div>-->
+                    <!--</div>-->
+                </div>
+                <div class="form-group col-xs-6" >
                     <label for="radius">Radius</label>
-                    <input ng-model="circle.radius" type="number" class="form-control" id="radius" placeholder="5000" onkeydown="if (event.keyCode == 13) {event.preventDefault(); event.stopPropagation();}">
-                    <!-- TODO Einheit! -->
+                    <input type="number" required ng-pattern="/^[0-9]+$/" rangemaps ng-model="offer.radius" type="number" name="radius" class="form-control" id="radius" placeholder="5000" onkeydown="if (event.keyCode == 13) {event.preventDefault(); event.stopPropagation();}">
+                    <div  ng-if="interacted(Offer.radius)" ng-messages="Offer.radius.$error" role="alert">
+                        <div class="alert alert-danger" ng-message="required">Please enter a value for this field.</div>
+                        <div class="alert alert-danger" ng-message="pattern">
+                            Not a valid radius! Please use a positive numeric value with a maximum of two decimals.
+                        </div>
+                        <div class="alert alert-danger" ng-message="rangemaps">
+                            Not a valid radius! Please choose a radius higher than 100m.
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group div-wrapper" data-tap-disabled="true">
+            </div>
+            <!-- TODO Einheit! -->
+            <div class="form-group div-wrapper" data-tap-disabled="true">
 
-                    <ui-gmap-google-map id="gmap" center='map.center' zoom='map.zoom' events="map.events" options="map.options">
-                        <ui-gmap-search-box
-                                template='search.template'
-                                events='search.events'
-                                position='search.position'
-                                parentdiv='search.parentDiv'
-                                options='search.options'>
-                        </ui-gmap-search-box>
-                        <ui-gmap-circle center='circle.center'
-                                radius='circle.radius'
-                                fill='circle.fill'
-                                stroke='circle.stroke'
-                                clickable='circle.clickable'
-                                draggable='circle.draggable'
-                                editable='circle.editable'
-                                visible='circle.visible'
-                                events='circle.events'
-                                control="circle.control">
+                <ui-gmap-google-map id="gmap" center='map.center' zoom='map.zoom' events="map.events" options="map.options">
+                    <ui-gmap-search-box
+                            template='search.template'
+                            events='search.events'
+                            position='search.position'
+                            parentdiv='search.parentDiv'
+                            options='search.options'>
+                    </ui-gmap-search-box>
+                    <ui-gmap-circle center='circle.center'
+                                    radius='offer.radius'
+                                    fill='circle.fill'
+                                    stroke='circle.stroke'
+                                    clickable='circle.clickable'
+                                    draggable='circle.draggable'
+                                    editable='circle.editable'
+                                    visible='circle.visible'
+                                    events='circle.events'
+                                    control="circle.control">
 
-                        </ui-gmap-circle>
-                    </ui-gmap-google-map>
+                    </ui-gmap-circle>
+                </ui-gmap-google-map>
 
-                </div>
             </div>
 
 

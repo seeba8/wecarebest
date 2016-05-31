@@ -11,6 +11,7 @@ var offerSchema = mongoose.Schema({
     typeofcare : String,
     wageperhour: Number,
     supportedarea: String,
+    radius: Number,
     notes: String
 
 });
