@@ -4,6 +4,7 @@
 
 var offerApp = angular.module('offerApp', ['ui.bootstrap.showErrors', 'ngMessages',"uiGmapgoogle-maps"]);
 
+
 offerApp.config(['showErrorsConfigProvider', function(showErrorsConfigProvider) {
     showErrorsConfigProvider.showSuccess(true);
 }]);
@@ -16,13 +17,28 @@ offerApp.config(function (uiGmapGoogleMapApiProvider) {
 });
 
 offerApp.run(['$templateCache', function ($templateCache) {
-    $templateCache.put('searchbox.tpl.html', '<input type="text" class="form-control" id="searchbox" onkeydown="if (event.keyCode == 13) {event.preventDefault(); event.stopPropagation();}"  name="supportedarea" ng-model="test" ng-minlength="3" placeholder="Enter city" required>');
+    $templateCache.put('searchbox.tpl.html', '<input type="text" class="form-control" id="searchbox" name="supportedarea" ng-model="ngModel" ng-minlength="3" placeholder="Enter city" required>');
+    // onkeydown="if(event.keyCode == 13) {event.preventDefault(); event.stopPropagation();}"
 }]);
-offerApp.controller('CreateOfferCtrl', ['$scope', '$http',  function($scope, $http) {
+
+offerApp.controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapGoogleMapApi',  function($interval, $scope, $http, uiGmapGoogleMapApi) {
     var app = this;
     var url = 'http://localhost:3000';
+    var geocoder;
+    var lastcenter = null;
+    var geocodeTimeout;
 
-    $scope.offer = {};
+    uiGmapGoogleMapApi.then(function(maps){
+        geocoder = new maps.Geocoder;
+        console.log(geocoder);
+    });
+
+    $scope.offer = {
+        radius: 5000,
+        center: {
+            latitude: 48.1,
+            longitude: 11.5},
+    };
     data = $scope.offer;
 
 
@@ -34,7 +50,8 @@ offerApp.controller('CreateOfferCtrl', ['$scope', '$http',  function($scope, $ht
     $scope.map = {
         center: {
             latitude: 48.1,
-            longitude: 11.5},
+            longitude: 11.5,
+            name: "München"},
         zoom: 10,
         options: {
             scaleControl: true,
@@ -59,10 +76,12 @@ offerApp.controller('CreateOfferCtrl', ['$scope', '$http',  function($scope, $ht
                         latitude: place.geometry.location.lat(),
                         longitude: place.geometry.location.lng()
                     };
-                    $scope.circle.center = {
+                    $scope.offer.center = {
                         latitude: place.geometry.location.lat(),
                         longitude: place.geometry.location.lng()
                     };
+                    $scope.offer.center.name = place.formatted_address;
+                    $scope.$apply;
                 }
             }
         },
@@ -74,12 +93,9 @@ offerApp.controller('CreateOfferCtrl', ['$scope', '$http',  function($scope, $ht
         }
        // position: "top-left"
     };
+
+
     $scope.circle = {
-        center: {
-            latitude: 48.13,
-            longitude: 11.57
-        },
-        radius: 5000,
         stroke: {
             color: '#08B21F',
             weight: 2,
@@ -94,7 +110,30 @@ offerApp.controller('CreateOfferCtrl', ['$scope', '$http',  function($scope, $ht
         clickable: true, // optional: defaults to true
         editable: true, // optional: defaults to false
         visible: true, // optional: defaults to true
-        control: {}
+        control: {},
+        events: {
+            radius_changed: function(arg){
+                $scope.offer.radius = Math.round(arg.radius);
+            },
+            dragend: function(test){
+                geocoder.geocode({"location": {lat: $scope.offer.center.latitude,
+                    lng: $scope.offer.center.longitude}}
+                    , function (results, status) {
+                        if(status == "OK" && results != null){
+                            $scope.offer.center.name = results[0].formatted_address;
+                            for(var i = 0; i < results.length; i++){
+                                var result = results[i];
+                                if(result.types[0] == "locality"){
+                                    $scope.offer.center.name = result.formatted_address;
+                                    break;
+                                }
+                            }
+                            $('#searchbox').val($scope.offer.center.name);
+                            $scope.$apply();
+                        };
+                });
+            }
+        }
     };
     var PushCandidate = $scope.offer;
     app.saveOffer = function ( PushCandidate) {

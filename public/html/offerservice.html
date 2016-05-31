@@ -178,7 +178,7 @@
                 </div>
                 <div class="form-group col-xs-6" >
                     <label for="radius">Radius</label>
-                    <input type="number" required ng-pattern="/^[0-9]+$/" rangemaps ng-model="offer.radius" type="number" name="radius" class="form-control" id="radius" placeholder="5000" onkeydown="if (event.keyCode == 13) {event.preventDefault(); event.stopPropagation();}">
+                    <input type="number" required ng-pattern="/^[0-9]+$/" rangemaps ng-model="offer.radius" type="number" name="radius" class="form-control" id="radius" onkeydown="if (event.keyCode == 13) {event.preventDefault(); event.stopPropagation();}">
                     <div  ng-if="interacted(Offer.radius)" ng-messages="Offer.radius.$error" role="alert">
                         <div class="alert alert-danger" ng-message="required">Please enter a value for this field.</div>
                         <div class="alert alert-danger" ng-message="pattern">
@@ -199,14 +199,16 @@
                             events='search.events'
                             position='search.position'
                             parentdiv='search.parentDiv'
+                            ng-model="offer.text"
                             options='search.options'>
                     </ui-gmap-search-box>
-                    <ui-gmap-circle center='circle.center'
+                    <ui-gmap-circle center='offer.center'
                                     radius='offer.radius'
                                     fill='circle.fill'
                                     stroke='circle.stroke'
                                     clickable='circle.clickable'
                                     draggable='circle.draggable'
+
                                     editable='circle.editable'
                                     visible='circle.visible'
                                     events='circle.events'
@@ -253,7 +255,7 @@
 
 
         <p>{{offer | json }} </p>
-
+        <p>{{search |json}}</p>
         <p>{{circle | json }} </p>
     </div>
 
