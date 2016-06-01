@@ -21,10 +21,15 @@ module.exports.postOffer = function(req, res){
     var timeframe = req.body.timeframe;
     var typeofcare = req.body.typeofcare;
     var wageperhour = req.body.wageperhour;
-    var supportedarea = req.body.supportedarea;
+    var location = req.body.center.name;
+    var latitude = req.body.center.latitude;
+    var longitude = req.body.center.longitude;
+    var radius = req.body.radius;
     var notes = req.body.notes;
 
-
+    console.log(location);
+    console.log(radius);
+    console.log(req.body);
     //######################
     //##### VALIDATION #####
     //######################
@@ -52,19 +57,22 @@ module.exports.postOffer = function(req, res){
         return;
     }
 
-    if(!supportedarea){
-        res.status(400).send('Supported area is required');
-        console.log("Supported area not defined");
-        return;
-    }
-
 
     //#############################
     //##### SAVE TO DATABASE  #####
     //#############################
 
     //define new Offer object with given parts
-    var offer = new Offer({timestamp:date, timeframe:timeframe, typeofcare:typeofcare, wageperhour:wageperhour, supportedarea: supportedarea, notes: notes});
+    var offer = new Offer({
+        timestamp:date,
+        timeframe:timeframe,
+        typeofcare:typeofcare,
+        wageperhour:wageperhour,
+        location:location,
+        latitude:latitude,
+        longitude:longitude,
+        radius:radius,
+        notes:notes});
     
     //according to mongoose function save offer to database
     offer.save(function(err) {
@@ -121,11 +129,17 @@ module.exports.updatemyOffer = function (req, res){
     var timeframe = req.body.timeframe;
     var typeofcare = req.body.typeofcare;
     var wageperhour = req.body.wageperhour;
-    var supportedarea = req.body.supportedarea;
+    var location = req.body.location;
+    var latitude = req.body.latitude;
+    var longitude = req.body.longitude;
+    var radius = req.body.radius;
     var notes = req.body.notes;
+    console.log(location);
+    console.log(radius);
 
-    Offer.findByIdAndUpdate(id, {timeframe:timeframe, typeofcare:typeofcare, wageperhour:wageperhour, supportedarea:supportedarea,notes:notes}, {new: true}, function(err, offer){
+    Offer.findByIdAndUpdate(id, {timeframe:timeframe, typeofcare:typeofcare, wageperhour:wageperhour, location:location,latitude:latitude, longitude:longitude, radius:radius, notes:notes}, {new: true}, function(err, offer){
         if (err) {
+            console.log(err);
             console.log("schade");
             return;
         } else {
@@ -133,5 +147,5 @@ module.exports.updatemyOffer = function (req, res){
             res.send();
         };
     });
-    
+
 };

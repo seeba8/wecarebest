@@ -179,7 +179,8 @@ offerApp.controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapG
 
         //Validate form input. If fine then send data via HTTP POST to server. Otherwise show error.
         if($scope.Offer.$valid){
-            console.log($scope.offer.supportedarea);
+            data.center.name = $scope.offer.center.name;
+            console.log(data.center.name);
             $scope.offer.date = new Date();
             console.log("Form is valid. Insert it...")
             $scope.statusmessages = 'OK! Sending offer.';
@@ -197,7 +198,7 @@ offerApp.controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapG
                         "<hr />config: " + config;
                     $scope.errormessages = 'Sorry! There was a network error. Try again later.';
                     $scope.statusmessages = null;
-                    $log.error(data);
+                    //$log.error(data);
                 });
         } else if (!$scope.Offer.$valid) {
             $scope.errormessages = 'Sorry! Offer is not valid. Please consider remarks.';
@@ -273,18 +274,31 @@ offerApp.controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapG
         $scope.offer.timeframe = offerItem.timeframe;
         $scope.offer.typeofcare = offerItem.typeofcare;
         $scope.offer.wageperhour = offerItem.wageperhour;
-        $scope.offer.supportedarea = offerItem.supportedarea;
+        $scope.offer.location = offerItem.location;
+        $scope.offer.latitude = offerItem.latitude;
+        $scope.offer.longitude = offerItem.longitude;
+        $scope.offer.radius = offerItem.radius;
         $scope.offer.notes = offerItem.notes;
 
 
         $scope.saveUpdate = function(item){
+
             console.log($scope.Offer.$valid);
+            console.log($scope.offer);
+            console.log(item);
             if($scope.Offer.$valid){
+                item.location = item.center.name;
+                item.latitude = item.center.latitude;
+                item.longitude = item.center.longitude;
+
                 console.log("Saved Changes.");
                 offerItem.timeframe = item.timeframe;
                 offerItem.typeofcare = item.typeofcare;
                 offerItem.wageperhour = item.wageperhour;
-                offerItem.supportedarea = item.supportedarea;
+                offerItem.location = item.location;
+                offerItem.latitude = item.latitude;
+                offerItem.longitude = item.longitude;
+                offerItem.radius = item.radius;
                 offerItem.notes = item.notes;
                 offerItem.id = offerItem._id;
                 app.updateOffer(offerItem);

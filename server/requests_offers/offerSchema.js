@@ -10,7 +10,9 @@ var offerSchema = mongoose.Schema({
     timeframe : Date,
     typeofcare : String,
     wageperhour: Number,
-    supportedarea: String,
+    location: String,
+    latitude : Number,
+    longitude : Number,
     radius: Number,
     notes: String
 
