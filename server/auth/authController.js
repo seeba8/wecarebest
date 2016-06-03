@@ -4,6 +4,7 @@
 
 // Load Schema of Offer
 var User = require('./../users/structure');
+var path = require('path');
 
 //For debugging purposes
 console.log("authController File geladen.");
@@ -63,8 +64,8 @@ module.exports.postRegister = function(req, res) {
     })
 };
 module.exports.getLogin = function(req, res){
-    res.sendfile("public/html/login.html");
+    res.sendfile("/html/login.html", { root: path.join(__dirname, '/../../public') });
 };
 module.exports.getRegister = function(req, res){
-    res.sendfile("public/html/registration.html");
+    res.sendfile("/html/registration.html", { root: path.join(__dirname, '/../../public') });
 };
