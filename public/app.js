@@ -14,7 +14,9 @@ jetbrains.controller("AppCtrl", function ($http) {
         })
     };
 
-    app.saveUser = function (type, firstName, name, street, city, postalCode, country, phone, gender, email, pwd) {
+    app.saveUser = function (type, firstName, name, street, city, postalCode, country, phone, gender, email, pwd, pwd2) {
+        console.log("clicked register");
+        if(pwd==pwd2) {
         $http.post(url + "/addUser", {
             type: type,
             firstName: firstName,
@@ -26,10 +28,14 @@ jetbrains.controller("AppCtrl", function ($http) {
             phone: phone,
             gender: gender,
             email: email,
-            pwd: pwd
+            pwd: pwd,
+            pwd2: pwd2
         }).success(function () {
             loadUsers();
-        })
+        })}
+        else {
+            console.log("passwords don't match");
+        }
     };
     
      app.login = function (e, p) {

@@ -46,6 +46,46 @@ module.exports.postRegister = function(req, res) {
     var gender = req.body.gender;
     var email = req.body.email;
     var pwd = req.body.pwd;
+    var pwd2 = req.body.pwd2;
+
+    if(!type){
+        res.status(400).send('type is required');
+        console.log("type is not defined");
+        return;
+    }
+
+    if(!name){
+        res.status(400).send('name is required');
+        console.log("name is not defined");
+        return;
+    }
+
+    if(!email){
+        res.status(400).send('email is required');
+        console.log("email is not defined");
+        return;
+    }
+
+    if(!pwd){
+        res.status(400).send('pwd is required');
+        console.log("pwd is not defined");
+        return;
+    }
+
+    if(!pwd2){
+        res.status(400).send('pwd2 is required');
+        console.log("pwd2 is not defined");
+        return;
+    }
+
+    console.log(pwd,pwd2);
+    if(!(pwd==pwd2)) {
+        res.status(400).send('pwd and pwd2 must match');
+        console.log("pwd and pwd2 dont match");
+        return;
+    }
+
+    console.log("creating new user");
     var user = new User({
         type: type,
         firstName: firstName,

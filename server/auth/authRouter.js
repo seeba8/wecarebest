@@ -19,6 +19,7 @@ function authRoutes() {
 
     router.use(function(req,res,next) {
         console.log('%s %s %s', req.method, req.url, req.path);
+        //console.log('%s %s',req.body.pwd, req.body.pwd2);
         next();
     });
 
