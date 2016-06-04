@@ -17,7 +17,7 @@ offerApp.config(function (uiGmapGoogleMapApiProvider) {
 });
 
 offerApp.run(['$templateCache', function ($templateCache) {
-    $templateCache.put('searchbox.tpl.html', '<input type="text" class="form-control" id="searchbox" name="supportedarea" ng-model="ngModel" ng-minlength="3" placeholder="Enter city" required>');
+    $templateCache.put('searchbox.tpl.html', '<input type="text" class="form-control" id="searchbox" name="supportedarea" ng-model="ngModel" ng ng-minlength="3" placeholder="Enter city" required>');
     // onkeydown="if(event.keyCode == 13) {event.preventDefault(); event.stopPropagation();}"
 }]);
 
@@ -37,8 +37,11 @@ offerApp.controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapG
         radius: 5000,
         center: {
             latitude: 48.1,
-            longitude: 11.5},
+            longitude: 11.5,
+            name: "Munich, Germany"
+        },
     };
+
     data = $scope.offer;
 
 
@@ -81,7 +84,7 @@ offerApp.controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapG
                         longitude: place.geometry.location.lng()
                     };
                     $scope.offer.center.name = place.formatted_address;
-                    $scope.$apply;
+                    $scope.$apply();
                 }
             }
         },
@@ -93,7 +96,6 @@ offerApp.controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapG
         }
        // position: "top-left"
     };
-
 
     $scope.circle = {
         stroke: {

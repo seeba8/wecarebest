@@ -3,6 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
+
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/html/offerservice.js"></script>
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/bower_components/angular-bootstrap-show-errors/src/showErrors.js"></script>
+    <script src="/bower_components/angular-messages/angular-messages.min.js"></script>
+
+    <script src="/bower_components/lodash/dist/lodash.min.js"></script>
+    <script src="/bower_components/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
+    <script src="/bower_components/angular-google-maps/dist/angular-google-maps.min.js"></script>
+    <script src="/bower_components/moment/min/moment.min.js"></script>
+    <script src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    <link rel="stylesheet" href="/html/offerservice.css">
     <title>Title</title>
 </head>
 <body ng-app="offerApp" ng-controller="CreateOfferCtrl as app">
@@ -20,32 +36,115 @@
                 -->
 
             <div class="row">
-                <div class="form-group col-xs-6">
-                    <label for="timeframe">Start</label>
-                    <input ng-model="offer.timeframe"
+                <div class="form-group col-xs-4">
+                    <label for="startday">Start day</label>
+                    <div class='startdaypicker input-group date'>
+                        <input type='text' ng-model="offer.timeframe"
+                               type="date"
+                               class="startdaypicker form-control"
+                               id="startday"
+                               name="startday"
+                               required />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                        <script type="text/javascript">
+                            $(function () {
+                                $('.startdaypicker').datetimepicker({
+                                    format: "L",
+                                    minDate: moment(),
+                                })
+                                        .on('dp.change', function(e) {
+                                            $('.enddaypicker').data("DateTimePicker").minDate(e.date);
+                                        });
+                            });
+                        </script>
+                    </div>
+                    <!--<input ng-model="offer.timeframe"
                            type="datetime-local"
                            class="form-control"
                            id="timeframe"
                            name="timeframe"
-                           required>
+                           required>-->
+                    <!--<md-datepicker ng-model="offer.timeframe" md-placeholder="Enter date"
+                                   md-open-on-focus></md-datepicker>-->
                     <div ng-if="interacted(Offer.timeframe)" ng-messages="Offer.timeframe.$error" role="alert">
-                        <div class="alert alert-danger" ng-message="required">Please select the time of your offered services</div>
+                        <div class="alert alert-danger" ng-message="required">Please select the day of your offered services</div>
                     </div>
                 </div>
-                <div class="form-group col-xs-6">
-                    <label for="enddate">Until</label>
-                    <input ng-model="offer.enddate"
-                           type="date"
+                <div class="form-group col-xs-3">
+                    <label for="starttime">Start time</label>
+                    <div class='starttimepicker input-group date'>
+                        <input type='text' ng-model="offer.starttime"
+                               type="time"
+                               class="starttimepicker form-control"
+                               id="starttime"
+                               name="starttime"
+                               required />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-time"></span>
+                        </span>
+                        <script type="text/javascript">
+                            $(function () {
+                                $('.starttimepicker').datetimepicker({
+                                    format: "LT"
+                                });
+                            });
+                        </script>
+                    </div>
+                    <!--<input ng-model="offer.starttime"
+                           type="time"
                            class="form-control"
-                           id="enddate"
-                           name="enddate"
-                           required>
-                    <div ng-if="interacted(Offer.enddate)" ng-messages="Offer.enddate.$error" role="alert">
-                        <div class="alert alert-danger" ng-message="required">Please select the time of your offered services</div>
+                           id="starttime"
+                           name="starttime"
+                           required>-->
+                    <div ng-if="interacted(Offer.starttime)" ng-messages="Offer.starttime.$error" role="alert">
+                        <div class="alert alert-danger" ng-message="required">Please select the start time of your offered services</div>
+                    </div>
+
+                </div>
+                <div class="form-group col-xs-3">
+                    <label for="endtime">End time</label>
+                    <div class='endtimepicker input-group date'>
+                        <input type='text' ng-model="offer.endtime"
+                               type="time"
+                               class="endtimepicker form-control"
+                               id="endtime"
+                               name="endtime"
+                               required />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-time"></span>
+                        </span>
+                        <script type="text/javascript">
+                            $(function () {
+                                $('.endtimepicker').datetimepicker({
+                                    format: "LT",
+                                });
+                            });
+                        </script>
+                    </div>
+                    <!--<input ng-model="offer.endtime"
+                           type="time"
+                           class="form-control"
+                           id="endtime"
+                           name="endtime"
+                           required>-->
+                    <div ng-if="interacted(Offer.endtime)" ng-messages="Offer.endtime.$error" role="alert">
+                        <div class="alert alert-danger" ng-message="required">Please select the end time of your offered services</div>
                     </div>
                 </div>
+                <div class="form-group col-xs-2 checkbox-inline">
+                    <label for="repeating">
+                        <input ng-model="offer.repeating"
+                                                    class=""
+                                                   type="checkbox"
+                                                   id="repeating"
+                                                   name="repeating">
+                        Repeating
+                    </label>
 
 
+                </div>
             </div>
             <!--<div class="form-group">-->
                 <!--<label for="timeframe">Start</label>-->
@@ -61,7 +160,7 @@
             <!--</div>-->
 
             <!-- Advanced Time Options -->
-            <div class="well form-group">
+            <div class="well form-group" ng-show="offer.repeating">
                 <div class="row" style="margin-bottom:0px;">
                     <div class=" form-group" id="weekdays" >
                         <label class="col-md-2 control-label">Day(s) of Week</label>
@@ -77,6 +176,43 @@
                             <label class="checkbox-inline" name="frequency" ng-repeat="frequency in frequencies">
                                 <input type="checkbox" value="">{{ frequency }}
                             </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="enddate" class="col-md-2 control-label">Until</label>
+                        <div class="col-md-10">
+                            <div class='enddaypicker input-group date'>
+                                <input type='text' ng-model="offer.timeframe"
+                                       type="date"
+                                       class="enddaypicker form-control"
+                                       id="endday"
+                                       name="endday"
+                                       required />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                                <script type="text/javascript">
+                                    $(function () {
+                                        $('.enddaypicker')
+                                                .datetimepicker({
+                                                    format: "L",
+                                                    minDate: moment(),
+                                                })
+                                                .on('dp.change', function(e) {
+                                                    $('.startdaypicker').data("DateTimePicker").maxDate(e.date);
+                                                });
+                                    });
+                                </script>
+                            </div>
+                            <!--<input ng-model="offer.enddate"
+                                   type="date"
+                                   class="form-control"
+                                   id="enddate"
+                                   name="enddate"
+                                   required>-->
+                            <div ng-if="interacted(Offer.enddate)" ng-messages="Offer.enddate.$error" role="alert">
+                                <div class="alert alert-danger" ng-message="required">Please select the time of your offered services</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -259,18 +395,5 @@
         <p>{{circle | json }} </p>
     </div>
 
-    <script src="/bower_components/angular/angular.js"></script>
-    <script src="/html/offerservice.js"></script>
-    <script src="/bower_components/jquery/dist/jquery.js"></script>
-    <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="/bower_components/angular-bootstrap-show-errors/src/showErrors.js"></script>
-    <script src="/bower_components/angular-messages/angular-messages.js"></script>
-
-    <script src="/bower_components/lodash/dist/lodash.min.js"></script>
-    <script src="/bower_components/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
-    <script src="/bower_components/angular-google-maps/dist/angular-google-maps.min.js"></script>
-    <!--<script src="https://maps.googleapis.com/maps/api/js?callback=initMap&key=AIzaSyCLOfEshWapwoqrg5qMVjhpG1DB75lvjTE"
-            async defer></script>-->
-    <link rel="stylesheet" href="/html/offerservice.css">
 </body>
 </html>
