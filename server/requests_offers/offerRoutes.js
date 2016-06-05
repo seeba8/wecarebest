@@ -15,10 +15,10 @@ function offerRoutes() {
 
     router.use(express.static(path.join(__dirname, '/../../public/')));
 
-router.use(function(req, res, next) {
-    console.log('%s %s %s', req.method, req.url, req.path);
-    next();
-});
+    router.use(function(req, res, next) {
+        console.log('%s %s %s', req.method, req.url, req.path);
+        next();
+    });
     
     //Create Offer Form
     router.route("/offers")
@@ -43,8 +43,5 @@ router.use(function(req, res, next) {
         .post(offerController.updatemyOffer);
 
     return router;
-
-
-
 }
 

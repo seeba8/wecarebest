@@ -228,7 +228,7 @@ offerApp.controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapG
             data.center.name = $scope.offer.center.name;
             console.log(data.center.name);
             $scope.offer.date = new Date();
-            console.log("Form is valid. Insert it...")
+            console.log("Form is valid. Insert it...");
             $scope.statusmessages = 'OK! Sending offer.';
             $http.post(url + "/offers", data).success(function(){
                 $scope.PostDataResponse = data;

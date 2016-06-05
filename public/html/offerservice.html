@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="/css/main.css">
     <script src="/bower_components/angular/angular.min.js"></script>
     <script src="/html/offerservice.js"></script>
@@ -50,14 +50,6 @@
                         </span>
 
                     </div>
-                    <!--<input ng-model="offer.timeframe"
-                           type="datetime-local"
-                           class="form-control"
-                           id="timeframe"
-                           name="timeframe"
-                           required>-->
-                    <!--<md-datepicker ng-model="offer.timeframe" md-placeholder="Enter date"
-                                   md-open-on-focus></md-datepicker>-->
                     <div ng-if="interacted(Offer.timeframe)" ng-messages="Offer.timeframe.$error" role="alert">
                         <div class="alert alert-danger" ng-message="required">Please select the day of your offered services</div>
                     </div>
@@ -74,12 +66,7 @@
                             <span class="glyphicon glyphicon-time"></span>
                         </span>
                     </div>
-                    <!--<input ng-model="offer.starttime"
-                           type="time"
-                           class="form-control"
-                           id="starttime"
-                           name="starttime"
-                           required>-->
+
                     <div ng-if="interacted(Offer.starttime)" ng-messages="Offer.starttime.$error" role="alert">
                         <div class="alert alert-danger" ng-message="required">Please select the start time of your offered services</div>
                     </div>
@@ -98,12 +85,7 @@
                         </span>
 
                     </div>
-                    <!--<input ng-model="offer.endtime"
-                           type="time"
-                           class="form-control"
-                           id="endtime"
-                           name="endtime"
-                           required>-->
+
                     <div ng-if="interacted(Offer.endtime)" ng-messages="Offer.endtime.$error" role="alert">
                         <div class="alert alert-danger" ng-message="required">Please select the end time of your offered services</div>
                     </div>
@@ -111,28 +93,16 @@
                 <div class="form-group col-xs-2 checkbox-inline">
                     <label for="repeating">
                         <input ng-model="offer.repeating"
-                                                    class=""
-                                                   type="checkbox"
-                                                   id="repeating"
-                                                   name="repeating">
+                               class=""
+                               type="checkbox"
+                               id="repeating"
+                               name="repeating">
                         Repeating
                     </label>
 
 
                 </div>
             </div>
-            <!--<div class="form-group">-->
-                <!--<label for="timeframe">Start</label>-->
-                <!--<input ng-model="offer.timeframe"-->
-                       <!--type="datetime-local"-->
-                       <!--class="form-control"-->
-                       <!--id="timeframe"-->
-                       <!--name="timeframe"-->
-                       <!--required>-->
-            <!--</div>-->
-            <!--<div ng-if="interacted(Offer.timeframe)" ng-messages="Offer.timeframe.$error" role="alert">-->
-                <!--<div class="alert alert-danger" ng-message="required">Please select the time of your offered services</div>-->
-            <!--</div>-->
 
             <!-- Advanced Time Options -->
             <div class="well form-group" ng-show="offer.repeating">
@@ -167,12 +137,7 @@
                                 </span>
 
                             </div>
-                            <!--<input ng-model="offer.enddate"
-                                   type="date"
-                                   class="form-control"
-                                   id="enddate"
-                                   name="enddate"
-                                   required>-->
+
                             <div ng-if="interacted(Offer.enddate)" ng-messages="Offer.enddate.$error" role="alert">
                                 <div class="alert alert-danger" ng-message="required">Please select the time of your offered services</div>
                             </div>
@@ -213,18 +178,18 @@
             <div class="form-group">
                 <label for="wage">Wage per hour in €/h</label>
                 <div class="input-group">
-                <input ng-model="offer.wageperhour"
-                       type="number"
-                       class="form-control"
-                       id="wage"
-                       name="wageperhour"
-                       range
-                       placeholder="Enter wage per hour"
-                       ng-minlength="1"
-                       ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/"
-                       step="0.01"
-                       required />
-                <span class="input-group-addon">&euro; / h</span>
+                    <input ng-model="offer.wageperhour"
+                           type="number"
+                           class="form-control"
+                           id="wage"
+                           name="wageperhour"
+                           range
+                           placeholder="Enter wage per hour"
+                           ng-minlength="1"
+                           ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/"
+                           step="0.01"
+                           required />
+                    <span class="input-group-addon">&euro; / h</span>
                 </div>
                 <div ng-if="interacted(Offer.wageperhour)" ng-messages="Offer.wageperhour.$error" role="alert">
                     <div class="alert alert-danger" ng-message="required">
@@ -270,14 +235,15 @@
                     <div id="searchBoxParent">
                         <!--<input type="text" class="form-control" id="searchbox" placeholder="Enter supported area">-->
                     </div>
-                    <!--<div ng-if="interacted(Offer.supportedarea)" ng-messages="Offer.supportedarea.$error" role="alert">-->
-                        <!--<div class="alert alert-danger" ng-message="required">Please enter a value for this field.</div>-->
-                        <!--<div class="alert alert-danger" ng-message="minlength">This field can be at most 15 characters long.</div>-->
-                    <!--</div>-->
                 </div>
                 <div class="form-group col-xs-6" >
                     <label for="radius">Radius</label>
-                    <input type="number" required ng-pattern="/^[0-9]+$/" rangemaps ng-model="offer.radius" type="number" name="radius" class="form-control" id="radius" onkeydown="if (event.keyCode == 13) {event.preventDefault(); event.stopPropagation();}">
+                    <div class="input-group">
+                        <input type="number" required ng-pattern="/^[0-9]+$/" rangemaps ng-model="offer.radius"
+                               name="radius" class="form-control" id="radius"
+                               onkeydown="if (event.keyCode == 13) {event.preventDefault(); event.stopPropagation();}">
+                        <span class="input-group-addon">meters</span>
+                    </div>
                     <div  ng-if="interacted(Offer.radius)" ng-messages="Offer.radius.$error" role="alert">
                         <div class="alert alert-danger" ng-message="required">Please enter a value for this field.</div>
                         <div class="alert alert-danger" ng-message="pattern">
@@ -289,7 +255,6 @@
                     </div>
                 </div>
             </div>
-            <!-- TODO Einheit! -->
             <div class="form-group div-wrapper" data-tap-disabled="true">
 
                 <ui-gmap-google-map id="gmap" center='map.center' zoom='map.zoom' events="map.events" options="map.options">
