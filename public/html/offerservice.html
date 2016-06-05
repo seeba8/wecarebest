@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
-
+    <link rel="stylesheet" href="/css/main.css">
     <script src="/bower_components/angular/angular.min.js"></script>
     <script src="/html/offerservice.js"></script>
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
@@ -17,6 +17,7 @@
     <script src="/bower_components/angular-google-maps/dist/angular-google-maps.min.js"></script>
     <script src="/bower_components/moment/min/moment.min.js"></script>
     <script src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    <!--<script src="../bower_components/angular-bootstrap-datetimepicker-directive/angular-bootstrap-datetimepicker-directive.min.js"></script>-->
 
     <link rel="stylesheet" href="/html/offerservice.css">
     <title>Title</title>
@@ -24,7 +25,7 @@
 <body ng-app="offerApp" ng-controller="CreateOfferCtrl as app">
 
     <div class="container">
-        <h2>Create y                    {{test | json }}our offer</h2>
+        <h2>Create our offer</h2>
         <p>
         Insert your information in order for customers to use your service.
         </p>
@@ -39,8 +40,7 @@
                 <div class="form-group col-xs-4">
                     <label for="startday">Start day</label>
                     <div class='startdaypicker input-group date'>
-                        <input type='text' ng-model="offer.timeframe"
-                               type="date"
+                        <input type='text'
                                class="startdaypicker form-control"
                                id="startday"
                                name="startday"
@@ -48,17 +48,7 @@
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
-                        <script type="text/javascript">
-                            $(function () {
-                                $('.startdaypicker').datetimepicker({
-                                    format: "L",
-                                    minDate: moment(),
-                                })
-                                        .on('dp.change', function(e) {
-                                            $('.enddaypicker').data("DateTimePicker").minDate(e.date);
-                                        });
-                            });
-                        </script>
+
                     </div>
                     <!--<input ng-model="offer.timeframe"
                            type="datetime-local"
@@ -75,8 +65,7 @@
                 <div class="form-group col-xs-3">
                     <label for="starttime">Start time</label>
                     <div class='starttimepicker input-group date'>
-                        <input type='text' ng-model="offer.starttime"
-                               type="time"
+                        <input type='text'
                                class="starttimepicker form-control"
                                id="starttime"
                                name="starttime"
@@ -84,13 +73,6 @@
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-time"></span>
                         </span>
-                        <script type="text/javascript">
-                            $(function () {
-                                $('.starttimepicker').datetimepicker({
-                                    format: "LT"
-                                });
-                            });
-                        </script>
                     </div>
                     <!--<input ng-model="offer.starttime"
                            type="time"
@@ -106,8 +88,7 @@
                 <div class="form-group col-xs-3">
                     <label for="endtime">End time</label>
                     <div class='endtimepicker input-group date'>
-                        <input type='text' ng-model="offer.endtime"
-                               type="time"
+                        <input type='text'
                                class="endtimepicker form-control"
                                id="endtime"
                                name="endtime"
@@ -115,13 +96,7 @@
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-time"></span>
                         </span>
-                        <script type="text/javascript">
-                            $(function () {
-                                $('.endtimepicker').datetimepicker({
-                                    format: "LT",
-                                });
-                            });
-                        </script>
+
                     </div>
                     <!--<input ng-model="offer.endtime"
                            type="time"
@@ -166,24 +141,23 @@
                         <label class="col-md-2 control-label">Day(s) of Week</label>
                         <div class="checkbox" >
                             <label class="checkbox-inline" name="weekdays" ng-repeat="weekday in weekdays">
-                                <input type="checkbox" value="">{{ weekday }}
+                                <input type="checkbox" value="" ng-model="offer.repeatdays[weekday]">{{ weekday }}
                             </label>
                         </div>
                     </div>
                     <div class="form-group" id="frequencies" >
                         <label class="col-md-2 control-label">Frequency</label>
                         <div class="checkbox" >
-                            <label class="checkbox-inline" name="frequency" ng-repeat="frequency in frequencies">
-                                <input type="checkbox" value="">{{ frequency }}
+                            <label class="radio-inline" ng-repeat="frequency in frequencies">
+                                <input type="radio" ng-model="offer.repeatfreq" name="frequency" value="{{frequency}}">{{frequency}}
                             </label>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="enddate" class="col-md-2 control-label">Until</label>
+                        <label for="endday" class="col-md-2 control-label">Until</label>
                         <div class="col-md-10">
                             <div class='enddaypicker input-group date'>
-                                <input type='text' ng-model="offer.timeframe"
-                                       type="date"
+                                <input type='text'
                                        class="enddaypicker form-control"
                                        id="endday"
                                        name="endday"
@@ -191,18 +165,7 @@
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
-                                <script type="text/javascript">
-                                    $(function () {
-                                        $('.enddaypicker')
-                                                .datetimepicker({
-                                                    format: "L",
-                                                    minDate: moment(),
-                                                })
-                                                .on('dp.change', function(e) {
-                                                    $('.startdaypicker').data("DateTimePicker").maxDate(e.date);
-                                                });
-                                    });
-                                </script>
+
                             </div>
                             <!--<input ng-model="offer.enddate"
                                    type="date"
@@ -391,8 +354,6 @@
 
 
         <p>{{offer | json }} </p>
-        <p>{{search |json}}</p>
-        <p>{{circle | json }} </p>
     </div>
 
 </body>

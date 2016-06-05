@@ -44,6 +44,50 @@ offerApp.controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapG
 
     data = $scope.offer;
 
+    $(function () {
+        $('.startdaypicker').datetimepicker({
+            format: "L",
+            minDate: moment(),
+        })
+            .on('dp.change', function(e) {
+                $('.enddaypicker').data("DateTimePicker").minDate(e.date);
+                $scope.offer.startday = e.date;
+                $scope.$apply();
+            });
+    });
+    $(function () {
+        $('.starttimepicker').datetimepicker({
+            format: "LT"
+        })
+            .on('dp.change', function(e) {
+                $scope.offer.starttime = e.date;
+                $scope.$apply();
+            });
+    });
+
+    $(function () {
+        $('.endtimepicker').datetimepicker({
+            format: "LT"
+        })
+            .on('dp.change', function(e) {
+                $scope.offer.endtime = e.date;
+                $scope.$apply();
+            });
+    });
+
+    $(function () {
+        $('.enddaypicker')
+            .datetimepicker({
+                format: "L",
+                minDate: moment()
+            })
+            .on('dp.change', function (e) {
+                $('.startdaypicker').data("DateTimePicker").maxDate(e.date);
+                $scope.offer.endday = e.date;
+                $scope.$apply();
+            });
+    });
+
 
     var config = {
         headers : {
