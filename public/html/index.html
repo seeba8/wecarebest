@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="myApp" lang="en">
+<html  lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="../css/main.css">
 </head>
 
-<body>
+<body ng-app="myApp" ng-controller="AppCtrl as app">
 <!--static top navbar-->
 <div class="navbar navbar-default navbar-static-top" role="navigation">
     <div class="container-fluid">
@@ -105,7 +105,7 @@
         <!--site content goes here-->
         <!--ng-view includes other html views from /partials folder-->
         <div class="col-sm-8 text-left">
-
+                {{4+4}}
                 <div ng-view></div>
 
         </div>

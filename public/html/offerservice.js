@@ -2,7 +2,7 @@
  * Created by MS on 23.05.2016.
  */
 
-var offerApp = angular.module('offerApp', ['ui.bootstrap.showErrors', 'ngMessages',"uiGmapgoogle-maps"]);
+var offerApp = angular.module('myApp', ['ui.bootstrap.showErrors', 'ngMessages',"uiGmapgoogle-maps"]);
 
 
 offerApp.config(['showErrorsConfigProvider', function(showErrorsConfigProvider) {

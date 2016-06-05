@@ -8,7 +8,14 @@ angular.module('myApp',['ngRoute'])
             .when('/about', { templateUrl: '../html/partials/about.html' })
             .when('/profile', { templateUrl: '../html/partials/profile.html' })
             .otherwise({ redirectTo: '/'});
-    });
+    })
+    .controller("AppCtrl", function ($http){
+        var app = this;
+        console.log("hi");
+    })
+
+
+;
 /*
     .controller('ArticlesCtrl', function($scope){
 
