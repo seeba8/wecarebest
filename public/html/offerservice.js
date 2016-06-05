@@ -50,7 +50,7 @@ offerApp.controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapG
         })
             .on('dp.change', function(e) {
                 $('.enddaypicker').data("DateTimePicker").minDate(e.date);
-                $scope.offer.startday = e.date;
+                $scope.offer.startday = e.date.toDate();
                 $scope.$apply();
             });
     });
@@ -59,7 +59,7 @@ offerApp.controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapG
             format: "LT"
         })
             .on('dp.change', function(e) {
-                $scope.offer.starttime = e.date;
+                $scope.offer.starttime = e.date.toDate();
                 $scope.$apply();
             });
     });
@@ -69,7 +69,7 @@ offerApp.controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapG
             format: "LT"
         })
             .on('dp.change', function(e) {
-                $scope.offer.endtime = e.date;
+                $scope.offer.endtime = e.date.toDate();
                 $scope.$apply();
             });
     });
@@ -82,7 +82,7 @@ offerApp.controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapG
             })
             .on('dp.change', function (e) {
                 $('.startdaypicker').data("DateTimePicker").maxDate(e.date);
-                $scope.offer.endday = e.date;
+                $scope.offer.endday = e.date.toDate();
                 $scope.$apply();
             });
     });
@@ -214,6 +214,7 @@ offerApp.controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapG
     ];
 
     $scope.submitted = false;
+
     $scope.submit = function() {
         // Trigger validation flag. True because user clicked on submit.
         $scope.submitted = true;
