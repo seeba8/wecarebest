@@ -2,13 +2,13 @@
  * Created by MS on 23.05.2016.
  */
 
-var offerApp = angular.module('myApp', ['ui.bootstrap.showErrors', 'ngMessages',"uiGmapgoogle-maps"]);
+var myApp = angular.module('myApp', ['ui.bootstrap.showErrors', 'ngMessages',"uiGmapgoogle-maps"]);
 
 
-offerApp.config(['showErrorsConfigProvider', function(showErrorsConfigProvider) {
+myApp.config(['showErrorsConfigProvider', function(showErrorsConfigProvider) {
     showErrorsConfigProvider.showSuccess(true);
 }]);
-offerApp.config(function (uiGmapGoogleMapApiProvider) {
+myApp.config(function (uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({
         key: 'AIzaSyCLOfEshWapwoqrg5qMVjhpG1DB75lvjTE',
         //v: '3.20', //defaults to latest 3.X anyhow
@@ -16,18 +16,18 @@ offerApp.config(function (uiGmapGoogleMapApiProvider) {
     });
 });
 
-offerApp.run(['$templateCache', function ($templateCache) {
+myApp.run(['$templateCache', function ($templateCache) {
     $templateCache.put('searchbox.tpl.html', '<input type="text" class="form-control" id="searchbox" name="supportedarea" ng-model="ngModel" ng ng-minlength="3" placeholder="Enter city" required>');
     // onkeydown="if(event.keyCode == 13) {event.preventDefault(); event.stopPropagation();}"
 }]);
 
-offerApp.controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapGoogleMapApi',  function($interval, $scope, $http, uiGmapGoogleMapApi) {
+myApp.controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapGoogleMapApi',  function($interval, $scope, $http, uiGmapGoogleMapApi) {
     var app = this;
     var url = 'http://localhost:3000';
     var geocoder;
     var lastcenter = null;
     var geocodeTimeout;
-
+    console.log("blubb");
     uiGmapGoogleMapApi.then(function(maps){
         geocoder = new maps.Geocoder;
     });
@@ -368,7 +368,7 @@ offerApp.controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapG
 }]);
 
 
-offerApp.directive("range", function() {
+myApp.directive("range", function() {
     return {
         restrict: "A",
 
@@ -387,7 +387,7 @@ offerApp.directive("range", function() {
     };
 });
 
-offerApp.filter('datetime1', function($filter)
+myApp.filter('datetime1', function($filter)
 {
     return function(input)
     {

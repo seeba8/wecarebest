@@ -1,6 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html  lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <title>weCare.best</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="../bower_components/angular-route/angular-route.min.js"></script>
+    <script src="../js/app.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../css/main.css">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
@@ -22,259 +35,348 @@
     <link rel="stylesheet" href="../html/offerservice.css">
     <title>Create offer</title>
 </head>
+
 <body ng-app="myApp" ng-controller="CreateOfferCtrl as app">
+<!--static top navbar-->
+<div class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <!--<div class="navbar-header">-->
+            <!--<a class="navbar-brand" id="logo"> <img src="header.png" width=100% height=90%></a>-->
+            <!--</div>-->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-static-top">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <!--navbar links-->
+        <div class="collapse navbar-collapse" id="navbar-static-top">
+            <!--<div class="navbar-text" id="slogan">weCare.best brings together elderly people and caregivers taking care of them</div>-->
+            <ul class="nav navbar-nav">
+                <li><div id="placeholder">.</div></li>
+                <li><a href="#/search">Search</a></li>
+                <li><a href="#/bookingsrequests">My Bookings & Requests</a></li>
+                <li><a href="#/offerservice">Offer Service</a></li>
+                <li><a href="#/about">About</a></li>
+            </ul>
+            <!--search field-->
+            <div class="nav navbar-nav navbar-right">
+                <!--<div class="navbar-text">Text</div>-->
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input class="form-control" placeholder="Search" name="srch-term" id="srch-term" type="text">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--fixed top navbar-->
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" id="logo" href="#/"> <img src="../images/header.png" width=100% height=90%></a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-fixed-top">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <!--navbar text (slogan)-->
+        <div class="collapse navbar-collapse"  id="navbar-fixed-top">
+            <div class="navbar-text" id="slogan">weCare.best brings together elderly people and caregivers taking care of them</div>
 
-    <div class="container">
-        <h2>Create offer</h2>
-        <p>
-        Insert your information in order for customers to use your service.
-        </p>
-        <form name="Offer" role="form" ng-submit="submit()" novalidate>
+            <!--            <ul class="nav navbar-nav">
+                            <li><a href="#">Search</a></li>
+                            <li><a href="#">My Bookings & Requests</a></li>
+                            <li><a href="#">Offer Service</a></li>
+                            <li><a href="#">About</a></li>
+                        </ul>-->
+            <!--        <button type="button" class="btn btn-default navbar-btn">Button</button>-->
+            <!--<div class="col-sm-3 col-md-3 pull-right">-->
 
-            <!--###############################################
-                ########FORM INPUT FOR timefrarme ############
-                ###############################################
-                -->
+            <!--register and login button-->
+            <ul class="nav navbar-nav pull-right">
+                <li><a href="#">Register</a></li>
+                <li><a href="#">Login <i class="glyphicon glyphicon-log-in"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
 
-            <div class="row">
-                <div class="form-group col-xs-4">
-                    <label for="startday">Start day</label>
-                    <div class='startdaypicker input-group date'>
-                        <input type='text'
-                               class="startdaypicker form-control"
-                               id="startday"
-                               name="startday"
-                               required />
+<!--left sidebar navigation-->
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-sm-2 sidenav hidden-xs">
+            <p class="active"><a href="#/">Home</a></p>
+            <p><a href="#/search">Search</a></p>
+            <p><a href="#/bookingsrequests">My Bookings & Requests</a></p>
+            <p><a href="#/offerservice">Offer Service</a></p>
+            <p><a href="#/profile">My Profile</a></p>
+            <p><a href="#/about">About</a></p>
+        </div>
+
+        <!--site content goes here-->
+        <!--ng-view includes other html views from /partials folder-->
+        <div class="col-sm-8 text-left">
+            {{4+4}}
+                <div class="container">
+                    <h2>Create offer</h2>
+                    <p>
+                        Insert your information in order for customers to use your service.
+                    </p>
+                    <form name="Offer" role="form" ng-submit="submit()" novalidate>
+
+                        <!--###############################################
+                            ########FORM INPUT FOR timefrarme ############
+                            ###############################################
+                            -->
+
+                        <div class="row">
+                            <div class="form-group col-xs-4">
+                                <label for="startday">Start day</label>
+                                <div class='startdaypicker input-group date'>
+                                    <input type='text'
+                                           class="startdaypicker form-control"
+                                           id="startday"
+                                           name="startday"
+                                           required />
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
 
-                    </div>
-                    <div ng-if="interacted(Offer.timeframe)" ng-messages="Offer.timeframe.$error" role="alert">
-                        <div class="alert alert-danger" ng-message="required">Please select the day of your offered services</div>
-                    </div>
-                </div>
-                <div class="form-group col-xs-3">
-                    <label for="starttime">Start time</label>
-                    <div class='starttimepicker input-group date'>
-                        <input type='text'
-                               class="starttimepicker form-control"
-                               id="starttime"
-                               name="starttime"
-                               required />
+                                </div>
+                                <div ng-if="interacted(Offer.timeframe)" ng-messages="Offer.timeframe.$error" role="alert">
+                                    <div class="alert alert-danger" ng-message="required">Please select the day of your offered services</div>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-3">
+                                <label for="starttime">Start time</label>
+                                <div class='starttimepicker input-group date'>
+                                    <input type='text'
+                                           class="starttimepicker form-control"
+                                           id="starttime"
+                                           name="starttime"
+                                           required />
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-time"></span>
                         </span>
-                    </div>
+                                </div>
 
-                    <div ng-if="interacted(Offer.starttime)" ng-messages="Offer.starttime.$error" role="alert">
-                        <div class="alert alert-danger" ng-message="required">Please select the start time of your offered services</div>
-                    </div>
+                                <div ng-if="interacted(Offer.starttime)" ng-messages="Offer.starttime.$error" role="alert">
+                                    <div class="alert alert-danger" ng-message="required">Please select the start time of your offered services</div>
+                                </div>
 
-                </div>
-                <div class="form-group col-xs-3">
-                    <label for="endtime">End time</label>
-                    <div class='endtimepicker input-group date'>
-                        <input type='text'
-                               class="endtimepicker form-control"
-                               id="endtime"
-                               name="endtime"
-                               required />
+                            </div>
+                            <div class="form-group col-xs-3">
+                                <label for="endtime">End time</label>
+                                <div class='endtimepicker input-group date'>
+                                    <input type='text'
+                                           class="endtimepicker form-control"
+                                           id="endtime"
+                                           name="endtime"
+                                           required />
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-time"></span>
                         </span>
 
-                    </div>
+                                </div>
 
-                    <div ng-if="interacted(Offer.endtime)" ng-messages="Offer.endtime.$error" role="alert">
-                        <div class="alert alert-danger" ng-message="required">Please select the end time of your offered services</div>
-                    </div>
-                </div>
-                <div class="form-group col-xs-2 checkbox-inline">
-                    <label for="repeating">
-                        <input ng-model="offer.repeating"
-                               class=""
-                               type="checkbox"
-                               id="repeating"
-                               name="repeating">
-                        Repeating
-                    </label>
+                                <div ng-if="interacted(Offer.endtime)" ng-messages="Offer.endtime.$error" role="alert">
+                                    <div class="alert alert-danger" ng-message="required">Please select the end time of your offered services</div>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-2 checkbox-inline">
+                                <label for="repeating">
+                                    <input ng-model="offer.repeating"
+                                           class=""
+                                           type="checkbox"
+                                           id="repeating"
+                                           name="repeating">
+                                    Repeating
+                                </label>
 
 
-                </div>
-            </div>
-
-            <!-- Advanced Time Options -->
-            <div class="well form-group" ng-show="offer.repeating">
-                <div class="row" style="margin-bottom:0px;">
-                    <div class=" form-group" id="weekdays" >
-                        <label class="col-md-2 control-label">Day(s) of Week</label>
-                        <div class="checkbox" >
-                            <label class="checkbox-inline" name="weekdays" ng-repeat="weekday in weekdays">
-                                <input type="checkbox" value="" ng-model="offer.repeatoptions[weekday]">{{ weekday }}
-                            </label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group" id="frequencies" >
-                        <label class="col-md-2 control-label">Frequency</label>
-                        <div class="checkbox" >
-                            <label class="radio-inline" ng-repeat="frequency in frequencies">
-                                <input type="radio" ng-model="offer.repeatoptions.frequency" name="frequency" value="{{frequency}}">{{frequency}}
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="endday" class="col-md-2 control-label">Until</label>
-                        <div class="col-md-10">
-                            <div class='enddaypicker input-group date'>
-                                <input type='text'
-                                       class="enddaypicker form-control"
-                                       id="endday"
-                                       name="endday"
-                                       required />
+
+                        <!-- Advanced Time Options -->
+                        <div class="well form-group" ng-show="offer.repeating">
+                            <div class="row" style="margin-bottom:0px;">
+                                <div class=" form-group" id="weekdays" >
+                                    <label class="col-md-2 control-label">Day(s) of Week</label>
+                                    <div class="checkbox" >
+                                        <label class="checkbox-inline" name="weekdays" ng-repeat="weekday in weekdays">
+                                            <input type="checkbox" value="" ng-model="offer.repeatoptions[weekday]">{{ weekday }}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="frequencies" >
+                                    <label class="col-md-2 control-label">Frequency</label>
+                                    <div class="checkbox" >
+                                        <label class="radio-inline" ng-repeat="frequency in frequencies">
+                                            <input type="radio" ng-model="offer.repeatoptions.frequency" name="frequency" value="{{frequency}}">{{frequency}}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="endday" class="col-md-2 control-label">Until</label>
+                                    <div class="col-md-10">
+                                        <div class='enddaypicker input-group date'>
+                                            <input type='text'
+                                                   class="enddaypicker form-control"
+                                                   id="endday"
+                                                   name="endday"
+                                                   required />
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
 
+                                        </div>
+
+                                        <div ng-if="interacted(Offer.enddate)" ng-messages="Offer.enddate.$error" role="alert">
+                                            <div class="alert alert-danger" ng-message="required">Please select the time of your offered services</div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
 
-                            <div ng-if="interacted(Offer.enddate)" ng-messages="Offer.enddate.$error" role="alert">
-                                <div class="alert alert-danger" ng-message="required">Please select the time of your offered services</div>
+
+                        <!--###############################################
+                            ########FORM INPUT FOR typeofcare #############
+                            ###############################################
+                            -->
+                        <div class="form-group" >
+                            <label for="typeofcare">Amount of care:</label>
+                            <select ng-model="offer.typeofcare"
+                                    ng-options="typeofcare for typeofcare in typeofcares"
+                                    type="text"
+                                    class="form-control"
+                                    id="typeofcare"
+                                    name="typeofcare"
+                                    placeholder="Basic"
+                                    required
+                            >
+                                <option ng-show="true" value="">- Please Choose -</option>
+                            </select>
+                            <div ng-if="interacted(Offer.typeofcare)" ng-messages="Offer.typeofcare.$error" role="alert">
+                                <div class="alert alert-danger" ng-message="required">Please select your offered type of service.</div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <!--###############################################
-                ########FORM INPUT FOR typeofcare #############
-                ###############################################
-                -->
-            <div class="form-group" >
-                <label for="typeofcare">Amount of care:</label>
-                <select ng-model="offer.typeofcare"
-                        ng-options="typeofcare for typeofcare in typeofcares"
-                        type="text"
-                        class="form-control"
-                        id="typeofcare"
-                        name="typeofcare"
-                        placeholder="Basic"
-                        required
-                         >
-                    <option ng-show="true" value="">- Please Choose -</option>
-                </select>
-                <div ng-if="interacted(Offer.typeofcare)" ng-messages="Offer.typeofcare.$error" role="alert">
-                    <div class="alert alert-danger" ng-message="required">Please select your offered type of service.</div>
-                </div>
-            </div>
 
 
 
-            <!--###############################################
-                ########FORM INPUT FOR wageperhour ############
-                ###############################################
-                -->
-            <div class="form-group">
-                <label for="wage">Wage per hour in €/h</label>
-                <div class="input-group">
-                    <input ng-model="offer.wageperhour"
-                           type="number"
-                           class="form-control"
-                           id="wage"
-                           name="wageperhour"
-                           range
-                           placeholder="Enter wage per hour"
-                           ng-minlength="1"
-                           ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/"
-                           step="0.01"
-                           required />
-                    <span class="input-group-addon">&euro; / h</span>
-                </div>
-                <div ng-if="interacted(Offer.wageperhour)" ng-messages="Offer.wageperhour.$error" role="alert">
-                    <div class="alert alert-danger" ng-message="required">
-                        Please enter your wage per hour as positive numeric value with maximum of two decimals.
-                    </div>
-                    <div class="alert alert-danger" ng-message="minlength">
-                        Not a valid wage! Please enter at least one digit as wage.
-                    </div>
-                    <div class="alert alert-danger" ng-message="pattern">
-                        Not a valid wage! Please use a positive numeric value with a maximum of two decimals.
-                    </div>
-                    <div class="alert alert-danger" ng-message="range">
-                        Not a valid wage! Please enter your wage in range between 0 and 100.
-                    </div>
-                </div>
-            </div>
-
-
-
-            <!--#################################################
-                ########FORM INPUT FOR supportedarea ############
-                #################################################
-                -->
-            <div class ="row">
-                <div class="form-group col-xs-6">
-                    <label for="searchbox">Supported area</label>
-                    <div id="searchBoxParent">
-                        <!--<input type="text" class="form-control" id="searchbox" placeholder="Enter supported area">-->
-                    </div>
-                </div>
-                <div class="form-group col-xs-6" >
-                    <label for="radius">Radius</label>
-                    <div class="input-group">
-                        <input type="number" required ng-pattern="/^[0-9]+$/" rangemaps ng-model="offer.location.radius"
-                               name="radius" class="form-control" id="radius"
-                               onkeydown="if (event.keyCode == 13) {event.preventDefault(); event.stopPropagation();}">
-                        <span class="input-group-addon">meters</span>
-                    </div>
-                    <div  ng-if="interacted(Offer.location.radius)" ng-messages="Offer.location.radius.$error" role="alert">
-                        <div class="alert alert-danger" ng-message="required">Please enter a value for this field.</div>
-                        <div class="alert alert-danger" ng-message="pattern">
-                            Not a valid radius! Please use a positive numeric value.
+                        <!--###############################################
+                            ########FORM INPUT FOR wageperhour ############
+                            ###############################################
+                            -->
+                        <div class="form-group">
+                            <label for="wage">Wage per hour in €/h</label>
+                            <div class="input-group">
+                                <input ng-model="offer.wageperhour"
+                                       type="number"
+                                       class="form-control"
+                                       id="wage"
+                                       name="wageperhour"
+                                       range
+                                       placeholder="Enter wage per hour"
+                                       ng-minlength="1"
+                                       ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/"
+                                       step="0.01"
+                                       required />
+                                <span class="input-group-addon">&euro; / h</span>
+                            </div>
+                            <div ng-if="interacted(Offer.wageperhour)" ng-messages="Offer.wageperhour.$error" role="alert">
+                                <div class="alert alert-danger" ng-message="required">
+                                    Please enter your wage per hour as positive numeric value with maximum of two decimals.
+                                </div>
+                                <div class="alert alert-danger" ng-message="minlength">
+                                    Not a valid wage! Please enter at least one digit as wage.
+                                </div>
+                                <div class="alert alert-danger" ng-message="pattern">
+                                    Not a valid wage! Please use a positive numeric value with a maximum of two decimals.
+                                </div>
+                                <div class="alert alert-danger" ng-message="range">
+                                    Not a valid wage! Please enter your wage in range between 0 and 100.
+                                </div>
+                            </div>
                         </div>
-                        <div class="alert alert-danger" ng-message="rangemaps">
-                            Not a valid radius! Please choose a radius higher than 100m.
+
+
+
+                        <!--#################################################
+                            ########FORM INPUT FOR supportedarea ############
+                            #################################################
+                            -->
+                        <div class ="row">
+                            <div class="form-group col-xs-6">
+                                <label for="searchbox">Supported area</label>
+                                <div id="searchBoxParent">
+                                    <!--<input type="text" class="form-control" id="searchbox" placeholder="Enter supported area">-->
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-6" >
+                                <label for="radius">Radius</label>
+                                <div class="input-group">
+                                    <input type="number" required ng-pattern="/^[0-9]+$/" rangemaps ng-model="offer.location.radius"
+                                           name="radius" class="form-control" id="radius"
+                                           onkeydown="if (event.keyCode == 13) {event.preventDefault(); event.stopPropagation();}">
+                                    <span class="input-group-addon">meters</span>
+                                </div>
+                                <div  ng-if="interacted(Offer.location.radius)" ng-messages="Offer.location.radius.$error" role="alert">
+                                    <div class="alert alert-danger" ng-message="required">Please enter a value for this field.</div>
+                                    <div class="alert alert-danger" ng-message="pattern">
+                                        Not a valid radius! Please use a positive numeric value.
+                                    </div>
+                                    <div class="alert alert-danger" ng-message="rangemaps">
+                                        Not a valid radius! Please choose a radius higher than 100m.
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group div-wrapper" data-tap-disabled="true">
+                        <div class="form-group div-wrapper" data-tap-disabled="true">
 
-                <ui-gmap-google-map id="gmap" center='map.center' zoom='map.zoom' events="map.events" options="map.options">
-                    <ui-gmap-search-box
-                            template='search.template'
-                            events='search.events'
-                            position='search.position'
-                            parentdiv='search.parentDiv'
-                            ng-model="offer.text"
-                            options='search.options'>
-                    </ui-gmap-search-box>
-                    <ui-gmap-circle center='offer.location'
-                                    radius='offer.location.radius'
-                                    fill='circle.fill'
-                                    stroke='circle.stroke'
-                                    clickable='circle.clickable'
-                                    draggable='circle.draggable'
+                            <ui-gmap-google-map id="gmap" center='map.center' zoom='map.zoom' events="map.events" options="map.options">
+                                <ui-gmap-search-box
+                                        template='search.template'
+                                        events='search.events'
+                                        position='search.position'
+                                        parentdiv='search.parentDiv'
+                                        ng-model="offer.text"
+                                        options='search.options'>
+                                </ui-gmap-search-box>
+                                <ui-gmap-circle center='offer.location'
+                                                radius='offer.location.radius'
+                                                fill='circle.fill'
+                                                stroke='circle.stroke'
+                                                clickable='circle.clickable'
+                                                draggable='circle.draggable'
 
-                                    editable='circle.editable'
-                                    visible='circle.visible'
-                                    events='circle.events'
-                                    control="circle.control">
+                                                editable='circle.editable'
+                                                visible='circle.visible'
+                                                events='circle.events'
+                                                control="circle.control">
 
-                    </ui-gmap-circle>
-                </ui-gmap-google-map>
+                                </ui-gmap-circle>
+                            </ui-gmap-google-map>
 
-            </div>
+                        </div>
 
 
 
-            <!--###############################################
-                ########FORM INPUT FOR notes ##################
-                ###############################################
-                -->
-            <div class="form-group">
-                <label for="notes">Notes (max. 400 chars)</label>
+                        <!--###############################################
+                            ########FORM INPUT FOR notes ##################
+                            ###############################################
+                            -->
+                        <div class="form-group">
+                            <label for="notes">Notes (max. 400 chars)</label>
                 <textarea ng-model="offer.notes"
                           class="form-control"
                           name="notes"
@@ -282,28 +384,43 @@
                           id="notes"
                           ng-maxlength="400";
                           placeholder="Enter your additional notes regarding your offer"></textarea>
-                <div ng-if="interacted(Offer.notes)" ng-messages="Offer.notes.$error" role="alert">
-                    <div class="alert alert-danger" ng-message="maxlength">Please explain your offer in less than 400 characters.</div>
+                            <div ng-if="interacted(Offer.notes)" ng-messages="Offer.notes.$error" role="alert">
+                                <div class="alert alert-danger" ng-message="maxlength">Please explain your offer in less than 400 characters.</div>
+                            </div>
+                        </div>
+
+
+
+
+                        <!--###############################################
+                           ########SUBMIT BUTTON ##################
+                           ###############################################
+                           -->
+                        <button type="submit" class="btn btn-default">Offer Service</button>
+                        <div id="messages" class="alert alert-success" data-ng-show="messages" data-ng-bind="messages"></div>
+                        <div id="statusmessages" class="alert alert-info" data-ng-show="statusmessages" data-ng-bind="statusmessages"></div>
+                        <div id="errormessages" class="alert alert-warning" data-ng-show="errormessages" data-ng-bind="errormessages"></div>
+                        <div data-ng-show="progress.active()" style="color: #0037ff; font-size: 50px;">Sending…</div>
+                    </form>
                 </div>
+
             </div>
 
+        </div>
 
-
-
-            <!--###############################################
-               ########SUBMIT BUTTON ##################
-               ###############################################
-               -->
-            <button type="submit" class="btn btn-default">Offer Service</button>
-            <div id="messages" class="alert alert-success" data-ng-show="messages" data-ng-bind="messages"></div>
-            <div id="statusmessages" class="alert alert-info" data-ng-show="statusmessages" data-ng-bind="statusmessages"></div>
-            <div id="errormessages" class="alert alert-warning" data-ng-show="errormessages" data-ng-bind="errormessages"></div>
-            <div data-ng-show="progress.active()" style="color: #0037ff; font-size: 50px;">Sending…</div>
-        </form>
-
-
-        <p>{{offer | json }} </p>
     </div>
+
+<!--footer, hide footer on xsmall screen-->
+<footer class="footer">
+    <div class="hidden-xs col-sm-12 text-center">
+        <div class="container-fluid text-center">
+            <a href="#">Home</a> |
+            <a href="#">Contact</a> |
+            <a href="#">Imprint</a> |
+            <a href="#">Terms & Conditions</a>
+        </div>
+    </div>
+</footer>
 
 </body>
 </html>

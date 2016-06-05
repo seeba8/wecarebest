@@ -29,7 +29,7 @@ var offerSchema = mongoose.Schema({
         latitude:   Number,
         longitude:  Number,
         name:       String,
-        radius:     {type: Number, min: 100}
+        radius:     {type: Number, min: 100, required: "radius can't be blank"}
     },
     notes:          {type: String, maxlength: 400, trim: true},
     createddate:    Date
