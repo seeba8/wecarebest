@@ -30,7 +30,6 @@ offerApp.controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapG
 
     uiGmapGoogleMapApi.then(function(maps){
         geocoder = new maps.Geocoder;
-        console.log(geocoder);
     });
 
     $scope.offer = {
@@ -253,7 +252,11 @@ offerApp.controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapG
     };
 
     $scope.interacted = function(field) {
-        return $scope.submitted || field.$dirty;
+        try {
+            return $scope.submitted || field.$dirty;
+        } catch(e){
+           // throws all kinds of errors. Not interested in them. I think they're connected to the bootstrap datepicker
+        }
     };
 
 
