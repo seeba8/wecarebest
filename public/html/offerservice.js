@@ -33,11 +33,13 @@ offerApp.controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapG
     });
 
     $scope.offer = {
-        radius: 5000,
-        center: {
+        startday: moment().toDate(),
+        repeating:false,
+        location: {
             latitude: 48.1,
             longitude: 11.5,
-            name: "Munich, Germany"
+            name: "Munich, Germany",
+            radius: 5000,
         },
     };
 
@@ -122,11 +124,9 @@ offerApp.controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapG
                         latitude: place.geometry.location.lat(),
                         longitude: place.geometry.location.lng()
                     };
-                    $scope.offer.center = {
-                        latitude: place.geometry.location.lat(),
-                        longitude: place.geometry.location.lng()
-                    };
-                    $scope.offer.center.name = place.formatted_address;
+                    $scope.offer.location.latitude  = place.geometry.location.lat();
+                    $scope.offer.location.longitude = place.geometry.location.lng();
+                    $scope.offer.location.name = place.formatted_address;
                     $scope.$apply();
                 }
             }
@@ -158,22 +158,22 @@ offerApp.controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapG
         control: {},
         events: {
             radius_changed: function(arg){
-                $scope.offer.radius = Math.round(arg.radius);
+                $scope.offer.location.radius = Math.round(arg.radius);
             },
             dragend: function(test){
-                geocoder.geocode({"location": {lat: $scope.offer.center.latitude,
-                    lng: $scope.offer.center.longitude}}
+                geocoder.geocode({"location": {lat: $scope.offer.location.latitude,
+                    lng: $scope.offer.location.longitude}}
                     , function (results, status) {
                         if(status == "OK" && results != null){
-                            $scope.offer.center.name = results[0].formatted_address;
+                            $scope.offer.location.name = results[0].formatted_address;
                             for(var i = 0; i < results.length; i++){
                                 var result = results[i];
                                 if(result.types[0] == "locality"){
-                                    $scope.offer.center.name = result.formatted_address;
+                                    $scope.offer.location.name = result.formatted_address;
                                     break;
                                 }
                             }
-                            $('#searchbox').val($scope.offer.center.name);
+                            $('#searchbox').val($scope.offer.location.name);
                             $scope.$apply();
                         };
                 });
@@ -182,7 +182,7 @@ offerApp.controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapG
     };
     var PushCandidate = $scope.offer;
     app.saveOffer = function ( PushCandidate) {
-        $http.post("../offers",  PushCandidate).success(function () {
+        $http.post(url + "/offers",  PushCandidate).success(function () {
             console.log("Inserted Successfully");
         })
     };
@@ -225,9 +225,9 @@ offerApp.controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapG
 
         //Validate form input. If fine then send data via HTTP POST to server. Otherwise show error.
         if($scope.Offer.$valid){
-            data.center.name = $scope.offer.center.name;
-            console.log(data.center.name);
-            $scope.offer.date = new Date();
+            data.location.name = $scope.offer.location.name;
+            console.log(data.location.name);
+            $scope.offer.createdDate = new Date();
             console.log("Form is valid. Insert it...");
             $scope.statusmessages = 'OK! Sending offer.';
             $http.post(url + "/offers", data).success(function(){
@@ -317,17 +317,14 @@ offerApp.controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapG
     $scope.updateOffer = function(offerItem, index) {
 
         // $scope.editing = {};
-        offerItem.timeframe = new Date(offerItem.timeframe);
+        offerItem.startDay = new Date(offerItem.startDay);
         console.log(index);
         console.log(offerItem);
 
-        $scope.offer.timeframe = offerItem.timeframe;
+        $scope.offer.startDay = offerItem.startDay;
         $scope.offer.typeofcare = offerItem.typeofcare;
         $scope.offer.wageperhour = offerItem.wageperhour;
         $scope.offer.location = offerItem.location;
-        $scope.offer.latitude = offerItem.latitude;
-        $scope.offer.longitude = offerItem.longitude;
-        $scope.offer.radius = offerItem.radius;
         $scope.offer.notes = offerItem.notes;
 
 

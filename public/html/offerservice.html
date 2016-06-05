@@ -20,12 +20,12 @@
     <!--<script src="../bower_components/angular-bootstrap-datetimepicker-directive/angular-bootstrap-datetimepicker-directive.min.js"></script>-->
 
     <link rel="stylesheet" href="/html/offerservice.css">
-    <title>Title</title>
+    <title>Create offer</title>
 </head>
 <body ng-app="offerApp" ng-controller="CreateOfferCtrl as app">
 
     <div class="container">
-        <h2>Create our offer</h2>
+        <h2>Create offer</h2>
         <p>
         Insert your information in order for customers to use your service.
         </p>
@@ -111,7 +111,7 @@
                         <label class="col-md-2 control-label">Day(s) of Week</label>
                         <div class="checkbox" >
                             <label class="checkbox-inline" name="weekdays" ng-repeat="weekday in weekdays">
-                                <input type="checkbox" value="" ng-model="offer.repeatdays[weekday]">{{ weekday }}
+                                <input type="checkbox" value="" ng-model="offer.repeatoptions[weekday]">{{ weekday }}
                             </label>
                         </div>
                     </div>
@@ -119,7 +119,7 @@
                         <label class="col-md-2 control-label">Frequency</label>
                         <div class="checkbox" >
                             <label class="radio-inline" ng-repeat="frequency in frequencies">
-                                <input type="radio" ng-model="offer.repeatfreq" name="frequency" value="{{frequency}}">{{frequency}}
+                                <input type="radio" ng-model="offer.repeatoptions.frequency" name="frequency" value="{{frequency}}">{{frequency}}
                             </label>
                         </div>
                     </div>
@@ -213,22 +213,6 @@
                 ########FORM INPUT FOR supportedarea ############
                 #################################################
                 -->
-            <!--<div class="form-group">-->
-                <!--<label for="googlemaps">Supported area</label>-->
-                <!--<input ng-model="offer.supportedarea"-->
-                       <!--name="supportedarea"-->
-                       <!--type="text"-->
-                       <!--class="form-control"-->
-                       <!--id="googlemaps"-->
-                       <!--placeholder="Enter supported area"-->
-                       <!--ng-minlength="3"-->
-                       <!--required />-->
-                <!--<div ng-if="interacted(Offer.supportedarea)" ng-messages="Offer.supportedarea.$error" role="alert">-->
-                    <!--<div class="alert alert-danger" ng-message="required">Please enter a value for this field.</div>-->
-                    <!--<div class="alert alert-danger" ng-message="minlength">This field can be at most 15 characters long.</div>-->
-                <!--</div>-->
-
-
             <div class ="row">
                 <div class="form-group col-xs-6">
                     <label for="searchbox">Supported area</label>
@@ -239,12 +223,12 @@
                 <div class="form-group col-xs-6" >
                     <label for="radius">Radius</label>
                     <div class="input-group">
-                        <input type="number" required ng-pattern="/^[0-9]+$/" rangemaps ng-model="offer.radius"
+                        <input type="number" required ng-pattern="/^[0-9]+$/" rangemaps ng-model="offer.location.radius"
                                name="radius" class="form-control" id="radius"
                                onkeydown="if (event.keyCode == 13) {event.preventDefault(); event.stopPropagation();}">
                         <span class="input-group-addon">meters</span>
                     </div>
-                    <div  ng-if="interacted(Offer.radius)" ng-messages="Offer.radius.$error" role="alert">
+                    <div  ng-if="interacted(Offer.location.radius)" ng-messages="Offer.location.radius.$error" role="alert">
                         <div class="alert alert-danger" ng-message="required">Please enter a value for this field.</div>
                         <div class="alert alert-danger" ng-message="pattern">
                             Not a valid radius! Please use a positive numeric value with a maximum of two decimals.
@@ -266,8 +250,8 @@
                             ng-model="offer.text"
                             options='search.options'>
                     </ui-gmap-search-box>
-                    <ui-gmap-circle center='offer.center'
-                                    radius='offer.radius'
+                    <ui-gmap-circle center='offer.location'
+                                    radius='offer.location.radius'
                                     fill='circle.fill'
                                     stroke='circle.stroke'
                                     clickable='circle.clickable'

@@ -17,14 +17,18 @@ module.exports.postOffer = function(req, res){
     console.log("Test date:" + req.body.date);
 
     //rename for easier usage
-    var date = req.body.date;
-    var timeframe = req.body.timeframe;
+    var date = req.body.createdDate;
+    var startday = req.body.startday;
+    var starttime = req.body.starttime;
+    var endday = req.body.endday;
+    var endtime = req.body.endtime;
+    var repeating = req.body.repeating;
     var typeofcare = req.body.typeofcare;
     var wageperhour = req.body.wageperhour;
-    var location = req.body.center.name;
-    var latitude = req.body.center.latitude;
-    var longitude = req.body.center.longitude;
-    var radius = req.body.radius;
+    var location = req.body.location.name;
+    var latitude = req.body.location.latitude;
+    var longitude = req.body.location.longitude;
+    var radius = req.body.location.radius;
     var notes = req.body.notes;
 
     console.log(location);
@@ -39,9 +43,19 @@ module.exports.postOffer = function(req, res){
         return;
     }
 
-    if(!timeframe){
-        res.status(400).send('timeframe is required');
-        console.log("timeframe is not defined");
+    if(!startday){
+        res.status(400).send('startday is required');
+        console.log("startday is not defined");
+        return;
+    }
+    if(!starttime){
+        res.status(400).send('starttime is required');
+        console.log("starttime is not defined");
+        return;
+    }
+    if(!endtime){
+        res.status(400).send('endtime is required');
+        console.log("endtime is not defined");
         return;
     }
 
@@ -63,16 +77,21 @@ module.exports.postOffer = function(req, res){
     //#############################
 
     //define new Offer object with given parts
-    var offer = new Offer({
-        timestamp:date,
-        timeframe:timeframe,
-        typeofcare:typeofcare,
-        wageperhour:wageperhour,
-        location:location,
-        latitude:latitude,
-        longitude:longitude,
-        radius:radius,
-        notes:notes});
+    // var offer = new Offer({
+    //     startday:startday,
+    //     starttime:starttime,
+    //     endday:endday,
+    //     endtime:endtime,
+    //     repeating:repeating,
+    //
+    //     typeofcare:typeofcare,
+    //     wageperhour:wageperhour,
+    //     location:location,
+    //     latitude:latitude,
+    //     longitude:longitude,
+    //     radius:radius,
+    //     notes:notes});
+    var offer = new Offer(req.body);
     
     //according to mongoose function save offer to database
     offer.save(function(err) {
