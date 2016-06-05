@@ -11,7 +11,7 @@ var offerSchema = mongoose.Schema({
     startday :      Date,
     starttime :     Date,
     endtime :       Date,
-    repeating:      Boolean,
+    repeating:      {type: Boolean, default: false},
     repeatoptions: {
         Monday:     {type: Boolean, default: false},
         Tuesday:    {type: Boolean, default: false},
@@ -23,15 +23,15 @@ var offerSchema = mongoose.Schema({
         frequency:  {type: String, enum: frequencies},
         endday :    Date
     },
-    typeofcare :    String,
+    typeofcare :    {type: String, enum: typesofcare},
     wageperhour:    {type: Number, min: 0, max: 100},
     location:       {
         latitude:   Number,
         longitude:  Number,
         name:       String,
-        radius:     Number
+        radius:     {type: Number, min: 100}
     },
-    notes:          String,
+    notes:          {type: String, maxlength: 400, trim: true},
     createddate:    Date
 });
 

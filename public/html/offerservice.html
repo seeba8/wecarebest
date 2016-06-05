@@ -2,24 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
-    <link rel="stylesheet" href="/css/main.css">
-    <script src="/bower_components/angular/angular.min.js"></script>
-    <script src="/html/offerservice.js"></script>
-    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="/bower_components/angular-bootstrap-show-errors/src/showErrors.js"></script>
-    <script src="/bower_components/angular-messages/angular-messages.min.js"></script>
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../html/offerservice.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../bower_components/angular-bootstrap-show-errors/src/showErrors.js"></script>
+    <script src="../bower_components/angular-messages/angular-messages.min.js"></script>
 
-    <script src="/bower_components/lodash/dist/lodash.min.js"></script>
-    <script src="/bower_components/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
-    <script src="/bower_components/angular-google-maps/dist/angular-google-maps.min.js"></script>
-    <script src="/bower_components/moment/min/moment.min.js"></script>
-    <script src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="../bower_components/lodash/dist/lodash.min.js"></script>
+    <script src="../bower_components/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
+    <script src="../bower_components/angular-google-maps/dist/angular-google-maps.min.js"></script>
+    <script src="../bower_components/moment/min/moment.min.js"></script>
+    <script src="../bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
     <!--<script src="../bower_components/angular-bootstrap-datetimepicker-directive/angular-bootstrap-datetimepicker-directive.min.js"></script>-->
 
-    <link rel="stylesheet" href="/html/offerservice.css">
+    <link rel="stylesheet" href="../html/offerservice.css">
     <title>Create offer</title>
 </head>
 <body ng-app="offerApp" ng-controller="CreateOfferCtrl as app">
@@ -231,7 +231,7 @@
                     <div  ng-if="interacted(Offer.location.radius)" ng-messages="Offer.location.radius.$error" role="alert">
                         <div class="alert alert-danger" ng-message="required">Please enter a value for this field.</div>
                         <div class="alert alert-danger" ng-message="pattern">
-                            Not a valid radius! Please use a positive numeric value with a maximum of two decimals.
+                            Not a valid radius! Please use a positive numeric value.
                         </div>
                         <div class="alert alert-danger" ng-message="rangemaps">
                             Not a valid radius! Please choose a radius higher than 100m.

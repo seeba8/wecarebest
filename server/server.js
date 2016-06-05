@@ -121,7 +121,9 @@ var offerRoutes = require("./requests_offers/offerRoutes");
 app.use("/", offerRoutes());
 
 
-
+app.get("/home", function(req,res) {
+    res.sendFile("/html/index.html", { root: path.join(__dirname, '/../public') });
+});
 
 
 

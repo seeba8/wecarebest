@@ -77,23 +77,10 @@ module.exports.postOffer = function(req, res){
     //#############################
 
     //define new Offer object with given parts
-    // var offer = new Offer({
-    //     startday:startday,
-    //     starttime:starttime,
-    //     endday:endday,
-    //     endtime:endtime,
-    //     repeating:repeating,
-    //
-    //     typeofcare:typeofcare,
-    //     wageperhour:wageperhour,
-    //     location:location,
-    //     latitude:latitude,
-    //     longitude:longitude,
-    //     radius:radius,
-    //     notes:notes});
     var offer = new Offer(req.body);
     
     //according to mongoose function save offer to database
+
     offer.save(function(err) {
         if (err) {
             res.status(500).send(err);
