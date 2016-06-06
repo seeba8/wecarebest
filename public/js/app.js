@@ -9,6 +9,7 @@ myApp.config(function($routeProvider) {
             .when('/profile', { templateUrl: '../html/partials/profile.html' })
             .when('/login', {templateUrl: '../html/login.html'})
             .when('/addUser', {templateUrl: '../html/registration.html'})
+            .when('/myoffers', {templateUrl: '../html/myoffers.html'})
             .otherwise({ redirectTo: '/'});
     });
 

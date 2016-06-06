@@ -6,6 +6,7 @@
     <title>Node Authentication</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <link rel="stylesheet" href="../css/main.css">
     <style>
         body        { padding-top:80px; }
     </style>
@@ -15,8 +16,6 @@
     <div class="col-sm-6 col-sm-offset-3">
 
         <h1><span class="fa fa-sign-in"></span> Login</h1>
-
-        <div class="alert alert-danger"></div>
 
         <div class="form-group">
             <label>Email</label>
@@ -28,7 +27,6 @@
         </div>
 
         <button ng-click="app.login(app.email, app.pwd)" class="btn btn-warning btn-lg">Login</button>
-        <p>{{app|json}}</p>
 
         <hr>
 
