@@ -7,12 +7,67 @@ myApp.config(function($routeProvider) {
             .when('/offerservice', { templateUrl: '../html/offerservice.html'})
             .when('/about', { templateUrl: '../html/partials/about.html' })
             .when('/profile', { templateUrl: '../html/partials/profile.html' })
+            .when('/login', {templateUrl: '../html/login.html'})
+            .when('/addUser', {templateUrl: '../html/registration.html'})
             .otherwise({ redirectTo: '/'});
     });
-myApp.controller("AppCtrl", function ($http){
-        var app = this;
-        console.log("hi");
-    });
+
+myApp.controller("AppCtrl", function($http) {
+    var app = this;
+    console.log("hi");
+});
+
+myApp.controller("AuthCtrl", function ($http) {
+
+    var app = this;
+    var url = "http://localhost:3000";
+
+    app.saveProduct = function(newProduct) {
+        $http.post(url + "/add", {name:newProduct}).success(function () {
+            loadProducts();
+        })
+    };
+
+    app.saveUser = function (type, firstName, name, street, city, postalCode, country, phone, gender, email, pwd, pwd2) {
+        console.log("clicked register");
+        if(pwd==pwd2) {
+            $http.post(url + "/addUser", {
+                type: type,
+                firstName: firstName,
+                name: name,
+                street: street,
+                city: city,
+                postalCode: postalCode,
+                country: country,
+                phone: phone,
+                gender: gender,
+                email: email,
+                pwd: pwd,
+                pwd2: pwd2
+            }).success(function () {
+                loadUsers();
+            })}
+        else {
+            console.log("passwords don't match");
+        }
+    };
+
+    app.login = function (e, p) {
+        $http.post(url + "/login", {
+            email: e,
+            pwd: p
+        }).then(function(response) {
+            //$httpProvider.defaults.headers.common["X-AUTH-TOKEN"] = response.data.token;
+        });
+    };
+    function loadUsers() {
+        $http.get(url + "/users").success(function (users) {
+            app.users = users;
+        })
+    }
+
+});
+
 
 //var offerApp = angular.module('offerApp', ['ui.bootstrap.showErrors', 'ngMessages',"uiGmapgoogle-maps"]);
 
