@@ -121,20 +121,13 @@ var offerRoutes = require("./requests_offers/offerRoutes");
 app.use("/", offerRoutes());
 
 
-app.get("/home", function(req,res) {
-    res.sendFile("/html/index.html", { root: path.join(__dirname, '/../public') });
-});
-
 
 
 app.get("/failure", function(req,res) {
     res.send(200,"Hello World");
 });
-
 app.get("/", function(req,res) {
-    User.find(function (err, users) {
-        res.send(users);
-    })
+    res.sendFile("/html/index.html", { root: path.join(__dirname, '/../public') });
 });
 
 app.listen(3000);
