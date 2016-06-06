@@ -5,26 +5,14 @@
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="../css/main.css">
-    <script src="../bower_components/angular/angular.js"></script>
-    <script src="../js/app.js"></script>
-    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="../bower_components/angular-bootstrap-show-errors/src/showErrors.js"></script>
-    <script src="../bower_components/angular-messages/angular-messages.min.js"></script>
-
-    <script src="../bower_components/lodash/dist/lodash.min.js"></script>
-    <script src="../bower_components/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
-    <script src="../bower_components/angular-google-maps/dist/angular-google-maps.min.js"></script>
-    <script src="../bower_components/moment/min/moment.min.js"></script>
-    <script src="../bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
     <!--<script src="../bower_components/angular-bootstrap-datetimepicker-directive/angular-bootstrap-datetimepicker-directive.min.js"></script>-->
 
     <link rel="stylesheet" href="../html/offerservice.css">
     <title>Create offer</title>
 </head>
-<body ng-app="offerApp" ng-controller="CreateOfferCtrl as app">
+<body ng-app="myApp">
 
-    <div class="container">
+    <div class="container" ng-controller="CreateOfferCtrl as app">
         <h2>Create offer</h2>
         <p>
         Insert your information in order for customers to use your service.
@@ -300,7 +288,6 @@
             <div id="errormessages" class="alert alert-warning" data-ng-show="errormessages" data-ng-bind="errormessages"></div>
             <div data-ng-show="progress.active()" style="color: #0037ff; font-size: 50px;">Sending…</div>
         </form>
-
 
         <p>{{offer | json }} </p>
     </div>
