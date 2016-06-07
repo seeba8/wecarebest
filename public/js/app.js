@@ -119,8 +119,10 @@ myApp.controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapGoog
         $('.startdaypicker').datetimepicker({
             format: "L",
             minDate: moment(),
+            useCurrent: false //Important! See issue #1075
         })
             .on('dp.change', function(e) {
+                console.log(e.date);
                 $('.enddaypicker').data("DateTimePicker").minDate(e.date);
                 $scope.offer.startday = e.date.toDate();
                 $scope.$apply();
@@ -150,7 +152,8 @@ myApp.controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapGoog
         $('.enddaypicker')
             .datetimepicker({
                 format: "L",
-                minDate: moment()
+                minDate: moment(),
+                useCurrent: false //Important! See issue #1075
             })
             .on('dp.change', function (e) {
                 $('.startdaypicker').data("DateTimePicker").maxDate(e.date);
