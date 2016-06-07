@@ -344,8 +344,9 @@ myApp.controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapGoog
     app.recent = true;
 
     $http.get(url + "/getmyOffers").success(function(offers){
-        console.log("go get it.");
+        console.log("Get Offers.");
         app.offerfinals = offers;
+        //console.log(app.offerfinals);
     })
 
     /*

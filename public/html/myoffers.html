@@ -35,10 +35,11 @@
                             Amount of care: <i>{{offerfinal.typeofcare}}</i></br>
                             Timeframe:<i> {{offerfinal.starttime | datetime1}}</i> until <i> {{offerfinal.endtime | datetime1}}</i>
                         </h4>
-                        <li class="list-group-item"><b>Repeating:</b> {{offerfinal.repeating}} </li>
+                        <li ng-show="offerfinal.repeating == true" class="list-group-item"><b>Repeating:</b> {{offerfinal.repeatoptions.frequency}} </li>
+                        <li ng-show="offerfinal.repeating == true" class="list-group-item" ><b>Days:</b> <span ng-repeat="(key,val) in offerfinal.repeatoptions">{{key}}</span></li>
                         <li class="list-group-item"><b>Wage:</b> {{offerfinal.wageperhour}} € / h</li>
                         <li class="list-group-item"><b>Location:</b> {{offerfinal.location.name}} - <b>Radius: </b>{{offerfinal.location.radius}}m</li>
-                        <li class="list-group-item"><b>Notes:</b> {{offerfinal.notes}}</li>
+                        <li ng-show="offerfinal.notes" class="list-group-item"><b>Notes:</b> {{offerfinal.notes}}</li>
                     </ul>
                 </div>
             </div>
