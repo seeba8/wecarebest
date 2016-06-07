@@ -32,12 +32,14 @@
                     <ul class="list-group">
                         <h4 class="media-heading list-group-item-heading"
                             style="background-color: #2b669a;padding:10px;color:white;margin-bottom: 0px;">
-                            Amount of care: <i>{{offerfinal.typeofcare}}</i></br>
+                            Amount of care: <i>{{offerfinal.typeofcare}}</i><br />
                             Timeframe:<i> {{offerfinal.starttime | datetime1}}</i> until <i> {{offerfinal.endtime | datetime1}}</i>
                         </h4>
                         <li ng-show="offerfinal.repeating == true" class="list-group-item"><b>Repeating:</b> {{offerfinal.repeatoptions.frequency}} </li>
                         <!--TODO show only weekdays with value == true-->
-                        <li ng-show="offerfinal.repeating == true" class="list-group-item" ><b>Days:</b> <span ng-repeat="(key,val) in offerfinal.repeatoptions">{{key}}</span></li>
+                        <li ng-show="offerfinal.repeating == true" class="list-group-item" ><b>Days:</b>
+                            <span ng-show="val == true" ng-repeat="(key,val) in offerfinal.repeatoptions">{{key}}</span>
+                        </li>
                         <li class="list-group-item"><b>Wage:</b> {{offerfinal.wageperhour}} € / h</li>
                         <li class="list-group-item"><b>Location:</b> {{offerfinal.location.name}} - <b>Radius: </b>{{offerfinal.location.radius}}m</li>
                         <li ng-show="offerfinal.notes" class="list-group-item"><b>Notes:</b> {{offerfinal.notes}}</li>

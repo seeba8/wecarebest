@@ -1,5 +1,4 @@
-angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapGoogleMapApi',
-        function($interval, $scope, $http, uiGmapGoogleMapApi) {
+angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapGoogleMapApi', function($interval, $scope, $http, uiGmapGoogleMapApi) {
     var app = this;
     var url = 'http://localhost:3000';
     var geocoder;
@@ -7,13 +6,13 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
 
     console.log("loaded create offer controller");
 
-    uiGmapGoogleMapApi.then(function(maps){
+    uiGmapGoogleMapApi.then(function (maps) {
         geocoder = new maps.Geocoder;
     });
 
     $scope.offer = {
         startday: moment().toDate(),
-        repeating:false,
+        repeating: false,
         location: {
             latitude: 48.1,
             longitude: 11.5,
@@ -30,7 +29,7 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
             minDate: moment(),
             useCurrent: false //Important! See issue #1075
         })
-            .on('dp.change', function(e) {
+            .on('dp.change', function (e) {
                 console.log(e.date);
                 $('.enddaypicker').data("DateTimePicker").minDate(e.date);
                 $scope.offer.startday = e.date.toDate();
@@ -41,7 +40,7 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
         $('.starttimepicker').datetimepicker({
             format: "LT"
         })
-            .on('dp.change', function(e) {
+            .on('dp.change', function (e) {
                 $scope.offer.starttime = e.date.toDate();
                 $scope.$apply();
             });
@@ -51,7 +50,7 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
         $('.endtimepicker').datetimepicker({
             format: "LT"
         })
-            .on('dp.change', function(e) {
+            .on('dp.change', function (e) {
                 $scope.offer.endtime = e.date.toDate();
                 $scope.$apply();
             });
@@ -73,15 +72,17 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
 
 
     var config = {
-            headers : {
+            headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
-            }}
+            }
+        }
         ;
     $scope.map = {
         center: {
             latitude: 48.1,
             longitude: 11.5,
-            name: "München"},
+            name: "München"
+        },
         zoom: 10,
         options: {
             scaleControl: true,
@@ -89,7 +90,7 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
             streetViewControl: false
         },
         events: {
-            click: function(mapModel, eventName, originalEventArgs) {
+            click: function (mapModel, eventName, originalEventArgs) {
                 var e = originalEventArgs[0];
                 $scope.circle.center = e.latLng;
                 $scope.$apply();
@@ -97,16 +98,16 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
         }
     };
     $scope.search = {
-        template:"searchbox.tpl.html",
+        template: "searchbox.tpl.html",
         events: {
-            place_changed: function(autocomplete) {
-                var  place = autocomplete.getPlace();
+            place_changed: function (autocomplete) {
+                var place = autocomplete.getPlace();
                 if (place.address_components) {
                     $scope.map.center = {
                         latitude: place.geometry.location.lat(),
                         longitude: place.geometry.location.lng()
                     };
-                    $scope.offer.location.latitude  = place.geometry.location.lat();
+                    $scope.offer.location.latitude = place.geometry.location.lat();
                     $scope.offer.location.longitude = place.geometry.location.lng();
                     $scope.offer.location.name = place.formatted_address;
                     $scope.$apply();
@@ -115,7 +116,7 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
         },
         parentDiv: "searchBoxParent",
         options: {
-            autocomplete:true,
+            autocomplete: true,
             types: ['(cities)'],
             componentRestrictions: {country: 'de'} //only works for one country, not multiple codes. remove if necessary
         }
@@ -139,18 +140,22 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
         visible: true, // optional: defaults to true
         control: {},
         events: {
-            radius_changed: function(arg){
+            radius_changed: function (arg) {
                 $scope.offer.location.radius = Math.round(arg.radius);
             },
-            dragend: function(test){
-                geocoder.geocode({"location": {lat: $scope.offer.location.latitude,
-                        lng: $scope.offer.location.longitude}}
+            dragend: function (test) {
+                geocoder.geocode({
+                        "location": {
+                            lat: $scope.offer.location.latitude,
+                            lng: $scope.offer.location.longitude
+                        }
+                    }
                     , function (results, status) {
-                        if(status == "OK" && results != null){
+                        if (status == "OK" && results != null) {
                             $scope.offer.location.name = results[0].formatted_address;
-                            for(var i = 0; i < results.length; i++){
+                            for (var i = 0; i < results.length; i++) {
                                 var result = results[i];
-                                if(result.types[0] == "locality"){
+                                if (result.types[0] == "locality") {
                                     $scope.offer.location.name = result.formatted_address;
                                     break;
                                 }
@@ -163,7 +168,7 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
         }
     };
     app.saveOffer = function (PushCandidate) {
-        $http.post(url + "/offers",  PushCandidate).success(function () {
+        $http.post(url + "/offers", PushCandidate).success(function () {
             console.log("Inserted Successfully");
         })
     };
@@ -196,7 +201,7 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
 
     $scope.submitted = false;
 
-    $scope.submit = function() {
+    $scope.submit = function () {
         // Trigger validation flag. True because user clicked on submit.
         $scope.submitted = true;
         $scope.errormessages = null;
@@ -205,13 +210,13 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
 
 
         //Validate form input. If fine then send data via HTTP POST to server. Otherwise show error.
-        if($scope.Offer.$valid){
+        if ($scope.Offer.$valid) {
             data.location.name = $scope.offer.location.name;
             console.log(data.location.name);
             $scope.offer.createdDate = new Date();
             console.log("Form is valid. Insert it...");
             $scope.statusmessages = 'OK! Sending offer.';
-            $http.post(url + "/offers", data).success(function(){
+            $http.post(url + "/offers", data).success(function () {
                 $scope.PostDataResponse = data;
                 $scope.messages = 'Success! Your offer has been created!';
                 $scope.statusmessages = null;
@@ -233,10 +238,10 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
         }
     };
 
-    $scope.interacted = function(field) {
+    $scope.interacted = function (field) {
         try {
             return $scope.submitted || field.$dirty;
-        } catch(e){
+        } catch (e) {
             // throws all kinds of errors. Not interested in them. I think they're connected to the bootstrap datepicker
         }
     };
@@ -254,8 +259,9 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
      * */
     app.recent = true;
 
-    $http.get(url + "/getmyOffers").success(function(offers){
+    $http.get(url + "/getmyOffers").success(function (offers) {
         console.log("Get Offers.");
+        app.offerfinals.repeatoptions
         app.offerfinals = offers;
         //console.log(app.offerfinals);
     });

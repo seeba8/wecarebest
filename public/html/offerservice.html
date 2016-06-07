@@ -212,12 +212,13 @@
                     <label for="radius">Radius</label>
                     <div class="input-group">
                         <input type="number" required ng-pattern="/^[0-9]+$/" rangemaps ng-model="offer.location.radius"
-                               name="radius" class="form-control" id="radius"
-                               onkeydown="if (event.keyCode == 13) {event.preventDefault(); event.stopPropagation();}">
+                               name="radius" class="form-control" id="radius">
                         <span class="input-group-addon">meters</span>
                     </div>
-                    <div  ng-if="interacted(Offer.location.radius)" ng-messages="Offer.location.radius.$error" role="alert">
-                        <div class="alert alert-danger" ng-message="required">Please enter a value for this field.</div>
+                    <div  ng-show="Offer.radius.$touched" ng-messages="Offer.radius.$error" role="alert">
+                        <div class="alert alert-danger" ng-message="required">
+                            Please enter a value for this field.
+                        </div>
                         <div class="alert alert-danger" ng-message="pattern">
                             Not a valid radius! Please use a positive numeric value.
                         </div>
