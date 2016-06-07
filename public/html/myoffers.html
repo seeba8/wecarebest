@@ -1,29 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
-    <link rel="stylesheet" href="../css/main.css">
-    <script src="../bower_components/angular/angular.min.js"></script>
-    <script src="../html/offerservice.js"></script>
-    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="../bower_components/angular-bootstrap-show-errors/src/showErrors.js"></script>
-    <script src="../bower_components/angular-messages/angular-messages.min.js"></script>
 
-    <script src="../bower_components/lodash/dist/lodash.min.js"></script>
-    <script src="../bower_components/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
-    <script src="../bower_components/angular-google-maps/dist/angular-google-maps.min.js"></script>
-    <script src="../bower_components/moment/min/moment.min.js"></script>
-    <script src="../bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-    <!--<script src="../bower_components/angular-bootstrap-datetimepicker-directive/angular-bootstrap-datetimepicker-directive.min.js"></script>-->
-
-    <link rel="stylesheet" href="../html/offerservice.css">
-</head>
-<body ng-app="myApp" ng-controller="CreateOfferCtrl as app">
-
-<div class="container">
+<div class="container" ng-controller="CreateOfferCtrl as app">
     <div class="row">
         <div class="col-sm-3 col-md-3 pull-right">
             <form class="navbar-form" role="search">
@@ -57,11 +33,11 @@
                         <h4 class="media-heading list-group-item-heading"
                             style="background-color: #2b669a;padding:10px;color:white;margin-bottom: 0px;">
                             Amount of care: <i>{{offerfinal.typeofcare}}</i></br>
-                            Timeframe:<i> {{offerfinal.timeframe | datetime1}}</i>
+                            Timeframe:<i> {{offerfinal.starttime | datetime1}}</i> until <i> {{offerfinal.endtime | datetime1}}</i>
                         </h4>
-                        <li class="list-group-item"><b>Date created:</b> {{offerfinal.timestamp | datetime1}} </li>
+                        <li class="list-group-item"><b>Repeating:</b> {{offerfinal.repeating}} </li>
                         <li class="list-group-item"><b>Wage:</b> {{offerfinal.wageperhour}} € / h</li>
-                        <li class="list-group-item"><b>Location:</b> {{offerfinal.location}} - <b>Radius: </b>{{offerfinal.radius}}m</li>
+                        <li class="list-group-item"><b>Location:</b> {{offerfinal.location.name}} - <b>Radius: </b>{{offerfinal.location.radius}}m</li>
                         <li class="list-group-item"><b>Notes:</b> {{offerfinal.notes}}</li>
                     </ul>
                 </div>
@@ -101,6 +77,3 @@
 </div>
 
 
-
-</body>
-</html>
