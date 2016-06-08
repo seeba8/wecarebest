@@ -12,11 +12,12 @@
 </head>
 <body ng-app="myApp">
 
-    <div class="container" ng-controller="CreateOfferCtrl as app">
-        <h2>Create offer</h2>
+    <div class="container createoffer" ng-controller="CreateOfferCtrl as app">
+        <h2>Create an offer</h2>
         <p>
         Insert your information in order for customers to use your service.
         </p>
+        <hr class="colorgraph">
         <form name="Offer" role="form" ng-submit="submit()" novalidate>
 
             <!--###############################################
@@ -25,7 +26,7 @@
                 -->
 
             <div class="row">
-                <div class="form-group col-xs-4">
+                <div class="form-group col-sm-4 col-xs-4">
                     <label for="startday">Start day</label>
                     <div class='input-group date'>
                         <input type='text'
@@ -42,7 +43,7 @@
                         <div class="alert alert-danger" ng-message="required">Please select the day of your offered services</div>
                     </div>
                 </div>
-                <div class="form-group col-xs-3">
+                <div class="form-group col-sm-3 col-xs-4">
                     <label for="starttime">Start time</label>
                     <div class='input-group date'>
                         <input type='text'
@@ -60,7 +61,7 @@
                     </div>
 
                 </div>
-                <div class="form-group col-xs-3">
+                <div class="form-group col-sm-3 col-xs-4">
                     <label for="endtime">End time</label>
                     <div class='input-group date'>
                         <input type='text'
@@ -78,8 +79,8 @@
                         <div class="alert alert-danger" ng-message="required">Please select the end time of your offered services</div>
                     </div>
                 </div>
-                <div class="form-group col-xs-2 checkbox-inline">
-                    <label for="repeating">
+                <div class="form-group col-sm-2 col-xs-12 checkbox-inline text-center pagination-centered">
+                    <label for="repeating" class="repeating ">
                         <input ng-model="offer.repeating"
                                class=""
                                type="checkbox"
@@ -278,19 +279,20 @@
 
 
 
-
+            <hr class="colorgraph">
             <!--###############################################
                ########SUBMIT BUTTON ##################
                ###############################################
                -->
-            <button type="submit" class="btn btn-default">Offer Service</button>
-            <div id="messages" class="alert alert-success" data-ng-show="messages" data-ng-bind="messages"></div>
-            <div id="statusmessages" class="alert alert-info" data-ng-show="statusmessages" data-ng-bind="statusmessages"></div>
-            <div id="errormessages" class="alert alert-warning" data-ng-show="errormessages" data-ng-bind="errormessages"></div>
-            <div data-ng-show="progress.active()" style="color: #0037ff; font-size: 50px;">Sending…</div>
+            <button type="submit" class="btn btn-success">Offer Service</button>
+            <span id="messages" class="alert alert-success" data-ng-show="messages" data-ng-bind="messages"></span>
+            <span id="statusmessages" class="alert alert-info" data-ng-show="statusmessages" data-ng-bind="statusmessages"></span>
+            <span id="errormessages" class="alert alert-warning" data-ng-show="errormessages" data-ng-bind="errormessages"></span>
+            <span data-ng-show="progress.active()" style="color: #0037ff; font-size: 50px;">Sending…</span>
+            <hr class="colorgraph">
         </form>
 
-        <p>{{offer | json }} </p>
+     <!--   <p>{{offer | json }} </p>-->
     </div>
 
 </body>

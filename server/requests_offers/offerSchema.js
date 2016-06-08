@@ -32,7 +32,7 @@ var offerSchema = mongoose.Schema({
         radius:     {type: Number, min: 100}
     },
     notes:          {type: String, maxlength: 400, trim: true},
-    createddate:    Date
+    createdDate:    Date
 });
 
 //define mongoose Model

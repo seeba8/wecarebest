@@ -214,6 +214,7 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
             data.location.name = $scope.offer.location.name;
             console.log(data.location.name);
             $scope.offer.createdDate = new Date();
+            console.log($scope.offer.createdDate);
             console.log("Form is valid. Insert it...");
             $scope.statusmessages = 'OK! Sending offer.';
             $http.post(url + "/offers", data).success(function () {

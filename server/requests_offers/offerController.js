@@ -142,6 +142,7 @@ module.exports.updatemyOffer = function (req, res){
     var notes = req.body.notes;
     console.log(location);
     console.log(radius);
+    console.log(createdDate);
 
     Offer.findByIdAndUpdate(id, {timeframe:timeframe, typeofcare:typeofcare, wageperhour:wageperhour, location:location,latitude:latitude, longitude:longitude, radius:radius, notes:notes}, {new: true}, function(err, offer){
         if (err) {
