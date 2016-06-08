@@ -44,8 +44,7 @@ db.once("open", function() {
     console.log("open");
 
 });
-var register = require("./auth/register");
-var login = require("./auth/login");
+
 var passportConfig = require ("./config/passportConfig");
 var User = require("./users/structure");
 
