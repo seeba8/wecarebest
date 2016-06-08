@@ -2,7 +2,14 @@
  * Created by sebas on 15/05/2016.
  */
 var express = require("express");
+var morgan  = require('morgan');
 var app = express();
+
+//This tells express to log via morgan
+//and morgan to log in the "combined" pre-defined format
+app.use(morgan('combined'));
+
+
 var cors = require("cors");
 var bodyParser = require("body-parser");
 app.use(cors());
@@ -44,8 +51,7 @@ db.once("open", function() {
     console.log("open");
 
 });
-var register = require("./auth/register");
-var login = require("./auth/login");
+
 var passportConfig = require ("./config/passportConfig");
 var User = require("./users/structure");
 
