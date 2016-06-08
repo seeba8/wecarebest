@@ -2,7 +2,14 @@
  * Created by sebas on 15/05/2016.
  */
 var express = require("express");
+var morgan  = require('morgan');
 var app = express();
+
+//This tells express to log via morgan
+//and morgan to log in the "combined" pre-defined format
+app.use(morgan('combined'));
+
+
 var cors = require("cors");
 var bodyParser = require("body-parser");
 app.use(cors());
