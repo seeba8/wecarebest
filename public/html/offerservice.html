@@ -27,21 +27,29 @@
 
             <div class="row">
                 <div class="form-group col-sm-4 col-xs-4">
-                    <label for="startday">Start day</label>
+                    <label for="startday">Start day (mm/dd/yy)</label>
                     <div class='input-group date'>
                         <input type='text'
                                class="startdaypicker form-control"
                                id="startday"
                                name="startday"
+                               placeholder="Enter Date"
+                               minlength="6"
                                required />
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar" onclick="$('.startdaypicker').data('DateTimePicker').show();"></span>
                         </span>
 
                     </div>
-                    <div ng-if="interacted(Offer.timeframe)" ng-messages="Offer.timeframe.$error" role="alert">
-                        <div class="alert alert-danger" ng-message="required">Please select the day of your offered services</div>
+                    <div ng-if="interacted(Offer.startday)" ng-messages="Offer.startday.$error" role="alert">
+                        <div class="alert alert-danger" ng-message="required">
+                            Please select the day of your offered services
+                        </div>
+                        <div class="alert alert-danger" ng-message="minlength">
+                            Not a valid wage! Please enter at least one digit as wage.
+                        </div>
                     </div>
+
                 </div>
                 <div class="form-group col-sm-3 col-xs-4">
                     <label for="starttime">Start time</label>
@@ -50,6 +58,8 @@
                                class="starttimepicker form-control"
                                id="starttime"
                                name="starttime"
+                               placeholder="Enter Time"
+                               minlength="4"
                                required />
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-time" onclick="$('.starttimepicker').data('DateTimePicker').show();"></span>
@@ -57,7 +67,12 @@
                     </div>
 
                     <div ng-if="interacted(Offer.starttime)" ng-messages="Offer.starttime.$error" role="alert">
-                        <div class="alert alert-danger" ng-message="required">Please select the start time of your offered services</div>
+                        <div class="alert alert-danger" ng-message="required">
+                            Please select the start time of your offered services
+                        </div>
+                        <div class="alert alert-danger" ng-message="minlength">
+                            Not a valid wage! Please enter at least one digit as wage.
+                        </div>
                     </div>
 
                 </div>
@@ -68,6 +83,7 @@
                                class="endtimepicker form-control"
                                id="endtime"
                                name="endtime"
+                               placeholder="Enter Time"
                                required />
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-time" onclick="$('.endtimepicker').data('DateTimePicker').show();"></span>
@@ -113,7 +129,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="endday" class="col-md-2 control-label">Until</label>
+                        <label for="endday" class="col-md-2 control-label">Until (mm/dd/yy)</label>
                         <div class="col-md-10">
                             <div class='input-group date'>
                                 <input type='text'
@@ -207,6 +223,11 @@
                     <label for="searchbox">Supported area</label>
                     <div id="searchBoxParent">
                         <!--<input type="text" class="form-control" id="searchbox" placeholder="Enter supported area">-->
+                    </div>
+                    <div  ng-show="Offer.location.name.$touched" ng-messages="Offer.location.name.$error" role="alert">
+                        <div class="alert alert-danger" ng-message="required">
+                            Please enter a value for this field.
+                        </div>
                     </div>
                 </div>
                 <div class="form-group col-xs-6" >
