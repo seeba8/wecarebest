@@ -261,7 +261,6 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
 
     $http.get(url + "/getmyOffers").success(function (offers) {
         console.log("Get Offers.");
-        app.offerfinals.repeatoptions
         app.offerfinals = offers;
         //console.log(app.offerfinals);
     });

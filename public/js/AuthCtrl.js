@@ -2,6 +2,7 @@ angular.module("myApp").controller("AuthCtrl", function ($http) {
     var app = this;
     var url = "http://localhost:3000";
 
+    console.log("loaded AuthCtrl");
     app.saveProduct = function(newProduct) {
         $http.post(url + "/add", {name:newProduct}).success(function () {
             loadProducts();
@@ -25,7 +26,7 @@ angular.module("myApp").controller("AuthCtrl", function ($http) {
                 pwd: pwd,
                 pwd2: pwd2
             }).success(function () {
-                loadUsers();
+                //loadUsers(); // SECURITY RISK. we cannot just hand out the password hashes etc.
             })}
         else {
             console.log("passwords don't match");
@@ -40,10 +41,12 @@ angular.module("myApp").controller("AuthCtrl", function ($http) {
             //$httpProvider.defaults.headers.common["X-AUTH-TOKEN"] = response.data.token;
         });
     };
-    function loadUsers() {
+
+    //This is a security risk. Not doing it.
+    /*function loadUsers() {
         $http.get(url + "/users").success(function (users) {
             app.users = users;
         })
-    }
+    }*/
 
 });

@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp',['ngRoute','ui.bootstrap.showErrors', 'ngMessages',"uiGmapgoogle-maps"]);
+var myApp = angular.module('myApp',['ngRoute','ui.bootstrap.showErrors', 'ngMessages',"uiGmapgoogle-maps", "countrySelect"]);
 myApp.config(function($routeProvider) {
         $routeProvider
             .when('/', { templateUrl: '../html/partials/home.html' })
@@ -31,7 +31,7 @@ myApp.config(function (uiGmapGoogleMapApiProvider) {
 });
 
 myApp.run(['$templateCache', function ($templateCache) {
-    $templateCache.put('searchbox.tpl.html', '<input type="text" class="form-control" id="searchbox" name="supportedarea" ng-model="ngModel" ng ng-minlength="3" placeholder="Enter city" required>');
+    $templateCache.put('searchbox.tpl.html', '<input type="text" class="form-control" id="searchbox" name="supportedarea" ng-model="ngModel" ng-minlength="3" placeholder="Enter city" required>');
     // onkeydown="if(event.keyCode == 13) {event.preventDefault(); event.stopPropagation();}"
 }]);
 
