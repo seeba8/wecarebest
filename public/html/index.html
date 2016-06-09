@@ -70,10 +70,13 @@
 <!--fixed top navbar-->
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" id="logo" href="#/">
+        <div class="navbar-collapse navbar-header col-sm-2" id="logo">
+            <!--<a class="navbar-brand pull-left img-responsive" href="#/">-->
+                <a href="#/home" class="pull-left img-responsive media show">
+                <img src="../images/logo2.png">
+<!--            <a class="navbar-brand" id="logo" href="#/">
                 <span style="color: #4D4D4D;">weCare.</span>
-                <span style="color: #428BCA">best</span>
+                <span style="color: #428BCA">best</span>-->
             </a>
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-fixed-top">
                 <span class="sr-only">Toggle navigation</span>
@@ -107,7 +110,7 @@
 <!--left sidebar navigation-->
 <div class="container-fluid">
     <div class="row content">
-        <div class="navbar-left sidenav hidden-xs">
+        <div class="navbar-left sidenav col-sm-2 hidden-xs">
             <p class="active"><a href="#/">Home</a></p>
             <p><a href="#/search">Search</a></p>
             <p><a href="#/bookingsrequests">My Bookings & Requests</a></p>
@@ -117,10 +120,10 @@
         </div>
         <!--site content goes here-->
         <!--ng-view includes other html views from /partials folder-->
-        <div class="col-sm-8 text-left">
+
+        <div class="col-sm-10 text-left">
                 <div ng-view></div>
 
-        </div>
 
     </div>
 </div>
@@ -129,13 +132,14 @@
 <footer class="footer">
     <div class="hidden-xs col-sm-12 text-center">
         <div class="container-fluid text-center">
-            <a href="#">Home</a> |
-            <a href="#">Contact</a> |
-            <a href="#">Imprint</a> |
-            <a href="#">Terms & Conditions</a>
+            <a href="#/home">Home</a> |
+            <a href="#/contact">Contact</a> |
+            <a href="#/imprint">Imprint</a> |
+            <a href="#/terms">Terms & Conditions</a>
         </div>
     </div>
 </footer>
 
+</div>
 </body>
 </html>

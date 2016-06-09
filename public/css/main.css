@@ -60,12 +60,17 @@ body {
 
 /*adapt navbar part with logo*/
 .navbar-brand{
-    height:auto;
-    width: 230px;
+    /*height:auto;*/
+    /*width: 230px;*/
     /*margin-top:30px;*/
+    /*border-width: 7px;
     border-style: solid;
-    border-color: #428bca;
+    border-color: white;*/
+    /*border-color: #428bca;*/
     background-color: white;
+    text-align: center;
+    font-size: x-large;
+    font-weight: bold;
 }
 
 .navbar-brand:hover{
@@ -120,7 +125,7 @@ footer a {
         display: block !important;
     }
     .navbar-header .collapse, .navbar-toggle {
-        display:block !important;
+        display: block !important;
     }
     .navbar-header {
         float:none;
@@ -129,6 +134,13 @@ footer a {
         padding: 15px;
         text-align:center;
     }
+    #logo{
+        display: block;
+    }
+/*    .col-sm-10{
+        width:auto;
+    }*/
+
 }
 
 @media screen and (max-width: 767px) {
@@ -139,6 +151,10 @@ footer a {
     }
     .row.content {
         height:auto;
+    }
+
+    #logo{
+        display: block;
     }
 
 }
@@ -158,4 +174,16 @@ footer a {
 
 .createoffer .form-group {
     margin-bottom: 30px;
+}
+
+/*homepage style*/
+.blueline{
+    color:#428bca;
+    border: solid;
+    border-color:#428bca;
+    border-width: thin;
+}
+
+.media-heading{
+    line-height: 20px;
 }
