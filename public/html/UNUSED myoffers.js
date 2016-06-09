@@ -9,7 +9,7 @@ myOffersApp.controller('ShowMyOffersCtrl', ['$scope', '$http',  function($scope,
     var url = "http://localhost:3000";
     app.recent = true;
 
-    $http.get(url + "/getmyOffers").success(function(offers){
+    $http.get(url + "/getmyOffers", config).success(function(offers){
         
         app.offerfinals = offers;
     })

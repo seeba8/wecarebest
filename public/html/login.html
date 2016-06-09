@@ -12,25 +12,26 @@
 <body ng-app="myApp">
 <div class="container" ng-controller="AuthCtrl as app">
     <div class="col-sm-6 col-sm-offset-3">
+        <form name="login" role="form" ng-submit="app.login(app.email, app.pwd)" novalidate>
 
-        <h1><span class="fa fa-sign-in"></span> Login</h1>
+            <h1><span class="fa fa-sign-in"></span> Login</h1>
 
-        <div class="form-group">
-            <label>Email</label>
-            <input type="text" class="form-control" ng-model="app.email">
-        </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" class="form-control" ng-model="app.pwd">
-        </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" ng-model="app.email">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" ng-model="app.pwd">
+            </div>
 
-        <button ng-click="app.login(app.email, app.pwd)" class="btn btn-warning btn-lg">Login</button>
+            <button type=submit" ng-click="app.login(app.email, app.pwd)" class="btn btn-warning btn-lg">Login</button>
 
-        <hr>
+            <hr>
 
-        <p>Need an account? <a href="/signup">Signup</a></p>
-        <p>Or go <a href="/">home</a>.</p>
-
+            <p>Need an account? <a href="/signup">Signup</a></p>
+            <p>Or go <a href="/">home</a>.</p>
+        </form>
     </div>
 </div>
 </body>

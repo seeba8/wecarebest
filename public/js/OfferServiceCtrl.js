@@ -6,6 +6,13 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
     console.log($window.localStorage['jwtToken']);
     console.log("loaded create offer controller");
 
+    var config = {
+        headers: {
+            Authorization: "JWT " + $window.localStorage['jwtToken'],
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+        }
+    };
+
     uiGmapGoogleMapApi.then(function (maps) {
         geocoder = new maps.Geocoder;
     });
@@ -71,12 +78,6 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
     });
 
 
-    var config = {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
-            }
-        }
-        ;
     $scope.map = {
         center: {
             latitude: 48.1,
@@ -214,16 +215,13 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
             console.log("Form is valid. Insert it...");
             $scope.statusmessages = 'OK! Sending offer.';
             //data["jwt"] = $window.localStorage['jwtToken'];
-            var config = {
-                headers: {
-                    Authorization: $window.localStorage['jwtToken']
-                }
-            };
+
             $http.post(url + "/offers", data, config).success(function () {
                 $scope.PostDataResponse = data;
                 $scope.messages = 'Success! Your offer has been created!';
                 $scope.statusmessages = null;
                 console.log("...Inserted Successfully!");
+                $window.location.href = "/#/bookingsrequests";
             })
             //IF error in HTTP POST then log it and show to user
                 .error(function (data, status, header, config) {
@@ -261,8 +259,7 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
      * #############################################################################
      * */
     app.recent = true;
-
-    $http.get(url + "/getmyOffers").success(function (offers) {
+    $http.get(url + "/getmyOffers", config).success(function (offers) {
         console.log("Get Offers.");
         app.offerfinals = offers;
         //console.log(app.offerfinals);

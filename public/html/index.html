@@ -48,9 +48,10 @@
             <ul class="nav navbar-nav">
                 <li><div id="placeholder">.</div></li>
                 <li><a href="#/search">Search</a></li>
-                <li><a href="#/bookingsrequests">My Bookings & Requests</a></li>
+                <li><a ng-show="app.isAuthed()" href="#/bookingsrequests">All Bookings & Requests</a></li>
                 <li><a ng-show="app.isAuthed()" href="#/offerservice">Offer Service</a></li>
-                <li><a href="#/about">About</a></li>
+                <li><a ng-show="app.isAuthed()" href="#/profile">My Profile</a></li>
+                <li><a href="/landingpage">About</a></li>
             </ul>
             <!--search field-->
             <div class="nav navbar-nav navbar-right">
@@ -102,7 +103,7 @@
             <ul class="nav navbar-nav pull-right">
                 <li ng-show="!app.isAuthed()"><a href="#/addUser">Register</a></li>
                 <li ng-show="!app.isAuthed()"><a href="#/login">Login <i class="glyphicon glyphicon-log-in"></i></a></li>
-                <li ng-show="app.isAuthed()"><a ng-click="app.logout(); $event.stopPropagation();">Logout <i class="glyphicon glyphicon-log-out"></i></a></li>
+                <li ng-show="app.isAuthed()"><a ng-click="app.logout(); $event.stopPropagation();" href="">Logout <i class="glyphicon glyphicon-log-out"></i></a></li>
             </ul>
         </div>
     </div>
@@ -114,10 +115,10 @@
         <div class="navbar-left sidenav col-sm-2 hidden-xs">
             <p class="active"><a href="#/">Home</a></p>
             <p><a href="#/search">Search</a></p>
-            <p><a href="#/bookingsrequests">My Bookings & Requests</a></p>
+            <p><a ng-show="app.isAuthed()" href="#/bookingsrequests">All Bookings & Requests</a></p>
             <p><a ng-show="app.isAuthed()" href="#/offerservice">Offer Service</a></p>
-            <p><a href="#/profile">My Profile</a></p>
-            <p><a href="#/about">About</a></p>
+            <p><a ng-show="app.isAuthed()" href="#/profile">My Profile</a></p>
+            <p><a href="/landingpage">About</a></p>
         </div>
         <!--site content goes here-->
         <!--ng-view includes other html views from /partials folder-->
