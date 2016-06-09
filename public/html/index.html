@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="../css/main.css">
 </head>
 
-<body ng-app="myApp" ng-controller="AppCtrl as app">
+<body ng-app="myApp" ng-controller="AuthCtrl as app">
 <!--static top navbar-->
 <div class="navbar navbar-default navbar-static-top" role="navigation">
     <div class="container-fluid">
@@ -49,7 +49,7 @@
                 <li><div id="placeholder">.</div></li>
                 <li><a href="#/search">Search</a></li>
                 <li><a href="#/bookingsrequests">My Bookings & Requests</a></li>
-                <li><a href="#/offerservice">Offer Service</a></li>
+                <li><a ng-show="app.isAuthed()" href="#/offerservice">Offer Service</a></li>
                 <li><a href="#/about">About</a></li>
             </ul>
             <!--search field-->
@@ -100,8 +100,9 @@
 
             <!--register and login button-->
             <ul class="nav navbar-nav pull-right">
-                <li><a href="#/addUser">Register</a></li>
-                <li><a href="#/login">Login <i class="glyphicon glyphicon-log-in"></i></a></li>
+                <li ng-show="!app.isAuthed()"><a href="#/addUser">Register</a></li>
+                <li ng-show="!app.isAuthed()"><a href="#/login">Login <i class="glyphicon glyphicon-log-in"></i></a></li>
+                <li ng-show="app.isAuthed()"><a ng-click="app.logout(); $event.stopPropagation();">Logout <i class="glyphicon glyphicon-log-out"></i></a></li>
             </ul>
         </div>
     </div>
@@ -114,7 +115,7 @@
             <p class="active"><a href="#/">Home</a></p>
             <p><a href="#/search">Search</a></p>
             <p><a href="#/bookingsrequests">My Bookings & Requests</a></p>
-            <p><a href="#/offerservice">Offer Service</a></p>
+            <p><a ng-show="app.loggedin" href="#/offerservice">Offer Service</a></p>
             <p><a href="#/profile">My Profile</a></p>
             <p><a href="#/about">About</a></p>
         </div>

@@ -1,7 +1,11 @@
 /**
  * Created by sebas on 07/06/2016.
  */
-angular.module("myApp").controller("AppCtrl", function($http) {
+
+/* NOT USED AT THE MOMENT!!!! */
+angular.module("myApp").controller("AppCtrl",["$http", "$window", function($http, $window) {
+
     var app = this;
-    console.log("hi");
-});
+
+
+}]);

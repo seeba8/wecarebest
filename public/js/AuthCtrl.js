@@ -3,10 +3,43 @@ angular.module("myApp").controller("AuthCtrl", ["$scope", "$http", "$window", fu
     var url = "http://localhost:3000";
 
     console.log("loaded AuthCtrl");
+
     app.saveProduct = function(newProduct) {
         $http.post(url + "/add", {name:newProduct}).success(function () {
             loadProducts();
         })
+    };
+
+    app.parseJwt = function(token) {
+        var base64Url = token.split('.')[1];
+        var base64 = base64Url.replace('-', '+').replace('_', '/');
+        return JSON.parse($window.atob(base64));
+    };
+
+
+    app.getToken = function() {
+        return $window.localStorage['jwtToken'];
+    };
+
+    app.isAuthed = function() {
+        var token = app.getToken();
+        if(token) {
+            /* var params = self.parseJwt(token);
+             return Math.round(new Date().getTime() / 1000) <= params.exp;*/
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+
+    app.saveToken = function(token) {
+        $window.localStorage['jwtToken'] = token;
+    };
+
+    app.logout = function() {
+        $window.localStorage.removeItem('jwtToken');
+        $window.location.href= "/";
     };
 
     app.saveUser = function (type, firstName, name, street, city, postalCode, country, phone, gender, email, pwd, pwd2) {
@@ -27,6 +60,7 @@ angular.module("myApp").controller("AuthCtrl", ["$scope", "$http", "$window", fu
                 pwd2: pwd2
             }).success(function () {
                 //loadUsers(); // SECURITY RISK. we cannot just hand out the password hashes etc.
+                $window.location.href= "/#/login";
             })}
         else {
             console.log("passwords don't match");
@@ -38,8 +72,10 @@ angular.module("myApp").controller("AuthCtrl", ["$scope", "$http", "$window", fu
             email: e,
             pwd: p
         }).success(function(response) {
-            console.log(response);
-            $window.localStorage['jwtToken'] = response.token;
+            //console.log(response);
+            app.saveToken(response.token);
+            $window.localStorage['firstname'] = app.parseJwt(response.token).firstname;
+            $window.location.href= "/";
             //$httpProvider.defaults.headers.common["X-AUTH-TOKEN"] = response.data.token;
         });
     };
@@ -50,5 +86,7 @@ angular.module("myApp").controller("AuthCtrl", ["$scope", "$http", "$window", fu
             app.users = users;
         })
     }*/
+
+    console.log(app.isAuthed());
 
 }]);
