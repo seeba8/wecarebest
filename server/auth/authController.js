@@ -101,7 +101,16 @@ module.exports.postRegister = function(req, res) {
         pwd: pwd
     });
     user.save(function (err) {
+        console.log("Save it to database...")
+        if (err) {
+            res.status(500).send(err);
+            console.log("...ERROR. Did not load to database");
+            console.log(err);
+            return;
+        } else {
+        console.log("...SUCCESS. Created User.");
         res.send();
+        }
     })
 };
 module.exports.getLogin = function(req, res){

@@ -330,7 +330,7 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
                 offerItem.timeframe = item.timeframe;
                 offerItem.typeofcare = item.typeofcare;
                 offerItem.wageperhour = item.wageperhour;
-                offerItem.location = item.location;
+                offerItem.location.name = item.location.name;
                 offerItem.latitude = item.latitude;
                 offerItem.longitude = item.longitude;
                 offerItem.radius = item.radius;

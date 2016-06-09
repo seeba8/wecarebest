@@ -41,6 +41,10 @@ function offerRoutes() {
     //Invokes backend functionality to delete offers document in mongodb
     router.route("/updatemyoffer")
         .post(offerController.updatemyOffer);
+    
+    //Get Landing Page
+    router.route("/landingpage")
+        .get(offerController.showLandingpage);
 
     return router;
 }

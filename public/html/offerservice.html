@@ -167,7 +167,7 @@
                         placeholder="Basic"
                         required
                          >
-                    <option ng-show="true" value="">- Please Choose -</option>
+                    <option ng-show="true" value="" style="color:rgb(204, 204, 204);">- Please Choose -</option>
                 </select>
                 <div ng-if="interacted(Offer.typeofcare)" ng-messages="Offer.typeofcare.$error" role="alert">
                     <div class="alert alert-danger" ng-message="required">Please select your offered type of service.</div>
@@ -229,6 +229,7 @@
                             Please enter a value for this field.
                         </div>
                     </div>
+
                 </div>
                 <div class="form-group col-xs-6" >
                     <label for="radius">Radius</label>
@@ -237,7 +238,7 @@
                                name="radius" class="form-control" id="radius">
                         <span class="input-group-addon">meters</span>
                     </div>
-                    <div  ng-show="Offer.radius.$touched" ng-messages="Offer.radius.$error" role="alert">
+                    <div  ng-if="interacted(Offer.radius)" ng-messages="Offer.radius.$error" role="alert">
                         <div class="alert alert-danger" ng-message="required">
                             Please enter a value for this field.
                         </div>
@@ -313,7 +314,7 @@
             <hr class="colorgraph">
         </form>
 
-     <!--   <p>{{offer | json }} </p>-->
+        <p>{{offer | json }} </p>
     </div>
 
 </body>

@@ -102,6 +102,10 @@ module.exports.showmyOffer = function(req, res){
     res.sendFile("/html/myoffers.html", { root: path.join(__dirname, '/../../public') });
 }
 
+module.exports.showLandingpage = function(req, res){
+    res.sendFile("/html/landingpage.html", { root: path.join(__dirname, '/../../public') });
+}
+
 module.exports.getmyOffer = function (req, res){
     console.log("getmyOffer aufgerufen!")
     Offer.find(function(err, offers){
