@@ -167,12 +167,7 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
             }
         }
     };
-    app.saveOffer = function (PushCandidate) {
 
-        $http.post(url + "/offers", PushCandidate).success(function () {
-            console.log("Inserted Successfully");
-        })
-    };
 
 
     // $scope.onlyNumbers = /^[0-9]+$/;
