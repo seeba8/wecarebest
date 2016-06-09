@@ -14,6 +14,9 @@ myApp.config(function($routeProvider) {
             .when('/login', {templateUrl: '../html/login.html'})
             .when('/addUser', {templateUrl: '../html/registration.html'})
             .when('/myoffers', {templateUrl: '../html/myoffers.html'})
+            .when('/contact', {templateUrl: '../html/partials/about.html'})
+            .when('/imprint', {templateUrl: '../html/partials/imprint.html'})
+            .when('/terms', {templateUrl: '../html/partials/terms.html'})
             .otherwise({ redirectTo: '/'});
     });
 
