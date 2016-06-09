@@ -9,167 +9,280 @@
 
 </head>
 <body ng-app="myApp">
-<section class="container" ng-controller="AuthCtrl as app">
+<div ng-controller="AuthCtrl as app">
 
-    <section class="col-sm-6 col-sm-offset-3">
-
+    <div class="container">
+        <form name="User" role="form" novalidate>
         <h1><span class="fa fa-sign-in"></span> Signup</h1>
 
-        <section>
             <h2>Personal Information</h2>
-            <div class="form-group">
-                <label for="usertype">Type</label>
+            <div class="row">
+                <div class="form-group col-sm-12">
+                <label for="usertype">Type (required)</label>
                 <!--<input type="text" class="form-control" ng-model="app.type" required>-->
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
                 <select
                         id="usertype"
                         ng-model="app.type"
                         type="text"
+                        name="type"
                         class="form-control"
                         required
                 >
+                    <option ng-show="true" value="" style="color:rgb(204, 204, 204);">- Please Choose -</option>
                     <option value="1">Caregiver</option>
                     <option value="2">Careseeker</option>
                 </select>
+                    </div>
+                    <div ng-if="interacted(User.type)" ng-messages="User.type.$error" role="alert">
+                        <div class="alert alert-danger" ng-message="required">Please select your offered type of service.</div>
+                    </div>
+            </div>
             </div>
 
-            <div class="form-group">
-                <label for="firstname">First Name</label>
-                <input
-                        id="firstname"
-                        type="text"
-                        class="form-control"
-                        placeholder="First Name"
-                        ng-model="app.firstName"
-                >
-            </div>
-            <div ng-if="interacted(app.firstName)" ng-messages="app.firstName.$error" role="alert">
-                <div class="alert alert-danger" ng-message="required">Please enter your first name</div>
-            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                        <label for="firstname">First Name (required)</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                    <input
+                            id="firstname"
+                            name="firstname"
+                            type="text"
+                            class="form-control"
+                            placeholder="First Name"
+                            ng-model="app.firstName"
+                            minlength="2"
+                            required
+                    >
+                        </div>
+                    <div ng-if="interacted(User.firstname)" ng-messages="User.firstname.$error" role="alert">
+                        <div class="alert alert-danger" ng-message="required">Please enter your first name</div>
+                        <div class="alert alert-danger" ng-message="minlength">At least two characters</div>
+                    </div>
+                </div>
 
-            <div class="form-group">
-                <label for="lastname">Name</label>
-                <input
-                        id="lastname"
-                        type="text"
-                        class="form-control"
-                        placeholder="Name"
-                        ng-model="app.name"
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="street">Street</label>
-                <input
-                        id="street"
-                        type="text"
-                        class="form-control"
-                        placeholder="Street"
-                        ng-model="app.street"
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="city">City</label>
-                <input
-                        id="city"
-                        type="text"
-                        class="form-control"
-                        placeholder="City"
-                        ng-model="app.city"
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="postcode">Postal Code</label>
-                <input
-                        id="postcode"
-                        type="text"
-                        class="form-control"
-                        placeholder="Postal Code"
-                        ng-model="app.postalCode"
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="country">Country</label>
-                <!--<input
-                        id="country"
-                        type="text"
-                        class="form-control"
-                        placeholder="Country"
-                        ng-model="app.country"
-                >-->
-                <country-select id="country"
-                                cs-priorities="DE, AT, CH, GB"
-                                cs-required required
+                <div class="form-group col-sm-6">
+                    <label for="name">Last Name (required)</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                        <input
+                                id="lastname"
+                                name="name"
+                                type="text"
                                 class="form-control"
-                                placeholder="Country"
-                                ng-model="app.country"></country-select>
+                                placeholder="Name"
+                                ng-model="app.name"
+                                minlength="2"
+                                required
+                        >
+                    </div>
+                    <div ng-if="interacted(User.name)" ng-messages="User.name.$error" role="alert">
+                        <div class="alert alert-danger" ng-message="required">Please enter your last name</div>
+                        <div class="alert alert-danger" ng-message="minlength">At least two characters</div>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label>Phone</label>
-                <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Phone number"
-                        ng-model="app.phone"
-                >
+            <div class="row">
+                <div class="form-group col-sm-3">
+                    <label for="street">Street</label>
+                    <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-road fa" aria-hidden="true"></i></span>
+                    <input
+                            id="street"
+                            type="text"
+                            class="form-control"
+                            placeholder="Street"
+                            ng-model="app.street"
+                    >
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-3">
+                    <label for="city">City</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-book fa" aria-hidden="true"></i></span>
+                            <input
+                                    id="city"
+                                    type="text"
+                                    class="form-control"
+                                    name="city"
+                                    placeholder="City"
+                                    ng-model="app.city"
+                                    minlength="2"
+                                    required
+                            >
+                    </div>
+                    <div ng-if="interacted(User.city)" ng-messages="User.city.$error" role="alert">
+                        <div class="alert alert-danger" ng-message="required">
+                            Please enter your wage per hour as positive numeric value with maximum of two decimals.
+                        </div>
+                        <div class="alert alert-danger" ng-message="minlength">
+                            Not a valid wage! Please enter at least one digit as wage.
+                        </div>
+                        <div class="alert alert-danger" ng-message="pattern">
+                            Not a valid wage! Please use a positive numeric value with a maximum of two decimals.
+                        </div>
+                        <div class="alert alert-danger" ng-message="range">
+                            Not a valid wage! Please enter your wage in range between 0 and 100.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-3">
+                    <label for="postcode">Postal Code</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-book fa" aria-hidden="true"></i></span>
+                        <input
+                                id="postcode"
+                                type="text"
+                                class="form-control"
+                                placeholder="Postal Code"
+                                ng-model="app.postalCode"
+                        >
+                    </div>
+                </div>
+
+
+                <div class="form-group col-sm-3">
+                    <label for="country">Country</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-globe fa" aria-hidden="true"></i></span>
+                        <country-select id="country"
+                                        cs-priorities="DE, AT, CH, GB"
+                                        cs-required
+                                        required
+                                        class="form-control"
+                                        placeholder="Country"
+                                        name="country"
+                                        ng-model="app.country">
+                        </country-select>
+                    </div>
+                    <div ng-if="interacted(User.country)" ng-messages="User.country.$error" role="alert">
+                        <div class="alert alert-danger" ng-message="required">
+                            Please enter your wage per hour as positive numeric value with maximum of two decimals.
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <label>Gender</label>
-            <!--<input type="text" class="form-control" ng-model="app.type" required>-->
-            <select
-                    ng-model="app.gender"
-                    type="text"
-                    class="form-control"
-            >
-                <option value="1">Female</option>
-                <option value="2">Male</option>
-                <option value="3">No answer</option>
-            </select>
-        </section>
 
-        <section>
+
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label>Phone</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-phone fa" aria-hidden="true"></i></span>
+                        <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Phone number"
+                                ng-model="app.phone"
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    <label>Gender (required)</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-female fa" aria-hidden="true"></i></span>
+                        <select
+                                ng-model="app.gender"
+                                name = "gender"
+                                type="text"
+                                class="form-control"
+                                required
+                        >
+                            <option ng-show="true" value="" style="color:rgb(204, 204, 204);">- Please Choose -</option>
+                            <option value="1">Female</option>
+                            <option value="2">Male</option>
+                            <option value="3">No answer</option>
+                        </select>
+                    </div>
+                    <div ng-if="interacted(User.gender)" ng-messages="User.gender.$error" role="alert">
+                        <div class="alert alert-danger" ng-message="required">Please select your gender</div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="row col-sm-12">
+            <hr class="colorgraph">
+        </div>
+
+
+
+
             <h2>Account information</h2>
             <div class="form-group">
                 <label>Email</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
                 <input
-                        type="text"
+                        type="email"
+                        name="email"
                         class="form-control"
                         placeholder="Email"
-                        ng-model="app.email">
-            </div>
+                        ng-model="app.email"
+                        required>
+
+                </div>
+                <div ng-if="interacted(User.email)" ng-messages="User.email.$error" role="alert">
+                    <div class="alert alert-danger" ng-message="required">Please enter your email</div>
+                    <div class="alert alert-danger" ng-message="email">Please enter a valid email</div>
+                </div>
+                </div>
 
             <div class="form-group">
                 <label>Password</label>
-                <input
-                        type="password"
-                        class="form-control"
-                        placeholder="Password"
-                        ng-model="app.pwd"
-                >
-            </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-key fa" aria-hidden="true"></i></span>
+                        <input
+                                type="password"
+                                name="pwd"
+                                class="form-control"
+                                placeholder="Password"
+                                ng-model="app.pwd"
+                                required
+                        >
+                </div>
+                </div>
+                    <div ng-if="interacted(User.pwd)" ng-messages="User.pwd.$error" role="alert">
+                        <div class="alert alert-danger" ng-message="required">Please enter your password</div>
+                    </div>
+
 
             <div class="form-group">
                 <label>Confirm Password</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-key fa" aria-hidden="true"></i></span>
                 <input
                         type="password"
+                        name="pwd2"
                         class="form-control"
                         placeholder="Password"
                         ng-model="app.pwd2"
                 >
             </div>
-        </section>
-        <button ng-click="app.saveUser(app.type, app.firstName, app.name, app.street, app.city, app.postalCode, app.country, app.phone, app.gender, app.email, app.pwd, app.pwd2)" class="btn btn-warning btn-lg">Signup</button>
+                <div ng-if="interacted(User.pwd2)" ng-messages="User.pwd2.$error" role="alert">
+                    <div class="alert alert-danger" ng-message="required">Please confirm your password</div>
 
-        <hr>
+                </div>
+                </div>
+        <button ng-click="app.saveUser(app.type, app.firstName, app.name, app.street, app.city, app.postalCode, app.country, app.phone, app.gender, app.email, app.pwd, app.pwd2)" class="btn btn-primary btn-lg">Signup</button>
 
-        <p>Already have an account? <a href="/login">Login</a></p>
-        <p>Or go <a href="/">home</a>.</p>
+        <div class="row col-sm-12">
+            <hr class="colorgraph">
+        </div>
 
-    </section>
 
-</section>
+        <p>Already have an account? <b><a href="/login">Login</a></b></p>
+        <p>Or go <b><a href="/landingpage">home</a></b>.</p>
+    </form>
+    </div>
+
+</div>
 </body>
 </html>
