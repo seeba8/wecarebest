@@ -1,9 +1,9 @@
-angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$http', 'uiGmapGoogleMapApi', function($interval, $scope, $http, uiGmapGoogleMapApi) {
+angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$http','$window', 'uiGmapGoogleMapApi', function($interval, $scope, $http, $window, uiGmapGoogleMapApi) {
     var app = this;
     var url = 'http://localhost:3000';
     var geocoder;
     var lastcenter = null;
-
+    console.log($window.localStorage['jwtToken']);
     console.log("loaded create offer controller");
 
     uiGmapGoogleMapApi.then(function (maps) {
@@ -168,6 +168,7 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
         }
     };
     app.saveOffer = function (PushCandidate) {
+
         $http.post(url + "/offers", PushCandidate).success(function () {
             console.log("Inserted Successfully");
         })
@@ -217,7 +218,13 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
             console.log($scope.offer.createdDate);
             console.log("Form is valid. Insert it...");
             $scope.statusmessages = 'OK! Sending offer.';
-            $http.post(url + "/offers", data).success(function () {
+            //data["jwt"] = $window.localStorage['jwtToken'];
+            var config = {
+                headers: {
+                    Authorization: $window.localStorage['jwtToken']
+                }
+            };
+            $http.post(url + "/offers", data, config).success(function () {
                 $scope.PostDataResponse = data;
                 $scope.messages = 'Success! Your offer has been created!';
                 $scope.statusmessages = null;

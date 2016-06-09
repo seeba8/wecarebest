@@ -6,7 +6,7 @@ module.exports = offerRoutes;
 
 console.log("OfferRoutes geladen");
 
-function offerRoutes() {
+function offerRoutes(passport) {
     console.log("offerRoutes");
     var offerController = require('./offerController');
     var router = require('express').Router();
@@ -23,10 +23,10 @@ function offerRoutes() {
     //Create Offer Form
     router.route("/offers")
         //put offer form into database
-        .post(offerController.postOffer)
+      //  .post(offerController.postOffer)
         //get offer form
         .get(offerController.getOffer);
-    
+    router.post('/offers', passport.authenticate('jwt', {session: false}), offerController.postOffer);
     //invokes backend functionality to get all offers documents in mongodb
     router.route("/getmyoffers")
         .get(offerController.getmyOffer);

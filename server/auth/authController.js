@@ -5,7 +5,8 @@
 // Load Schema of Offer
 var User = require('./../users/structure');
 var path = require('path');
-
+var jwt = require('jwt-simple');
+var passportConfig = require ("../config/passportConfig");
 //For debugging purposes
 console.log("authController File geladen.");
 
@@ -25,7 +26,7 @@ module.exports.postLogin = function(req, res){
                     // if user is found and password is right create a token
                     var token = jwt.encode(user, passportConfig.secret);
                     // return the information including token as JSON
-                    res.json({success: true, token: 'JWT ' + token}); //not res.send?
+                    res.json({success: true, token: token}); //not res.send?
                     //res.send({success: true, token: 'JWT ' + token}); //not res.send?
                 } else {
                     res.send({success: false, msg: 'Authentication failed. Wrong password.'});

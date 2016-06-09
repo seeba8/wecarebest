@@ -1,4 +1,4 @@
-angular.module("myApp").controller("AuthCtrl", function ($http) {
+angular.module("myApp").controller("AuthCtrl", ["$scope", "$http", "$window", function ($scope, $http, $window) {
     var app = this;
     var url = "http://localhost:3000";
 
@@ -37,7 +37,9 @@ angular.module("myApp").controller("AuthCtrl", function ($http) {
         $http.post(url + "/login", {
             email: e,
             pwd: p
-        }).then(function(response) {
+        }).success(function(response) {
+            console.log(response);
+            $window.localStorage['jwtToken'] = response.token;
             //$httpProvider.defaults.headers.common["X-AUTH-TOKEN"] = response.data.token;
         });
     };
@@ -49,4 +51,4 @@ angular.module("myApp").controller("AuthCtrl", function ($http) {
         })
     }*/
 
-});
+}]);

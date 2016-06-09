@@ -19,7 +19,8 @@ app.use(bodyParser.json());
 var path = require("path");
 
 var mongo = require("./config/config");
-var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 //var passportLocal = require("passport-local");
 var expressSession = require('express-session');
 app.use(expressSession({secret: 'mySecretKey'}));
@@ -124,7 +125,7 @@ app.post('/logout', function(req, res){ req.logOut(); res.send(200); });
 
 var offerRoutes = require("./requests_offers/offerRoutes");
 
-app.use("/", offerRoutes());
+app.use("/", offerRoutes(passport));
 
 
 
