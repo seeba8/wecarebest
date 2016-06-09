@@ -21,18 +21,16 @@ function offerRoutes(passport) {
     });
     
     //Create Offer Form
-    router.route("/offers")
+    //router.route("/offers")
         //put offer form into database
-      //  .post(offerController.postOffer)
         //get offer form
-        .get(offerController.getOffer);
+    //router.get('/offers', passport.authenticate('jwt', {session: false}), offerController.getOffer);
     router.post('/offers', passport.authenticate('jwt', {session: false}), offerController.postOffer);
     //invokes backend functionality to get all offers documents in mongodb
-    router.route("/getmyoffers")
-        .get(offerController.getmyOffer);
+    router.get("/getmyoffers", passport.authenticate('jwt', {session: false}), offerController.getmyOffer);
     //Show List of offers
-    router.route("/showmyoffers")
-        .get(offerController.showmyOffer);
+    // router.route("/showmyoffers")
+    //     .get(offerController.showmyOffer);
     
     //Invokes backend functionality to delete offers document in mongodb
     router.route("/deletemyoffer")

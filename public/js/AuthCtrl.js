@@ -89,4 +89,13 @@ angular.module("myApp").controller("AuthCtrl", ["$scope", "$http", "$window", fu
 
     console.log(app.isAuthed());
 
+
+    $scope.interacted = function (field) {
+        try {
+            return $scope.submitted || field.$dirty;
+        } catch (e) {
+            // throws all kinds of errors. Not interested in them. I think they're connected to the bootstrap datepicker
+        }
+    };
+
 }]);
