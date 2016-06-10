@@ -25,9 +25,9 @@ function offerRoutes(passport) {
         //put offer form into database
         //get offer form
     //router.get('/offers', passport.authenticate('jwt', {session: false}), offerController.getOffer);
-    router.post('/offers', passport.authenticate('jwt', {session: false}), offerController.postOffer);
+    router.post('/offers'/*, passport.authenticate('jwt', {session: false})*/, offerController.postOffer);
     //invokes backend functionality to get all offers documents in mongodb
-    router.get("/getmyoffers", passport.authenticate('jwt', {session: false}), offerController.getmyOffer);
+    router.get("/getmyoffers", /* passport.authenticate('jwt', {session: false}),*/ offerController.getmyOffer);
     //Show List of offers
     // router.route("/showmyoffers")
     //     .get(offerController.showmyOffer);
