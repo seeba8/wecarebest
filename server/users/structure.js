@@ -5,7 +5,6 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 
 var userSchema = mongoose.Schema({
-    id: Number,
     type: { type: Number, min: 1, max: 2 }, /** 1 for caregiver, 2 for careseeker */
     firstName: String,
     name: String,

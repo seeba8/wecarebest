@@ -1,4 +1,4 @@
-angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$http','$window', 'uiGmapGoogleMapApi', function($interval, $scope, $http, $window, uiGmapGoogleMapApi) {
+angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$http','$window', 'uiGmapGoogleMapApi', "auth", function($interval, $scope, $http, $window, uiGmapGoogleMapApi, auth) {
     var app = this;
     var url = 'http://localhost:3000';
     var geocoder;
@@ -11,11 +11,6 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
             Authorization: "JWT " + $window.localStorage['jwtToken'],
             'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
         }*/
-    };
-    app.parseJwt = function(token) {
-        var base64Url = token.split('.')[1];
-        var base64 = base64Url.replace('-', '+').replace('_', '/');
-        return JSON.parse($window.atob(base64));
     };
 
     uiGmapGoogleMapApi.then(function (maps) {
@@ -216,7 +211,7 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
             data.location.name = $scope.offer.location.name;
             console.log(data.location.name);
             $scope.offer.createdDate = new Date();
-            $scope.offer.createdBy = app.parseJwt($window.localStorage['jwtToken'])._id;
+            $scope.offer.createdBy = auth.parseJwt($window.localStorage['jwtToken'])._id;
             console.log($scope.offer.createdDate);
             console.log("Form is valid. Insert it...");
             $scope.statusmessages = 'OK! Sending offer.';

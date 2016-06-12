@@ -24,7 +24,11 @@ module.exports.postLogin = function(req, res){
             user.comparePassword(req.body.pwd, function (err, isMatch) {
                 if (isMatch && !err) {
                     // if user is found and password is right create a token
-                    var token = jwt.encode(user, passportConfig.secret);
+                    var token = jwt.encode({
+                        _id: user._id,
+                        type: user.type,
+                        firstName: user.firstName
+                    }, passportConfig.secret);
                     // return the information including token as JSON
                     res.json({success: true, token: token}); //not res.send?
                     //res.send({success: true, token: 'JWT ' + token}); //not res.send?
@@ -102,12 +106,11 @@ module.exports.postRegister = function(req, res) {
         pwd: pwd
     });
     user.save(function (err) {
-        console.log("Save it to database...")
+        console.log("Save it to database...");
         if (err) {
             res.status(500).send(err);
             console.log("...ERROR. Did not load to database");
             console.log(err);
-            return;
         } else {
         console.log("...SUCCESS. Created User.");
         res.send();
