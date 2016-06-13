@@ -83,11 +83,11 @@ function userService($http, API, auth) {
 
 }
 
-var myApp = angular.module('myApp',['ngRoute','ui.bootstrap.showErrors', 'ngMessages',"uiGmapgoogle-maps", "countrySelect"]);
+var myApp = angular.module('myApp',['ngRoute','ui.bootstrap.showErrors', 'ngMessages',"uiGmapgoogle-maps", "countrySelect", "rzModule"]);
 myApp.config(function($routeProvider) {
         $routeProvider
             .when('/', { templateUrl: '../html/partials/home.html' })
-            .when('/search', { templateUrl: '../html/partials/search.html' })
+            .when('/search', { templateUrl: '../html/searchresults.html' })
             .when('/bookingsrequests', { templateUrl: '../html/myoffers.html' })
             .when('/offerservice', {
                 templateUrl: '../html/offerservice.html',

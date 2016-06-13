@@ -92,9 +92,43 @@ module.exports.postOffer = function(req, res){
         }
     });
 };
-
+/*
 module.exports.getOffer = function(req, res){
     res.sendFile("/html/offerservice.html", { root: path.join(__dirname, '/../../public') });
+};
+*/
+module.exports.getOffers = function(req, res) {
+    console.log("Search parameters: ", req.query);
+    var searchParams = req.query;
+    var conditions = {};
+    for(var param in searchParams){
+        switch(param) {
+            case "locationname":
+                conditions["location.name"] = {
+                    "$regex" : searchParams[param],
+                    "$options" : "i"
+                };
+                break;
+            case "priceMin":
+                if(typeof conditions["wageperhour"] == "undefined"){
+                    conditions["wageperhour"] = {};
+                }
+                conditions["wageperhour"].$gt = searchParams[param];
+                break;
+            case "priceMax":
+                if(typeof conditions["wageperhour"] == "undefined"){
+                    conditions["wageperhour"] = {};
+                }
+                conditions["wageperhour"].$lt = searchParams[param];
+                break;
+        }
+
+    }
+    console.log("Search params: ", conditions);
+    Offer.find(conditions, function(err, results) {
+        console.log("Results: ", results.length);
+        res.send(results);
+    });
 };
 
 module.exports.showmyOffer = function(req, res){

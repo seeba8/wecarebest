@@ -1,0 +1,40 @@
+<div class="container" ng-controller="SearchCtrl as app">
+    <pre>{{searchParams}}</pre>
+    <div class="col-sm-10 col-md-10">
+        <form ng-submit="app.search()">
+            <div class="form-group col-sm-4 col-xs-4">
+                <label class="row">Location
+                    <input type="text" ng-model="searchParams.locationname" placeholder="Location"/>
+                </label>
+            </div>
+            <div class="form-group col-sm-4 col-xs-4">
+                <label>Price
+                    <rzslider
+                            style="width: 500px"
+                            rz-slider-model="searchParams.priceMin"
+                            rz-slider-high="searchParams.priceMax"
+                            rz-slider-options="slider.options"></rzslider>
+                </label>
+            </div>
+
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <div id="searchresults">
+        <div class="col-sm-10 col-md-10" ng-repeat="result in results">
+            <hr class="colorgraph"/>
+            <span>{{result.startday}}</span>
+            <span>{{result.starttime}} - {{result.endtime}}</span>
+            <span ng-show="result.repeating">
+                , {{result.repeatoptions.frequency}} until
+                <span>{{result.endday}}</span>
+            </span>
+            <span>
+                    <input type="checkbox" disabled ng-checked="result.repeating"/>
+            </span>
+        </div>
+    </div>
+</div>
+
+
