@@ -56,6 +56,7 @@ module.exports.getCreateRequest = function(req, res){
 
 module.exports.getMyBookings = function(req, res){
     //depending on user type, send different files!
+    console.log("res" + res + "req" + req);
     usertype = 2; //TODO: read from database depending on current user object
     if(usertype == 1) {
         //user is caregiver
@@ -66,6 +67,7 @@ module.exports.getMyBookings = function(req, res){
         console.log("Careseeker - GetMyBookings aufgerufen!");
         Booking.find(function(err, bookings){
             console.log("Booking find ausgeführt.");
+            //console.log(bookings);
             res.send(bookings);
         })
     }
