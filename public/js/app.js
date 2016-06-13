@@ -38,12 +38,27 @@ function authService($window) {
     };
 
     self.isCaregiver = function() {
-        var token = self.parseJwt(self.getToken());
+        //console.log("in is caregiver");
+        if (!self.isAuthed()) {
+            return false; //user is currently not logged in
+        }
+        var token1 = self.getToken();
+        //console.log(token1);
+        var token = self.parseJwt(token1);
+        //console.log(token);
+        //console.log(token.type);
+        //console.log(token.type == 1);
         return(token.type == 1);
     };
 
     self.isCareseeker = function() {
+        if (!self.isAuthed()) {
+            return false; //user is currently not logged in
+        }
         var token = self.parseJwt(self.getToken());
+        //console.log(token);
+        //console.log(token.type);
+        //console.log(token.type == 2);
         return(token.type == 2);
     };
 

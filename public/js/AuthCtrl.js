@@ -6,7 +6,7 @@ angular.module("myApp")
 
         console.log("loaded AuthCtrl");
         if(auth.isAuthed()){
-            console.log(auth.parseJwt(auth.getToken()));
+            //console.log(auth.parseJwt(auth.getToken()));
         }
 
     /*
@@ -18,6 +18,14 @@ angular.module("myApp")
 
         app.isAuthed = function() {
             return auth.isAuthed ? auth.isAuthed() : false
+        };
+
+        app.isCaregiver = function() {
+            return auth.isCaregiver ? auth.isCaregiver() : false
+        };
+
+        app.isCareseeker = function() {
+            return auth.isCareseeker ? auth.isCareseeker() : false
         };
 
 
