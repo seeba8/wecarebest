@@ -286,16 +286,16 @@
                 ###############################################
                 -->
             <div class="form-group">
-                <label for="notes">Notes (max. 400 chars)</label>
+                <label for="notes">Notes (max. 2000 chars)</label>
                 <textarea ng-model="offer.notes"
                           class="form-control"
                           name="notes"
                           rows="5"
                           id="notes"
-                          ng-maxlength="400";
+                          ng-maxlength="2000"
                           placeholder="Enter your additional notes regarding your offer"></textarea>
                 <div ng-if="interacted(Offer.notes)" ng-messages="Offer.notes.$error" role="alert">
-                    <div class="alert alert-danger" ng-message="maxlength">Please explain your offer in less than 400 characters.</div>
+                    <div class="alert alert-danger" ng-message="maxlength">Please explain your offer in less than 2000 characters.</div>
                 </div>
             </div>
 

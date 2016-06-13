@@ -86,7 +86,6 @@ module.exports.postOffer = function(req, res){
             res.status(500).send(err);
             console.log("Did not load to database");
             console.log(err);
-            return;
         } else {
             console.log("Saved offer to database");
             res.send();
@@ -96,23 +95,23 @@ module.exports.postOffer = function(req, res){
 
 module.exports.getOffer = function(req, res){
     res.sendFile("/html/offerservice.html", { root: path.join(__dirname, '/../../public') });
-}
+};
 
 module.exports.showmyOffer = function(req, res){
     res.sendFile("/html/myoffers.html", { root: path.join(__dirname, '/../../public') });
-}
+};
 
 module.exports.showLandingpage = function(req, res){
     res.sendFile("/html/landingpage.html", { root: path.join(__dirname, '/../../public') });
-}
+};
 
 module.exports.getmyOffer = function (req, res){
-    console.log("getmyOffer aufgerufen!")
+    console.log("getmyOffer aufgerufen!");
     Offer.find(function(err, offers){
-        console.log("Offer find ausgeführt.")
+        console.log("Offer find ausgeführt.");
         res.send(offers);
     })
-}
+};
 
 module.exports.deletemyOffer = function (req, res){
     console.log("deletemyOffer aufgerufen!");
@@ -124,7 +123,7 @@ module.exports.deletemyOffer = function (req, res){
         } else {
             console.log("erfolgreich gelöscht:" + id);
             res.send();
-        };
+        }
     });
 
 };
@@ -156,7 +155,7 @@ module.exports.updatemyOffer = function (req, res){
         } else {
             console.log("yo");
             res.send();
-        };
+        }
     });
 
 };

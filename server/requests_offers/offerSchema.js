@@ -31,7 +31,7 @@ var offerSchema = mongoose.Schema({
         name:       String,
         radius:     {type: Number, min: 100}
     },
-    notes:          {type: String, maxlength: 400, trim: true},
+    notes:          {type: String, maxlength: 2000, trim: true},
     createdDate:    Date,
     createdBy:      String //caregiver
 });
