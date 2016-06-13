@@ -25,13 +25,17 @@ var bookingSchema = mongoose.Schema({
     location:       {
         latitude:   Number,
         longitude:  Number,
-        name:       String
+        street: String,
+        city: String,
+        postalCode: String, /** this must be a string, as postal codes can potentially start with 0 (or user can be located abroad ...) */
+        country: String
     },
     notes:          {type: String, maxlength: 400, trim: true},
     createdDate:    Date,
+    lastActivity:   Date, //when did the status change the last time?
     createdBy:      String, //Careseeker
     offer:          String, //referenz auf das Objekt Offer, hier kann auch Caregiver und Type of Care ausgelesen werden
-    status:         int //1: Caregiver requested, 2:
+    status:         int //1: Open Request/Waiting for Answer; 2: To be paid; 3: Ready/In the past (depending on timestamp); 4: cancelled
 });
 
 //define mongoose Model

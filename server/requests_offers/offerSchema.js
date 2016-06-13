@@ -33,7 +33,7 @@ var offerSchema = mongoose.Schema({
     },
     notes:          {type: String, maxlength: 400, trim: true},
     createdDate:    Date,
-    createdBy:      String
+    createdBy:      String //caregiver
 });
 
 //define mongoose Model
