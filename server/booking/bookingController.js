@@ -62,7 +62,12 @@ module.exports.getMyBookings = function(req, res){
         res.sendFile("/html/mybookingscaregiver.html", {root: path.join(__dirname, '/../../public')});
     } else {
         //user is careseeker
-        res.sendFile("/html/mybookingscareseeker.html", {root: path.join(__dirname, '/../../public')});
+        //res.sendFile("/html/mybookingscareseeker.html", {root: path.join(__dirname, '/../../public')});
+        console.log("Careseeker - GetMyBookings aufgerufen!");
+        Booking.find(function(err, bookings){
+            console.log("Booking find ausgeführt.");
+            res.send(bookings);
+        })
     }
 };
 
