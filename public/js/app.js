@@ -1,94 +1,37 @@
-function authInterceptor(API, auth) {
-    return {
-        // automatically attach Authorization header
-        request: function(config) {
-            var token = auth.getToken();
-            if(token) {
-                config.headers.Authorization = 'JWT ' + token;
-            }
-
-            return config;
-        },
-
-        // If a token was sent back, save it
-        response: function(res) {
-            if(res.data.token) {
-                auth.saveToken(res.data.token);
-            }
-            return res;
-        }
-    }
-}
-
-function authService($window) {
-    var self = this;
-    self.getToken = function() {
-        return $window.localStorage['jwtToken'];
-    };
-
-    self.isAuthed = function() {
-        var token = self.getToken();
-        if(token) {
-            /* var params = self.parseJwt(token);
-             return Math.round(new Date().getTime() / 1000) <= params.exp;*/
-            return true;
-        } else {
-            return false;
-        }
-    };
-
-    self.saveToken = function(token) {
-        $window.localStorage['jwtToken'] = token;
-    };
-
-    self.parseJwt = function(token) {
-        var base64Url = token.split('.')[1];
-        var base64 = base64Url.replace('-', '+').replace('_', '/');
-        return JSON.parse($window.atob(base64));
-    };
-    // Add JWT methods here
-
-}
-
-function userService($http, API, auth) {
-    var self = this;
-
-
-    // add authentication (user) methods here
-
-}
-
 var myApp = angular.module('myApp',['ngRoute','ui.bootstrap.showErrors', 'ngMessages',"uiGmapgoogle-maps", "countrySelect"]);
 myApp.config(function($routeProvider) {
-        $routeProvider
-            .when('/', { templateUrl: '../html/partials/home.html' })
-            .when('/search', { templateUrl: '../html/partials/search.html' })
-            .when('/bookingsrequests', { templateUrl: '../html/myoffers.html' })
-            .when('/offerservice', {
-                templateUrl: '../html/offerservice.html',
-                title: "Offer Service",
-                controller: "CreateOfferCtrl"
-            })
-            .when('/about', { templateUrl: '../html/partials/about.html' })
-            .when('/profile', { templateUrl: '../html/partials/profile.html' })
-            .when('/login', {templateUrl: '../html/login.html'})
-            .when('/addUser', {templateUrl: '../html/registration.html'})
-            .when('/myoffers', {templateUrl: '../html/myoffers.html'})
-            .when('/singleOffer', {templateUrl: '../html/singleOffer.html'})
-            .when('/mybookings', {templateUrl: '../html/mybookingscareseeker.html'})
-            .when('/createRequest', {templateUrl: '../html/createRequest.html'})
-            .when('/contact', {templateUrl: '../html/partials/about.html'})
-            .when('/imprint', {templateUrl: '../html/partials/imprint.html'})
-            .when('/terms', {templateUrl: '../html/partials/terms.html'})
-            .otherwise({ redirectTo: '/'});
-    });
+    $routeProvider
+        .when('/', { templateUrl: '../html/partials/home.html' })
+        .when('/search', { templateUrl: '../html/partials/search.html' })
+        .when('/bookingsrequests', { templateUrl: '../html/myoffers.html' })
+        .when('/offerservice', {
+            templateUrl: '../html/offerservice.html',
+            title: "Offer Service",
+            controller: "CreateOfferCtrl"
+        })
+        .when('/about', { templateUrl: '../html/partials/about.html' })
+        .when('/profile', { templateUrl: '../html/partials/profile.html' })
+        .when('/login', {templateUrl: '../html/login.html'})
+        .when('/addUser', {templateUrl: '../html/registration.html'})
+        .when('/myoffers', {templateUrl: '../html/myoffers.html'})
+        .when('/singleOffer', {templateUrl: '../html/singleOffer.html'})
+        .when('/mybookings', {templateUrl: '../html/mybookingscareseeker.html'})
+        .when('/createRequest', {templateUrl: '../html/createRequest.html'})
+        .when('/contact', {templateUrl: '../html/partials/about.html'})
+        .when('/imprint', {templateUrl: '../html/partials/imprint.html'})
+        .when('/terms', {templateUrl: '../html/partials/terms.html'});
 
-myApp.factory('authInterceptor', authInterceptor)
-    .service('user', userService)
-    .service('auth', authService)
-    .constant('API', 'http://localhost:3000')
-    .config(function($httpProvider) {
-        $httpProvider.interceptors.push('authInterceptor');
+/*    type = 2;
+    if(type == 1) {
+        //type is caregiver
+        $routeProvider.when('/mybookings', {templateUrl: '../html/mybookingscaregiver.html'})
+    } else {
+        //type is careseeker
+        $routeProvider.when('/mybookings', {templateUrl: '../html/mybookingscareseeker.html'})
+    }*/
+
+    $routeProvider.otherwise({ redirectTo: '/'});
+
     });
 
 myApp.config(['showErrorsConfigProvider', function(showErrorsConfigProvider) {
