@@ -37,6 +37,16 @@ function authService($window) {
         }
     };
 
+    self.isCaregiver = function() {
+        var token = self.parseJwt(self.getToken());
+        return(token.type == 1);
+    };
+
+    self.isCareseeker = function() {
+        var token = self.parseJwt(self.getToken());
+        return(token.type == 2);
+    };
+
     self.saveToken = function(token) {
         $window.localStorage['jwtToken'] = token;
     };

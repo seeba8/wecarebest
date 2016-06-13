@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html  lang="en">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -46,10 +46,12 @@
         <div class="collapse navbar-collapse" id="navbar-static-top">
             <!--<div class="navbar-text" id="slogan">weCare.best brings together elderly people and caregivers taking care of them</div>-->
             <ul class="nav navbar-nav">
-                <li><div id="placeholder">.</div></li>
+                <li>
+                    <div id="placeholder">.</div>
+                </li>
                 <li><a href="#/search">Search</a></li>
                 <li><a ng-show="app.isAuthed()" href="#/bookingsrequests">All Bookings & Requests</a></li>
-                <li><a ng-show="app.isAuthed()" href="#/offerservice">Offer Service</a></li>
+                <li><a ng-show="app.isAuthed()&&app.IsCaregiver()" href="#/offerservice">Offer Service</a></li>
                 <li><a ng-show="app.isAuthed()" href="#/profile">My Profile</a></li>
                 <li><a href="/landingpage">About</a></li>
             </ul>
@@ -60,7 +62,8 @@
                     <div class="input-group">
                         <input class="form-control" placeholder="Search" name="srch-term" id="srch-term" type="text">
                         <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i>
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -73,11 +76,11 @@
     <div class="container-fluid">
         <div class="navbar-collapse navbar-header col-sm-2" id="logo">
             <!--<a class="navbar-brand pull-left img-responsive" href="#/">-->
-                <a href="#/home" class="pull-left img-responsive media show">
+            <a href="#/home" class="pull-left img-responsive media show">
                 <img src="../images/logo2.png">
-<!--            <a class="navbar-brand" id="logo" href="#/">
-                <span style="color: #4D4D4D;">weCare.</span>
-                <span style="color: #428BCA">best</span>-->
+                <!--            <a class="navbar-brand" id="logo" href="#/">
+                                <span style="color: #4D4D4D;">weCare.</span>
+                                <span style="color: #428BCA">best</span>-->
             </a>
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-fixed-top">
                 <span class="sr-only">Toggle navigation</span>
@@ -87,8 +90,10 @@
             </button>
         </div>
         <!--navbar text (slogan)-->
-        <div class="collapse navbar-collapse"  id="navbar-fixed-top">
-            <div class="navbar-text" id="slogan">weCare.best brings together elderly people and caregivers taking care of them</div>
+        <div class="collapse navbar-collapse" id="navbar-fixed-top">
+            <div class="navbar-text" id="slogan">weCare.best brings together elderly people and caregivers taking care
+                of them
+            </div>
 
             <!--            <ul class="nav navbar-nav">
                             <li><a href="#">Search</a></li>
@@ -102,8 +107,10 @@
             <!--register and login button-->
             <ul class="nav navbar-nav pull-right">
                 <li ng-show="!app.isAuthed()"><a href="#/addUser">Register</a></li>
-                <li ng-show="!app.isAuthed()"><a href="#/login">Login <i class="glyphicon glyphicon-log-in"></i></a></li>
-                <li ng-show="app.isAuthed()"><a ng-click="app.logout(); $event.stopPropagation();" href="">Logout <i class="glyphicon glyphicon-log-out"></i></a></li>
+                <li ng-show="!app.isAuthed()"><a href="#/login">Login <i class="glyphicon glyphicon-log-in"></i></a>
+                </li>
+                <li ng-show="app.isAuthed()"><a ng-click="app.logout(); $event.stopPropagation();" href="">Logout <i
+                        class="glyphicon glyphicon-log-out"></i></a></li>
             </ul>
         </div>
     </div>
@@ -112,35 +119,25 @@
 <!--left sidebar navigation-->
 <div class="container-fluid">
     <div class="row content">
-        <div class="navbar-left sidenav col-sm-2 hidden-xs">
-            <p class="active"><a href="#/">Home</a></p>
-            <p><a href="#/search">Search</a></p>
-            <p><a ng-show="app.isAuthed()" href="#/bookingsrequests">All Bookings & Requests</a></p>
-            <p><a ng-show="app.isAuthed()" href="#/offerservice">Offer Service</a></p>
-            <p><a ng-show="app.isAuthed()" href="#/profile">My Profile</a></p>
-            <p><a href="/landingpage">About</a></p>
-        </div>
-        <!--site content goes here-->
-        <!--ng-view includes other html views from /partials folder-->
-
+        <div class="navbar-left sidenav col-sm-1 hidden-xs"></div>
+        <!--content goes here, included with ng-view-->
         <div class="col-sm-10 text-left">
-                <div ng-view></div>
-
-
-    </div>
-</div>
-
-<!--footer, hide footer on xsmall screen-->
-<footer class="footer">
-    <div class="hidden-xs col-sm-12 text-center">
-        <div class="container-fluid text-center">
-            <a href="#/home">Home</a> |
-            <a href="#/contact">Contact</a> |
-            <a href="#/imprint">Imprint</a> |
-            <a href="#/terms">Terms & Conditions</a>
+            <div ng-view></div>
         </div>
+        <div class="navbar-left sidenav col-sm-1 hidden-xs"></div>
     </div>
-</footer>
+
+    <!--footer, hide footer on xsmall screen-->
+    <footer class="footer">
+        <div class="hidden-xs col-sm-12 text-center">
+            <div class="container-fluid text-center">
+                <a href="#/home">Home</a> |
+                <a href="#/contact">Contact</a> |
+                <a href="#/imprint">Imprint</a> |
+                <a href="#/terms">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
 
 </div>
 </body>
