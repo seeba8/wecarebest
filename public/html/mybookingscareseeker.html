@@ -13,28 +13,38 @@
     </div>
     <hr class="colorgraph">
 
-    <div class="row" ng-repeat="offerfinal in app.offerfinals | orderBy:'timestamp': app.recent" style="margin-bottom: 30px;">
-        <div class="col-sm-10 col-md-10">
+    <div class="row" style="margin-bottom: 30px;">
+        <div class="col sm-2">
+            <div class="col-md-2 col-sm-2">
+                <img src="../images/clint.jpg" class="img-rounded img-responsive"  >
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6">
             <div class="media">
                 <div class="media-body">
                     <ul class="list-group">
                         <h4 class="media-heading list-group-item-heading"
                             style="background-color: #2b669a;padding:10px;color:white;margin-bottom: 0px;">
-                            Amount of care: <i>{{offerfinal.typeofcare}}</i><br />
-                            Timeframe:<i> {{offerfinal.starttime | datetime1}}</i> until <i> {{offerfinal.endtime | datetime1}}</i>
+                            Amount of care: <i>Basic</i><br />
+                            Timeframe:<i> 01.01.2016 </i> until <i> 30.01.2016</i>
                         </h4>
-                        <li ng-show="offerfinal.repeating == true" class="list-group-item"><b>Repeating:</b> {{offerfinal.repeatoptions.frequency}} </li>
+                        <li class="list-group-item"><b>Repeating:</b> Weekly </li>
                         <!--TODO show only weekdays with value == true-->
-                        <li ng-show="offerfinal.repeating == true" class="list-group-item" ><b>Days:</b>
-                            <span ng-show="val == true" ng-repeat="(key,val) in offerfinal.repeatoptions">{{key}} | </span>
+                        <li  class="list-group-item" ><b>Days:</b>
+                            <span >Monday | Tuesday | </span>
                         </li>
-                        <li class="list-group-item"><b>Wage:</b> {{offerfinal.wageperhour}} € / h</li>
-                        <li class="list-group-item"><b>Location:</b> {{offerfinal.location.name}} - <b>Radius: </b>{{offerfinal.location.radius}}m</li>
-                        <li ng-show="offerfinal.notes" class="list-group-item"><b>Notes:</b> {{offerfinal.notes}}</li>
-                        <li ng-show="offerfinal.createdDate" class="list-group-item"><b>Creation Date:</b> {{offerfinal.createdDate | datetime1}}</li>
+                        <li class="list-group-item"><b>Wage:</b> 12 € / h</li>
+                        <li class="list-group-item"><b>Location:</b> Teststraße. 16 - <b> 123456 Teststadt </b></li>
+                        <li class="list-group-item"><b>Notes:</b> Blablalbalabalbla</li>
+                        <li  class="list-group-item"><b>Last Activity:</b> 30.01.2016</li>
                     </ul>
                 </div>
             </div>
+        </div>
+        <div class="col-sm-2">
+            <p>Status: </br>
+            To be paid
+            </p>
         </div>
         <div class="col-sm-2 col-md-2 pull-right">
             <a href="#" class="btn btn-primary btn-success" style="min-width:80%;margin-top:10px;"><span class="glyphicon glyphicon-ok"></span> View</a>
