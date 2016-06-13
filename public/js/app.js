@@ -1,3 +1,63 @@
+function authInterceptor(API, auth) {
+    return {
+        // automatically attach Authorization header
+        request: function(config) {
+            var token = auth.getToken();
+            if(token) {
+                config.headers.Authorization = 'JWT ' + token;
+            }
+
+            return config;
+        },
+
+        // If a token was sent back, save it
+        response: function(res) {
+            if(res.data.token) {
+                auth.saveToken(res.data.token);
+            }
+            return res;
+        }
+    }
+}
+
+function authService($window) {
+    var self = this;
+    self.getToken = function() {
+        return $window.localStorage['jwtToken'];
+    };
+
+    self.isAuthed = function() {
+        var token = self.getToken();
+        if(token) {
+            /* var params = self.parseJwt(token);
+             return Math.round(new Date().getTime() / 1000) <= params.exp;*/
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    self.saveToken = function(token) {
+        $window.localStorage['jwtToken'] = token;
+    };
+
+    self.parseJwt = function(token) {
+        var base64Url = token.split('.')[1];
+        var base64 = base64Url.replace('-', '+').replace('_', '/');
+        return JSON.parse($window.atob(base64));
+    };
+    // Add JWT methods here
+
+}
+
+function userService($http, API, auth) {
+    var self = this;
+
+
+    // add authentication (user) methods here
+
+}
+
 var myApp = angular.module('myApp',['ngRoute','ui.bootstrap.showErrors', 'ngMessages',"uiGmapgoogle-maps", "countrySelect"]);
 myApp.config(function($routeProvider) {
         $routeProvider
@@ -21,6 +81,14 @@ myApp.config(function($routeProvider) {
             .when('/imprint', {templateUrl: '../html/partials/imprint.html'})
             .when('/terms', {templateUrl: '../html/partials/terms.html'})
             .otherwise({ redirectTo: '/'});
+    });
+
+myApp.factory('authInterceptor', authInterceptor)
+    .service('user', userService)
+    .service('auth', authService)
+    .constant('API', 'http://localhost:3000')
+    .config(function($httpProvider) {
+        $httpProvider.interceptors.push('authInterceptor');
     });
 
 myApp.config(['showErrorsConfigProvider', function(showErrorsConfigProvider) {

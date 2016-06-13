@@ -35,7 +35,7 @@ var bookingSchema = mongoose.Schema({
     lastActivity:   Date, //when did the status change the last time?
     createdBy:      String, //Careseeker
     offer:          String, //referenz auf das Objekt Offer, hier kann auch Caregiver und Type of Care ausgelesen werden
-    status:         int //1: Open Request/Waiting for Answer; 2: To be paid; 3: Ready/In the past (depending on timestamp); 4: cancelled
+    status:         Number //1: Open Request/Waiting for Answer; 2: To be paid; 3: Ready/In the past (depending on timestamp); 4: cancelled
 });
 
 //define mongoose Model

@@ -69,7 +69,7 @@ app.post('/logout', function(req, res){ req.logOut(); res.send(200); });
 
 
 var offerRoutes = require("./requests_offers/offerRoutes");
-var bookingRouter = require("./requests_offers/bookingRouter");
+var bookingRouter = require("./booking/bookingRouter");
 
 app.use("/", offerRoutes(passport));
 app.use("/", bookingRouter(passport));

@@ -1,72 +1,6 @@
-function authInterceptor(API, auth) {
-    return {
-        // automatically attach Authorization header
-        request: function(config) {
-            var token = auth.getToken();
-            if(token) {
-                config.headers.Authorization = 'JWT ' + token;
-            }
 
-            return config;
-        },
-
-        // If a token was sent back, save it
-        response: function(res) {
-            if(res.data.token) {
-                auth.saveToken(res.data.token);
-            }
-            return res;
-        }
-    }
-}
-
-function authService($window) {
-    var self = this;
-    self.getToken = function() {
-        return $window.localStorage['jwtToken'];
-    };
-
-    self.isAuthed = function() {
-        var token = self.getToken();
-        if(token) {
-            /* var params = self.parseJwt(token);
-             return Math.round(new Date().getTime() / 1000) <= params.exp;*/
-            return true;
-        } else {
-            return false;
-        }
-    };
-
-    self.saveToken = function(token) {
-        $window.localStorage['jwtToken'] = token;
-    };
-
-    self.parseJwt = function(token) {
-        var base64Url = token.split('.')[1];
-        var base64 = base64Url.replace('-', '+').replace('_', '/');
-        return JSON.parse($window.atob(base64));
-    };
-    // Add JWT methods here
-
-}
-
-function userService($http, API, auth) {
-    var self = this;
-
-
-    // add authentication (user) methods here
-
-}
 
 angular.module("myApp")
-
-    .factory('authInterceptor', authInterceptor)
-    .service('user', userService)
-    .service('auth', authService)
-    .constant('API', 'http://localhost:3000')
-    .config(function($httpProvider) {
-        $httpProvider.interceptors.push('authInterceptor');
-    })
     .controller("AuthCtrl", ["$scope", "$http", "$window", "user", "auth", function ($scope, $http, $window, user, auth) {
         var app = this;
 
@@ -95,7 +29,7 @@ angular.module("myApp")
         app.saveUser = function (type, firstName, name, street, city, postalCode, country, phone, gender, email, pwd, pwd2) {
             console.log("clicked register");
             if(pwd==pwd2) {
-                $http.post(API + "/addUser", {
+                $http.post("HTTP://localhost:3000/addUser", {
                     type: type,
                     firstName: firstName,
                     name: name,
@@ -118,7 +52,7 @@ angular.module("myApp")
         };
 
         app.login = function (e, p) {
-            $http.post(API + "/login", {
+            $http.post("HTTP://localhost:3000/login", {
                 email: e,
                 pwd: p
             }).success(function(response) {

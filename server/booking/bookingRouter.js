@@ -19,6 +19,7 @@ function bookingRoutes(passport) {
         next();
     });
 
+    //TODO: kann man hier gleich den User Type abfangen und entsprechend in jwt berücksichtigen?
     //add new booking
     router.post('/createRequest', passport.authenticate('jwt', {session: false}, bookingController.postCreateRequest));
 
@@ -34,7 +35,7 @@ function bookingRoutes(passport) {
 
     //TODO: brauchen wir das?
     router.route("/landingpage")
-        .get(offerController.showLandingpage);
+        .get(bookingController.showLandingpage);
 
     return router;
 }
