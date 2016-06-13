@@ -1,0 +1,366 @@
+<div class="container createoffer" ng-controller="CreateOfferCtrl as app">
+    <h2>Request a caregiver</h2>
+    <p>
+        Insert your details.
+    </p>
+    <hr class="colorgraph">
+    <form name="Offer" role="form" ng-submit="submit()" novalidate>
+
+        <!--###############################################
+            ########FORM INPUT FOR timefrarme ############
+            ###############################################
+            -->
+
+        <div class="row">
+            <div class="form-group col-sm-4 col-xs-4">
+                <label for="startday">Start day (mm/dd/yy)</label>
+                <div class='input-group date'>
+                    <input type='text'
+                           class="startdaypicker form-control"
+                           id="startday"
+                           name="startday"
+                           placeholder="Enter Date"
+                           minlength="6"
+                           required />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar" onclick="$('.startdaypicker').data('DateTimePicker').show();"></span>
+                        </span>
+
+                </div>
+                <div ng-if="interacted(Offer.startday)" ng-messages="Offer.startday.$error" role="alert">
+                    <div class="alert alert-danger" ng-message="required">
+                        Please select the day of your offered services
+                    </div>
+                    <div class="alert alert-danger" ng-message="minlength">
+                        Not a valid wage! Please enter at least one digit as wage.
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group col-sm-3 col-xs-4">
+                <label for="starttime">Start time</label>
+                <div class='input-group date'>
+                    <input type='text'
+                           class="starttimepicker form-control"
+                           id="starttime"
+                           name="starttime"
+                           placeholder="Enter Time"
+                           minlength="4"
+                           required />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-time" onclick="$('.starttimepicker').data('DateTimePicker').show();"></span>
+                        </span>
+                </div>
+
+                <div ng-if="interacted(Offer.starttime)" ng-messages="Offer.starttime.$error" role="alert">
+                    <div class="alert alert-danger" ng-message="required">
+                        Please select the start time of your offered services
+                    </div>
+                    <div class="alert alert-danger" ng-message="minlength">
+                        Not a valid wage! Please enter at least one digit as wage.
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group col-sm-3 col-xs-4">
+                <label for="endtime">End time</label>
+                <div class='input-group date'>
+                    <input type='text'
+                           class="endtimepicker form-control"
+                           id="endtime"
+                           name="endtime"
+                           placeholder="Enter Time"
+                           required />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-time" onclick="$('.endtimepicker').data('DateTimePicker').show();"></span>
+                        </span>
+
+                </div>
+
+                <div ng-if="interacted(Offer.endtime)" ng-messages="Offer.endtime.$error" role="alert">
+                    <div class="alert alert-danger" ng-message="required">Please select the end time of your offered services</div>
+                </div>
+            </div>
+            <div class="form-group col-sm-2 col-xs-12 checkbox-inline text-center pagination-centered">
+                <label for="repeating" class="repeating ">
+                    <input ng-model="offer.repeating"
+                           class=""
+                           type="checkbox"
+                           id="repeating"
+                           name="repeating">
+                    Repeating
+                </label>
+
+
+            </div>
+        </div>
+
+        <!-- Advanced Time Options -->
+        <div class="well form-group" ng-show="offer.repeating">
+            <div class="row" style="margin-bottom:0px;">
+                <div class=" form-group" id="weekdays" >
+                    <label class="col-md-2 control-label">Day(s) of Week</label>
+                    <div class="checkbox" >
+                        <label class="checkbox-inline" name="weekdays" ng-repeat="weekday in weekdays">
+                            <input type="checkbox" value="" ng-model="offer.repeatoptions[weekday]">{{ weekday }}
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group" id="frequencies" >
+                    <label class="col-md-2 control-label">Frequency</label>
+                    <div class="checkbox" >
+                        <label class="radio-inline" ng-repeat="frequency in frequencies">
+                            <input type="radio" ng-model="offer.repeatoptions.frequency" name="frequency" value="{{frequency}}">{{frequency}}
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="endday" class="col-md-2 control-label">Until (mm/dd/yy)</label>
+                    <div class="col-md-10">
+                        <div class='input-group date'>
+                            <input type='text'
+                                   class="enddaypicker form-control"
+                                   id="endday"
+                                   name="endday"
+                                   required />
+                                <span class="input-group-addon" onclick="$('.enddaypicker').data('DateTimePicker').show();">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+
+                        </div>
+
+                        <div ng-if="interacted(Offer.enddate)" ng-messages="Offer.enddate.$error" role="alert">
+                            <div class="alert alert-danger" ng-message="required">Please select the time of your offered services</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--###############################################
+            ########FORM INPUT FOR typeofcare #############
+            ###############################################
+            -->
+<!--        <div class="form-group" >
+            <label for="typeofcare">Amount of care:</label>
+            <select ng-model="offer.typeofcare"
+                    ng-options="typeofcare for typeofcare in typeofcares"
+                    type="text"
+                    class="form-control"
+                    id="typeofcare"
+                    name="typeofcare"
+                    placeholder="Basic"
+                    required
+            >
+                <option ng-show="true" value="">- Please Choose -</option>
+            </select>
+            <div ng-if="interacted(Offer.typeofcare)" ng-messages="Offer.typeofcare.$error" role="alert">
+                <div class="alert alert-danger" ng-message="required">Please select your offered type of service.</div>
+            </div>
+        </div>-->
+
+
+
+        <!--###############################################
+            ########FORM INPUT FOR wageperhour ############
+            ###############################################
+            -->
+<!--        <div class="form-group">
+            <label for="wage">Wage per hour in €/h</label>
+            <div class="input-group">
+                <input ng-model="offer.wageperhour"
+                       type="number"
+                       class="form-control"
+                       id="wage"
+                       name="wageperhour"
+                       range
+                       placeholder="Enter wage per hour"
+                       ng-minlength="1"
+                       ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/"
+                       step="0.01"
+                       required />
+                <span class="input-group-addon">&euro; / h</span>
+            </div>
+            <div ng-if="interacted(Offer.wageperhour)" ng-messages="Offer.wageperhour.$error" role="alert">
+                <div class="alert alert-danger" ng-message="required">
+                    Please enter your wage per hour as positive numeric value with maximum of two decimals.
+                </div>
+                <div class="alert alert-danger" ng-message="minlength">
+                    Not a valid wage! Please enter at least one digit as wage.
+                </div>
+                <div class="alert alert-danger" ng-message="pattern">
+                    Not a valid wage! Please use a positive numeric value with a maximum of two decimals.
+                </div>
+                <div class="alert alert-danger" ng-message="range">
+                    Not a valid wage! Please enter your wage in range between 0 and 100.
+                </div>
+            </div>
+        </div>-->
+
+
+
+        <!--#################################################
+            ########FORM INPUT FOR supportedarea ############
+            #################################################
+            -->
+        <div class="row">
+            <div class="form-group col-sm-4">
+                <label for="street">Street</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-road fa" aria-hidden="true"></i></span>
+                    <input
+                            id="street"
+                            type="text"
+                            class="form-control"
+                            placeholder="Street"
+                            ng-model="app.street"
+                    >
+                </div>
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="city">City</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-book fa" aria-hidden="true"></i></span>
+                    <input
+                            id="city"
+                            type="text"
+                            class="form-control"
+                            name="city"
+                            placeholder="City"
+                            ng-model="app.city"
+                            minlength="2"
+                            required
+                    >
+                </div>
+                <div ng-if="interacted(User.city)" ng-messages="User.city.$error" role="alert">
+                    <div class="alert alert-danger" ng-message="required">
+                        Please enter your wage per hour as positive numeric value with maximum of two decimals.
+                    </div>
+                    <div class="alert alert-danger" ng-message="minlength">
+                        Not a valid wage! Please enter at least one digit as wage.
+                    </div>
+                    <div class="alert alert-danger" ng-message="pattern">
+                        Not a valid wage! Please use a positive numeric value with a maximum of two decimals.
+                    </div>
+                    <div class="alert alert-danger" ng-message="range">
+                        Not a valid wage! Please enter your wage in range between 0 and 100.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="postcode">Postal Code</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-book fa" aria-hidden="true"></i></span>
+                    <input
+                            id="postcode"
+                            type="text"
+                            class="form-control"
+                            placeholder="Postal Code"
+                            ng-model="app.postalCode"
+                    >
+                </div>
+            </div>
+
+
+
+        </div>
+<!--        <div class ="row">
+            <div class="form-group col-xs-6">
+                <label for="searchbox">Supported area</label>
+                <div id="searchBoxParent">
+                    &lt;!&ndash;<input type="text" class="form-control" id="searchbox" placeholder="Enter supported area">&ndash;&gt;
+                </div>
+                <div  ng-show="Offer.location.name.$touched" ng-messages="Offer.location.name.$error" role="alert">
+                    <div class="alert alert-danger" ng-message="required">
+                        Please enter a value for this field.
+                    </div>
+                </div>
+
+            </div>
+&lt;!&ndash;            <div class="form-group col-xs-6" >
+                <label for="radius">Radius</label>
+                <div class="input-group">
+                    <input type="number" required ng-pattern="/^[0-9]+$/" rangemaps ng-model="offer.location.radius"
+                           name="radius" class="form-control" id="radius">
+                    <span class="input-group-addon">meters</span>
+                </div>
+                <div  ng-if="interacted(Offer.radius)" ng-messages="Offer.radius.$error" role="alert">
+                    <div class="alert alert-danger" ng-message="required">
+                        Please enter a value for this field.
+                    </div>
+                    <div class="alert alert-danger" ng-message="pattern">
+                        Not a valid radius! Please use a positive numeric value.
+                    </div>
+                    <div class="alert alert-danger" ng-message="rangemaps">
+                        Not a valid radius! Please choose a radius higher than 100m.
+                    </div>
+                </div>
+            </div>&ndash;&gt;
+        </div>-->
+        <div class="form-group div-wrapper" data-tap-disabled="true">
+
+            <ui-gmap-google-map id="gmap" center='map.center' zoom='map.zoom' events="map.events" options="map.options">
+                <ui-gmap-search-box
+                        template='search.template'
+                        events='search.events'
+                        position='search.position'
+                        parentdiv='search.parentDiv'
+                        ng-model="offer.text"
+                        options='search.options'>
+                </ui-gmap-search-box>
+                <ui-gmap-circle center='offer.location'
+                                radius='offer.location.radius'
+                                fill='circle.fill'
+                                stroke='circle.stroke'
+                                clickable='circle.clickable'
+                                draggable='circle.draggable'
+
+                                editable='circle.editable'
+                                visible='circle.visible'
+                                events='circle.events'
+                                control="circle.control">
+
+                </ui-gmap-circle>
+            </ui-gmap-google-map>
+
+        </div>
+
+
+
+        <!--###############################################
+            ########FORM INPUT FOR notes ##################
+            ###############################################
+            -->
+        <div class="form-group">
+            <label for="notes">Notes (max. 800 chars)</label>
+                <textarea ng-model="offer.notes"
+                          class="form-control"
+                          name="notes"
+                          rows="5"
+                          id="notes"
+                          ng-maxlength="800";
+                          placeholder="Enter your additional notes regarding your booking and needs."></textarea>
+            <div ng-if="interacted(Offer.notes)" ng-messages="Offer.notes.$error" role="alert">
+                <div class="alert alert-danger" ng-message="maxlength">Please explain your offer in less than 800 characters.</div>
+            </div>
+        </div>
+
+
+
+        <hr class="colorgraph">
+        <!--###############################################
+           ########SUBMIT BUTTON ##################
+           ###############################################
+           -->
+        <button type="submit" class="btn btn-success">Send request</button>
+        <span id="messages" class="alert alert-success" data-ng-show="messages" data-ng-bind="messages"></span>
+        <span id="statusmessages" class="alert alert-info" data-ng-show="statusmessages" data-ng-bind="statusmessages"></span>
+        <span id="errormessages" class="alert alert-warning" data-ng-show="errormessages" data-ng-bind="errormessages"></span>
+        <span data-ng-show="progress.active()" style="color: #0037ff; font-size: 50px;">Sending…</span>
+        <hr class="colorgraph">
+    </form>
+
+</div>
