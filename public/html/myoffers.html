@@ -26,7 +26,7 @@
                         <li ng-show="offerfinal.repeating == true" class="list-group-item"><b>Repeating:</b> {{offerfinal.repeatoptions.frequency}} </li>
                         <!--TODO show only weekdays with value == true-->
                         <li ng-show="offerfinal.repeating == true" class="list-group-item" ><b>Days:</b>
-                            <span ng-show="val == true" ng-repeat="(key,val) in offerfinal.repeatoptions">{{key}} | </span>
+                            <span ng-show="val == true" ng-repeat="(key,val) in offerfinal.repeatoptions">{{key}}<span ng-show="!$last"> | </span></span>
                         </li>
                         <li class="list-group-item"><b>Wage:</b> {{offerfinal.wageperhour}} € / h</li>
                         <li class="list-group-item"><b>Location:</b> {{offerfinal.location.name}} - <b>Radius: </b>{{offerfinal.location.radius}}m</li>
