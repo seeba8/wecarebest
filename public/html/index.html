@@ -66,7 +66,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand page-scroll" href="/landingpage">weCare.best</>
+            <a class="navbar-brand page-scroll" href="/landingpage">weCare.best</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -78,6 +78,11 @@
                 <li><a ng-show="app.isCaregiver()" href="#/offerservice">Offer Service</a></li>
                 <li><a ng-show="app.isAuthed()" href="#/profile">My Profile</a></li>
                 <li><a href="#/about">About</a></li>
+                <li ng-show="!app.isAuthed()"><a href="#/addUser">Register</a></li>
+                <li ng-show="!app.isAuthed()"><a href="#/login">Login <i class="glyphicon glyphicon-log-in"></i></a>
+                </li>
+                <li ng-show="app.isAuthed()"><a ng-click="app.logout(); $event.stopPropagation();" href="">Logout <i
+                        class="glyphicon glyphicon-log-out"></i></a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -130,16 +135,16 @@
     </div>
 </div>-->
 <!--fixed top navbar-->
-<div id="subNav" class="navbar navbar-default navbar-fixed-top" role="navigation">
+<!--<div id="subNav" class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
-<!--        <div class="navbar-collapse navbar-header col-sm-2" id="logo">
+&lt;!&ndash;        <div class="navbar-collapse navbar-header col-sm-2" id="logo">
             &lt;!&ndash;<a class="navbar-brand pull-left img-responsive" href="#/">&ndash;&gt;
             <a href="#/home" class="pull-left img-responsive media show">
                 <img src="../images/logo2.png">
                 &lt;!&ndash;            <a class="navbar-brand" id="logo" href="#/">
                                 <span style="color: #4D4D4D;">weCare.</span>
                                 <span style="color: #428BCA">best</span>&ndash;&gt;
-            </a>-->
+            </a>&ndash;&gt;
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-fixed-top">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
@@ -147,22 +152,22 @@
                 <span class="icon-bar"></span>
             </button>
         </div>
-        <!--navbar text (slogan)-->
+        &lt;!&ndash;navbar text (slogan)&ndash;&gt;
         <div class="collapse navbar-collapse" id="navbar-fixed-top">
-<!--            <div class="navbar-text" id="slogan">weCare.best brings together elderly people and caregivers taking care
+&lt;!&ndash;            <div class="navbar-text" id="slogan">weCare.best brings together elderly people and caregivers taking care
                 of them
-            </div>-->
+            </div>&ndash;&gt;
 
-            <!--            <ul class="nav navbar-nav">
+            &lt;!&ndash;            <ul class="nav navbar-nav">
                             <li><a href="#">Search</a></li>
                             <li><a href="#">My Bookings & Requests</a></li>
                             <li><a href="#">Offer Service</a></li>
                             <li><a href="#">About</a></li>
-                        </ul>-->
-            <!--        <button type="button" class="btn btn-default navbar-btn">Button</button>-->
-            <!--<div class="col-sm-3 col-md-3 pull-right">-->
+                        </ul>&ndash;&gt;
+            &lt;!&ndash;        <button type="button" class="btn btn-default navbar-btn">Button</button>&ndash;&gt;
+            &lt;!&ndash;<div class="col-sm-3 col-md-3 pull-right">&ndash;&gt;
 
-            <!--register and login button-->
+            &lt;!&ndash;register and login button&ndash;&gt;
             <ul class="nav navbar-nav pull-right">
                 <li ng-show="!app.isAuthed()"><a href="#/addUser">Register</a></li>
                 <li ng-show="!app.isAuthed()"><a href="#/login">Login <i class="glyphicon glyphicon-log-in"></i></a>
@@ -171,8 +176,8 @@
                         class="glyphicon glyphicon-log-out"></i></a></li>
             </ul>
         </div>
-    </div>
-</div>
+    </div>-->
+<!--</div>-->
 
 <!--left sidebar navigation-->
 <div class="container-fluid">

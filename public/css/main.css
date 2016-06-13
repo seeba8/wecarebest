@@ -1,5 +1,5 @@
 body {
-    padding-top: 110px;
+    padding-top: 60px;
     font-family: Montserrat, Arial, sans-serif;
 }
 
@@ -83,7 +83,7 @@ body {
     color:black;
 }*/
 .row.content {
-    height: 500px;
+    height: 570px;
 }
 
 /*BY MS Set Color of buttons on myoffers.html (bookings&requests) to white*/
