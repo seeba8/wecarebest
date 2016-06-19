@@ -1,31 +1,78 @@
 <div class="container" ng-controller="SearchCtrl as app">
+    <link rel="stylesheet" href="../css/offerservice.css">
     <pre>{{searchParams}}</pre>
-    <div class="col-sm-10 col-md-10">
-        <form ng-submit="app.search()">
-            <div class="form-group col-sm-4 col-xs-4">
-                <label class="row">Location
-                    <input type="text" ng-model="searchParams.locationname" placeholder="Location"/>
-                </label>
-            </div>
-            <div class="form-group col-sm-4 col-xs-4">
-                <label>Price
-                    <rzslider
-                            style="width: 500px"
-                            rz-slider-model="searchParams.priceMin"
-                            rz-slider-high="searchParams.priceMax"
-                            rz-slider-options="slider.options"></rzslider>
-                </label>
-            </div>
+    <div class="row">
+        <div class="col-sm-10 col-md-10">
+            <form ng-submit="app.search()">
+                <!--<div class="form-group col-sm-4 col-xs-4">
+                    <label class="row">Location
+                        <input type="text" ng-model="searchParams.locationname" placeholder="Location"/>
+                    </label>
+                </div>-->
+                <div class="form-group col-sm-4 col-xs-4">
+                    <label>Price
+                        <rzslider
+                                style="width: 500px"
+                                rz-slider-model="searchParams.priceMin"
+                                rz-slider-high="searchParams.priceMax"
+                                rz-slider-options="slider.options"></rzslider>
+                    </label>
+                </div>
+                <div class="form-group col-sm-12 col-xs-12">
+                    <select ng-model="searchParams.typeofcare"
+                            ng-options="typeofcare for typeofcare in typeofcares"
+                            type="text"
+                            class="form-control"
+                            id="typeofcare"
+                            name="typeofcare"
+                            placeholder="Basic">
+                        <option ng-show="true" value="">- Please Choose -</option>
+                    </select>
 
-            <button type="submit">Search</button>
-        </form>
-    </div>
+                </div>
+                <div class="form-group col-sm-12 col-xs-12">
+                    <div>
+                        <label for="searchbox">Supported area</label>
+                        <div id="searchBoxParent">
+                            <!--<input type="text" class="form-control" id="searchbox" placeholder="Enter supported area">-->
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-12 col-xs-12">
+                    <div class="form-group div-wrapper" data-tap-disabled="true">
+                        <ui-gmap-google-map id="gmap" center='map.center' zoom='map.zoom' events="map.events"
+                                            options="map.options">
+                            <ui-gmap-search-box
+                                    template='search.template'
+                                    events='search.events'
+                                    position='search.position'
+                                    parentdiv='search.parentDiv'
+                                    ng-model="searchParams.locationname"
+                                    options='search.options'>
+                            </ui-gmap-search-box>
+                            <ui-gmap-marker
+                                    idKey='123'
+                                    coords='marker.coords'
+                                    options='marker.options'
+                                    events="marker.events">
+                            </ui-gmap-marker>
+                        </ui-gmap-google-map>
 
-    <div id="searchresults">
-        <div class="col-sm-10 col-md-10" ng-repeat="result in results">
-            <hr class="colorgraph"/>
-            <span>{{result.startday}}</span>
-            <span>{{result.starttime}} - {{result.endtime}}</span>
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-12 col-xs-12">
+                    <button type="submit">Search</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="searchresults">
+            <div class="col-sm-10 col-md-10" ng-repeat="result in results">
+                <hr class="colorgraph"/>
+                <span>{{result.location.name}} ({{result.location.radius}}): </span>
+                <span>{{result.startday}}</span>
+                <span>{{result.starttime}} - {{result.endtime}}</span>
             <span ng-show="result.repeating">
                 , {{result.repeatoptions.frequency}} until
                 <span>{{result.endday}}</span>
@@ -33,6 +80,7 @@
             <span>
                     <input type="checkbox" disabled ng-checked="result.repeating"/>
             </span>
+            </div>
         </div>
     </div>
 </div>

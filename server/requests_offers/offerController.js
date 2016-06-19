@@ -11,7 +11,7 @@ var path = require('path');
 console.log("offerController File geladen.");
 
 //export so it can be invoked in offerRoutes
-module.exports.postOffer = function(req, res){
+module.exports.postOffer = function (req, res) {
 
     //For debugging purposes
     console.log("Test date:" + req.body.date);
@@ -37,35 +37,35 @@ module.exports.postOffer = function(req, res){
     //######################
     //##### VALIDATION #####
     //######################
-    if(!date){
+    if (!date) {
         res.status(400).send('date is required');
         console.log("date is not defined");
         return;
     }
 
-    if(!startday){
+    if (!startday) {
         res.status(400).send('startday is required');
         console.log("startday is not defined");
         return;
     }
-    if(!starttime){
+    if (!starttime) {
         res.status(400).send('starttime is required');
         console.log("starttime is not defined");
         return;
     }
-    if(!endtime){
+    if (!endtime) {
         res.status(400).send('endtime is required');
         console.log("endtime is not defined");
         return;
     }
 
-    if(!typeofcare){
+    if (!typeofcare) {
         res.status(400).send('typeofcare is required');
         console.log("typeofcare is not defined");
         return;
     }
 
-    if(!wageperhour){
+    if (!wageperhour) {
         res.status(400).send('wageperhour is required');
         console.log("wageperhour is not defined");
         return;
@@ -78,10 +78,10 @@ module.exports.postOffer = function(req, res){
 
     //define new Offer object with given parts
     var offer = new Offer(req.body);
-    
+
     //according to mongoose function save offer to database
 
-    offer.save(function(err) {
+    offer.save(function (err) {
         if (err) {
             res.status(500).send(err);
             console.log("Did not load to database");
@@ -93,30 +93,51 @@ module.exports.postOffer = function(req, res){
     });
 };
 /*
-module.exports.getOffer = function(req, res){
-    res.sendFile("/html/offerservice.html", { root: path.join(__dirname, '/../../public') });
-};
-*/
-module.exports.getOffers = function(req, res) {
+ module.exports.getOffer = function(req, res){
+ res.sendFile("/html/offerservice.html", { root: path.join(__dirname, '/../../public') });
+ };
+ */
+module.exports.getOffers = function (req, res) {
     console.log("Search parameters: ", req.query);
     var searchParams = req.query;
     var conditions = {};
-    for(var param in searchParams){
-        switch(param) {
+    for (var param in searchParams) {
+        switch (param) {
             case "locationname":
                 conditions["location.name"] = {
-                    "$regex" : searchParams[param],
-                    "$options" : "i"
+                    "$regex": searchParams[param],
+                    "$options": "i"
                 };
                 break;
+            case "lat":
+            case "lng":
+                var lat2 = searchParams["lat"];
+                var lon2 = searchParams["lng"];
+                conditions["$where"] =
+                    '(this.location.radius/1000) >= (6371*2*Math.atan2(Math.sqrt(Math.sin((' +
+                    lat2 + '-this.location.latitude)*(Math.PI/180)/2) * Math.sin((' +
+                    lat2 + '-this.location.latitude)*(Math.PI/180)/2) + Math.cos(this.location.latitude*(Math.PI/180)) * Math.cos(' +
+                    lat2 + '*(Math.PI / 180)) * Math.sin((' +
+                    lon2 + '-this.location.longitude)*(Math.PI/180)/2) * Math.sin((' +
+                    lon2 + '-this.location.longitude)*(Math.PI/180)/2)), Math.sqrt(1-(Math.sin((' +
+                    lat2 + '-this.location.latitude)*(Math.PI/180)/2) * Math.sin((' +
+                    lat2 + '-this.location.latitude)*(Math.PI/180)/2) + Math.cos(this.location.latitude*(Math.PI/180)) * Math.cos(' +
+                    lat2 + '*(Math.PI / 180)) * Math.sin(( ' +
+                    lon2 + '-this.location.longitude)*(Math.PI/180)/2) * Math.sin((' +
+                    lon2 + '-this.location.longitude)*(Math.PI/180)/2)))))';
+
+                break;
+            case "typeofcare":
+                conditions["typeofcare"] = searchParams[param]; // direct match
+                break;
             case "priceMin":
-                if(typeof conditions["wageperhour"] == "undefined"){
+                if (typeof conditions["wageperhour"] == "undefined") {
                     conditions["wageperhour"] = {};
                 }
                 conditions["wageperhour"].$gt = searchParams[param];
                 break;
             case "priceMax":
-                if(typeof conditions["wageperhour"] == "undefined"){
+                if (typeof conditions["wageperhour"] == "undefined") {
                     conditions["wageperhour"] = {};
                 }
                 conditions["wageperhour"].$lt = searchParams[param];
@@ -125,34 +146,34 @@ module.exports.getOffers = function(req, res) {
 
     }
     console.log("Search params: ", conditions);
-    Offer.find(conditions, function(err, results) {
+    Offer.find(conditions).limit(25).exec(function (err, results) {
         console.log("Results: ", results.length);
         res.send(results);
     });
 };
 
-module.exports.showmyOffer = function(req, res){
-    res.sendFile("/html/myoffers.html", { root: path.join(__dirname, '/../../public') });
+module.exports.showmyOffer = function (req, res) {
+    res.sendFile("/html/myoffers.html", {root: path.join(__dirname, '/../../public')});
 };
 
-module.exports.showLandingpage = function(req, res){
-    res.sendFile("/html/landingpage.html", { root: path.join(__dirname, '/../../public') });
+module.exports.showLandingpage = function (req, res) {
+    res.sendFile("/html/landingpage.html", {root: path.join(__dirname, '/../../public')});
 };
 
-module.exports.getmyOffer = function (req, res){
+module.exports.getmyOffer = function (req, res) {
     console.log("getmyOffer aufgerufen!");
-    Offer.find(function(err, offers){
+    Offer.find(function (err, offers) {
         console.log("Offer find ausgeführt.");
         res.send(offers);
     })
 };
 
-module.exports.deletemyOffer = function (req, res){
+module.exports.deletemyOffer = function (req, res) {
     console.log("deletemyOffer aufgerufen!");
     console.log(req.body.id);
     var id = req.body.id;
-    Offer.findByIdAndRemove(id, function (err,offer){
-        if(err) {
+    Offer.findByIdAndRemove(id, function (err, offer) {
+        if (err) {
             throw err;
         } else {
             console.log("erfolgreich gelöscht:" + id);
@@ -162,7 +183,7 @@ module.exports.deletemyOffer = function (req, res){
 
 };
 
-module.exports.updatemyOffer = function (req, res){
+module.exports.updatemyOffer = function (req, res) {
     console.log("updatemyOffer aufgerufen!");
     console.log(req.body);
 
@@ -181,11 +202,19 @@ module.exports.updatemyOffer = function (req, res){
     console.log(radius);
     console.log(createdDate);
 
-    Offer.findByIdAndUpdate(id, {timeframe:timeframe, typeofcare:typeofcare, wageperhour:wageperhour, location:location,latitude:latitude, longitude:longitude, radius:radius, notes:notes}, {new: true}, function(err, offer){
+    Offer.findByIdAndUpdate(id, {
+        timeframe: timeframe,
+        typeofcare: typeofcare,
+        wageperhour: wageperhour,
+        location: location,
+        latitude: latitude,
+        longitude: longitude,
+        radius: radius,
+        notes: notes
+    }, {new: true}, function (err, offer) {
         if (err) {
             console.log(err);
             console.log("schade");
-            return;
         } else {
             console.log("yo");
             res.send();

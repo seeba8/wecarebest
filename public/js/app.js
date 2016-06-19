@@ -132,6 +132,7 @@ myApp.config(function (uiGmapGoogleMapApiProvider) {
 
 myApp.run(['$templateCache', function ($templateCache) {
     $templateCache.put('searchbox.tpl.html', '<input type="text" class="form-control" id="searchbox" name="supportedarea" ng-model="ngModel" ng-minlength="3" placeholder="Enter city" required>');
+    $templateCache.put('searchbox_searchctrl.tpl.html', '<input type="text" class="form-control" id="searchbox" name="searchbox_searchctrl" ng-model="ngModel" ng-minlength="3" placeholder="Enter city">');
     // onkeydown="if(event.keyCode == 13) {event.preventDefault(); event.stopPropagation();}"
 }]);
 
