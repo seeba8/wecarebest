@@ -5,8 +5,34 @@
     <meta charset="UTF-8">
     <title>weCare.best</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--landingpage css-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../bower_components/angularjs-slider/dist/rzslider.min.css">
+
+     <!--Custom Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css" type="text/css">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="../css/magnific-popup.css" type="text/css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/creative.css" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="../bower_components/html5shiv/dist/html5shiv.min.js"></script>
+    <script src="../bower_components/respond/dest/respond.min.js"></script>
+    <![endif]-->
+
+    <!--<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">-->
+
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../bower_components/angular/angular.min.js"></script>
@@ -34,13 +60,49 @@
 </head>
 
 <body ng-app="myApp" ng-controller="AuthCtrl as app">
+
+<!--landingpage navbar-->
+<nav id="mainNav1" class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand page-scroll" href="/landingpage">weCare.best</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#/search">Search</a></li>
+                <li><a ng-show="app.isCaregiver()" href="#/mybookingscaregiver">All Bookings & Requests</a></li>
+                <li><a ng-show="app.isCareseeker()" href="#/mybookingscareseeker">All Bookings & Requests</a></li>
+                <li><a ng-show="app.isCaregiver()" href="#/offerservice">Offer Service</a></li>
+                <li><a ng-show="app.isAuthed()" href="#/profile">My Profile</a></li>
+                <li><a href="#/about">About</a></li>
+                <li ng-show="!app.isAuthed()"><a href="#/addUser">Register</a></li>
+                <li ng-show="!app.isAuthed()"><a href="#/login">Login <i class="glyphicon glyphicon-log-in"></i></a>
+                </li>
+                <li ng-show="app.isAuthed()"><a ng-click="app.logout(); $event.stopPropagation();" href="">Logout <i
+                        class="glyphicon glyphicon-log-out"></i></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
 <!--static top navbar-->
-<div class="navbar navbar-default navbar-static-top" role="navigation">
+<!--<div class="navbar navbar-default navbar-static-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
-            <!--<div class="navbar-header">-->
-            <!--<a class="navbar-brand" id="logo"> <img src="header.png" width=100% height=90%></a>-->
-            <!--</div>-->
+            &lt;!&ndash;<div class="navbar-header">&ndash;&gt;
+            &lt;!&ndash;<a class="navbar-brand" id="logo"> <img src="header.png" width=100% height=90%></a>&ndash;&gt;
+            &lt;!&ndash;</div>&ndash;&gt;
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-static-top">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
@@ -48,9 +110,9 @@
                 <span class="icon-bar"></span>
             </button>
         </div>
-        <!--navbar links-->
+        &lt;!&ndash;navbar links&ndash;&gt;
         <div class="collapse navbar-collapse" id="navbar-static-top">
-            <!--<div class="navbar-text" id="slogan">weCare.best brings together elderly people and caregivers taking care of them</div>-->
+            &lt;!&ndash;<div class="navbar-text" id="slogan">weCare.best brings together elderly people and caregivers taking care of them</div>&ndash;&gt;
             <ul class="nav navbar-nav">
                 <li>
                     <div id="placeholder">.</div>
@@ -62,9 +124,9 @@
                 <li><a ng-show="app.isAuthed()" href="#/profile">My Profile</a></li>
                 <li><a href="/landingpage">About</a></li>
             </ul>
-            <!--search field-->
+            &lt;!&ndash;search field&ndash;&gt;
             <div class="nav navbar-nav navbar-right">
-                <!--<div class="navbar-text">Text</div>-->
+                &lt;!&ndash;<div class="navbar-text">Text</div>&ndash;&gt;
                 <form class="navbar-form" role="search">
                     <div class="input-group">
                         <input class="form-control" placeholder="Search" name="srch-term" id="srch-term" type="text">
@@ -77,18 +139,18 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
 <!--fixed top navbar-->
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+<!--<div id="subNav" class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
-        <div class="navbar-collapse navbar-header col-sm-2" id="logo">
-            <!--<a class="navbar-brand pull-left img-responsive" href="#/">-->
+&lt;!&ndash;        <div class="navbar-collapse navbar-header col-sm-2" id="logo">
+            &lt;!&ndash;<a class="navbar-brand pull-left img-responsive" href="#/">&ndash;&gt;
             <a href="#/home" class="pull-left img-responsive media show">
                 <img src="../images/logo2.png">
-                <!--            <a class="navbar-brand" id="logo" href="#/">
+                &lt;!&ndash;            <a class="navbar-brand" id="logo" href="#/">
                                 <span style="color: #4D4D4D;">weCare.</span>
-                                <span style="color: #428BCA">best</span>-->
-            </a>
+                                <span style="color: #428BCA">best</span>&ndash;&gt;
+            </a>&ndash;&gt;
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-fixed-top">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
@@ -96,22 +158,22 @@
                 <span class="icon-bar"></span>
             </button>
         </div>
-        <!--navbar text (slogan)-->
+        &lt;!&ndash;navbar text (slogan)&ndash;&gt;
         <div class="collapse navbar-collapse" id="navbar-fixed-top">
-            <div class="navbar-text" id="slogan">weCare.best brings together elderly people and caregivers taking care
+&lt;!&ndash;            <div class="navbar-text" id="slogan">weCare.best brings together elderly people and caregivers taking care
                 of them
-            </div>
+            </div>&ndash;&gt;
 
-            <!--            <ul class="nav navbar-nav">
+            &lt;!&ndash;            <ul class="nav navbar-nav">
                             <li><a href="#">Search</a></li>
                             <li><a href="#">My Bookings & Requests</a></li>
                             <li><a href="#">Offer Service</a></li>
                             <li><a href="#">About</a></li>
-                        </ul>-->
-            <!--        <button type="button" class="btn btn-default navbar-btn">Button</button>-->
-            <!--<div class="col-sm-3 col-md-3 pull-right">-->
+                        </ul>&ndash;&gt;
+            &lt;!&ndash;        <button type="button" class="btn btn-default navbar-btn">Button</button>&ndash;&gt;
+            &lt;!&ndash;<div class="col-sm-3 col-md-3 pull-right">&ndash;&gt;
 
-            <!--register and login button-->
+            &lt;!&ndash;register and login button&ndash;&gt;
             <ul class="nav navbar-nav pull-right">
                 <li ng-show="!app.isAuthed()"><a href="#/addUser">Register</a></li>
                 <li ng-show="!app.isAuthed()"><a href="#/login">Login <i class="glyphicon glyphicon-log-in"></i></a>
@@ -120,18 +182,18 @@
                         class="glyphicon glyphicon-log-out"></i></a></li>
             </ul>
         </div>
-    </div>
-</div>
+    </div>-->
+<!--</div>-->
 
 <!--left sidebar navigation-->
 <div class="container-fluid">
     <div class="row content">
-        <div class="navbar-left sidenav col-sm-1 hidden-xs"></div>
+        <!--<div class="navbar-left sidenav col-sm-1 hidden-xs"></div>-->
         <!--content goes here, included with ng-view-->
-        <div class="col-sm-10 text-left">
+        <div class="col-sm-12 text-left">
             <div ng-view></div>
         </div>
-        <div class="navbar-left sidenav col-sm-1 hidden-xs"></div>
+        <!--<div class="navbar-left sidenav col-sm-1 hidden-xs"></div>-->
     </div>
 
     <!--footer, hide footer on xsmall screen-->

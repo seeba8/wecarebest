@@ -1,17 +1,17 @@
 body {
-    padding-top: 70px;
+    padding-top: 60px;
     font-family: Montserrat, Arial, sans-serif;
 }
 
 /*change color of fixed navbar and links*/
-.navbar-fixed-top{
+/*.navbar-fixed-top{
     background-color: #428bca;
     color: white;
-    /*margin-left: 230px;*/
+    !*margin-left: 230px;*!
 }
 .navbar-fixed-top .navbar-text{
     color: white;
-    /*margin-left: 230px;*/
+    !*margin-left: 230px;*!
 }
 
 .navbar-fixed-top .navbar-nav li a {
@@ -24,7 +24,7 @@ body {
     color:white;
 }
 
-/*change color of static navbar and links*/
+!*change color of static navbar and links*!
 .navbar-static-top{
     background-color:#f1f1f1;
     color: white;
@@ -58,15 +58,15 @@ body {
     margin-top:25px;
 }
 
-/*adapt navbar part with logo*/
+!*adapt navbar part with logo*!
 .navbar-brand{
-    /*height:auto;*/
-    /*width: 230px;*/
-    /*margin-top:30px;*/
-    /*border-width: 7px;
+    !*height:auto;*!
+    !*width: 230px;*!
+    !*margin-top:30px;*!
+    !*border-width: 7px;
     border-style: solid;
-    border-color: white;*/
-    /*border-color: #428bca;*/
+    border-color: white;*!
+    !*border-color: #428bca;*!
     background-color: white;
     text-align: center;
     font-size: x-large;
@@ -76,13 +76,14 @@ body {
 .navbar-brand:hover{
     background-color:white !important;
 }
-/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-.row.content {
-    height: 500px;
-}
+!* Set height of the grid so .sidenav can be 100% (adjust as needed) *!
+
 
 .row.content a{
     color:black;
+}*/
+.row.content {
+    height: 570px;
 }
 
 /*BY MS Set Color of buttons on myoffers.html (bookings&requests) to white*/
@@ -96,12 +97,12 @@ a.btn {
 }
 
 /* Set gray background color and 100% height */
-.sidenav {
+/*.sidenav {
     padding: 20px;
-    /* background-color: #f1f1f1; */
+    !* background-color: #f1f1f1; *!
     height: 100%;
     color: black;
-}
+}*/
 
 
 /* Set black background color, white text and some padding */
@@ -117,7 +118,7 @@ footer a {
 
 /* On small screens, set height to 'auto' for sidenav and grid */
 
-@media (min-width: 768px) and (max-width: 991px) {
+/*@media (min-width: 768px) and (max-width: 991px) {
     .navbar-collapse.collapse {
         display: none !important;
     }
@@ -137,9 +138,9 @@ footer a {
     #logo{
         display: block;
     }
-/*    .col-sm-10{
+!*    .col-sm-10{
         width:auto;
-    }*/
+    }*!
 
 }
 
@@ -157,7 +158,7 @@ footer a {
         display: block;
     }
 
-}
+}*/
 
 /*BY MS: Colorgraph for dividing */
 .colorgraph {
@@ -186,4 +187,23 @@ footer a {
 
 .media-heading{
     line-height: 20px;
+}
+
+#subNav{
+    /*padding-top:50px;*/
+    margin-top:50px;
+    height: 20px;
+}
+
+#mainNav1{
+    background-color: #428bca;
+    color: white;
+}
+
+#mainNav1 li a {
+    color:white;
+}
+
+#mainNav1 li a:hover {
+    color:grey;
 }
