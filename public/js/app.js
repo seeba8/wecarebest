@@ -94,7 +94,7 @@ myApp.config(function($routeProvider) {
                 title: "Offer Service",
                 controller: "CreateOfferCtrl"
             })
-            .when('/about', { templateUrl: '../html/partials/about.html' })
+            .when('/about', { templateUrl: '../html/partials/home.html' })
             .when('/profile', { templateUrl: '../html/partials/profile.html' })
             .when('/login', {templateUrl: '../html/login.html'})
             .when('/addUser', {templateUrl: '../html/registration.html'})
@@ -103,7 +103,7 @@ myApp.config(function($routeProvider) {
             .when('/mybookingscareseeker', {templateUrl: '../html/mybookingscareseeker.html'})
             .when('/mybookingscaregiver', {templateUrl: '../html/mybookingscaregiver.html'})
             .when('/createRequest', {templateUrl: '../html/createRequest.html'})
-            .when('/contact', {templateUrl: '../html/partials/about.html'})
+            .when('/contact', {templateUrl: '../html/partials/home.html'})
             .when('/imprint', {templateUrl: '../html/partials/imprint.html'})
             .when('/terms', {templateUrl: '../html/partials/terms.html'})
             .otherwise({ redirectTo: '/'});
