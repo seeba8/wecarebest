@@ -13,7 +13,7 @@
     </div>
     <hr class="colorgraph">
 
-    <div class="row" style="margin-bottom: 30px;">
+    <div class="row" style="margin-bottom: 30px;" ng-repeat="booking in app.bookings | orderBy:'timestamp': app.recent">
         <div class="col sm-2">
             <div class="col-md-2 col-sm-2">
                 <img src="../images/clint.jpg" class="img-rounded img-responsive"  >
@@ -25,31 +25,41 @@
                     <ul class="list-group">
                         <h4 class="media-heading list-group-item-heading"
                             style="background-color: #2b669a;padding:10px;color:white;margin-bottom: 0px;">
-                            Amount of care: <i>Basic</i><br />
-                            Timeframe:<i> 01.01.2016 </i> until <i> 30.01.2016</i>
+                            Amount of care: <i>{{booking.typeofcare}}</i><br />
+                            Timeframe:<i> {{booking.starttime | datetime1}}</i> until <i> {{booking.endtime |
+                            datetime1}}</i>
                         </h4>
-                        <li class="list-group-item"><b>Repeating:</b> Weekly </li>
-                        <!--TODO show only weekdays with value == true-->
-                        <li  class="list-group-item" ><b>Days:</b>
-                            <span >Monday | Tuesday | </span>
+                        <li ng-show="booking.repeating == true" class="list-group-item"><b>Repeating:</b>
+                            {{booking.repeatoptions.frequency}}
                         </li>
-                        <li class="list-group-item"><b>Wage:</b> 12 € / h</li>
-                        <li class="list-group-item"><b>Location:</b> Teststraße. 16 - <b> 123456 Teststadt </b></li>
-                        <li class="list-group-item"><b>Notes:</b> Blablalbalabalbla</li>
-                        <li  class="list-group-item"><b>Last Activity:</b> 30.01.2016</li>
+                        <!--TODO show only weekdays with value == true-->
+                        <li ng-show="booking.repeating == true" class="list-group-item" ><b>Days:</b>
+                            <span ng-show="val == true" ng-repeat="(key,val) in booking.repeatoptions">{{key}}<span ng-show="!$last"> | </span></span>
+                        </li>
+                        <li class="list-group-item"><b>Location:</b> {{booking.location.city}} - <b>
+                            {{booking.location.postalCode}} {{booking.location.street}} </b></li>
+                        <li class="list-group-item"><b>Notes:</b> {{booking.notes}}</li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="col-sm-2">
             <p>Status: </br>
-            To be paid
+                <img ng-if="booking.status == 1" src="https://maxcdn.icons8.com/Color/PNG/96/Ecommerce/delivery-96.png" title="Delivery" width="96">
+                <img ng-if="booking.status == 2" src="https://maxcdn.icons8.com/Color/PNG/96/Finance/card_in_use-96.png" title="Card in Use" width="96">
+                <img ng-if="booking.status == 3 && booking.statustext == 'In the past'" src="https://maxcdn.icons8.com/Color/PNG/96/Very_Basic/lock-96.png" title="Lock" width="96">
+                <img ng-if="booking.status == 3 && booking.statustext == 'Ready'" src="https://maxcdn.icons8.com/Color/PNG/96/Very_Basic/ok-96.png" title="Ok" width="96">
+                <img ng-if="booking.status == 4" src="https://maxcdn.icons8.com/Color/PNG/96/Computer_Hardware/system_report-96.png" title="System Report" width="96">
+                </br>{{booking.statustext}}
             </p>
         </div>
         <div class="col-sm-2 col-md-2 pull-right">
-            <a href="#" class="btn btn-primary btn-success" style="min-width:80%;margin-top:10px;"><span class="glyphicon glyphicon-ok"></span> View</a>
-            <a href="" ng-click="deleteOffer(offerfinal._id, app.offerfinals.indexOf(offerfinal))" class="btn btn-danger" style="min-width:80%;margin-top:10px;"><span class="glyphicon glyphicon-remove-sign"></span> Delete</a>
-            <a href="" data-toggle="modal" data-target="#myModal"  ng-click="updateOffer(offerfinal, offerfinal.$index)" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;"><span class="glyphicon glyphicon-envelope"></span> Update</a>
+            <a href="" ng-click="payBooking(booking, booking.$index)" class="btn btn-primary btn-success" style="min-width:80%;margin-top:10px;" ng-if="booking.status == 2"><span class="glyphicon glyphicon-ok"></span> Pay</a>
+            <!--<a href="#" class="btn btn-primary btn-success" style="min-width:80%;margin-top:10px;" ng-if="booking.status == 2"><span class="glyphicon glyphicon-ok"></span> View</a>-->
+            <a href="" ng-click="cancelBooking(booking, booking.$index)" class="btn btn-danger" style="min-width:80%;margin-top:10px;" ng-if="booking.status==1 || booking.status==2"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</a>
+            <!--<a href="" data-toggle="modal" data-target="#myModal" ng-click="updateOffer(booking, booking.$index)" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;"><span class="glyphicon glyphicon-envelope"></span> {{button3.name}}</a>-->
+            <a href="#" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;" ><span class="glyphicon-envelope"></span> Contact</a>
+            <a href="#" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;" ><span class="glyphicon-envelope"></span> vIEW</a>
         </div>
 
     </div>

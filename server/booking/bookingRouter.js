@@ -32,7 +32,7 @@ function bookingRoutes(passport) {
     router.get('/mybookings', bookingController.getMyBookings);
 
     //changes the booking status in the database (of an existing object)
-    router.post('/ChangeBookingStatus', passport.authenticate('jwt', {session: false}, bookingController.postChangeBookingStatus));
+    router.post('/ChangeBookingStatus', bookingController.postChangeBookingStatus);
 
     //TODO: brauchen wir das?
     router.route("/landingpage")

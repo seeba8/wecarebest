@@ -140,7 +140,22 @@ module.exports.postMyBookings = function(req, res){
 };
 
 module.exports.postChangeBookingStatus = function(req, res) {
-    //update booking status to booking status from req.body
+    console.log("updateBooking aufgerufen!");
+    console.log(req.body);
+    var id = req.body._id;
+    var status = req.body.status;
+    var targetStatus = req.body.targetStatus;
+
+    Booking.findByIdAndUpdate(id, {status:targetStatus}, {new: true}, function(err){
+        if (err) {
+            console.log(err);
+            console.log("schade");
+            return;
+        } else {
+            console.log(status);
+            res.send();
+        }
+    });
 
 };
 
