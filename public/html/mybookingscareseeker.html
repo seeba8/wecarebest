@@ -1,5 +1,5 @@
 
-<div class="container" ng-controller="BookingCtrl as app">
+<div class="container" ng-controller="BookingCtrl as app" ng-init="initFirst()">
     <div class="row" >
         <div class="col-sm-6 col-md-6">
             <h4>My Bookings & Requests</h4>
@@ -13,7 +13,7 @@
     </div>
     <hr class="colorgraph">
 
-    <div class="row" style="margin-bottom: 30px;" ng-repeat="booking in app.bookings | orderBy:'timestamp': app.recent">
+    <div class="row" style="margin-bottom: 30px;" ng-repeat="booking in bookings | orderBy:'timestamp': app.recent">
         <div class="col sm-2">
             <div class="col-md-2 col-sm-2">
                 <img src="../images/clint.jpg" class="img-rounded img-responsive"  >
@@ -54,12 +54,12 @@
             </p>
         </div>
         <div class="col-sm-2 col-md-2 pull-right">
-            <a href="" ng-click="payBooking(booking, booking.$index)" class="btn btn-primary btn-success" style="min-width:80%;margin-top:10px;" ng-if="booking.status == 2"><span class="glyphicon glyphicon-ok"></span> Pay</a>
+            <a href="" ng-click="changeBookingStatus(booking, 3)" class="btn btn-primary btn-success" style="min-width:80%;margin-top:10px;" ng-if="booking.status == 2"><span class="glyphicon glyphicon-ok"></span> Pay</a>
             <!--<a href="#" class="btn btn-primary btn-success" style="min-width:80%;margin-top:10px;" ng-if="booking.status == 2"><span class="glyphicon glyphicon-ok"></span> View</a>-->
-            <a href="" ng-click="cancelBooking(booking, booking.$index)" class="btn btn-danger" style="min-width:80%;margin-top:10px;" ng-if="booking.status==1 || booking.status==2"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</a>
+            <a href="" ng-click="changeBookingStatus(booking, 4)" class="btn btn-danger" style="min-width:80%;margin-top:10px;" ng-if="booking.status==1 || booking.status==2"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</a>
             <!--<a href="" data-toggle="modal" data-target="#myModal" ng-click="updateOffer(booking, booking.$index)" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;"><span class="glyphicon glyphicon-envelope"></span> {{button3.name}}</a>-->
             <a href="#" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;" ><span class="glyphicon-envelope"></span> Contact</a>
-            <a href="#" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;" ><span class="glyphicon-envelope"></span> vIEW</a>
+            <a href="" ng-click="changeBookingStatus(booking, 2)" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;" ><span class="glyphicon-envelope"></span> vIEW</a>
         </div>
 
     </div>
