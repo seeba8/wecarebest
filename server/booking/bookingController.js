@@ -84,12 +84,13 @@ module.exports.getMyBookings = function(req, res) {
             console.log("find suitable offers to match bookings");
 
             console.log(offers);
-            myOffers = {};
+            myoffers = {};
             var arrayLength = offers.length;
             for (var i = 0; i < arrayLength; i++) {
                 myoffers[i].createdBy = offers[i].createdBy;
                 myoffers[i].id = offers[i].id;
             }
+            console.log(myoffers);
         })
     } else {
         //careseeker
