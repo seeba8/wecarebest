@@ -1,10 +1,10 @@
-<div class="container createoffer" ng-controller="CreateOfferCtrl as app">
+<div class="container createoffer" ng-controller="BookingCtrl as app">
     <h2>Request a caregiver</h2>
     <p>
         Insert your details.
     </p>
     <hr class="colorgraph">
-    <form name="Offer" role="form" ng-submit="submit()" novalidate>
+    <form name="Request" role="form" ng-submit="submit()" novalidate>
 
         <!--###############################################
             ########FORM INPUT FOR timefrarme ############
@@ -27,7 +27,7 @@
                         </span>
 
                 </div>
-                <div ng-if="interacted(Offer.startday)" ng-messages="Offer.startday.$error" role="alert">
+                <div ng-if="interacted(Request.startday)" ng-messages="Request.startday.$error" role="alert">
                     <div class="alert alert-danger" ng-message="required">
                         Please select the day of your offered services
                     </div>
@@ -52,7 +52,7 @@
                         </span>
                 </div>
 
-                <div ng-if="interacted(Offer.starttime)" ng-messages="Offer.starttime.$error" role="alert">
+                <div ng-if="interacted(Request.starttime)" ng-messages="Request.starttime.$error" role="alert">
                     <div class="alert alert-danger" ng-message="required">
                         Please select the start time of your offered services
                     </div>
@@ -77,7 +77,7 @@
 
                 </div>
 
-                <div ng-if="interacted(Offer.endtime)" ng-messages="Offer.endtime.$error" role="alert">
+                <div ng-if="interacted(Request.endtime)" ng-messages="Request.endtime.$error" role="alert">
                     <div class="alert alert-danger" ng-message="required">Please select the end time of your offered services</div>
                 </div>
             </div>
@@ -129,7 +129,7 @@
 
                         </div>
 
-                        <div ng-if="interacted(Offer.enddate)" ng-messages="Offer.enddate.$error" role="alert">
+                        <div ng-if="interacted(Request.enddate)" ng-messages="Request.enddate.$error" role="alert">
                             <div class="alert alert-danger" ng-message="required">Please select the time of your offered services</div>
                         </div>
                     </div>
@@ -343,7 +343,7 @@
                           id="notes"
                           ng-maxlength="800";
                           placeholder="Enter your additional notes regarding your booking and needs."></textarea>
-            <div ng-if="interacted(Offer.notes)" ng-messages="Offer.notes.$error" role="alert">
+            <div ng-if="interacted(Request.notes)" ng-messages="Request.notes.$error" role="alert">
                 <div class="alert alert-danger" ng-message="maxlength">Please explain your offer in less than 800 characters.</div>
             </div>
         </div>
