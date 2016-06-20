@@ -62,12 +62,13 @@ module.exports.getCreateRequest = function(req, res){
 };*/
 
 module.exports.getMyBookings = function(req, res) {
+    var resultingBookings = {};
     var secretOrKey = config.secret;
     console.log("in new function");
 
     conditions = {}; //empty conditions array
 
-    conditions["createdBy"] = "575ec188dcba0f71fd406ec9"; // direct match
+    //conditions["createdBy"] = "575ec188dcba0f71fd406ec9"; // direct match
 
     var token = req.headers.authorization;
     token = token.substr(4);
@@ -76,37 +77,46 @@ module.exports.getMyBookings = function(req, res) {
     console.log(decoded);
 
     var type = decoded.type;
+    var userid = decoded._id;
 
     if(type == 1) {
         //caregiver
         //got to look into offer table first to find match
-        Offer.find().exec(function(err, offers) {
+        var condOffers = {};
+        condOffers["createdBy"] = userid;
+        Offer.find(condOffers).exec(function(err, offers) {
             console.log("find suitable offers to match bookings");
 
-            console.log(offers);
-            myoffers = {};
             var arrayLength = offers.length;
             for (var i = 0; i < arrayLength; i++) {
-                myoffers[i].createdBy = offers[i].createdBy;
-                myoffers[i].id = offers[i].id;
+                console.log("find bookings matching the offer ids");
+                conditions["offer"] = offers[i].id;
+                //console.log(conditions);
+                Booking.find(conditions).exec(function (err, bookings) {
+                    console.log("print bookings for caregiver");
+                    console.log(bookings);
+                    resultingBookings += bookings;
+                    //resultingBookings.push(bookings);
+                    console.log(mybookings);
+                });
             }
-            console.log(myoffers);
         })
     } else {
         //careseeker
         //directly use _id tag
-        conditions["createdBy"] = decoded._id;
+        conditions["createdBy"] = userid;
+        Booking.find(conditions).exec(function (err, bookings) {
+            console.log("print bookings for careseeker");
+            //console.log(bookings);
+            resultingBookings += bookings;
+            console.log(resultingBookings);
+            //resultingBookings.push(bookings);
+        })
     }
 
-    var opts = {};
-
-    console.log(conditions);
-
-    Booking.find(conditions).exec(function (err, bookings) {
-        console.log("Booking find ausgeführt.");
-        //console.log(bookings);
-        res.send(bookings);
-    });
+    console.log("resulting bookings");
+    console.log(resultingBookings);
+    res.send(resultingBookings);
 };
 /*module.exports.getMyBookings = function(req, res){
     //depending on user type, send different files!

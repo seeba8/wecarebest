@@ -83,11 +83,11 @@ function userService($http, API, auth) {
 
 }
 
-var myApp = angular.module('myApp',['ngRoute','ui.bootstrap.showErrors', 'ngMessages',"uiGmapgoogle-maps", "countrySelect"]);
+var myApp = angular.module('myApp',['ngRoute','ui.bootstrap.showErrors', 'ngMessages',"uiGmapgoogle-maps", "countrySelect", "rzModule"]);
 myApp.config(function($routeProvider) {
         $routeProvider
             .when('/', { templateUrl: '../html/partials/home.html' })
-            .when('/search', { templateUrl: '../html/partials/search.html' })
+            .when('/search', { templateUrl: '../html/searchresults.html' })
             .when('/bookingsrequests', { templateUrl: '../html/myoffers.html' })
             .when('/offerservice', {
                 templateUrl: '../html/offerservice.html',
@@ -99,7 +99,7 @@ myApp.config(function($routeProvider) {
             .when('/login', {templateUrl: '../html/login.html'})
             .when('/addUser', {templateUrl: '../html/registration.html'})
             .when('/myoffers', {templateUrl: '../html/myoffers.html'})
-            .when('/singleOffer', {templateUrl: '../html/singleOffer.html'})
+            .when('/singleOffer/:offerid', {templateUrl: '../html/singleOffer.html'})
             .when('/mybookingscareseeker', {templateUrl: '../html/mybookingscareseeker.html'})
             .when('/mybookingscaregiver', {templateUrl: '../html/mybookingscaregiver.html'})
             .when('/createRequest', {templateUrl: '../html/createRequest.html'})
@@ -132,6 +132,7 @@ myApp.config(function (uiGmapGoogleMapApiProvider) {
 
 myApp.run(['$templateCache', function ($templateCache) {
     $templateCache.put('searchbox.tpl.html', '<input type="text" class="form-control" id="searchbox" name="supportedarea" ng-model="ngModel" ng-minlength="3" placeholder="Enter city" required>');
+    $templateCache.put('searchbox_searchctrl.tpl.html', '<input type="text" class="form-control" id="searchbox" name="searchbox_searchctrl" ng-model="ngModel" ng-minlength="3" placeholder="Enter city">');
     // onkeydown="if(event.keyCode == 13) {event.preventDefault(); event.stopPropagation();}"
 }]);
 
