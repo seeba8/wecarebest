@@ -226,3 +226,24 @@ hr{
 #offerbtn.btn.btn-default.btn-lg a{
     color: #428BCA !important;
 }*/
+
+
+
+/*BY MS DO NOT DELETE*/
+.mybookingscareseeker .bookingitem {
+    margin-bottom: 30px;
+    background-color:white;
+    border-bottom:2px solid #bfcad2;
+    border-top:1px solid #dbdadf;
+    padding:15px;
+    border-radius:10px;
+}
+
+.mybookingscareseeker .bookingitem .image {
+    padding: 0px;
+}
+
+.mybookingscareseeker .bookingitem .status {
+    text-align:center;
+}
+
