@@ -1,6 +1,7 @@
 body {
     padding-top: 60px;
     font-family: Montserrat, Arial, sans-serif;
+    background-color: lightgrey;
 }
 
 /*change color of fixed navbar and links*/
@@ -84,6 +85,10 @@ body {
 }*/
 .row.content {
     height: 570px;
+}
+
+#content{
+    background-color: white;
 }
 
 /*BY MS Set Color of buttons on myoffers.html (bookings&requests) to white*/
