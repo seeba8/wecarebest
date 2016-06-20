@@ -1,0 +1,114 @@
+<div class="container" ng-controller="SearchCtrl as app">
+    <link rel="stylesheet" href="../css/offerservice.css">
+    <pre>{{searchParams}}</pre>
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <form ng-submit="app.search()">
+                <!--<div class="form-group col-sm-4 col-xs-4">
+                    <label class="row">Location
+                        <input type="text" ng-model="searchParams.locationname" placeholder="Location"/>
+                    </label>
+                </div>-->
+                <div class="form-group col-sm-4 col-xs-4">
+                    <label>Price
+                        <rzslider
+                                style="width: 500px"
+                                rz-slider-model="searchParams.priceMin"
+                                rz-slider-high="searchParams.priceMax"
+                                rz-slider-options="slider.options"></rzslider>
+                    </label>
+                </div>
+                <div class="form-group col-sm-12 col-xs-12">
+                    <select ng-model="searchParams.typeofcare"
+                            ng-options="typeofcare for typeofcare in typeofcares"
+                            type="text"
+                            class="form-control"
+                            id="typeofcare"
+                            name="typeofcare"
+                            placeholder="Basic">
+                        <option ng-show="true" value="">- Please Choose -</option>
+                    </select>
+
+                </div>
+                <div class="form-group col-sm-12 col-xs-12">
+                    <div>
+                        <label for="searchbox">Supported area</label>
+                        <div id="searchBoxParent">
+                            <!--<input type="text" class="form-control" id="searchbox" placeholder="Enter supported area">-->
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-12 col-xs-12">
+                    <div class="form-group div-wrapper" data-tap-disabled="true">
+                        <ui-gmap-google-map id="gmap" center='map.center' zoom='map.zoom' events="map.events"
+                                            options="map.options">
+                            <ui-gmap-search-box
+                                    template='search.template'
+                                    events='search.events'
+                                    position='search.position'
+                                    parentdiv='search.parentDiv'
+                                    ng-model="searchParams.locationname"
+                                    options='search.options'>
+                            </ui-gmap-search-box>
+                            <ui-gmap-marker
+                                    idKey='123'
+                                    coords='marker.coords'
+                                    options='marker.options'
+                                    events="marker.events">
+                            </ui-gmap-marker>
+                        </ui-gmap-google-map>
+
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-12 col-xs-12">
+                    <button type="submit">Search</button>
+                </div>
+            </form>
+        </div>
+        <div id="results">
+            <div class="row" ng-repeat="result in results" style="margin-bottom: 30px;">
+                <div class="col sm-2">
+                    <div class="col-md-2 col-sm-2">
+                        <img src="../images/clint.jpg" class="img-rounded img-responsive">
+                    </div>
+                </div>
+                <div class="col-sm-7 col-md-7">
+                    <div class="media">
+                        <div class="media-body">
+                            <ul class="list-group">
+                                <h4 class="media-heading list-group-item-heading"
+                                    style="background-color: #2b669a;padding:10px;color:white;margin-bottom: 0px;">
+                                    Amount of care: <i>{{result.offer.typeofcare}}</i><br/>
+                                    Timeframe:
+                                    <span ng-show="!result.offer.repeating">
+                                        {{result.offer.startday}},
+                                    </span>
+                                    <i>{{result.offer.starttime}}</i> &mdash; <i>{{result.offer.endtime}}</i>
+
+                                </h4>
+                                <li ng-show="result.offer.repeating == true" class="list-group-item">
+                                    <b>Repeating:</b> {{result.offer.repeatoptions.frequency}} between {{result.offer.startday}} and {{result.offer.endday}}
+                                </li>
+                                <li ng-show="result.offer.repeating == true" class="list-group-item"><b>Days:</b>
+                                    <span ng-show="val == true"
+                                          ng-repeat="(key,val) in result.offer.repeatoptions">{{key}}<span
+                                            ng-show="!$last"> | </span></span>
+                                </li>
+                                <li class="list-group-item"><b>Wage:</b> {{result.offer.wageperhour}}&euro; / h</li>
+                                <li class="list-group-item"><b>Notes:</b> {{result.offer.notes}}</li>
+                                <li class="list-group-item"><b>Last Activity:</b>@Marci: Was meint das?</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 pull-right">
+                    <a href="/#/singleOffer/{{result.offer._id}}" class="btn btn-primary btn-success" style="min-width:80%;margin-top:10px;"><span
+                            class="glyphicon glyphicon-ok"></span> View</a>
+                    <a ng-click="" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;">
+                        <span class="glyphicon glyphicon-envelope"></span> Book</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
