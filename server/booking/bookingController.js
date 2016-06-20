@@ -10,7 +10,7 @@ var path = require('path');
 console.log("bookingController File geladen.");
 
 //export so it can be invoked in offerRoutes
-module.exports.postCreateRequest = function(req, res){
+/*module.exports.postCreateRequest = function(req, res){
     //get content of req
     var date = req.body.createdDate;
     var startday = req.body.startday;
@@ -52,9 +52,18 @@ module.exports.postCreateRequest = function(req, res){
 
 module.exports.getCreateRequest = function(req, res){
     res.sendFile("/html/createRequest.html", { root: path.join(__dirname, '/../../public') });
-};
+};*/
 
-module.exports.getMyBookings = function(req, res){
+module.exports.getMyBookings = function(req, res) {
+    console.log("in new function");
+    console.log("req: " + req + "res: " + res);
+    Booking.find(function(err, bookings){
+        console.log("Booking find ausgeführt.");
+        //console.log(bookings);
+        res.send(bookings);
+    })
+};
+/*module.exports.getMyBookings = function(req, res){
     //depending on user type, send different files!
     console.log("res" + res + "req" + req);
     usertype = 2; //TODO: read from database depending on current user object
@@ -71,7 +80,7 @@ module.exports.getMyBookings = function(req, res){
             res.send(bookings);
         })
     }
-};
+};*/
 
 module.exports.postMyBookings = function(req, res){
     //depending on user type, send different files!

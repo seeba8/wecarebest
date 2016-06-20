@@ -6,6 +6,7 @@
 // Load Schema of Offer
 var Offer = require('./offerSchema');
 var path = require('path');
+var User = require('../users/structure.js');
 
 //For debugging purposes
 console.log("offerController File geladen.");
@@ -142,13 +143,41 @@ module.exports.getOffers = function (req, res) {
                 }
                 conditions["wageperhour"].$lt = searchParams[param];
                 break;
+            case "_id":
+                conditions["_id"] = searchParams[param];
+                break;
         }
 
     }
     console.log("Search params: ", conditions);
     Offer.find(conditions).limit(25).exec(function (err, results) {
-        console.log("Results: ", results.length);
-        res.send(results);
+        var send = [];
+        userids = [];
+        for (x in results) {
+            send.push({"offer": results[x]});
+            userids.push(results[x].createdBy || "5759bd3581b11d042b6cf54e");
+            if(typeof results[x].createdBy === "undefined"){
+                send[send.length -1].offer.createdBy = "5759bd3581b11d042b6cf54e";
+            }
+        }
+        User.find({'_id': {$in: userids}}, function (err, users) {
+            console.log(users);
+            usersorted = {};
+            for(user in users){
+                if(typeof users[user]._id !== "undefined"){
+                    usersorted[users[user]._id] = users[user];
+                }
+            }
+            for(x in send){
+                currUser = usersorted[send[x].offer.createdBy];
+                send[x].user = {
+                    firstname: currUser.firstName,
+                    lastname: currUser.name
+            };
+            }
+            console.log(send);
+            res.send(send);
+        });
     });
 };
 
