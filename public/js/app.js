@@ -99,7 +99,7 @@ myApp.config(function($routeProvider) {
             .when('/login', {templateUrl: '../html/login.html'})
             .when('/addUser', {templateUrl: '../html/registration.html'})
             .when('/myoffers', {templateUrl: '../html/myoffers.html'})
-            .when('/singleOffer', {templateUrl: '../html/singleOffer.html'})
+            .when('/singleOffer/:offerid', {templateUrl: '../html/singleOffer.html'})
             .when('/mybookingscareseeker', {templateUrl: '../html/mybookingscareseeker.html'})
             .when('/mybookingscaregiver', {templateUrl: '../html/mybookingscaregiver.html'})
             .when('/createRequest', {templateUrl: '../html/createRequest.html'})

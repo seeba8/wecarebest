@@ -79,31 +79,31 @@
                             <ul class="list-group">
                                 <h4 class="media-heading list-group-item-heading"
                                     style="background-color: #2b669a;padding:10px;color:white;margin-bottom: 0px;">
-                                    Amount of care: <i>{{result.typeofcare}}</i><br/>
+                                    Amount of care: <i>{{result.offer.typeofcare}}</i><br/>
                                     Timeframe:
-                                    <span ng-show="!result.repeating">
-                                        {{result.startday}},
+                                    <span ng-show="!result.offer.repeating">
+                                        {{result.offer.startday}},
                                     </span>
-                                    <i>{{result.starttime}}</i> &mdash; <i>{{result.endtime}}</i>
+                                    <i>{{result.offer.starttime}}</i> &mdash; <i>{{result.offer.endtime}}</i>
 
                                 </h4>
-                                <li ng-show="result.repeating == true" class="list-group-item">
-                                    <b>Repeating:</b> {{result.repeatoptions.frequency}} between {{result.startday}} and {{result.endday}}
+                                <li ng-show="result.offer.repeating == true" class="list-group-item">
+                                    <b>Repeating:</b> {{result.offer.repeatoptions.frequency}} between {{result.offer.startday}} and {{result.offer.endday}}
                                 </li>
-                                <li ng-show="result.repeating == true" class="list-group-item"><b>Days:</b>
+                                <li ng-show="result.offer.repeating == true" class="list-group-item"><b>Days:</b>
                                     <span ng-show="val == true"
-                                          ng-repeat="(key,val) in result.repeatoptions">{{key}}<span
+                                          ng-repeat="(key,val) in result.offer.repeatoptions">{{key}}<span
                                             ng-show="!$last"> | </span></span>
                                 </li>
-                                <li class="list-group-item"><b>Wage:</b> {{result.wageperhour}}&euro; / h</li>
-                                <li class="list-group-item"><b>Notes:</b> {{result.notes}}</li>
+                                <li class="list-group-item"><b>Wage:</b> {{result.offer.wageperhour}}&euro; / h</li>
+                                <li class="list-group-item"><b>Notes:</b> {{result.offer.notes}}</li>
                                 <li class="list-group-item"><b>Last Activity:</b>@Marci: Was meint das?</li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-3 col-md-3 pull-right">
-                    <a class="btn btn-primary btn-success" style="min-width:80%;margin-top:10px;"><span
+                    <a href="/#/singleOffer/{{result.offer._id}}" class="btn btn-primary btn-success" style="min-width:80%;margin-top:10px;"><span
                             class="glyphicon glyphicon-ok"></span> View</a>
                     <a ng-click="" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;">
                         <span class="glyphicon glyphicon-envelope"></span> Book</a>
