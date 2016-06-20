@@ -62,6 +62,7 @@ module.exports.getCreateRequest = function(req, res){
 };*/
 
 module.exports.getMyBookings = function(req, res) {
+    var resultingBookings = {};
     var secretOrKey = config.secret;
     console.log("in new function");
 
@@ -86,19 +87,16 @@ module.exports.getMyBookings = function(req, res) {
         Offer.find(condOffers).exec(function(err, offers) {
             console.log("find suitable offers to match bookings");
 
-            //console.log(offers);
-
-            var mybookings = {};
-            myoffers = {};
             var arrayLength = offers.length;
             for (var i = 0; i < arrayLength; i++) {
-                //myoffers[i] = {createdBy : offers[i].createdBy, id : offers[i].id};
                 console.log("find bookings matching the offer ids");
                 conditions["offer"] = offers[i].id;
-                console.log(conditions);
+                //console.log(conditions);
                 Booking.find(conditions).exec(function (err, bookings) {
+                    console.log("print bookings for caregiver");
                     console.log(bookings);
-                    mybookings.push(bookings);
+                    resultingBookings += bookings;
+                    //resultingBookings.push(bookings);
                     console.log(mybookings);
                 });
             }
@@ -106,18 +104,19 @@ module.exports.getMyBookings = function(req, res) {
     } else {
         //careseeker
         //directly use _id tag
-        conditions["createdBy"] = decoded._id;
+        conditions["createdBy"] = userid;
+        Booking.find(conditions).exec(function (err, bookings) {
+            console.log("print bookings for careseeker");
+            //console.log(bookings);
+            resultingBookings += bookings;
+            console.log(resultingBookings);
+            //resultingBookings.push(bookings);
+        })
     }
 
-    var opts = {};
-
-    console.log(conditions);
-
-    Booking.find(conditions).exec(function (err, bookings) {
-        console.log("Booking find ausgeführt.");
-        //console.log(bookings);
-        res.send(bookings);
-    });
+    console.log("resulting bookings");
+    console.log(resultingBookings);
+    res.send(resultingBookings);
 };
 /*module.exports.getMyBookings = function(req, res){
     //depending on user type, send different files!
