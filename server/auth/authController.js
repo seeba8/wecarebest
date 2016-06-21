@@ -60,21 +60,30 @@ module.exports.putUser = function(req,res){
     var decoded = jwt.decode(token, passportConfig.secret);
     var userid = decoded._id;
     imageBuffer = decodeBase64Image(req.body.picture);
-    var filetype=".png";
+    var filetype="";
+    if(imageBuffer.type == "image/png"){
+        filetype = ".png";
+    }
     if(imageBuffer.type == "image/gif"){
         filetype=".gif";
     }
     else if(imageBuffer.type == "image/jpg" || imageBuffer.type == "image/jpeg") {
         filetype = ".jpg";
     }
-    require("fs").writeFile("./../public/images/users/" + userid + filetype, imageBuffer.data, function(err) {
-        if(err) console.log(err);
-    });
-    User.update({_id: userid}, {picture: "/images/users/" + userid + filetype}, {}, function(test) {
-        if(!test) {
-            res.status(200).send();
-        }
-    });
+    if(filetype != ""){
+        require("fs").writeFile("./../public/images/users/" + userid + filetype, imageBuffer.data, function(err) {
+            if(err) console.log(err);
+        });
+        User.update({_id: userid}, {picture: "/images/users/" + userid + filetype}, {}, function(test) {
+            if(!test) {
+                res.status(200).send();
+            }
+        });
+    }
+    else{
+        res.status(400).send();
+    }
+
 };
 
 module.exports.postRegister = function(req, res) {
