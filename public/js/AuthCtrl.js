@@ -15,6 +15,9 @@ angular.module("myApp")
                 loadProducts();
             })
         };*/
+        app.getFirstName = function(){
+            return auth.parseJwt(auth.getToken()).firstName;
+        };
 
         app.isAuthed = function() {
             return auth.isAuthed ? auth.isAuthed() : false
