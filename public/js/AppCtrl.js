@@ -14,7 +14,9 @@ angular.module("myApp").controller("AppCtrl",["$scope", "$http", "$window", func
             r = new FileReader();
         r.onloadend = function(e) {
             var data = e.target.result;
-            $http.put("/users", {picture: data});
+            $http.put("/users", {picture: data}).success(function(res){
+                $window.location = "/";
+            });
         };
         r.readAsDataURL(f);
     }

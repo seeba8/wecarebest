@@ -68,10 +68,12 @@ module.exports.putUser = function(req,res){
         filetype = ".jpg";
     }
     require("fs").writeFile("./../public/images/users/" + userid + filetype, imageBuffer.data, function(err) {
-        console.log(err);
+        if(err) console.log(err);
     });
     User.update({_id: userid}, {picture: "/images/users/" + userid + filetype}, {}, function(test) {
-        console.log(test);
+        if(!test) {
+            res.status(200).send();
+        }
     });
 };
 
