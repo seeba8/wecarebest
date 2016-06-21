@@ -55,8 +55,7 @@
                                    id="startday"
                                    name="startday"
                                    placeholder="Enter Date"
-                                   minlength="6"
-                                   required/>
+                                   minlength="6"/>
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"
                                       onclick="$('.startdaypicker').data('DateTimePicker').show();"></span>
@@ -72,8 +71,7 @@
                                    id="starttime"
                                    name="starttime"
                                    placeholder="Enter Time"
-                                   minlength="4"
-                                   required/>
+                                   minlength="4"/>
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-time"
                                       onclick="$('.starttimepicker').data('DateTimePicker').show();"></span>
@@ -88,8 +86,7 @@
                                    class="endtimepicker form-control"
                                    id="endtime"
                                    name="endtime"
-                                   placeholder="Enter Time"
-                                   required/>
+                                   placeholder="Enter Time"/>
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-time"
                                       onclick="$('.endtimepicker').data('DateTimePicker').show();"></span>
@@ -142,12 +139,12 @@
         </div>
 
         <div class="form-group col-sm-12 col-xs-12">
-            <button type="submit" ng-click="app.search()" class="btn btn-success">Search</button>
+            <button type="submit" class="btn btn-success">Search</button>
             <button type="reset" class="btn btn-danger" ng-click="app.reset()">Reset</button>
         </div>
         </form>
     </div>
-    <div id="results">
+    <div class="row" id="results">
         <div class="row" ng-repeat="result in results" style="margin-bottom: 30px;">
             <div class="col sm-2">
                 <div class="col-md-2 col-sm-2">
