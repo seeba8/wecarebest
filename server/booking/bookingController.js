@@ -34,6 +34,7 @@ module.exports.getMyBookings = function(req, res) {
     var type = decoded.type;
     var userid = decoded._id;
 
+    //Get Offers and according bookings. 
     var getBookings = function(callback) {
         //caregiver
         //got to look into offer table first to find match
@@ -69,7 +70,7 @@ module.exports.getMyBookings = function(req, res) {
         })
     }
 
-
+    //Send Bookings by HTTP 
     var sendBookings = function(data){
         console.log("3: Send Caregiver Bookings Data.");
         res.send(data);
@@ -79,6 +80,7 @@ module.exports.getMyBookings = function(req, res) {
 
 
     if(type == 1) {
+        //Invoke function.
         getBookings(sendBookings);
 
         // //caregiver
