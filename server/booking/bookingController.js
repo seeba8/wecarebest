@@ -62,7 +62,7 @@ module.exports.getCreateRequest = function(req, res){
 };*/
 
 module.exports.getMyBookings = function(req, res) {
-    var resultingBookings = {};
+    var resultingBookings = [];
     var secretOrKey = config.secret;
     console.log("in new function");
 
@@ -94,11 +94,14 @@ module.exports.getMyBookings = function(req, res) {
                 //console.log(conditions);
                 Booking.find(conditions, function (err, bookings) {
                     console.log("print bookings for caregiver");
-                    //console.log(bookings);
-                    resultingBookings += bookings;
-                    //resultingBookings.push(bookings);
+                    console.log(bookings);
+                    //resultingBookings += bookings;
+                    resultingBookings.push(bookings);
                 });
             }
+            console.log("resulting bookings for type caregiver");
+            console.log(resultingBookings);
+            res.send(resultingBookings);
         })
     } else {
         //careseeker
@@ -108,12 +111,12 @@ module.exports.getMyBookings = function(req, res) {
         Booking.find(conditions, function (err, bookings) {
             console.log("print bookings for careseeker");
             console.log(bookings);
-            resultingBookings += bookings;
+            //resultingBookings += bookings;
+            resultingBookings.push(bookings);
             console.log("resulting bookings");
             console.log(resultingBookings);
-            res.send(resultingBookings);
+            res.send(bookings);
             //console.log(resultingBookings);
-            //resultingBookings.push(bookings);
         })
     }
 
