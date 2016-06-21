@@ -92,12 +92,11 @@ module.exports.getMyBookings = function(req, res) {
                 console.log("find bookings matching the offer ids");
                 conditions["offer"] = offers[i].id;
                 //console.log(conditions);
-                Booking.find(conditions).exec(function (err, bookings) {
+                Booking.find(conditions, function (err, bookings) {
                     console.log("print bookings for caregiver");
-                    console.log(bookings);
+                    //console.log(bookings);
                     resultingBookings += bookings;
                     //resultingBookings.push(bookings);
-                    console.log(mybookings);
                 });
             }
         })
@@ -105,18 +104,22 @@ module.exports.getMyBookings = function(req, res) {
         //careseeker
         //directly use _id tag
         conditions["createdBy"] = userid;
-        Booking.find(conditions).exec(function (err, bookings) {
+        console.log(conditions);
+        Booking.find(conditions, function (err, bookings) {
             console.log("print bookings for careseeker");
-            //console.log(bookings);
+            console.log(bookings);
             resultingBookings += bookings;
+            console.log("resulting bookings");
             console.log(resultingBookings);
+            res.send(resultingBookings);
+            //console.log(resultingBookings);
             //resultingBookings.push(bookings);
         })
     }
 
-    console.log("resulting bookings");
-    console.log(resultingBookings);
-    res.send(resultingBookings);
+    //console.log("resulting bookings");
+    //console.log(resultingBookings);
+    //res.send(resultingBookings);
 };
 /*module.exports.getMyBookings = function(req, res){
     //depending on user type, send different files!
