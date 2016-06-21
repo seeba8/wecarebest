@@ -40,6 +40,17 @@ angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$ht
         });
     };
 
+    function gotoBottom ($scope, $location, $anchorScroll) {
+        $scope.gotoBottom = function() {
+            // set the location.hash to the id of
+            // the element you wish to scroll to.
+            $location.hash('results');
+
+            // call $anchorScroll()
+            $anchorScroll();
+        };
+    }
+
     $(function () {
         $('.startdaypicker').datetimepicker({
             format: "L",
@@ -219,4 +230,6 @@ angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$ht
         'Saturday',
         'Sunday'
     ];
+
+
 }]);
