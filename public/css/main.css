@@ -247,3 +247,6 @@ hr{
     text-align:center;
 }
 
+.mybookingscareseeker .bookingitem .btn-success {
+    background-color: #5cb85c;
+}
