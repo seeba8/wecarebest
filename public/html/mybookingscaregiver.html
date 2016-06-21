@@ -16,13 +16,15 @@
     <div class="row bookingitem"  ng-repeat="booking in bookings | orderBy:'timestamp': app.recent">
         <div class="col-md-2 col-sm-2 image">
             <img src="../images/clint.jpg" class="img-rounded img-responsive"  >
+            Careseeker: {{booking.user.firstName}} {{booking.user.name}}
         </div>
         <div class="col-sm-6 col-md-6">
             <div class="media">
                 <div class="media-body">
                     <ul class="list-group">
                         <h4 class="media-heading list-group-item-heading">
-                            <h3 style="margin-top:0px;">Amount of care: <i>TODO</i><br /></h3>
+                            <h3 style="margin-top:0px;">Careseeker: {{booking.user.firstName}} {{booking.user.name}}<br /></h3>
+                            Offer: {{booking.offer}}</br>
                             <img src="https://maxcdn.icons8.com/Color/PNG/24/Time_And_Date/calendar-24.png" title="Calendar" width="24">
                             {{booking.starttime | datetime1}}
                             </br><img src="https://maxcdn.icons8.com/Color/PNG/24/Time_And_Date/tear_off_calendar-24.png" title="Tear Off Calendar" width="24">

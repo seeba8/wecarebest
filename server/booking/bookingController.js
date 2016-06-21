@@ -5,6 +5,7 @@
 // Load Schema of Booking and Offer
 var Booking = require('./bookingSchema');
 var Offer = require('../requests_offers/offerSchema');
+var User = require('../users/structure');
 var path = require('path');
 var jwt = require('jwt-simple');
 var ExtractJwt = require('passport-jwt').ExtractJwt;
@@ -49,16 +50,45 @@ module.exports.getMyBookings = function(req, res) {
              for(var i=0; i < offers.length; i++){
                  console.log("offer: " + offers[i]._id);
                  offersarr.push(offers[i]._id);
-
              }
 
             console.log(offersarr);
 
             Booking.find({'offer': {$in: offersarr}}, function(err, bookings){
-                console.log("2: Print bookings for caregiver");
-                //console.log(bookings[0]);
-                resultingBookings = bookings;
-                callback(resultingBookings);
+
+                var b;
+                var u;
+                var bookingsusersarr = [];
+                var result = [];
+                for(var i=0; i < bookings.length; i++){
+                    console.log("bookings: " + bookings[i].createdBy);
+                    bookingsusersarr.push( bookings[i].createdBy);
+                }
+
+                User.find({'_id': {$in: bookingsusersarr}}, function(err, users){
+                    console.log(users[0]);
+                    for(booking in bookings){
+                        for(user in users){
+                            if(bookings[booking].createdBy == users[user]._id){
+                                //console.log(bookings[booking]._id + " und " + users[user]._id );
+                                b = bookings[booking];
+                                u = users[user];
+                                console.log(booking);
+                                //console.log(b);
+                                //console.log(u);
+                                result.push({booking:b, user:u});
+                                console.log(result[0]);
+                            }
+                        }
+                    }
+
+                    console.log("2: Print bookings for caregiver");
+                    //console.log(bookings[0]);
+                    resultingBookings = result;
+                    callback(resultingBookings);
+
+
+                });
              })
 
 
