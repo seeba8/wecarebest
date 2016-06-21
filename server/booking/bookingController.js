@@ -34,32 +34,82 @@ module.exports.getMyBookings = function(req, res) {
     var type = decoded.type;
     var userid = decoded._id;
 
-    if(type == 1) {
+    //Get Offers and according bookings. 
+    var getBookings = function(callback) {
         //caregiver
         //got to look into offer table first to find match
         console.log("Type 1");
         var condOffers = {};
-        condOffers["createdBy"] = userid;
+        //ondOffers["createdBy"] = userid;
         console.log(condOffers);
-        Offer.find(condOffers, function(err, offers) {
-            console.log("find suitable offers to match bookings");
+        Offer.find({'createdBy': {$in: userid}}, function(err, offers) {
+            console.log("1: Find suitable offers to match bookings");
 
-            var arrayLength = offers.length;
-            for (var i = 0; i < arrayLength; i++) {
-                console.log("find bookings matching the offer ids");
-                conditions["offer"] = offers[i].id;
-                //console.log(conditions);
-                Booking.find(conditions, function (err, bookings) {
-                    console.log("print bookings for caregiver");
-                    console.log(bookings);
-                    //resultingBookings += bookings;
-                    resultingBookings.push(bookings);
-                });
-            }
-            console.log("resulting bookings for type caregiver");
-            console.log(resultingBookings);
-            res.send(resultingBookings);
+            var offersarr =[];
+             for(var i=0; i < offers.length; i++){
+                 console.log("offer: " + offers[i]._id);
+                 offersarr.push(offers[i]._id);
+
+             }
+
+            console.log(offersarr);
+
+            Booking.find({'offer': {$in: offersarr}}, function(err, bookings){
+                console.log("2: Print bookings for caregiver");
+                //console.log(bookings[0]);
+                resultingBookings = bookings;
+                callback(resultingBookings);
+             })
+
+
+            // var arrayLength = offers.length;
+            // thingwithcallback(arrayLength,offers,function(bookings, callback){
+            //     resultingBookings.push(bookings);
+            // });
+            //console.log("5");
         })
+    }
+
+    //Send Bookings by HTTP 
+    var sendBookings = function(data){
+        console.log("3: Send Caregiver Bookings Data.");
+        res.send(data);
+        //console.log("Final: " + data);
+    }
+
+
+
+    if(type == 1) {
+        //Invoke function.
+        getBookings(sendBookings);
+
+        // //caregiver
+        // //got to look into offer table first to find match
+        // console.log("Type 1");
+        // var condOffers = {};
+        // condOffers["createdBy"] = userid;
+        // console.log(condOffers);
+        // Offer.find(condOffers, function(err, offers) {
+        //     console.log("find suitable offers to match bookings");
+        //     console.log("offer: " + offers);
+        //
+        //     var arrayLength = offers.length;
+        //     for (var i = 0; i < arrayLength; i++) {
+        //         console.log("find bookings matching the offer ids");
+        //         conditions["offer"] = offers[i].id;
+        //         //console.log(conditions);
+        //         Booking.find(conditions, function (err, bookings) {
+        //             console.log("print bookings for caregiver");
+        //             //console.log(bookings);
+        //             //resultingBookings += bookings;
+        //             resultingBookings.push(bookings);
+        //             console.log("resulting bookings " + i +" : " + resultingBookings);
+        //         });
+        //     }
+        //     console.log("resulting bookings for type caregiver");
+        //     console.log("Final: " + resultingBookings);
+        //     res.send(resultingBookings);
+        // })
     } else {
         //careseeker
         //directly use _id tag
