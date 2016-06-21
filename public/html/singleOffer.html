@@ -1,11 +1,12 @@
+<link rel="stylesheet" href="../css/offerservice.css">
 <div class="container" ng-controller="SearchCtrl as app">
     <div class="row">
         <div class="col-sm-6 col-md-6">
-            <h4>My Bookings & Requests</h4>
+            <h2>{{results[0].user.firstname}} {{results[0].user.lastname}}</h2>
         </div>
     </div>
     <hr class="colorgraph">
-    <row>
+    <div class="row">
         <div class="col-md-2 col-sm-2">
             <img src="../images/clint.jpg" class="img-rounded img-responsive">
         </div>
@@ -20,30 +21,51 @@
                     class="glyphicon glyphicon-ok"></span> Book</a>
             <a href="" data-toggle="modal" data-target="#myModal" ng-click="updateOffer(offerfinal, offerfinal.$index)"
                class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;"><span
-                    class="glyphicon glyphicon-envelope"></span> Rate</a>
+                    class="glyphicon glyphicon-star-empty"></span> Rate</a>
 
         </div>
-    </row>
+    </div>
 
 
-    <row>
+    <div class="row">
         <div class="col-md-offset-2 col-md-10 well">
             {{results[0].offer.notes}}
         </div>
-    </row>
-    <row>
+    </div>
+
+    <div class="row">
+        <div class="col-md-offset-2 col-md-10 well">
+            <div class="form-group div-wrapper" data-tap-disabled="true">
+                <ui-gmap-google-map id="gmap" center='map.center' zoom='map.zoom' options="map.options">
+
+                    <ui-gmap-circle center='circle.center'
+                                    radius='circle.radius'
+                                    fill='circle.fill'
+                                    stroke='circle.stroke'
+                                    clickable='false'
+                                    draggable='false'
+                                    editable='false'
+                                    visible='true'
+                                    control="circle.control">
+
+                    </ui-gmap-circle>
+                </ui-gmap-google-map>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-offset-2 col-md-10 well">
             ...4x Overall Rating Bewertung...
         </div>
-    </row>
-    <row>
+    </div>
+    <div class="row">
         <div class="col-md-2">
             Sternchen
         </div>
         <div class="col-md-10">
             Sternchen Text
         </div>
-    </row>
+    </div>
 
 
 </div>
