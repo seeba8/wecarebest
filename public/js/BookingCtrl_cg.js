@@ -2,7 +2,7 @@
  * Created by Layla M on 20.06.2016.
  */
 angular.module("myApp")
-    .controller("BookingCtrl", ["$scope", "$http", "$window", "user", "auth", function ($scope, $http, $window, user, auth) {
+    .controller("BookingCtrl_cg", ["$scope", "$http", "$window", "user", "auth", function ($scope, $http, $window, user, auth) {
 
         // var app = this;
         // var url = 'http://localhost:3000';
