@@ -8,7 +8,7 @@
     <hr class="colorgraph">
     <div class="row">
         <div class="col-md-2 col-sm-2">
-            <img src="../images/clint.jpg" class="img-rounded img-responsive">
+            <img id="caregiverimg" src="../images/clint.jpg" class="img-rounded img-responsive">
         </div>
         <div class="col-md-8 col-sm-12">
             <p>Name: {{results[0].user.firstname}} {{results[0].user.lastname}} </br>
@@ -17,11 +17,10 @@
             </p>
         </div>
         <div class="col-md-2 col-sm-9">
-            <a href="#" class="btn btn-primary btn-success" style="min-width:80%;margin-top:10px;"><span
+            <a onclick="alert('This is not the droid you\'re looking for.')" class="btn btn-primary btn-success" style="min-width:80%;margin-top:10px;"><span
                     class="glyphicon glyphicon-ok"></span> Book</a>
-            <a href="" data-toggle="modal" data-target="#myModal" ng-click="updateOffer(offerfinal, offerfinal.$index)"
-               class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;"><span
-                    class="glyphicon glyphicon-star-empty"></span> Rate</a>
+            <a onclick="alert('I\'m sorry Dave, I\'m afraid I can\'t do that.')" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;">
+                <span class="glyphicon glyphicon-star-empty"></span> Rate</a>
 
         </div>
     </div>

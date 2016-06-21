@@ -172,7 +172,8 @@ module.exports.getOffers = function (req, res) {
                 currUser = usersorted[send[x].offer.createdBy];
                 send[x].user = {
                     firstname: currUser.firstName,
-                    lastname: currUser.name
+                    lastname: currUser.name,
+                    picture: currUser.picture.data
             };
             }
             console.log(send);

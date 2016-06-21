@@ -27,12 +27,14 @@ angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$ht
                 offer.starttime = moment(offer.starttime).format("LT");
                 offer.endtime = moment(offer.endtime).format("LT");
                 offer.endday = offer.repeating ? moment(offer.endday).format("L") : "";
+                offers[offerID].user.picture = offers[offerID].user.picture || "../images/clint.jpg"
             }
             $scope.results = offers;
             if(isSingleOffer){
                 $scope.map.center = $scope.results[0].offer.location;
                 $scope.circle.center = $scope.results[0].offer.location;
                 $scope.circle.radius = $scope.results[0].offer.location.radius;
+                $('#caregiverimg').attr("src", $scope.results[0].user.picture);
             }
         });
     };
@@ -185,12 +187,12 @@ angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$ht
     };
     $scope.circle = {
         stroke: {
-            color: '#08B21F',
+            color: '#428BCA',
             weight: 2,
             opacity: 1
         },
         fill: {
-            color: '#08B21F',
+            color: '#428BCA',
             opacity: 0.2
         },
         geodesic: true, // optional: defaults to false
