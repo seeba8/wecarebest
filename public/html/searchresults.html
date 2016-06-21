@@ -13,6 +13,7 @@
     <h2>Search for a caregiver</h2>
     <pre>{{searchParams}}
     </pre>
+    <hr class="colorgraph">
     <div class="row">
         <div class="col-sm-12 col-md-12">
             <form ng-submit="app.search()">
@@ -21,15 +22,7 @@
                         <input type="text" ng-model="searchParams.locationname" placeholder="Location"/>
                     </label>
                 </div>-->
-                <div class="form-group col-sm-4 col-xs-4">
-                    <label>Price
-                        <rzslider
-                                style="width: 500px"
-                                rz-slider-model="searchParams.priceMin"
-                                rz-slider-high="searchParams.priceMax"
-                                rz-slider-options="slider.options"></rzslider>
-                    </label>
-                </div>
+                <div class="row">
                 <div class="form-group col-sm-12 col-xs-12">
                     <label for="typeofcare">Type of care</label>
                     <select ng-model="searchParams.typeofcare"
@@ -45,7 +38,7 @@
 
                 <br>
                 <!-- date and time -->
-                <div class="row">
+
                     <div class="form-group col-sm-4 col-xs-4">
                         <label for="startday">Start day (mm/dd/yy)</label>
                         <div class='input-group date'>
@@ -62,6 +55,8 @@
                             </span>
                         </div>
                     </div>
+                    <div class="form-group col-sm-2">
+                        </div>
                     <div class="form-group col-sm-3 col-xs-4">
                         <label for="starttime">Start time</label>
                         <div class='input-group date'>
@@ -93,18 +88,33 @@
                             </span>
                         </div>
                     </div>
+                    <br>
 
-                    <div class="form-group col-sm-2 col-xs-12 checkbox-inline text-center pagination-centered">
-                        <label for="repeating" class="repeating ">
+                    <div class="form-group col-sm-4 col-xs-4 checkbox-inline">
+
+                        <label for="repeating" class="repeating " style="margin-left:15px;margin-top:10px;">
                             <input ng-model="offer.repeating"
                                    class=""
                                    type="checkbox"
                                    id="repeating"
                                    name="repeating">
-                            Repeating?
+                            Advanced Search
                         </label>
 
                     </div>
+                    <br>
+                </div>
+                <hr class="colorgraph">
+                <div class="well form-group animate-if" ng-if="offer.repeating">
+                    <div class="row" style="margin-bottom:0px;">
+                <div class="form-group col-sm-4 col-xs-4">
+                    <label>Price
+                        <rzslider
+                                style="width: 500px"
+                                rz-slider-model="searchParams.priceMin"
+                                rz-slider-high="searchParams.priceMax"
+                                rz-slider-options="slider.options"></rzslider>
+                    </label>
                 </div>
 
                 <div class="form-group col-sm-12 col-xs-12">
@@ -137,9 +147,11 @@
 
             </div>
         </div>
+                        </div>
+                    </div>
 
         <div class="form-group col-sm-12 col-xs-12">
-            <button type="submit" class="btn btn-success">Search</button>
+            <button type="submit" ng-click="scrolltoBottom()" class="btn btn-success">Search</button>
             <button type="reset" class="btn btn-danger" ng-click="app.reset()">Reset</button>
         </div>
         </form>
@@ -157,7 +169,7 @@
                         <ul class="list-group">
                             <h4 class="media-heading list-group-item-heading"
                                 style="background-color: #2b669a;padding:10px;color:white;margin-bottom: 0px;">
-                                Amount of care: <i>{{result.offer.typeofcare}}</i><br/>
+                                Name: <i>{{result.user.firstname}} {{result.user.lastname}}</i><br/>
                                 Timeframe:
                                     <span ng-show="!result.offer.repeating">
                                         {{result.offer.startday}},
@@ -165,6 +177,7 @@
                                 <i>{{result.offer.starttime}}</i> &mdash; <i>{{result.offer.endtime}}</i>
 
                             </h4>
+                            <li class="list-group-item"><b>Amount of care:</b> {{result.offer.typeofcare}}</li>
                             <li ng-show="result.offer.repeating == true" class="list-group-item">
                                 <b>Repeating:</b> {{result.offer.repeatoptions.frequency}} between
                                 {{result.offer.startday}} and {{result.offer.endday}}
@@ -190,5 +203,6 @@
             </div>
         </div>
     </div>
+
 </div>
 </div>
