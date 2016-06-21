@@ -143,6 +143,17 @@ module.exports.getOffers = function (req, res) {
                 }
                 conditions["wageperhour"].$lt = searchParams[param];
                 break;
+            case "startday":
+                conditions["startday"].$lt = searchParams[param];
+                break;
+            case "starttime":
+                conditions["starttime"].$lt = searchParams[param];
+                break;
+            case "endtime":
+                conditions["endtime"].$gt = searchParams[param];
+                break;
+            //({"created_on": new Date(2012, 7, 14) })
+             //'timestamp': {$gte: minDate}
             case "_id":
                 conditions["_id"] = searchParams[param];
                 break;
@@ -172,7 +183,8 @@ module.exports.getOffers = function (req, res) {
                 currUser = usersorted[send[x].offer.createdBy];
                 send[x].user = {
                     firstname: currUser.firstName,
-                    lastname: currUser.name
+                    lastname: currUser.name,
+                    picture: currUser.picture
             };
             }
             console.log(send);

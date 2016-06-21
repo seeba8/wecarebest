@@ -1,34 +1,97 @@
-angular.module('myApp').controller('SearchCtrl', ['$scope',"$routeParams",'$http','$window', "auth", "uiGmapGoogleMapApi", function($scope, $routeParams, $http, $window, auth, uiGmapGoogleMapApi) {
+angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$http', '$window', "auth", "uiGmapGoogleMapApi", function ($scope, $routeParams, $http, $window, auth, uiGmapGoogleMapApi) {
     var app = this;
     var url = 'http://localhost:3000';
     console.log("Loaded Searchcontroller");
+    var isSingleOffer = false;
 
-    app.search = function() {
+    app.reset = function () {
+        $scope.searchParams = {
+            priceMin: 0,
+            priceMax: 100
+        };
+
+    };
+    app.reset();
+
+    app.search = function () {
+        console.log("clicked");
         var searchParams = $scope.searchParams;
-        $http.get(url + "/offers",{
+        $http.get(url + "/offers", {
             params: searchParams
         }).success(function (offers) {
             console.log("Got Offers.");
             console.log(offers);
-            for(var offerID in offers){
+            for (var offerID in offers) {
                 var offer = offers[offerID].offer;
                 offer.startday = moment(offer.startday).format("L");
                 offer.starttime = moment(offer.starttime).format("LT");
                 offer.endtime = moment(offer.endtime).format("LT");
                 offer.endday = offer.repeating ? moment(offer.endday).format("L") : "";
+                offer.createdDate = offer.createdDate ? moment(offer.createdDate).format("L") : moment("2016 01 01", "YYYY MM DD").format("L");
+                offers[offerID].user.picture = offers[offerID].user.picture || "../images/clint.jpg"
             }
             $scope.results = offers;
+            if(isSingleOffer){
+                $scope.map.center = $scope.results[0].offer.location;
+                $scope.circle.center = $scope.results[0].offer.location;
+                $scope.circle.radius = $scope.results[0].offer.location.radius;
+                $('#caregiverimg').attr("src", $scope.results[0].user.picture);
+            }
         });
     };
 
+    function gotoBottom ($scope, $location, $anchorScroll) {
+        $scope.gotoBottom = function() {
+            // set the location.hash to the id of
+            // the element you wish to scroll to.
+            $location.hash('results');
 
-    if(typeof $routeParams.offerid !== "undefined") {
+            // call $anchorScroll()
+            $anchorScroll();
+        };
+    }
+
+    $(function () {
+        $('.startdaypicker').datetimepicker({
+            format: "L",
+            minDate: moment(),
+            useCurrent: false
+        })
+            .on('dp.change', function (e) {
+                $scope.searchParams.startday = e.date.toDate();
+                $scope.$apply();
+            });
+    });
+    $(function () {
+        $('.starttimepicker').datetimepicker({
+            format: "LT",
+            useCurrent: false
+        })
+            .on('dp.change', function (e) {
+                $scope.searchParams.starttime = e.date.toDate();
+                $scope.$apply();
+            });
+    });
+    $(function () {
+        $('.endtimepicker').datetimepicker({
+            format: "LT",
+            useCurrent: false
+        })
+            .on('dp.change', function (e) {
+                $scope.searchParams.endtime = e.date.toDate();
+                $scope.$apply();
+            });
+    });
+
+    
+    
+    if (typeof $routeParams.offerid !== "undefined") {
+        isSingleOffer = true;
         console.log("Show single offer:", $routeParams.offerid);
         $scope.searchParams = {
             _id: $routeParams.offerid
         };
         app.search();
-
     }
 
 
@@ -37,10 +100,6 @@ angular.module('myApp').controller('SearchCtrl', ['$scope',"$routeParams",'$http
             floor: 0,
             ceil: 100
         }
-    };
-    $scope.searchParams = {
-        priceMin: 0,
-        priceMax: 100
     };
 
     $scope.search = {
@@ -57,7 +116,7 @@ angular.module('myApp').controller('SearchCtrl', ['$scope',"$routeParams",'$http
                     $scope.searchParams.lng = place.geometry.location.lng();
                     $scope.marker.coords = {
                         latitude: place.geometry.location.lat(),
-                        longitude:  place.geometry.location.lng()
+                        longitude: place.geometry.location.lng()
                     };
                     $scope.$apply();
                 }
@@ -77,8 +136,7 @@ angular.module('myApp').controller('SearchCtrl', ['$scope',"$routeParams",'$http
 
     $scope.marker = {
         options: {draggable: true},
-        coords: {
-        },
+        coords: {},
         events: {
             dragend: function (marker, eventName, args) {
                 console.log(marker);
@@ -89,8 +147,7 @@ angular.module('myApp').controller('SearchCtrl', ['$scope',"$routeParams",'$http
                             lat: marker.position.lat(),
                             lng: marker.position.lng()
                         }
-                    }
-                    , function (results, status) {
+                    }, function (results, status) {
                         if (status == "OK" && results != null) {
                             $('#searchbox').val(results[0].formatted_address);
 
@@ -139,6 +196,23 @@ angular.module('myApp').controller('SearchCtrl', ['$scope',"$routeParams",'$http
                 $scope.$apply();
             }
         }
+    };
+    $scope.circle = {
+        stroke: {
+            color: '#428BCA',
+            weight: 2,
+            opacity: 1
+        },
+        fill: {
+            color: '#428BCA',
+            opacity: 0.2
+        },
+        geodesic: true, // optional: defaults to false
+        draggable: true, // optional: defaults to false
+        clickable: true, // optional: defaults to true
+        editable: true, // optional: defaults to false
+        visible: true, // optional: defaults to true
+        control: {}
     };
 
     $scope.typeofcares = [

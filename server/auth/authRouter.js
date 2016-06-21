@@ -5,7 +5,7 @@ module.exports = authRoutes;
 
 console.log("AuthRouter geladen");
 
-function authRoutes() {
+function authRoutes(passport) {
     console.log("authRoutes");
     var authController = require('./authController');
     var router = require('express').Router();
@@ -22,6 +22,9 @@ function authRoutes() {
         //console.log('%s %s',req.body.pwd, req.body.pwd2);
         next();
     });
+
+    router.put('/users', passport.authenticate('jwt', {session: false}), authController.putUser);
+
 
     router.route("/login")
         .post(authController.postLogin)

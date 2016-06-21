@@ -1,6 +1,19 @@
 <div class="container" ng-controller="SearchCtrl as app">
-    <link rel="stylesheet" href="../css/offerservice.css">
-    <pre>{{searchParams}}</pre>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet"
+              href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
+        <link rel="stylesheet" href="../css/main.css">
+        <!--<script src="../bower_components/angular-bootstrap-datetimepicker-directive/angular-bootstrap-datetimepicker-directive.min.js"></script>-->
+
+        <link rel="stylesheet" href="../css/offerservice.css">
+        <title>Search offers</title>
+    </head>
+    <h2>Search for a caregiver</h2>
+    <pre>{{searchParams}}
+    </pre>
+    <hr class="colorgraph">
     <div class="row">
         <div class="col-sm-12 col-md-12">
             <form ng-submit="app.search()">
@@ -9,16 +22,9 @@
                         <input type="text" ng-model="searchParams.locationname" placeholder="Location"/>
                     </label>
                 </div>-->
-                <div class="form-group col-sm-4 col-xs-4">
-                    <label>Price
-                        <rzslider
-                                style="width: 500px"
-                                rz-slider-model="searchParams.priceMin"
-                                rz-slider-high="searchParams.priceMax"
-                                rz-slider-options="slider.options"></rzslider>
-                    </label>
-                </div>
+                <div class="row">
                 <div class="form-group col-sm-12 col-xs-12">
+                    <label for="typeofcare">Type of care</label>
                     <select ng-model="searchParams.typeofcare"
                             ng-options="typeofcare for typeofcare in typeofcares"
                             type="text"
@@ -28,8 +34,89 @@
                             placeholder="Basic">
                         <option ng-show="true" value="">- Please Choose -</option>
                     </select>
-
                 </div>
+
+                <br>
+                <!-- date and time -->
+
+                    <div class="form-group col-sm-4 col-xs-4">
+                        <label for="startday">Start day (mm/dd/yy)</label>
+                        <div class='input-group date'>
+                            <input type='text'
+
+                                   class="startdaypicker form-control"
+                                   id="startday"
+                                   name="startday"
+                                   placeholder="Enter Date"
+                                   minlength="6"/>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"
+                                      onclick="$('.startdaypicker').data('DateTimePicker').show();"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        </div>
+                    <div class="form-group col-sm-3 col-xs-4">
+                        <label for="starttime">Start time</label>
+                        <div class='input-group date'>
+                            <input
+                                   type='text'
+                                   class="starttimepicker form-control"
+                                   id="starttime"
+                                   name="starttime"
+                                   placeholder="Enter Time"
+                                   minlength="4"/>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-time"
+                                      onclick="$('.starttimepicker').data('DateTimePicker').show();"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3 col-xs-4">
+                        <label for="endtime">End time</label>
+                        <div class='input-group date'>
+                            <input
+                                   type='text'
+                                   class="endtimepicker form-control"
+                                   id="endtime"
+                                   name="endtime"
+                                   placeholder="Enter Time"/>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-time"
+                                      onclick="$('.endtimepicker').data('DateTimePicker').show();"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="form-group col-sm-4 col-xs-4 checkbox-inline">
+
+                        <label for="repeating" class="repeating " style="margin-left:15px;margin-top:10px;">
+                            <input ng-model="offer.repeating"
+                                   class=""
+                                   type="checkbox"
+                                   id="repeating"
+                                   name="repeating">
+                            Advanced Search
+                        </label>
+
+                    </div>
+                    <br>
+                </div>
+                <hr class="colorgraph">
+                <div class="well form-group animate-if" ng-if="offer.repeating">
+                    <div class="row" style="margin-bottom:0px;">
+                <div class="form-group col-sm-4 col-xs-4">
+                    <label>Price
+                        <rzslider
+                                style="width: 500px"
+                                rz-slider-model="searchParams.priceMin"
+                                rz-slider-high="searchParams.priceMax"
+                                rz-slider-options="slider.options"></rzslider>
+                    </label>
+                </div>
+
                 <div class="form-group col-sm-12 col-xs-12">
                     <div>
                         <label for="searchbox">Supported area</label>
@@ -58,57 +145,64 @@
                             </ui-gmap-marker>
                         </ui-gmap-google-map>
 
-                    </div>
-                </div>
-
-                <div class="form-group col-sm-12 col-xs-12">
-                    <button type="submit">Search</button>
-                </div>
-            </form>
+            </div>
         </div>
-        <div id="results">
-            <div class="row" ng-repeat="result in results" style="margin-bottom: 30px;">
-                <div class="col sm-2">
-                    <div class="col-md-2 col-sm-2">
-                        <img src="../images/clint.jpg" class="img-rounded img-responsive">
+                        </div>
                     </div>
+
+        <div class="form-group col-sm-12 col-xs-12">
+            <button type="submit" ng-click="scrolltoBottom()" class="btn btn-success">Search</button>
+            <button type="reset" class="btn btn-danger" ng-click="app.reset()">Reset</button>
+        </div>
+        </form>
+    </div>
+    <div class="row" id="results">
+        <div class="row" ng-repeat="result in results" style="margin-bottom: 30px;">
+            <div class="col sm-2">
+                <div class="col-md-2 col-sm-2">
+                    <img style="max-height:10em;" src="{{result.user.picture}}" class="img-rounded img-responsive">
                 </div>
-                <div class="col-sm-7 col-md-7">
-                    <div class="media">
-                        <div class="media-body">
-                            <ul class="list-group">
-                                <h4 class="media-heading list-group-item-heading"
-                                    style="background-color: #2b669a;padding:10px;color:white;margin-bottom: 0px;">
-                                    Amount of care: <i>{{result.offer.typeofcare}}</i><br/>
-                                    Timeframe:
+            </div>
+            <div class="col-sm-7 col-md-7">
+                <div class="media">
+                    <div class="media-body">
+                        <ul class="list-group">
+                            <h4 class="media-heading list-group-item-heading"
+                                style="background-color: #2b669a;padding:10px;color:white;margin-bottom: 0px;">
+                                Name: <i>{{result.user.firstname}} {{result.user.lastname}}</i><br/>
+                                Timeframe:
                                     <span ng-show="!result.offer.repeating">
                                         {{result.offer.startday}},
                                     </span>
-                                    <i>{{result.offer.starttime}}</i> &mdash; <i>{{result.offer.endtime}}</i>
+                                <i>{{result.offer.starttime}}</i> &mdash; <i>{{result.offer.endtime}}</i>
 
-                                </h4>
-                                <li ng-show="result.offer.repeating == true" class="list-group-item">
-                                    <b>Repeating:</b> {{result.offer.repeatoptions.frequency}} between {{result.offer.startday}} and {{result.offer.endday}}
-                                </li>
-                                <li ng-show="result.offer.repeating == true" class="list-group-item"><b>Days:</b>
+                            </h4>
+                            <li class="list-group-item"><b>Amount of care:</b> {{result.offer.typeofcare}}</li>
+                            <li ng-show="result.offer.repeating == true" class="list-group-item">
+                                <b>Repeating:</b> {{result.offer.repeatoptions.frequency}} between
+                                {{result.offer.startday}} and {{result.offer.endday}}
+                            </li>
+                            <li ng-show="result.offer.repeating == true" class="list-group-item"><b>Days:</b>
                                     <span ng-show="val == true"
                                           ng-repeat="(key,val) in result.offer.repeatoptions">{{key}}<span
                                             ng-show="!$last"> | </span></span>
-                                </li>
-                                <li class="list-group-item"><b>Wage:</b> {{result.offer.wageperhour}}&euro; / h</li>
-                                <li class="list-group-item"><b>Notes:</b> {{result.offer.notes}}</li>
-                                <li class="list-group-item"><b>Last Activity:</b>@Marci: Was meint das?</li>
-                            </ul>
-                        </div>
+                            </li>
+                            <li class="list-group-item"><b>Wage:</b> {{result.offer.wageperhour}}&euro; / h</li>
+                            <li class="list-group-item"><b>Notes:</b> {{result.offer.notes}}</li>
+                            <li class="list-group-item"><b>Last Activity:</b> {{result.offer.createdDate}}</li>
+                        </ul>
                     </div>
                 </div>
-                <div class="col-sm-3 col-md-3 pull-right">
-                    <a href="/#/singleOffer/{{result.offer._id}}" class="btn btn-primary btn-success" style="min-width:80%;margin-top:10px;"><span
-                            class="glyphicon glyphicon-ok"></span> View</a>
-                    <a ng-click="" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;">
-                        <span class="glyphicon glyphicon-envelope"></span> Book</a>
-                </div>
+            </div>
+            <div class="col-sm-3 col-md-3 pull-right">
+                <a href="/#/singleOffer/{{result.offer._id}}" class="btn btn-primary btn-success"
+                   style="min-width:80%;margin-top:10px;"><span
+                        class="glyphicon glyphicon-ok"></span> View</a>
+                <a ng-click="" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;">
+                    <span class="glyphicon glyphicon-envelope"></span> Book</a>
             </div>
         </div>
     </div>
+
+</div>
 </div>
