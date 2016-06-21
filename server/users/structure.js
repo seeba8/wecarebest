@@ -20,10 +20,7 @@ var userSchema = mongoose.Schema({
     },
     pwd: String,
     gender: { type: Number, min: 1, max: 2 } /** 1 for female, 2 for male */,
-    picture: {
-        data: String,
-        contentType: String
-    }
+    picture: String
 });
 
 userSchema.pre('save', function (next) {

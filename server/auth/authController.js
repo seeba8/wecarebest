@@ -40,6 +40,41 @@ module.exports.postLogin = function(req, res){
     });
 };
 
+function decodeBase64Image(dataString) {
+    var matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/),
+        response = {};
+
+    if (matches.length !== 3) {
+        return new Error('Invalid input string');
+    }
+
+    response.type = matches[1];
+    response.data = new Buffer(matches[2], 'base64');
+
+    return response;
+}
+
+module.exports.putUser = function(req,res){
+    var token = req.headers.authorization;
+    token = token.substr(4);
+    var decoded = jwt.decode(token, passportConfig.secret);
+    var userid = decoded._id;
+    imageBuffer = decodeBase64Image(req.body.picture);
+    var filetype=".png";
+    if(imageBuffer.type == "image/gif"){
+        filetype=".gif";
+    }
+    else if(imageBuffer.type == "image/jpg" || imageBuffer.type == "image/jpeg") {
+        filetype = ".jpg";
+    }
+    require("fs").writeFile("./../public/images/users/" + userid + filetype, imageBuffer.data, function(err) {
+        console.log(err);
+    });
+    User.update({_id: userid}, {picture: "/images/users/" + userid + filetype}, {}, function(test) {
+        console.log(test);
+    });
+};
+
 module.exports.postRegister = function(req, res) {
     var type = req.body.type;
     var firstName = req.body.firstName;

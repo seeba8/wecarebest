@@ -3,9 +3,19 @@
  */
 
 /* NOT USED AT THE MOMENT!!!! */
-angular.module("myApp").controller("AppCtrl",["$http", "$window", function($http, $window) {
+angular.module("myApp").controller("AppCtrl",["$scope", "$http", "$window", function($scope, $http, $window) {
 
     var app = this;
 
 
+    app.updateProfile = function(){
+        console.log("hi");
+        var f = document.getElementById('profilepicture').files[0],
+            r = new FileReader();
+        r.onloadend = function(e) {
+            var data = e.target.result;
+            $http.put("/users", {picture: data});
+        };
+        r.readAsDataURL(f);
+    }
 }]);

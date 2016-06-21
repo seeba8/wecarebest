@@ -173,7 +173,7 @@ module.exports.getOffers = function (req, res) {
                 send[x].user = {
                     firstname: currUser.firstName,
                     lastname: currUser.name,
-                    picture: currUser.picture.data
+                    picture: currUser.picture
             };
             }
             console.log(send);
