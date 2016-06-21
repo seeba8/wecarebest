@@ -2,13 +2,13 @@
 <div class="container mybookingscareseeker" ng-controller="BookingCtrl_cg as app" ng-init="initFirst()">
     <div class="row" >
         <div class="col-sm-6 col-md-6">
-            <h4>My Bookings & Requests</h4>
+            <h2>My Bookings & Requests</h2>
         </div>
         <div class="col-sm-6 col-md-6 pull-right">
-            <div class="btn-group" style="float:right">
-                <a href="#" ng-click="app.recent = !app.recent" class="btn btn-primary btn-primary"><span class="glyphicon glyphicon-export"></span> Show recent entries</a>
-                <a href="#" class="btn btn-primary btn-info"><span class="glyphicon glyphicon-stats"></span> Filter entries</a>
-            </div>
+            <!--<div class="btn-group" style="float:right">-->
+                <!--<a href="#" ng-click="app.recent = !app.recent" class="btn btn-primary btn-primary"><span class="glyphicon glyphicon-export"></span> Show recent entries</a>-->
+                <!--<a href="#" class="btn btn-primary btn-info"><span class="glyphicon glyphicon-stats"></span> Filter entries</a>-->
+            <!--</div>-->
         </div>
     </div>
     <hr class="colorgraph">
@@ -22,7 +22,8 @@
                 <div class="media-body">
                     <ul class="list-group">
                         <h4 class="media-heading list-group-item-heading">
-                            <h3 style="margin-top:0px;">Amount of care: <i>TODO</i><br /></h3>
+                            <h3 style="margin-top:0px;">Careseeker: {{booking.user.firstName}} {{booking.user.name}}<br /></h3>
+                            Offer: {{booking.offer}}</br>
                             <img src="https://maxcdn.icons8.com/Color/PNG/24/Time_And_Date/calendar-24.png" title="Calendar" width="24">
                             {{booking.starttime | datetime1}}
                             </br><img src="https://maxcdn.icons8.com/Color/PNG/24/Time_And_Date/tear_off_calendar-24.png" title="Tear Off Calendar" width="24">
