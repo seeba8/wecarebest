@@ -103,7 +103,7 @@ myApp.config(function($routeProvider) {
             .when('/mybookingscareseeker', {templateUrl: '../html/mybookingscareseeker.html'})
             .when('/mybookingscaregiver', {templateUrl: '../html/mybookingscaregiver.html'})
             .when('/createRequest', {templateUrl: '../html/createRequest.html'})
-            .when('/contact', {templateUrl: '../html/partials/home.html'})
+            .when('/contact', {templateUrl: '../html/partials/contact.html'})
             .when('/imprint', {templateUrl: '../html/partials/imprint.html'})
             .when('/terms', {templateUrl: '../html/partials/terms.html'})
             .otherwise({ redirectTo: '/'});

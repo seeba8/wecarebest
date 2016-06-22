@@ -6,12 +6,90 @@
 <body>
 <div class="container">
 <h2>My Profile</h2>
-    <div ng-controller="AppCtrl as app">
-    <form ng-submit="app.updateProfile()">
-        <input type="file" id="profilepicture">
-        <button type="submit">Submit</button>
 
-    </form>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 toppad" >
+
+                <div class="panel panel-info">
+                    <div class="panel-heading" style="background-color:#428bca;color:white;">
+                        <h3 class="panel-title">[Name]</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3 col-lg-3" align="center">
+                                <div ng-controller="AppCtrl as app">
+                                    <label>Upload profile picture</label></br>
+                                    <form ng-submit="app.updateProfile()">
+                                        <input type="file" id="profilepicture">
+                                        <button type="submit">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <!--<div class="col-xs-10 col-sm-10 hidden-md hidden-lg"> <br>
+                              <dl>
+                                <dt>DEPARTMENT:</dt>
+                                <dd>Administrator</dd>
+                                <dt>HIRE DATE</dt>
+                                <dd>11/12/2013</dd>
+                                <dt>DATE OF BIRTH</dt>
+                                   <dd>11/12/2013</dd>
+                                <dt>GENDER</dt>
+                                <dd>Male</dd>
+                              </dl>
+                            </div>-->
+                            <div class=" col-md-9 col-lg-9 ">
+                                <table class="table table-user-information">
+                                    <tbody>
+                                    <tr>
+                                        <td>First name</td>
+                                        <td>...</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Last name</td>
+                                        <td>...</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Date of Birth</td>
+                                        <td>...</td>
+                                    </tr>
+
+                                    <tr>
+                                    <tr>
+                                        <td>Gender</td>
+                                        <td>...</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Home Address</td>
+                                        <td>...</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Email</td>
+                                        <td><a href="mailto:info@support.com">...</a></td>
+                                    </tr>
+                                    <td>Phone Number</td>
+                                    <td>...
+                                    </td>
+
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+
+                    <div class="panel-footer" style="background-color:white;">
+                        <span class="pull-right">
+                            <a href="#" data-original-title="Edit profile" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning glyphicon glyphicon-edit"><i></i></a>
+
+                        </span>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+    </div>
+
 </body>
