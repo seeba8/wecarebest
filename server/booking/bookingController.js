@@ -35,12 +35,13 @@ module.exports.postCreateRequest = function(req, res) {
         starttime :     req.body.starttime,
         endtime :       req.body.endtime,
         repeating:      req.body.repeating,
-        repeatoptions: req.body.repeating,
-        location: req.body.repeating,
+        repeatoptions: req.body.repeatoptions,
+        location: req.body.location,
         notes:     req.body.notes,
         createdDate:    req.body.createdDate,
         lastActivity:   req.body.createdDate, //when did the status change the last time?
         createdBy:      careseeker, //Careseeker
+        offer : req.body.offer,
         status : 1
     });
     booking.save(function (err) {

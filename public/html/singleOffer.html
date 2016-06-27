@@ -17,7 +17,7 @@
             </p>
         </div>
         <div class="col-md-2 col-sm-9">
-            <a onclick="alert('This is not the droid you\'re looking for.')" class="btn btn-primary btn-success" style="min-width:80%;margin-top:10px;"><span
+            <a href="/#/createRequest/{{results[0].offer._id}}" class="btn btn-primary btn-success" style="min-width:80%;margin-top:10px;"><span
                     class="glyphicon glyphicon-ok"></span> Book</a>
             <a onclick="alert('I\'m sorry Dave, I\'m afraid I can\'t do that.')" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;">
                 <span class="glyphicon glyphicon-star-empty"></span> Rate</a>
@@ -58,45 +58,45 @@
                 <tr>
                     <td>Overall Satisfaction</td>
                     <td>
-                        <span ng-if="rating.overallSatisfaction == null">
+                        <span ng-if="overallSatisfaction == null">
                         No rating available.
                             </span>
-                        <span ng-if="app.overallSatisfaction > 0 && app.overallSatisfaction < 0.49">
+                        <span ng-if="overallSatisfaction >= 0 && overallSatisfaction < 0.5">
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                         </span>
-                        <span ng-if="app.overallSatisfaction > 0.5 && app.overallSatisfaction < 1.49">
+                        <span ng-if="overallSatisfaction >= 0.5 && overallSatisfaction < 1.5">
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                         </span>
-                        <span ng-if="app.overallSatisfaction > 1.5 && app.overallSatisfaction < 2.49">
+                        <span ng-if="overallSatisfaction >= 1.5 && overallSatisfaction < 2.5">
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                         </span>
-                        <span ng-if="app.overallSatisfaction > 2.5 && app.overallSatisfaction < 3.49">
+                        <span ng-if="overallSatisfaction >= 2.5 && overallSatisfaction < 3.5">
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                         </span>
-                        <span ng-if="app.overallSatisfaction > 3.5 && app.overallSatisfaction < 4.49">
+                        <span ng-if="overallSatisfaction >= 3.5 && overallSatisfaction < 4.5">
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                         </span>
-                        <span ng-if="app.overallSatisfaction > 4.5">
+                        <span ng-if="overallSatisfaction >= 4.5">
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
@@ -108,45 +108,45 @@
                 <tr>
                     <td>Friendliness</td>
                     <td>
-                        <span ng-if="app.Friendliness == null">
+                        <span ng-if="Friendliness == null">
                         No rating available.
                             </span>
-                        <span ng-if="app.Friendliness > 0 && app.Friendliness < 0.49">
+                        <span ng-if="Friendliness >= 0 && Friendliness < 0.5">
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                         </span>
-                        <span ng-if="app.Friendliness > 0.5 && app.Friendliness < 1.49">
+                        <span ng-if="Friendliness >= 0.5 && Friendliness < 1.5">
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                         </span>
-                        <span ng-if="app.Friendliness > 1.5 && app.Friendliness < 2.49">
+                        <span ng-if="Friendliness >= 1.5 && Friendliness < 2.5">
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                         </span>
-                        <span ng-if="app.Friendliness > 2.5 && app.Friendliness < 3.49">
+                        <span ng-if="Friendliness >= 2.5 && Friendliness < 3.5">
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                         </span>
-                        <span ng-if="app.Friendliness > 3.5 && app.Friendliness < 4.49">
+                        <span ng-if="Friendliness >= 3.5 && Friendliness < 4.5">
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                         </span>
-                        <span ng-if="app.Friendliness > 4.5">
+                        <span ng-if="Friendliness >= 4.5">
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
@@ -158,45 +158,45 @@
                 <tr>
                     <td>Competence</td>
                     <td>
-                        <span ng-if="app.Competence == null">
+                        <span ng-if="Competence == null">
                         No rating available.
                             </span>
-                        <span ng-if="app.Competence > 0 && app.Competence < 0.49">
+                        <span ng-if="Competence >= 0 && Competence < 0.5">
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                         </span>
-                        <span ng-if="app.Competence > 0.5 && app.Competence < 1.49">
+                        <span ng-if="Competence >= 0.5 && Competence < 1.5">
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                         </span>
-                        <span ng-if="app.Competence > 1.5 && app.Competence < 2.49">
+                        <span ng-if="Competence >= 1.5 && Competence < 2.5">
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                         </span>
-                        <span ng-if="app.Competence > 2.5 && app.Competence < 3.49">
+                        <span ng-if="Competence >= 2.5 && Competence < 3.5">
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                         </span>
-                        <span ng-if="app.Competence > 3.5 && app.Competence < 4.49">
+                        <span ng-if="Competence >= 3.5 && Competence < 4.5">
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                         </span>
-                        <span ng-if="app.Competence > 4.5">
+                        <span ng-if="Competence > 4.5">
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
@@ -208,45 +208,45 @@
                 <tr>
                     <td>Punctuality</td>
                     <td>
-                        <span ng-if="app.Punctuality == null">
+                        <span ng-if="Punctuality == null">
                         No rating available.
                             </span>
-                        <span ng-if="app.Punctuality > 0 && app.Punctuality < 0.49">
+                        <span ng-if="Punctuality >= 0 && Punctuality <= 0.5">
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                         </span>
-                        <span ng-if="app.Punctuality > 0.5 && app.Punctuality < 1.49">
+                        <span ng-if="Punctuality >= 0.5 && Punctuality <= 1.5">
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                         </span>
-                        <span ng-if="app.Punctuality > 1.5 && app.Punctuality < 2.49">
+                        <span ng-if="Punctuality >= 1.5 && Punctuality <= 2.5">
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                         </span>
-                        <span ng-if="app.Punctuality > 2.5 && app.Punctuality < 3.49">
+                        <span ng-if="Punctuality >= 2.5 && Punctuality <= 3.5">
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                         </span>
-                        <span ng-if="app.Punctuality > 3.5 && app.Punctuality < 4.49">
+                        <span ng-if="Punctuality >= 3.5 && Punctuality < 4.5">
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star-empty"></i>
                         </span>
-                        <span ng-if="app.Punctuality > 4.5">
+                        <span ng-if="Punctuality >= 4.5">
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
                             <i class="glyphicon glyphicon-star"></i>
@@ -258,16 +258,56 @@
             </table>
         </div>
     </div>
-    <div class="row">
+    <div class="row" ng-repeat="rating in ratings" style="margin-bottom: 30px;">
         <div class="col-md-2 stardetail">
-            <i class="glyphicon glyphicon-star"></i>
-            <i class="glyphicon glyphicon-star"></i>
-            <i class="glyphicon glyphicon-star"></i>
-            <i class="glyphicon glyphicon-star-empty"></i>
-            <i class="glyphicon glyphicon-star-empty"></i>
+            <span ng-if="rating.overallSatisfaction == null">
+            No rating available.
+                </span>
+            <span ng-if="rating.overallSatisfaction == 0">
+                <i class="glyphicon glyphicon-star-empty"></i>
+                <i class="glyphicon glyphicon-star-empty"></i>
+                <i class="glyphicon glyphicon-star-empty"></i>
+                <i class="glyphicon glyphicon-star-empty"></i>
+                <i class="glyphicon glyphicon-star-empty"></i>
+            </span>
+            <span ng-if="rating.overallSatisfaction == 1">
+                <i class="glyphicon glyphicon-star"></i>
+                <i class="glyphicon glyphicon-star-empty"></i>
+                <i class="glyphicon glyphicon-star-empty"></i>
+                <i class="glyphicon glyphicon-star-empty"></i>
+                <i class="glyphicon glyphicon-star-empty"></i>
+            </span>
+            <span ng-if="rating.overallSatisfaction == 2">
+                <i class="glyphicon glyphicon-star"></i>
+                <i class="glyphicon glyphicon-star"></i>
+                <i class="glyphicon glyphicon-star-empty"></i>
+                <i class="glyphicon glyphicon-star-empty"></i>
+                <i class="glyphicon glyphicon-star-empty"></i>
+            </span>
+            <span ng-if="rating.overallSatisfaction == 3">
+                <i class="glyphicon glyphicon-star"></i>
+                <i class="glyphicon glyphicon-star"></i>
+                <i class="glyphicon glyphicon-star"></i>
+                <i class="glyphicon glyphicon-star-empty"></i>
+                <i class="glyphicon glyphicon-star-empty"></i>
+            </span>
+            <span ng-if="rating.overallSatisfaction == 4">
+                <i class="glyphicon glyphicon-star"></i>
+                <i class="glyphicon glyphicon-star"></i>
+                <i class="glyphicon glyphicon-star"></i>
+                <i class="glyphicon glyphicon-star"></i>
+                <i class="glyphicon glyphicon-star-empty"></i>
+            </span>
+            <span ng-if="rating.overallSatisfaction == 5">
+                <i class="glyphicon glyphicon-star"></i>
+                <i class="glyphicon glyphicon-star"></i>
+                <i class="glyphicon glyphicon-star"></i>
+                <i class="glyphicon glyphicon-star"></i>
+                <i class="glyphicon glyphicon-star"></i>
+            </span>
         </div>
         <div class="col-md-10">
-            Sternchen Text
+            {{rating.otherRemarks}}
         </div>
     </div>
 
