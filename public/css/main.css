@@ -1,6 +1,7 @@
 body {
     padding-top: 60px;
     font-family: Montserrat, Arial, sans-serif;
+    background-color: lightgrey;
 }
 
 /*change color of fixed navbar and links*/
@@ -84,6 +85,10 @@ body {
 }*/
 .row.content {
     height: 570px;
+}
+
+#content{
+    background-color: white;
 }
 
 /*BY MS Set Color of buttons on myoffers.html (bookings&requests) to white*/
@@ -175,17 +180,14 @@ footer a {
     background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
 }
 
+hr{
+    max-width: 100%;
+}
+
 .createoffer .form-group {
     margin-bottom: 30px;
 }
 
-/*homepage style*/
-.blueline{
-    color:#428bca;
-    border: solid;
-    border-color:#428bca;
-    border-width: thin;
-}
 
 .media-heading{
     line-height: 20px;
@@ -212,7 +214,7 @@ footer a {
 
 #mainNav li a:hover,
 #mainNav li a:focus {
-    color:grey;
+    background-color:#003399;
 }
 
 
@@ -231,3 +233,27 @@ footer a {
 #offerbtn.btn.btn-default.btn-lg a{
     color: #428BCA !important;
 }*/
+
+
+
+/*BY MS DO NOT DELETE*/
+.mybookingscareseeker .bookingitem {
+    margin-bottom: 30px;
+    background-color:white;
+    border-bottom:2px solid #bfcad2;
+    border-top:1px solid #dbdadf;
+    padding:15px;
+    border-radius:10px;
+}
+
+.mybookingscareseeker .bookingitem .image {
+    padding: 0px;
+}
+
+.mybookingscareseeker .bookingitem .status {
+    text-align:center;
+}
+
+.mybookingscareseeker .bookingitem .btn-success {
+    background-color: #5cb85c;
+}

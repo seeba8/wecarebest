@@ -57,7 +57,7 @@ var passportConfig = require ("./config/passportConfig");
 var User = require("./users/structure");
 
 var authRoutes = require("./auth/authRouter");
-app.use("/",authRoutes());
+app.use("/",authRoutes(passport));
 
 app.get("/users", function (reg,res) {
     User.find(function (err,users) {

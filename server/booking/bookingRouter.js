@@ -28,10 +28,11 @@ function bookingRoutes(passport) {
 
     //view all bookings (potentially including offers); it depends on the type of user (caregiver, careseeker)
     router.post('/mybookings', passport.authenticate('jwt', {session: false}, bookingController.postMyBookings));
-    router.get('/mybookings', passport.authenticate('jwt', {session: false}, bookingController.getMyBookings));
+    //router.get('/mybookings', passport.authenticate('jwt', {session: false}, bookingController.getMyBookings));
+    router.get('/mybookings', bookingController.getMyBookings);
 
     //changes the booking status in the database (of an existing object)
-    router.post('/ChangeBookingStatus', passport.authenticate('jwt', {session: false}, bookingController.postChangeBookingStatus));
+    router.post('/ChangeBookingStatus', bookingController.postChangeBookingStatus);
 
     //TODO: brauchen wir das?
     router.route("/landingpage")

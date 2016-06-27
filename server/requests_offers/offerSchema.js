@@ -8,9 +8,9 @@ console.log("Schema geladen.");
 var frequencies = ["Weekly", "Bi-weekly", "Monthly"];
 var typesofcare = ["Basic", "Premium", "Full Service"];
 var offerSchema = mongoose.Schema({
-    startday :      Date,
-    starttime :     Date,
-    endtime :       Date,
+    startday:      Date,
+    starttime:     Date,
+    endtime:       Date,
     repeating:      {type: Boolean, default: false},
     repeatoptions: {
         Monday:     {type: Boolean, default: false},
@@ -21,9 +21,9 @@ var offerSchema = mongoose.Schema({
         Saturday:   {type: Boolean, default: false},
         Sunday:     {type: Boolean, default: false},
         frequency:  {type: String, enum: frequencies},
-        endday :    Date
+        endday:    Date
     },
-    typeofcare :    {type: String, enum: typesofcare},
+    typeofcare:    {type: String, enum: typesofcare},
     wageperhour:    {type: Number, min: 0, max: 100},
     location:       {
         latitude:   Number,

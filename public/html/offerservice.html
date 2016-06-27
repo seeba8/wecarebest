@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/main.css">
     <!--<script src="../bower_components/angular-bootstrap-datetimepicker-directive/angular-bootstrap-datetimepicker-directive.min.js"></script>-->
 
-    <link rel="stylesheet" href="../html/offerservice.css">
+    <link rel="stylesheet" href="../css/offerservice.css">
     <title>Create offer</title>
 </head>
 <body ng-app="myApp">
@@ -102,7 +102,7 @@
                                type="checkbox"
                                id="repeating"
                                name="repeating">
-                        Repeating
+                        Repeating?
                     </label>
 
 
@@ -110,7 +110,7 @@
             </div>
 
             <!-- Advanced Time Options -->
-            <div class="well form-group" ng-show="offer.repeating">
+            <div class="well form-group animate-if" ng-if="offer.repeating">
                 <div class="row" style="margin-bottom:0px;">
                     <div class=" form-group" id="weekdays" >
                         <label class="col-md-2 control-label">Day(s) of Week</label>
@@ -157,7 +157,7 @@
                 ###############################################
                 -->
             <div class="form-group" >
-                <label for="typeofcare">Amount of care:</label>
+                <label for="typeofcare">Amount of care</label>
                 <select ng-model="offer.typeofcare"
                         ng-options="typeofcare for typeofcare in typeofcares"
                         type="text"
@@ -181,7 +181,7 @@
                 ###############################################
                 -->
             <div class="form-group">
-                <label for="wage">Wage per hour in €/h</label>
+                <label for="wage">Wage per hour</label>
                 <div class="input-group">
                     <input ng-model="offer.wageperhour"
                            type="number"
