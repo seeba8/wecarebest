@@ -1,0 +1,1 @@
+"C:\Program Files (x86)\Gource\gource.exe" --file-filter "(node|bower)"
