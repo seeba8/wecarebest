@@ -60,14 +60,17 @@ module.exports.postShortRating = function(req, res) {
                 count1 = count1 + 1;
             }
             if ('Friendliness' in ratings[i]) {
+                console.log("has own property Friendliness");
                 sum2 = sum2 + ratings[i].Friendliness;
                 count2 = count2 + 1;
             }
             if ('Competence' in ratings[i]) {
+                console.log("has own property Competence");
                 sum3 = sum3 + ratings[i].Competence;
                 count3 = count3 + 1;
             }
             if ('Punctuality' in ratings[i]) {
+                console.log("has own property Punctuality");
                 sum4 = sum4 + ratings[i].Punctuality;
                 count4 = count4 + 1;
             }
