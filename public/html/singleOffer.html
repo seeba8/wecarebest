@@ -53,13 +53,218 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-offset-2 col-md-10 well">
-            ...4x Overall Rating Bewertung...
+        <div class="col-md-offset-2 col-md-10 well staroverall">
+            <table style="width:50%">
+                <tr>
+                    <td>Overall Satisfaction</td>
+                    <td>
+                        <span ng-if="rating.overallSatisfaction == null">
+                        No rating available.
+                            </span>
+                        <span ng-if="rating.overallSatisfaction > 0 && rating.overallSatisfaction < 0.49">
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                        </span>
+                        <span ng-if="rating.overallSatisfaction > 0.5 && rating.overallSatisfaction < 1.49">
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                        </span>
+                        <span ng-if="rating.overallSatisfaction > 1.5 && rating.overallSatisfaction < 2.49">
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                        </span>
+                        <span ng-if="rating.overallSatisfaction > 2.5 && rating.overallSatisfaction < 3.49">
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                        </span>
+                        <span ng-if="rating.overallSatisfaction > 3.5 && rating.overallSatisfaction < 4.49">
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                        </span>
+                        <span ng-if="rating.overallSatisfaction > 4.5">
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Friendliness</td>
+                    <td>
+                        <span ng-if="rating.Friendliness == null">
+                        No rating available.
+                            </span>
+                        <span ng-if="rating.Friendliness > 0 && rating.Friendliness < 0.49">
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                        </span>
+                        <span ng-if="rating.Friendliness > 0.5 && rating.Friendliness < 1.49">
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                        </span>
+                        <span ng-if="rating.Friendliness > 1.5 && rating.Friendliness < 2.49">
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                        </span>
+                        <span ng-if="rating.Friendliness > 2.5 && rating.Friendliness < 3.49">
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                        </span>
+                        <span ng-if="rating.Friendliness > 3.5 && rating.Friendliness < 4.49">
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                        </span>
+                        <span ng-if="rating.Friendliness > 4.5">
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Competence</td>
+                    <td>
+                        <span ng-if="rating.Competence == null">
+                        No rating available.
+                            </span>
+                        <span ng-if="rating.Competence > 0 && rating.Competence < 0.49">
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                        </span>
+                        <span ng-if="rating.Competence > 0.5 && rating.Competence < 1.49">
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                        </span>
+                        <span ng-if="rating.Competence > 1.5 && rating.Competence < 2.49">
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                        </span>
+                        <span ng-if="rating.Competence > 2.5 && rating.Competence < 3.49">
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                        </span>
+                        <span ng-if="rating.Competence > 3.5 && rating.Competence < 4.49">
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                        </span>
+                        <span ng-if="rating.Competence > 4.5">
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Punctuality</td>
+                    <td>
+                        <span ng-if="rating.Punctuality == null">
+                        No rating available.
+                            </span>
+                        <span ng-if="rating.Punctuality > 0 && rating.Punctuality < 0.49">
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                        </span>
+                        <span ng-if="rating.Punctuality > 0.5 && rating.Punctuality < 1.49">
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                        </span>
+                        <span ng-if="rating.Punctuality > 1.5 && rating.Punctuality < 2.49">
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                        </span>
+                        <span ng-if="rating.Punctuality > 2.5 && rating.Punctuality < 3.49">
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                        </span>
+                        <span ng-if="rating.Punctuality > 3.5 && rating.Punctuality < 4.49">
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                        </span>
+                        <span ng-if="rating.Punctuality > 4.5">
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="glyphicon glyphicon-star"></i>
+                        </span>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-2">
-            Sternchen
+        <div class="col-md-2 stardetail">
+            <i class="glyphicon glyphicon-star"></i>
+            <i class="glyphicon glyphicon-star"></i>
+            <i class="glyphicon glyphicon-star"></i>
+            <i class="glyphicon glyphicon-star-empty"></i>
+            <i class="glyphicon glyphicon-star-empty"></i>
         </div>
         <div class="col-md-10">
             Sternchen Text

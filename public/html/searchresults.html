@@ -18,16 +18,9 @@
                         <input type="text" ng-model="searchParams.locationname" placeholder="Location"/>
                     </label>
                 </div>-->
-                <div class="row">
-                    <div class="form-group col-sm-4 col-xs-4">
-                        <label for="unbooked">
-                            Only show unbooked offers
-                        </label>
-                        <input type="checkbox" class="form-control" checked ng-model="searchParams.unbooked"
-                               id="unbooked"/>
+                <div class="row" id="basicsearch">
 
-                    </div>
-                    <div class="form-group col-sm-8 col-xs-8">
+                    <div class="form-group col-sm-12 col-xs-12" style="margin-top:10px;">
                         <label for="typeofcare">Type of care</label>
                         <select ng-model="searchParams.typeofcare"
                                 ng-options="typeofcare for typeofcare in typeofcares"
@@ -39,10 +32,10 @@
                             <option ng-show="true" value="">- Please Choose -</option>
                         </select>
                     </div>
-                </div>
+
                 <br>
                 <!-- date and time -->
-                <div class="row">
+                <!--<div class="row">-->
                     <div class="form-group col-sm-4 col-xs-4">
                         <label for="startday">Start day (mm/dd/yy)</label>
                         <div class='input-group date'>
@@ -93,24 +86,34 @@
                         </div>
                     </div>
                     <br>
-                </div>
-                <div class="btn btn-primary col-sm-3 col-xs-4 checkbox-inline" style="margin-left:15px">
 
-                    <label for="repeating" class="repeating " style="margin-left:15px;margin-top:10px;">
-                        <input ng-model="offer.repeating"
-                               class=""
-                               type="checkbox"
-                               id="repeating"
-                               name="repeating">
+                <!--<div class="col-sm-3 col-xs-4 checkbox-inline" style="margin-left:15px">-->
+                    <!--<label for="advanced" class="repeating " style="margin-left:15px;margin-top:10px;">-->
+                        <!--<input ng-model="search.advanced"-->
+                               <!--class="form-control ng-pristine ng-untouched ng-valid ng-empty"-->
+                               <!--type="checkbox"-->
+                               <!--id="advanced"-->
+                               <!--name="advanced">-->
+                        <!--Advanced Search-->
+                    <!--</label>-->
+                <!--</div>-->
+
+                <div class="form-group col-sm-4 col-xs-4">
+                    <br>
+                    <label for="advanced" style="margin-left:10px;margin-top:10px;">
                         Advanced Search
                     </label>
-
+                    <div class="form-group col-sm-2 col-xs-2">
+                    <input ng-model="search.advanced" type="checkbox" class="form-control align-left"
+                           id="advanced"/>
+                    </div>
+                    </div>
                 </div>
                 <br>
-                <hr class="colorgraph">
-                <div class="well form-group animate-if" ng-if="offer.repeating">
+                <div class="col-xs-12"></div>
+                <div class="well form-group animate-if" ng-if="search.advanced">
                     <div class="row" style="margin-bottom:0px;">
-                        <div class="form-group col-sm-4 col-xs-4">
+                        <div class="form-group col-sm-8 col-xs-8">
                             <label>Price
                                 <rzslider
                                         style="width: 500px"
@@ -149,6 +152,19 @@
                                 </ui-gmap-google-map>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <hr class="colorgraph" style="width:100%">
+                <div class="col-sm-12"></div>
+
+                <div id="unbookedcheck" class="row form-group col-sm-4 col-xs-4">
+                    <label for="unbooked" style="margin-left: 10px; margin-top:10px;">
+                        Only show unbooked offers
+                    </label>
+                    <div class="form-group col-sm-2 col-xs-2">
+                        <input type="checkbox" class="form-control" checked ng-model="searchParams.unbooked"
+                               id="unbooked"/>
                     </div>
                 </div>
 

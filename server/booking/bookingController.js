@@ -17,6 +17,44 @@ var config = require('../config/passportConfig'); // get config file
 //For debugging purposes
 console.log("bookingController File geladen.");
 
+module.exports.postCreateRequest = function(req, res) {
+    //create new database entry from req.body
+    //insert new rating from req.body
+    var secretOrKey = config.secret;
+    
+    var token = req.headers.authorization;
+    token = token.substr(4);
+
+    var decoded = jwt.decode(token, secretOrKey);
+    console.log(decoded);
+
+    var careseeker = decoded._id;
+
+    var booking = new Booking({
+        startDay : req.body.startDay,
+        starttime :     req.body.starttime,
+        endtime :       req.body.endtime,
+        repeating:      req.body.repeating,
+        repeatoptions: req.body.repeating,
+        location: req.body.repeating,
+        notes:     req.body.notes,
+        createdDate:    req.body.createdDate,
+        lastActivity:   req.body.createdDate, //when did the status change the last time?
+        createdBy:      careseeker, //Careseeker
+        status : 1
+    });
+    booking.save(function (err) {
+        if (err) {
+            res.status(500).send(err);
+            console.log("Error during Booking.save: Did not load to database");
+            console.log(err);
+        } else {
+            console.log("Saved rating to database");
+            res.send();
+        }
+    });
+};
+
 module.exports.getMyBookings = function(req, res) {
     var resultingBookings = [];
     var secretOrKey = config.secret;

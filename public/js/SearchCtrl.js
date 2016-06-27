@@ -231,5 +231,12 @@ angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$ht
         'Sunday'
     ];
 
+    $scope.rating = {
+        overallSatisfaction: 3,
+        Friendliness: 4,
+        Competence: 2,
+        Punctuality: 5
+    }
+
 
 }]);
