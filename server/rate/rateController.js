@@ -19,7 +19,7 @@ console.log("rateController File geladen.");
 //add new rating
 module.exports.postCreateRating = function(req, res) {
     //insert new rating from req.body
-    
+
 };
 
 //retrieve stars for rating (average)

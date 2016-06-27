@@ -17,6 +17,10 @@ var config = require('../config/passportConfig'); // get config file
 //For debugging purposes
 console.log("bookingController File geladen.");
 
+module.exports.postCreateRequest = function(req, res) {
+    //create new database entry from req.body
+};
+
 module.exports.getMyBookings = function(req, res) {
     var resultingBookings = [];
     var secretOrKey = config.secret;
