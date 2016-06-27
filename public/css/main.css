@@ -257,3 +257,17 @@ hr{
 .mybookingscareseeker .bookingitem .btn-success {
     background-color: #5cb85c;
 }
+
+.staroverall .glyphicon-star,
+    .staroverall .glyphicon-star-empty
+{
+    font-size: 30px;
+    color: #428BCA;
+}
+
+.stardetail .glyphicon-star,
+.stardetail .glyphicon-star-empty
+{
+    font-size: 20px;
+    color: #428BCA;
+}
