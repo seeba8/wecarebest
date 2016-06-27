@@ -31,7 +31,7 @@ module.exports.postCreateRequest = function(req, res) {
     var careseeker = decoded._id;
 
     var booking = new Booking({
-        startDay : req.body.startDay,
+        startDay : req.body.startday,
         starttime :     req.body.starttime,
         endtime :       req.body.endtime,
         repeating:      req.body.repeating,
@@ -41,7 +41,7 @@ module.exports.postCreateRequest = function(req, res) {
         createdDate:    req.body.createdDate,
         lastActivity:   req.body.createdDate, //when did the status change the last time?
         createdBy:      careseeker, //Careseeker
-        offer : req.body.offer,
+        offer : req.body.offerid,
         status : 1
     });
     booking.save(function (err) {
