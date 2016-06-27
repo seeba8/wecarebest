@@ -12,11 +12,11 @@ angular.module("myApp")
             $scope.initFirst=function()
             {
                 console.log("BookingCtrl loaded.");
-                var caregiver_id = auth.parseJwt(auth.getToken())._id
+                var caregiver_id = auth.parseJwt(auth.getToken())._id;
 
                 console.log("offers");
-                $http.get(url + "/offers", {caregiver: caregiver_id}).success(function (offers) {
-                    console.log(offers);
+                $http.get(url + "/offers", {params:{caregiver: caregiver_id, unbooked: true}}).success(function (offers) {
+                    console.log(offers.length);
                     
                     
                 });

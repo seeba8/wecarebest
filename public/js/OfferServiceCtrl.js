@@ -3,7 +3,6 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
     var url = 'http://localhost:3000';
     var geocoder;
     var lastcenter = null;
-    console.log($window.localStorage['jwtToken']);
     console.log("loaded create offer controller");
 
     var config = {
