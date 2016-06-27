@@ -51,17 +51,7 @@ angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$ht
             }
         });
     };
-
-    function gotoBottom ($scope, $location, $anchorScroll) {
-        $scope.gotoBottom = function() {
-            // set the location.hash to the id of
-            // the element you wish to scroll to.
-            $location.hash('results');
-
-            // call $anchorScroll()
-            $anchorScroll();
-        };
-    }
+    
 
     $(function () {
         $('.startdaypicker').datetimepicker({
@@ -209,6 +199,21 @@ angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$ht
             }
         }
     };
+
+    $scope.$watch('selected', function () {
+
+        window.setTimeout(function(){
+
+            google.maps.event.trigger(map, 'resize');
+        },100);
+
+    });
+
+    // function refreshMap() {
+    //
+    //         google.maps.event.trigger(map, 'resize');
+    //     };
+
     $scope.circle = {
         stroke: {
             color: '#428BCA',
@@ -243,5 +248,11 @@ angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$ht
         'Sunday'
     ];
 
+    // $timeout(function () {
+    //     // // in my case
+    //     // initializeMap();
+    //     // OR this case:
+    //     google.maps.event.trigger(map, 'resize');
+    // });
 
 }]);

@@ -12,7 +12,10 @@
     <hr class="colorgraph">
     <div class="row">
         <div class="col-sm-12 col-md-12">
+
             <form ng-submit="app.search()">
+                <div id="criteria" class="collapse in">
+
                 <!--<div class="form-group col-sm-4 col-xs-4">
                     <label class="row">Location
                         <input type="text" ng-model="searchParams.locationname" placeholder="Location"/>
@@ -113,23 +116,26 @@
                         Advanced Search
                     </label>
                     <div class="form-group col-sm-2 col-xs-2">
-                    <input ng-model="search.advanced" type="checkbox" class="form-control align-left"
-                           id="advanced"/>
+                    <input type="checkbox" id="advanced" class="form-control align-left" ng-model="search.advanced" ng-click="selected='advanced'"
+                           ng-class="{'selected': selected == 'advanced'}"/>
+                        <!--ng-model="search.advanced"-->
                     </div>
+
                     </div>
                 </div>
                 <br>
                 <div class="col-xs-12"></div>
-                <div class="well form-group animate-if" ng-if="search.advanced">
+                <div class="well form-group" ng-show="selected == 'advanced'">
+                    <!--ng-show="search.advanced"-->
                     <div class="row" style="margin-bottom:0px;">
                         <div class="form-group col-sm-8 col-xs-8">
-                            <label>Price
+                            <label>Price</label><br>
                                 <rzslider
-                                        style="width: 500px"
+                                        style="width: 100%"
                                         rz-slider-model="searchParams.priceMin"
                                         rz-slider-high="searchParams.priceMax"
                                         rz-slider-options="slider.options"></rzslider>
-                            </label>
+
                         </div>
 
                         <!--<div class="form-group col-sm-12 col-xs-12">-->
@@ -143,7 +149,7 @@
                         <div class="form-group col-sm-12 col-xs-12">
                             <div class="form-group div-wrapper" data-tap-disabled="true">
                                 <ui-gmap-google-map id="gmap" center='map.center' zoom='map.zoom' events="map.events"
-                                                    options="map.options">
+                                                    options="map.options" refresh=!map.isMapElementHidden">
                                     <ui-gmap-search-box
                                             template='search.template'
                                             events='search.events'
@@ -164,12 +170,12 @@
                     </div>
                 </div>
 
-                <hr class="colorgraph" style="width:100%">
+                <hr class="colorgraph">
                 <div class="col-sm-12"></div>
 
                 <div id="unbookedcheck" class="row form-group col-sm-4 col-xs-4">
                     <label for="unbooked" style="margin-left: 10px; margin-top:10px;">
-                        Only show unbooked offers
+                        Include booked offers
                     </label>
                     <div class="form-group col-sm-2 col-xs-2">
                         <input type="checkbox" class="form-control" checked ng-model="searchParams.unbooked"
@@ -178,19 +184,23 @@
                 </div>
 
                 <div class="form-group col-sm-12 col-xs-12">
-                    <button type="submit" ng-click="scrolltoBottom()" class="btn btn-success">Search</button>
+                    <button data-toggle="collapse" data-target="#criteria, #newsearch" type="submit" class="btn btn-success">Search</button>
                     <button type="reset" class="btn btn-danger" ng-click="app.reset()">Reset</button>
+                    <br><br>
+
                 </div>
+                </div>
+            <button id="newsearch" class="collapse btn btn-success" onClick="javascript:location.reload();">New Search</button>
             </form>
-        </div>
-        <div class="row" id="results">
+
+            </div>
+
+        <div class="col-md-12 col-sm-12" id="results">
             <div class="row" ng-repeat="result in results" style="margin-bottom: 30px;">
-                <div class="col sm-2">
-                    <div class="col-md-2 col-sm-2">
+                <div class="col-md-2 col-sm-2">
                         <img style="max-height:10em;" src="{{result.user.picture}}" class="img-rounded img-responsive">
-                    </div>
                 </div>
-                <div class="col-sm-7 col-md-7">
+                <div class="col-md-7 col-sm-7">
                     <div class="media">
                         <div class="media-body">
                             <ul class="list-group">
@@ -222,7 +232,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3 col-md-3 pull-right">
+                <div class="col-md-3 col-sm-3 pull-right">
                     <a href="/#/singleOffer/{{result.offer._id}}" class="btn btn-primary btn-success"
                        style="min-width:80%;margin-top:10px;"><span
                             class="glyphicon glyphicon-ok"></span> View</a>
