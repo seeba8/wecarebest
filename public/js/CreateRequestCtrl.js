@@ -4,9 +4,17 @@
 
 angular.module("myApp")
     .controller("CreateRequestCtrl", ["$scope", "$routeParams", "$http", "$window", "user", "auth", "uiGmapGoogleMapApi", function ($scope, $routeParams, $http, $window, user, auth, uiGmapGoogleMapApi) {
+
         var geocoder;
         var app = this;
         var url = 'http://localhost:3000';
+
+        function submit() {
+            $http.post(url + "/createRequest", $scope.request).success(function () {
+                console.log("...Inserted Successfully!");
+                $window.location.href = "/#/bookingsrequests";
+            })
+        }
 
         if (typeof $routeParams.offerid == "undefined") {
             $window.location = "/";
@@ -29,7 +37,7 @@ angular.module("myApp")
                 offer.startday = moment(offer.startday).format("L");
                 offer.starttime = moment(offer.starttime).format("LT");
                 offer.endtime = moment(offer.endtime).format("LT");
-                offer.endday = offer.repeating ? moment(offer.endday).format("L") : "";
+                offer.repeatoptions.endday = offer.repeating ? moment(offer.repeatoptions.endday).format("L") : "";
                 offer.createdDate = offer.createdDate ? moment(offer.createdDate).format("L") : moment("2016 01 01", "YYYY MM DD").format("L");
             }
             offer = offers[0].offer;
@@ -41,10 +49,10 @@ angular.module("myApp")
                 location: {}
             };
 
-            if(offer.endday) $('.startdaypicker').data("DateTimePicker").maxDate(moment(offer.endday));
+            /*if(offer.endday) $('.startdaypicker').data("DateTimePicker").maxDate(moment(offer.endday));
             $('.startdaypicker').data("DateTimePicker").minDate(moment(offer.startday));
             if(offer.endday) $('.enddaypicker').data("DateTimePicker").maxDate(moment(offer.endday));
-            $('.enddaypicker').data("DateTimePicker").minDate(moment(offer.startday));
+            $('.enddaypicker').data("DateTimePicker").minDate(moment(offer.startday));*/
         });
         updateMap = function(){
             console.log("ASKING GOOOGLE");
@@ -105,7 +113,7 @@ angular.module("myApp")
                 })
                 .on('dp.change', function (e) {
                     $('.startdaypicker').data("DateTimePicker").maxDate(e.date);
-                    $scope.request.endday = e.date.toDate();
+                    $scope.request.repeatoptions.endday = e.date.toDate();
                     $scope.$apply();
                 });
         });
