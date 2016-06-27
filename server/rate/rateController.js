@@ -2,7 +2,7 @@
  * Created by Layla M on 26.06.2016.
  */
 var Rating = require('./rateSchema');
-var Booking = require('./bookingSchema'); //Fremdschlüsselreferenz
+var Booking = require('../booking/bookingSchema'); //Fremdschlüsselreferenz
 var Offer = require('../requests_offers/offerSchema'); //Fremdschlüsselreferenz
 var User = require('../users/structure');
 var path = require('path');
@@ -36,8 +36,10 @@ module.exports.postCreateRating = function(req, res) {
 module.exports.postShortRating = function(req, res) {
     conditions = {};
     var caregiver = req.body.caregiver;
+    console.log("Caregiver:" + caregiver);
     conditions["caregiver"] = caregiver;
     Rating.find(conditions, function(err, ratings) {
+        console.log(ratings);
         var returnItem = {};
         //ziehe alle vier sterne-bewertungen
         //ziehe anzahl
@@ -50,19 +52,22 @@ module.exports.postShortRating = function(req, res) {
         var sum4 = 0;
         var count4 =0;
         for(var i=0; i < ratings.length; i++){
-            if (ratings[i].hasOwnProperty('overallSatisfaction')) {
+            console.log(ratings[i]);
+            if ('overallSatisfaction' in ratings[i]) {
+                console.log("has property overallSatisfaction");
                 sum1 = sum1 + ratings[i].overallSatisfaction;
+                //console.log("satisfaction is: " + ratings[i].overallSatisfaction);
                 count1 = count1 + 1;
             }
-            if (ratings[i].hasOwnProperty('Friendliness')) {
+            if ('Friendliness' in ratings[i]) {
                 sum2 = sum2 + ratings[i].Friendliness;
                 count2 = count2 + 1;
             }
-            if (ratings[i].hasOwnProperty('Competence')) {
+            if ('Competence' in ratings[i]) {
                 sum3 = sum3 + ratings[i].Competence;
                 count3 = count3 + 1;
             }
-            if (ratings[i].hasOwnProperty('Punctuality')) {
+            if ('Punctuality' in ratings[i]) {
                 sum4 = sum4 + ratings[i].Punctuality;
                 count4 = count4 + 1;
             }
