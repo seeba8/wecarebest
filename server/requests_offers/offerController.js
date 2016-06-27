@@ -7,6 +7,7 @@
 var Offer = require('./offerSchema');
 var path = require('path');
 var User = require('../users/structure.js');
+var Booking = require("../booking/bookingSchema");
 
 //For debugging purposes
 console.log("offerController File geladen.");
@@ -98,10 +99,48 @@ module.exports.postOffer = function (req, res) {
  res.sendFile("/html/offerservice.html", { root: path.join(__dirname, '/../../public') });
  };
  */
+
 module.exports.getOffers = function (req, res) {
+    function parseResults(results) {
+        var send = [];
+        userids = [];
+        for (x in results) {
+            send.push({"offer": results[x]});
+            userids.push(results[x].createdBy || "5759bd3581b11d042b6cf54e");
+            if (typeof results[x].createdBy === "undefined") {
+                send[send.length - 1].offer.createdBy = "5759bd3581b11d042b6cf54e";
+            }
+        }
+        User.find({'_id': {$in: userids}}, function (err, users) {
+            usersorted = {};
+            for (user in users) {
+                if (typeof users[user]._id !== "undefined") {
+                    usersorted[users[user]._id] = users[user];
+                }
+            }
+            for (x in send) {
+                currUser = usersorted[send[x].offer.createdBy];
+                send[x].user = {
+                    firstname: currUser.firstName,
+                    lastname: currUser.name,
+                    picture: currUser.picture
+                };
+            }
+            res.send(send);
+        });
+    }
+
+    function runQuery(conditions){
+        console.log("Search params: ", conditions);
+        Offer.find(conditions).limit(25).exec(function (err, results) {
+            parseResults(results);
+        });
+    }
+
     console.log("Search parameters: ", req.query);
     var searchParams = req.query;
     var conditions = {};
+    var unbooked = false;
     for (var param in searchParams) {
         switch (param) {
             case "locationname":
@@ -157,40 +196,32 @@ module.exports.getOffers = function (req, res) {
             case "_id":
                 conditions["_id"] = searchParams[param];
                 break;
+            case "unbooked":
+                if(searchParams[param] == "true" || searchParams[param] == true){
+                    unbooked = true;
+                }
         }
 
     }
-    console.log("Search params: ", conditions);
-    Offer.find(conditions).limit(25).exec(function (err, results) {
-        var send = [];
-        userids = [];
-        for (x in results) {
-            send.push({"offer": results[x]});
-            userids.push(results[x].createdBy || "5759bd3581b11d042b6cf54e");
-            if(typeof results[x].createdBy === "undefined"){
-                send[send.length -1].offer.createdBy = "5759bd3581b11d042b6cf54e";
+    if(unbooked) {
+        Booking.find().exec(function(err, results){
+            var arr = results.map(function(item){ return item["offer"]});
+            if(typeof conditions["_id"] == "undefined") {
+                conditions["_id"] = {
+                    $nin: arr
+                };
             }
-        }
-        User.find({'_id': {$in: userids}}, function (err, users) {
-            console.log(users);
-            usersorted = {};
-            for(user in users){
-                if(typeof users[user]._id !== "undefined"){
-                    usersorted[users[user]._id] = users[user];
-                }
+            else{
+                conditions["_id"].$nin = arr;
             }
-            for(x in send){
-                currUser = usersorted[send[x].offer.createdBy];
-                send[x].user = {
-                    firstname: currUser.firstName,
-                    lastname: currUser.name,
-                    picture: currUser.picture
-            };
-            }
-            console.log(send);
-            res.send(send);
+            runQuery(conditions);
         });
-    });
+    }
+    else{
+        runQuery(conditions);
+    }
+
+
 };
 
 module.exports.showmyOffer = function (req, res) {
