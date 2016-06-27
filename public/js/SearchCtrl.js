@@ -36,6 +36,18 @@ angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$ht
                 $scope.circle.center = $scope.results[0].offer.location;
                 $scope.circle.radius = $scope.results[0].offer.location.radius;
                 $('#caregiverimg').attr("src", $scope.results[0].user.picture);
+                console.log("get short rating");
+                $http.post(url + "/shortRating", {
+                        caregiver: "5758096dc421b13009535def"
+                    }).success(function(shortRatings) {
+                        console.log(shortRatings);
+                        $scope.overallSatisfaction = shortRatings.overallSatisfaction;
+                        $scope.Friendliness = shortRatings.Friendliness;
+                        $scope.Competence = shortRatings.Competence;
+                        $scope.Punctuality = shortRatings.Punctuality;
+
+                    })
+                
             }
         });
     };
@@ -230,13 +242,6 @@ angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$ht
         'Saturday',
         'Sunday'
     ];
-
-    $scope.rating = {
-        overallSatisfaction: 3,
-        Friendliness: 4,
-        Competence: 2,
-        Punctuality: 5
-    }
 
 
 }]);
