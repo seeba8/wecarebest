@@ -38,7 +38,7 @@ angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$ht
                 $('#caregiverimg').attr("src", $scope.results[0].user.picture);
                 console.log("get short rating");
                 $http.post(url + "/shortRating", {
-                        caregiver: "5758096dc421b13009535def"
+                        caregiver: $scope.results[0].offer.createdBy
                     }).success(function(shortRatings) {
                         console.log(shortRatings);
                         $scope.overallSatisfaction = shortRatings.overallSatisfaction;
@@ -46,8 +46,16 @@ angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$ht
                         $scope.Competence = shortRatings.Competence;
                         $scope.Punctuality = shortRatings.Punctuality;
 
-                    })
-                
+                    });
+                $http.post(url + "/longRating", {
+                    caregiver : $scope.results[0].offer.createdBy
+                }).success(function(longratings) {
+                    console.log("long ratings successful");
+                    console.log(longratings);
+                    $scope.ratings = longratings;
+
+                });
+
             }
         });
     };
