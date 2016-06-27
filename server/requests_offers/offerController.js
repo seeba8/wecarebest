@@ -200,6 +200,10 @@ module.exports.getOffers = function (req, res) {
                 if(searchParams[param] == "true" || searchParams[param] == true){
                     unbooked = true;
                 }
+                break;
+            case "caregiver":
+                conditions["createdBy"] = searchParams[param];
+                break;
         }
 
     }
