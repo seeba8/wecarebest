@@ -19,7 +19,17 @@ console.log("rateController File geladen.");
 //add new rating
 module.exports.postCreateRating = function(req, res) {
     //insert new rating from req.body
-
+    var rating = new Rating(req.body);
+    rating.save(function (err) {
+        if (err) {
+            res.status(500).send(err);
+            console.log("Error during Rating.save: Did not load to database");
+            console.log(err);
+        } else {
+            console.log("Saved rating to database");
+            res.send();
+        }
+    });
 };
 
 //retrieve stars for rating (average)
