@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="../css/offerservice.css">
 
     <h2>Search for a caregiver</h2>
-    <pre>{{searchParams}}
-    </pre>
     <hr class="colorgraph">
     <div class="row">
         <div class="col-sm-12 col-md-12">
@@ -223,10 +221,10 @@
                     </div>
                 </div>
                 <div class="col-sm-3 col-md-3 pull-right">
-                    <a href="/#/singleOffer/{{result.offer._id}}" class="btn btn-primary btn-success"
+                    <a href="/#/singleOffer/{{result.offer._id}}/{{searchParams.startday}}/{{searchParams.starttime}}/{{searchParams.endtime}}" class="btn btn-primary btn-success"
                        style="min-width:80%;margin-top:10px;"><span
                             class="glyphicon glyphicon-ok"></span> View</a>
-                    <a ng-click="" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;">
+                    <a href="/#/createRequest/{{result.offer._id}}/{{searchParams.startday}}/{{searchParams.starttime}}/{{searchParams.endtime}}" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;">
                         <span class="glyphicon glyphicon-envelope"></span> Book
                     </a>
                 </div>

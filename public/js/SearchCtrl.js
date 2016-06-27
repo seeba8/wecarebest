@@ -127,6 +127,7 @@ angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$ht
         events: {
             place_changed: function (autocomplete) {
                 var place = autocomplete.getPlace();
+                $scope.searchParams.locationname = place.formatted_address;
                 if (place.address_components) {
                     $scope.map.center = {
                         latitude: place.geometry.location.lat(),
