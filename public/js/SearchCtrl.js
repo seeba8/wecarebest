@@ -4,7 +4,7 @@ angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$ht
     console.log("Loaded Searchcontroller");
     var isSingleOffer = false;
     $scope.search = {advanced: true};
-
+    $scope.showMap = true;
     geolocation.getLocation().then(function(data){
         $scope.searchParams.lat = data.coords.latitude;
         $scope.searchParams.lng = data.coords.longitude;
@@ -163,11 +163,21 @@ angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$ht
         }
         // position: "top-left"
     };
-
     uiGmapGoogleMapApi.then(function (maps) {
         geocoder = new maps.Geocoder;
+        app.maps = maps;
 
     });
+    
+    $scope.$watch("search.advanced", function() {
+        console.log("test");
+        if(typeof app.maps != "undefined"){
+            console.log($scope.map.control.getGMap());
+            app.maps.event.trigger($scope.map.control.getGMap(),'resize');
+        }
+
+    });
+    
     $scope.marker = {
         options: {draggable: true},
         coords: {},
@@ -199,6 +209,7 @@ angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$ht
             longitude: 11.5,
             name: "München"
         },
+        control: {},
         zoom: 10,
         options: {
             scaleControl: true,

@@ -114,7 +114,7 @@
                         Advanced Search
                     </label>
                     <div class="form-group col-sm-2 col-xs-2">
-                    <input type="checkbox" id="advanced" class="form-control align-left" ng-model="search.advanced" ng-click="showMap = false; showMap = true;"/>
+                    <input type="checkbox" id="advanced" class="form-control align-left" ng-model="search.advanced" ng-click="map.refresh = true; map.refresh=false;"/>
                         <!--ng-model="search.advanced"-->
                     </div>
 
@@ -144,9 +144,9 @@
                             <!--</div>-->
                         <!--</div>-->
                         <div class="form-group col-sm-12 col-xs-12">
-                            <div class="form-group div-wrapper" data-tap-disabled="true" ng-if="showMap">
+                            <div class="form-group div-wrapper" data-tap-disabled="true" ng-if="!map.refresh">
                                 <ui-gmap-google-map id="gmap" center='map.center' zoom='map.zoom' events="map.events"
-                                                    options="map.options" refresh=!map.isMapElementHidden">
+                                                    options="map.options" control="map.control">
                                     <ui-gmap-search-box
                                             template='search.template'
                                             events='search.events'

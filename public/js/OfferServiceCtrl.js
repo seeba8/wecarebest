@@ -1,4 +1,4 @@
-angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$http','$window', 'uiGmapGoogleMapApi', "auth", function($interval, $scope, $http, $window, uiGmapGoogleMapApi, auth) {
+angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$http','$window', 'uiGmapGoogleMapApi', "auth", "geolocation", function($interval, $scope, $http, $window, uiGmapGoogleMapApi, auth, geolocation) {
     var app = this;
     var url = 'http://localhost:3000';
     var geocoder;
@@ -14,6 +14,36 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
 
     uiGmapGoogleMapApi.then(function (maps) {
         geocoder = new maps.Geocoder;
+        
+    });
+
+    geolocation.getLocation().then(function(data){
+        $scope.offer.location.latitude = data.coords.latitude;
+        $scope.offer.location.longitude = data.coords.longitude;
+
+        $scope.map.center = {
+            latitude: data.coords.latitude,
+            longitude: data.coords.longitude
+        };
+        geocoder.geocode({
+                "location": {
+                    lat: data.coords.latitude,
+                    lng: data.coords.longitude
+                }
+            }
+            , function (results, status) {
+                if (status == "OK" && results != null) {
+                    $scope.offer.location.name = results[0].formatted_address;
+                    for (var i = 0; i < results.length; i++) {
+                        var result = results[i];
+                        if (result.types[0] == "locality") {
+                            $scope.offer.location.name = result.formatted_address;
+                            break;
+                        }
+                    }
+                    $('#searchbox').val($scope.offer.location.name);
+                }
+            });
     });
 
     $scope.offer = {
