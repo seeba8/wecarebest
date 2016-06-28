@@ -221,7 +221,7 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
                 $scope.messages = 'Success! Your offer has been created!';
                 $scope.statusmessages = null;
                 console.log("...Inserted Successfully!");
-                $window.location.href = "/#/bookingsrequests";
+                $window.location.href = "/#/mybookingscaregiver";
             })
             //IF error in HTTP POST then log it and show to user
                 .error(function (data, status, header, config) {

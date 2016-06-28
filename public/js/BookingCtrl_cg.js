@@ -92,6 +92,95 @@ angular.module("myApp")
 
 
 
+
+        /*
+         * #############################################################################
+         * ##### INVOKED BY CLICK ON DELETE BUTTON IN myoffers.html ####################
+         * ##### DELETE DOCUMENT BY ID FROM DATABASE AND ARRAY IN FRONTEND #############
+         * #############################################################################
+         * */
+        $scope.deleteOffer = function(id, index) {
+            console.log(index);
+            //delete offer from array in frontend.
+            $scope.offers.splice(index, 1);
+
+            var data = {};
+            data.id = id;
+            console.log(data);
+
+            //send it as http post to backend in order to delete it in database
+            $http.post(url + "/deletemyoffer", data).success(function(){
+                console.log("clicked:" + data);
+                $scope.PostDataResponse = data;
+                console.log("Löschung beendet.");
+            })
+            //IF error in HTTP POST then log it and show to user
+                .error(function (data, status, header, config) {
+                    $scope.ResponseDetails = "Data: " + data +
+                        "<hr />status: " + status +
+                        "<hr />headers: " + header +
+                        "<hr />config: " + config;
+                    console.log($scope.ResponseDetails);
+                });
+        };
+
+
+        //UPDATE FUNCTIONALITY
+        $scope.updateOffer = function(offerItem, index) {
+
+            // $scope.editing = {};
+            offerItem.startDay = new Date(offerItem.startDay);
+            console.log(index);
+            console.log(offerItem);
+
+            $scope.offer.startDay = offerItem.startDay;
+            $scope.offer.typeofcare = offerItem.typeofcare;
+            $scope.offer.wageperhour = offerItem.wageperhour;
+            $scope.offer.location = offerItem.location;
+            $scope.offer.notes = offerItem.notes;
+
+
+            $scope.saveUpdate = function(item){
+
+                console.log($scope.Offer.$valid);
+                console.log($scope.offer);
+                console.log(item);
+                if($scope.Offer.$valid){
+                    item.location = item.center.name;
+                    item.latitude = item.center.latitude;
+                    item.longitude = item.center.longitude;
+
+                    console.log("Saved Changes.");
+                    offerItem.timeframe = item.timeframe;
+                    offerItem.typeofcare = item.typeofcare;
+                    offerItem.wageperhour = item.wageperhour;
+                    offerItem.location.name = item.location.name;
+                    offerItem.latitude = item.latitude;
+                    offerItem.longitude = item.longitude;
+                    offerItem.radius = item.radius;
+                    offerItem.notes = item.notes;
+                    offerItem.id = offerItem._id;
+                    app.updateOffer(offerItem);
+
+                } else {
+                    console.log("Not valid form.");
+                }
+            }
+
+        };
+
+        app.updateOffer = function ( PushCandidate) {
+            $http.post("../updatemyoffer",  PushCandidate).success(function () {
+                console.log("Updated successfully");
+            })
+        };
+
+
+
+
+
+
+
     }]);
 
 

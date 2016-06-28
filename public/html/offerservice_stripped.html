@@ -7,7 +7,7 @@
 <div class="row">
     <div class="form-group col-xs-6">
         <label for="timeframe">Start</label>
-        <input ng-model="offer.timeframe"
+        <input ng-model="offer.starttime"
                type="datetime-local"
                class="form-control"
                id="timeframe"
@@ -19,7 +19,7 @@
     </div>
     <div class="form-group col-xs-6">
         <label for="enddate">Until</label>
-        <input ng-model="offer.enddate"
+        <input ng-model="offer.endtime"
                type="date"
                class="form-control"
                id="enddate"
@@ -51,16 +51,16 @@
         <div class=" form-group" id="weekdays" >
             <label class="col-md-2 control-label">Day(s) of Week</label>
             <div class="checkbox" >
-                <label class="checkbox-inline" name="weekdays" ng-repeat="weekday in weekdays">
-                    <input type="checkbox" value="">{{ weekday }}
+                <label class="checkbox-inline" name="weekdays" ng-repeat="offer.repeatoptions.weekday in offer.repeatoptions.weekdays">
+                    <input type="checkbox" value="">{{ offer.repeatoptions.weekday }}
                 </label>
             </div>
         </div>
         <div class="form-group" id="frequencies" >
             <label class="col-md-2 control-label">Frequency</label>
             <div class="checkbox" >
-                <label class="checkbox-inline" name="frequency" ng-repeat="frequency in frequencies">
-                    <input type="checkbox" value="">{{ frequency }}
+                <label class="checkbox-inline" name="frequency">
+                    <input type="checkbox" value="">{{ offer.offer.repeatoptions.frequency }}
                 </label>
             </div>
         </div>
@@ -212,14 +212,14 @@
     -->
 <div class="form-group">
     <label for="notes">Notes (max. 400 chars)</label>
-                <textarea ng-model="offer.notes"
+                <textarea ng-model="offer.offer.notes"
                           class="form-control"
                           name="notes"
                           rows="5"
                           id="notes"
                           ng-maxlength="400";
                           placeholder="Enter your additional notes regarding your offer"></textarea>
-    <div ng-if="interacted(Offer.notes)" ng-messages="Offer.notes.$error" role="alert">
+    <div ng-if="interacted(Offer.offer.notes)" ng-messages="Offer.notes.$error" role="alert">
         <div class="alert alert-danger" ng-message="maxlength">Please explain your offer in less than 400 characters.</div>
     </div>
 </div>
@@ -251,4 +251,3 @@
 <script src="/bower_components/angular-google-maps/dist/angular-google-maps.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?callback=initMap&key=AIzaSyCLOfEshWapwoqrg5qMVjhpG1DB75lvjTE"
         async defer></script>-->
-<link rel="stylesheet" href="/html/offerservice.css">
