@@ -91,6 +91,11 @@ body {
     background-color: white;
 }
 
+.whitebg{
+    background-color:white;
+    padding: 30px;
+}
+
 /*BY MS Set Color of buttons on myoffers.html (bookings&requests) to white*/
 a.btn {
     color:white !important;

@@ -21,27 +21,32 @@
             <div class="media">
                 <div class="media-body">
                     <ul class="list-group">
-                        <h4 class="media-heading list-group-item-heading">
-                            <h3 style="margin-top:0px;">Careseeker: {{booking.user.firstName}} {{booking.user.name}}<br /></h3>
-                            Offer: {{booking.offer}}</br>
-                            <img src="https://maxcdn.icons8.com/Color/PNG/24/Time_And_Date/calendar-24.png" title="Calendar" width="24">
-                            {{booking.starttime | datetime1}}
-                            </br><img src="https://maxcdn.icons8.com/Color/PNG/24/Time_And_Date/tear_off_calendar-24.png" title="Tear Off Calendar" width="24">
-                            {{booking.endtime |  datetime1}}</h4>
-                        <li ng-show="booking.repeating == true" class="list-group-item"><b>Repeating:</b>
+                            <h3 style="margin-top:0px;">Request by Careseeker: {{booking.user.firstName}} {{booking.user.name}}<br /></h3>
+                            <hr>
+                        <li class="list-group-item" >
+                            <img src="../images/icons/date.png" title="Date" title="Calendar" width="24">
+                            <b>Start: </b>
+                            {{booking.starttime | datenotime}}
+                            -
+                            <b>Time: </b>
+                            {{booking.starttime | datetotime}} until {{booking.endtime |  datetotime}}
+                        </li>
+                        <li ng-show="booking.repeating == true" class="list-group-item">
+                            <img src="../images/icons/repeating.png" title="Repeating true" width="24">
+                            <b>Repeating:</b>
                             {{booking.repeatoptions.frequency}}
-                        </li>
-                        <!--TODO show only weekdays with value == true-->
-                        <li ng-show="booking.repeating == true" class="list-group-item" ><b>Days:</b>
-                            <span ng-show="val == true" ng-repeat="(key,val) in booking.repeatoptions">{{key}}<span ng-show="!$last"> | </span></span>
-                        </li>
-                        <li class="list-group-item">
-                            <img src="https://maxcdn.icons8.com/Color/PNG/24/Maps/geo_fence-24.png" title="Geo-fence" width="24">
-                            {{booking.location.street}}, {{booking.location.postalCode}} {{booking.location.city}}
+                            -
+                            <span ng-show="booking.repeating == true"><b>Days:</b>
+                            <span ng-show="val == true" ng-repeat="(key,val) in booking.repeatoptions">{{key | cut:true:2}}<span ng-show="!$last"> | </span></span>
+                        </span>
                         </li>
                         <li class="list-group-item">
-                            <img src="https://maxcdn.icons8.com/Color/PNG/24/Business/survey-24.png" title="Survey" width="24">
-                            Notes: {{booking.notes}}
+                            <img src="../images/icons/location.png" title="Location" width="24">
+                            <b>City: </b>{{booking.location.street}}, {{booking.location.postalCode}} {{booking.location.city}}
+                        </li>
+                        <li class="list-group-item">
+                            <img src="../images/icons/notes.png" title="Notes" width="24">
+                            <b>Notes:</b> {{booking.notes}}
                         </li>
                     </ul>
                 </div>
@@ -78,7 +83,7 @@
                         <h3 style="margin-top:0px;">Unbooked Offer - Type: {{offer.offer.typeofcare}}</h3>
                         <hr>
                         <li class="list-group-item" >
-                            <img src="https://maxcdn.icons8.com/Color/PNG/24/Time_And_Date/calendar-24.png" title="Calendar" width="24">
+                            <img src="../images/icons/date.png" title="Date" title="Calendar" width="24">
                             <b>Start: </b>
                             {{offer.offer.starttime | datenotime}}
                             -
@@ -86,14 +91,13 @@
                             {{offer.offer.starttime | datetotime}} until {{offer.offer.endtime |  datetotime}}
                         </li>
                         <li ng-show="offer.offer.repeating == true" class="list-group-item">
-                            <img src="../images/icons/repeatingtrue.png" title="Repeating true" width="17">
-                            <b> Repeating:</b>
+                            <img src="../images/icons/repeating.png" title="Repeating true" width="24">
+                            <b>Repeating:</b>
                             {{offer.offer.repeatoptions.frequency}}
-                        </li>
-                        <li ng-show="offer.offer.repeating == true" class="list-group-item" >
-                            <img src="../images/icons/repeating.png" title="Days" width="24">
-                            <b>Days:</b>
-                            <span ng-show="val == true" ng-repeat="(key,val) in offer.offer.repeatoptions">{{key}}<span ng-show="!$last"> | </span></span>
+                            -
+                            <span ng-show="offer.offer.repeating == true"><b>Days:</b>
+                            <span ng-show="val == true" ng-repeat="(key,val) in offer.offer.repeatoptions">{{key | cut:true:2}}<span ng-show="!$last"> | </span></span>
+                        </span>
                         </li>
                         <li class="list-group-item">
                             <img src="../images/icons/sell_property-24.png" title="Wage" width="24">
