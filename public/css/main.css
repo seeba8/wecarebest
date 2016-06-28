@@ -251,6 +251,10 @@ hr{
     padding: 0px;
 }
 
+.mybookingscareseeker .bookingitem h3 {
+    color: #428BCA;
+}
+
 .mybookingscareseeker .bookingitem .status {
     text-align:center;
 }

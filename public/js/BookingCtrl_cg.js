@@ -17,8 +17,8 @@ angular.module("myApp")
                 console.log("offers");
                 $http.get(url + "/offers", {params:{caregiver: caregiver_id, unbooked: true}}).success(function (offers) {
                     console.log(offers.length);
-                    
-                    
+                    console.log(offers);
+                    $scope.offers = offers;
                 });
                 
                 
