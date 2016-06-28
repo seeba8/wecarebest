@@ -47,7 +47,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-2 status">
+        <div class="col-sm-2 status vcenter">
             <p>Status: </br>
                 <img ng-if="booking.status == 1" src="../images/icons/waitingforanswer.png" title="Waiting For Answer" width="96">
                 <img ng-if="booking.status == 2" src="../images/icons/tobepaid.png" title="To Be Paid" width="96">
@@ -79,13 +79,11 @@
                         <hr>
                         <li class="list-group-item" >
                             <img src="https://maxcdn.icons8.com/Color/PNG/24/Time_And_Date/calendar-24.png" title="Calendar" width="24">
-                            <b>Start:</b>
-                            {{offer.offer.starttime | datetime1}}
-                        </li>
-                        <li class="list-group-item" >
-                            <img src="https://maxcdn.icons8.com/Color/PNG/24/Time_And_Date/tear_off_calendar-24.png" title="Tear Off Calendar" width="24">
-                            <b>End:</b>
-                            {{offer.offer.endtime |  datetime1}}
+                            <b>Start: </b>
+                            {{offer.offer.starttime | datenotime}}
+                            -
+                            <b>Timeframe: </b>
+                            {{offer.offer.starttime | datetotime}} until {{offer.offer.endtime |  datetotime}}
                         </li>
                         <li ng-show="offer.offer.repeating == true" class="list-group-item">
                             <img src="../images/icons/repeatingtrue.png" title="Repeating true" width="17">
