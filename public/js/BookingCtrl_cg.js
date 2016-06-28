@@ -209,6 +209,7 @@ angular.module("myApp")
         app.updateOffer = function ( PushCandidate) {
             $http.put(url + "/offers/:" + PushCandidate.offer.id, PushCandidate.offer).success(function () {
                 console.log("Updated successfully");
+                $('#myModal').modal('hide');
             })
         };
 
