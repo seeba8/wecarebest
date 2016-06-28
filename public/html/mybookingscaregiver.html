@@ -105,7 +105,7 @@
                             <img src="../images/icons/location.png" title="Location" width="24">
                             <b>City:</b> {{offer.offer.location.name}} - <b>Radius:</b> {{offer.offer.location.radius}}m
                         </li>
-                        <li class="list-group-item">
+                        <li class="list-group-item" ng-show="offer.offer.notes">
                             <img src="../images/icons/notes.png" title="Notes" width="24">
                             <b>Notes:</b> {{offer.offer.notes}}
                         </li>
@@ -120,7 +120,7 @@
             </p>
         </div>
         <div class="col-sm-2 col-md-2 pull-right">
-            <a href="#" class="btn btn-primary btn-success" style="min-width:80%;margin-top:10px;"><span class="glyphicon glyphicon-ok"></span> View</a>
+            <a href="" ng-click="viewOffer(offer.offer._id)" class="btn btn-primary btn-success" style="min-width:80%;margin-top:10px;"><span class="glyphicon glyphicon-ok"></span> View</a>
             <a href="" ng-click="deleteOffer(offer.offer._id, offers.indexOf(offer))" class="btn btn-danger" style="min-width:80%;margin-top:10px;"><span class="glyphicon glyphicon-remove-sign"></span> Delete</a>
             <a href="" data-toggle="modal" data-target="#myModal"  ng-click="updateOffer(offer, offer.$index)" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;"><span class="glyphicon glyphicon-envelope"></span> Update</a>
         </div>

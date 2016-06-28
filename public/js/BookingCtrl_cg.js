@@ -92,7 +92,12 @@ angular.module("myApp")
 
 
 
-
+        $scope.viewOffer = function(id) {
+            console.log(id);
+            var link = "/#/singleOffer/" + id;
+            console.log(link);
+            $window.location.href = link;
+        }
         /*
          * #############################################################################
          * ##### INVOKED BY CLICK ON DELETE BUTTON IN myoffers.html ####################
