@@ -3,11 +3,57 @@
  */
 
 angular.module("myApp")
-    .controller("CreateRequestCtrl", ["$scope", "$routeParams", "$http", "$window", "user", "auth", "uiGmapGoogleMapApi", function ($scope, $routeParams, $http, $window, user, auth, uiGmapGoogleMapApi) {
+    .controller("CreateRequestCtrl", ["$scope", "$routeParams", "$http", "$window", "user", "auth", "uiGmapGoogleMapApi","geolocation", function ($scope, $routeParams, $http, $window, user, auth, uiGmapGoogleMapApi, geolocation) {
 
         var geocoder;
         var app = this;
         var url = 'http://localhost:3000';
+
+
+        uiGmapGoogleMapApi.then(function (maps) {
+            geocoder = new maps.Geocoder;
+            console.log("Then");
+
+        });
+        geolocation.getLocation().then(function(data){
+            $scope.request.location.latitude = data.coords.latitude;
+            $scope.request.location.longitude = data.coords.longitude;
+            $scope.marker.coords = {
+                latitude: data.coords.latitude,
+                longitude: data.coords.longitude
+            };
+            $scope.map.center = $scope.marker.coords;
+            geocoder.geocode({
+                    "location": {
+                        lat:data.coords.latitude,
+                        lng: data.coords.longitude
+                    }
+                }
+                , function (results, status) {
+                    if (status == "OK" && results != null){
+                        $scope.request.location.city = "";
+                        $scope.request.location.street = "";
+                        $scope.request.location.postalCode = "";
+                        console.log(results[0]);
+                        for(var i = 0; i < results[0].address_components.length; i++){
+                            var component = results[0].address_components[i];
+                            if(component["types"].indexOf("street_number") > -1) {
+                                $scope.request.location.street += " " + component.long_name;
+                            }
+                            else if(component["types"].indexOf("route") > -1) {
+                                $scope.request.location.street = component.long_name + " " + $scope.request.location.street;
+                            }
+                            else if(component["types"].indexOf("locality") > -1) {
+                                $scope.request.location.city = component.long_name;
+                            }
+                            else if(component["types"].indexOf("postal_code") > -1) {
+                                $scope.request.location.postalCode = component.long_name;
+                            }
+                        }
+                    }
+                }
+            );
+        });
 
         app.submit = function() {
             $http.post(url + "/createRequest", $scope.request).success(function () {
@@ -27,7 +73,7 @@ angular.module("myApp")
             location: {},
             repeating: false,
             repeatoptions: {
-                
+
             }
         };
 
