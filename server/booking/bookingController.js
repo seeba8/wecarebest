@@ -29,20 +29,23 @@ module.exports.postCreateRequest = function(req, res) {
     console.log(decoded);
 
     var careseeker = decoded._id;
+    console.log("Request Body:");
+    console.log(req.body);
+    console.log("End Request Body");
 
     var booking = new Booking({
-        startDay : req.body.startday,
+        startDay :      req.body.startday,
         starttime :     req.body.starttime,
         endtime :       req.body.endtime,
-        repeating:      req.body.repeating,
-        repeatoptions: req.body.repeatoptions,
-        location: req.body.location,
-        notes:     req.body.notes,
-        createdDate:    req.body.createdDate,
+        repeating:      req.body.repeating || false,
+        repeatoptions:  req.body.repeatoptions,
+        location:       req.body.location,
+        notes:          req.body.notes,
+        createdDate:    new Date(),
         lastActivity:   req.body.createdDate, //when did the status change the last time?
         createdBy:      careseeker, //Careseeker
-        offer : req.body.offerid,
-        status : 1
+        offer :         req.body.offerid,
+        status :        1
     });
     booking.save(function (err) {
         if (err) {
@@ -50,7 +53,7 @@ module.exports.postCreateRequest = function(req, res) {
             console.log("Error during Booking.save: Did not load to database");
             console.log(err);
         } else {
-            console.log("Saved rating to database");
+            console.log("Saved request to database");
             res.send();
         }
     });

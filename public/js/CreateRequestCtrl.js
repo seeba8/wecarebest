@@ -9,12 +9,12 @@ angular.module("myApp")
         var app = this;
         var url = 'http://localhost:3000';
 
-        function submit() {
+        app.submit = function() {
             $http.post(url + "/createRequest", $scope.request).success(function () {
                 console.log("...Inserted Successfully!");
                 $window.location.href = "/#/bookingsrequests";
             })
-        }
+        };
 
         if (typeof $routeParams.offerid == "undefined") {
             $window.location = "/";
@@ -24,7 +24,11 @@ angular.module("myApp")
             startday: $routeParams.startday,
             starttime: $routeParams.starttime,
             endtime: $routeParams.endtime,
-            location: {}
+            location: {},
+            repeating: false,
+            repeatoptions: {
+                
+            }
         };
 
         $http.get(url + "/offers", {

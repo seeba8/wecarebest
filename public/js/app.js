@@ -83,7 +83,7 @@ function userService($http, API, auth) {
 
 }
 
-var myApp = angular.module('myApp',['ngRoute','ui.bootstrap.showErrors', 'ngMessages',"uiGmapgoogle-maps", "countrySelect", "rzModule"]);
+var myApp = angular.module('myApp',['ngRoute','ui.bootstrap.showErrors', 'ngMessages',"uiGmapgoogle-maps", "countrySelect", "rzModule", "geolocation"]);
 myApp.config(function($routeProvider) {
         $routeProvider
             .when('/', { templateUrl: '../html/partials/home.html' })

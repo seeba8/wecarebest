@@ -20,13 +20,13 @@ function bookingRoutes(passport) {
     });
 
     //add new booking
-    router.post('/createRequest', passport.authenticate('jwt', {session: false}, bookingController.postCreateRequest));
+    router.post('/createRequest', passport.authenticate('jwt', {session: false}), bookingController.postCreateRequest);
 
     //return create request page
-    router.get('/createRequest', passport.authenticate('jwt', {session: false}, bookingController.getCreateRequest));
+    //router.get('/createRequest', passport.authenticate('jwt', {session: false}), bookingController.getCreateRequest);
 
     //view all bookings (potentially including offers); it depends on the type of user (caregiver, careseeker)
-    router.post('/mybookings', passport.authenticate('jwt', {session: false}, bookingController.postMyBookings));
+    router.post('/mybookings', passport.authenticate('jwt', {session: false}), bookingController.postMyBookings);
     //router.get('/mybookings', passport.authenticate('jwt', {session: false}, bookingController.getMyBookings));
     router.get('/mybookings', bookingController.getMyBookings);
 

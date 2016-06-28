@@ -114,8 +114,7 @@
                         Advanced Search
                     </label>
                     <div class="form-group col-sm-2 col-xs-2">
-                    <input type="checkbox" id="advanced" class="form-control align-left" ng-model="search.advanced" ng-click="selected='advanced'"
-                           ng-class="{'selected': selected == 'advanced'}"/>
+                    <input type="checkbox" id="advanced" class="form-control align-left" ng-model="search.advanced" ng-click="showMap = false; showMap = true;"/>
                         <!--ng-model="search.advanced"-->
                     </div>
 
@@ -123,7 +122,7 @@
                 </div>
                 <br>
                 <div class="col-xs-12"></div>
-                <div class="well form-group" ng-show="selected == 'advanced'">
+                <div class="well form-group" ng-show="search.advanced">
                     <!--ng-show="search.advanced"-->
                     <div class="row" style="margin-bottom:0px;">
                         <div class="form-group col-sm-8 col-xs-8">
@@ -145,7 +144,7 @@
                             <!--</div>-->
                         <!--</div>-->
                         <div class="form-group col-sm-12 col-xs-12">
-                            <div class="form-group div-wrapper" data-tap-disabled="true">
+                            <div class="form-group div-wrapper" data-tap-disabled="true" ng-if="showMap">
                                 <ui-gmap-google-map id="gmap" center='map.center' zoom='map.zoom' events="map.events"
                                                     options="map.options" refresh=!map.isMapElementHidden">
                                     <ui-gmap-search-box
@@ -230,8 +229,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-3 pull-right">
-                    <a href="/#/singleOffer/{{result.offer._id}}" class="btn btn-primary btn-success"
                 <div class="col-sm-3 col-md-3 pull-right">
                     <a href="/#/singleOffer/{{result.offer._id}}/{{searchParams.startday}}/{{searchParams.starttime}}/{{searchParams.endtime}}" class="btn btn-primary btn-success"
                        style="min-width:80%;margin-top:10px;"><span

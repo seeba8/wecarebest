@@ -1,8 +1,31 @@
-angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$http', '$window', "auth", "uiGmapGoogleMapApi", function ($scope, $routeParams, $http, $window, auth, uiGmapGoogleMapApi) {
+angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$http', '$window', "auth", "uiGmapGoogleMapApi", "geolocation", function ($scope, $routeParams, $http, $window, auth, uiGmapGoogleMapApi, geolocation) {
     var app = this;
     var url = 'http://localhost:3000';
     console.log("Loaded Searchcontroller");
     var isSingleOffer = false;
+    $scope.search = {advanced: true};
+
+    geolocation.getLocation().then(function(data){
+        $scope.searchParams.lat = data.coords.latitude;
+        $scope.searchParams.lng = data.coords.longitude;
+        $scope.marker.coords = {
+            latitude: data.coords.latitude,
+            longitude: data.coords.longitude
+        };
+        $scope.map.center = $scope.marker.coords;
+        geocoder.geocode({
+                "location": {
+                    lat: data.coords.latitude,
+                    lng: data.coords.longitude
+                }
+            }, function (results, status) {
+                if (status == "OK" && results != null) {
+                    $('#searchbox').val(results[0].formatted_address);
+
+                }
+            }
+        );
+    });
 
     app.reset = function () {
         $scope.searchParams = {
@@ -143,8 +166,8 @@ angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$ht
 
     uiGmapGoogleMapApi.then(function (maps) {
         geocoder = new maps.Geocoder;
-    });
 
+    });
     $scope.marker = {
         options: {draggable: true},
         coords: {},
@@ -208,20 +231,6 @@ angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$ht
             }
         }
     };
-
-    $scope.$watch('selected', function () {
-
-        window.setTimeout(function(){
-
-            google.maps.event.trigger(map, 'resize');
-        },100);
-
-    });
-
-    // function refreshMap() {
-    //
-    //         google.maps.event.trigger(map, 'resize');
-    //     };
 
     $scope.circle = {
         stroke: {
