@@ -1,4 +1,4 @@
-<div class="container" ng-controller="SearchCtrl as app">
+<div class="container whitebg" ng-controller="SearchCtrl as app">
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet"
           href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
@@ -37,7 +37,7 @@
                     <div class="form-group col-sm-12 col-xs-12">
                         <div>
                             <label for="searchbox">Supported area</label>
-                            <div id="searchBoxParent">
+                            <div id="searchBoxParent" ng-show="searchboxParent" ng-init="searchboxParent=true">
                                 <!--<input type="text" class="form-control" id="searchbox" placeholder="Enter supported area">-->
                             </div>
                         </div>
@@ -114,7 +114,8 @@
                         Advanced Search
                     </label>
                     <div class="form-group col-sm-2 col-xs-2">
-                    <input type="checkbox" id="advanced" class="form-control align-left" ng-model="search.advanced" ng-click="showMap = false; showMap = true;"/>
+                    <input type="checkbox" id="advanced" class="form-control align-left" ng-model="search.advanced"  ng-click="showMap=false;showMap=true;"/>
+                           <!--ng-click="showMap()"/>-->
                         <!--ng-model="search.advanced"-->
                     </div>
 
@@ -146,7 +147,7 @@
                         <div class="form-group col-sm-12 col-xs-12">
                             <div class="form-group div-wrapper" data-tap-disabled="true" ng-if="showMap">
                                 <ui-gmap-google-map id="gmap" center='map.center' zoom='map.zoom' events="map.events"
-                                                    options="map.options" refresh=!map.isMapElementHidden">
+                                                    options="map.options">
                                     <ui-gmap-search-box
                                             template='search.template'
                                             events='search.events'
@@ -170,13 +171,13 @@
                 <hr class="colorgraph">
                 <div class="col-sm-12"></div>
 
-                <div id="unbookedcheck" class="row form-group col-sm-4 col-xs-4">
-                    <label for="unbooked" style="margin-left: 10px; margin-top:10px;">
+                <div id="bookedcheck" class="row form-group col-sm-4 col-xs-4">
+                    <label for="booked" id="bookedlabel">
                         Include booked offers
                     </label>
                     <div class="form-group col-sm-2 col-xs-2">
-                        <input type="checkbox" class="form-control" checked ng-model="searchParams.unbooked"
-                               id="unbooked"/>
+                        <input type="checkbox" class="form-control" ng-model="searchParams.booked" ng-init="searchParams.booked=true"
+                               id="booked"/>
                     </div>
                 </div>
 

@@ -196,9 +196,9 @@ module.exports.getOffers = function (req, res) {
             case "_id":
                 conditions["_id"] = searchParams[param];
                 break;
-            case "unbooked":
+            case "booked":
                 if(searchParams[param] == "true" || searchParams[param] == true){
-                    unbooked = true;
+                    unbooked = false;
                 }
                 break;
             case "caregiver":

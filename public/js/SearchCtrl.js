@@ -159,6 +159,7 @@ angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$ht
         parentDiv: "searchBoxParent",
         options: {
             autocomplete: true,
+            visible: true,
             componentRestrictions: {country: 'de'} //only works for one country, not multiple codes. remove if necessary
         }
         // position: "top-left"
@@ -231,6 +232,17 @@ angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$ht
             }
         }
     };
+
+    // $scope.$watch('selected', function () {
+    //     $scope.google.maps.event.trigger(map, 'resize');
+    //
+    // });
+
+
+    // app.showMap = function()  {
+    //
+    //         google.maps.event.trigger(map, 'resize');
+    //     };
 
     $scope.circle = {
         stroke: {
