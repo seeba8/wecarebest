@@ -114,18 +114,15 @@ angular.module("myApp")
             console.log(data);
 
             //send it as http post to backend in order to delete it in database
-            $http.post(url + "/deletemyoffer", data).success(function(){
-                console.log("clicked:" + data);
-                $scope.PostDataResponse = data;
-                console.log("Löschung beendet.");
+            $http.delete(url + "/offers/:" + data.id).success(function(){
+                $scope.ServerResponse = data;
             })
             //IF error in HTTP POST then log it and show to user
                 .error(function (data, status, header, config) {
-                    $scope.ResponseDetails = "Data: " + data +
-                        "<hr />status: " + status +
-                        "<hr />headers: " + header +
-                        "<hr />config: " + config;
-                    console.log($scope.ResponseDetails);
+                    $scope.ServerResponse = htmlDecode("Data: " + data +
+                        "\n\n\n\nstatus: " + status +
+                        "\n\n\n\nheaders: " + header +
+                        "\n\n\n\nconfig: " + config);
                 });
         };
 
@@ -133,38 +130,73 @@ angular.module("myApp")
         //UPDATE FUNCTIONALITY
         $scope.updateOffer = function(offerItem, index) {
 
-            // $scope.editing = {};
-            offerItem.startDay = new Date(offerItem.startDay);
-            console.log(index);
-            console.log(offerItem);
+            $scope.typeofcares = [
+                'Basic',
+                'Premium',
+                'Full Service'
+            ];
 
-            $scope.offer.startDay = offerItem.startDay;
-            $scope.offer.typeofcare = offerItem.typeofcare;
-            $scope.offer.wageperhour = offerItem.wageperhour;
-            $scope.offer.location = offerItem.location;
-            $scope.offer.notes = offerItem.notes;
+            $scope.offers.weekdays = [
+                'Monday',
+                'Tuesday',
+                'Wednesday',
+                'Thursday',
+                'Friday',
+                'Saturday',
+                'Sunday'
+            ];
+
+
+            $scope.offers.frequencies = [
+                'Weekly',
+                'Bi-weekly',
+                'Monthly'
+            ];
+            
+            
+            
+            // $scope.editing = {};
+            offerItem.offer.starttime = new Date(offerItem.offer.starttime);
+            offerItem.offer.endtime = new Date(offerItem.offer.endtime);
+            //console.log(index);
+            //console.log(offerItem.offer.location.radius);
+
+
+            $scope.offers.starttime = offerItem.offer.starttime;
+            $scope.offers.endtime = offerItem.offer.endtime;
+            $scope.offers.typeofcare = offerItem.offer.typeofcare;
+            $scope.offers.wageperhour = offerItem.offer.wageperhour;
+            if(offerItem.offer.notes){
+                $scope.offers.notes = offerItem.offer.notes;
+            }
+            //$scope.offers.location.radius = offerItem.offer.location.radius;
+            //$scope.offers.location.name = offerItem.offer.location.name;
+
 
 
             $scope.saveUpdate = function(item){
 
-                console.log($scope.Offer.$valid);
-                console.log($scope.offer);
+                console.log(offerItem.offer);
                 console.log(item);
                 if($scope.Offer.$valid){
-                    item.location = item.center.name;
-                    item.latitude = item.center.latitude;
-                    item.longitude = item.center.longitude;
+                    //item.location = item.center.name;
+                    //item.latitude = item.center.latitude;
+                    //item.longitude = item.center.longitude;
 
                     console.log("Saved Changes.");
-                    offerItem.timeframe = item.timeframe;
-                    offerItem.typeofcare = item.typeofcare;
-                    offerItem.wageperhour = item.wageperhour;
-                    offerItem.location.name = item.location.name;
-                    offerItem.latitude = item.latitude;
-                    offerItem.longitude = item.longitude;
-                    offerItem.radius = item.radius;
-                    offerItem.notes = item.notes;
-                    offerItem.id = offerItem._id;
+                    //offerItem.timeframe = item.timeframe;
+                    //offerItem.typeofcare = item.typeofcare;
+                    console.log(item);
+                    offerItem.offer.starttime = item.starttime;
+                    offerItem.offer.endtime = item.endtime;
+                    offerItem.offer.wageperhour = item.wageperhour;
+                    //offerItem.location.name = item.location.name;
+                    //offerItem.latitude = item.latitude;
+                    //offerItem.longitude = item.longitude;
+                    //offerItem.radius = item.radius;
+                    offerItem.offer.notes = item.notes;
+                    offerItem.offer.id = offerItem.offer._id;
+                    console.log
                     app.updateOffer(offerItem);
 
                 } else {
@@ -175,7 +207,7 @@ angular.module("myApp")
         };
 
         app.updateOffer = function ( PushCandidate) {
-            $http.post("../updatemyoffer",  PushCandidate).success(function () {
+            $http.put(url + "/offers/:" + PushCandidate.offer.id, PushCandidate.offer).success(function () {
                 console.log("Updated successfully");
             })
         };

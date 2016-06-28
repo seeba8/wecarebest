@@ -7,7 +7,7 @@
 <div class="row">
     <div class="form-group col-xs-6">
         <label for="timeframe">Start</label>
-        <input ng-model="offer.starttime"
+        <input ng-model="offers.starttime"
                type="datetime-local"
                class="form-control"
                id="timeframe"
@@ -19,8 +19,8 @@
     </div>
     <div class="form-group col-xs-6">
         <label for="enddate">Until</label>
-        <input ng-model="offer.endtime"
-               type="date"
+        <input ng-model="offers.endtime"
+               type="datetime-local"
                class="form-control"
                id="enddate"
                name="enddate"
@@ -46,26 +46,46 @@
 <!--</div>-->
 
 <!-- Advanced Time Options -->
-<div class="well form-group">
+<!--<div class="well form-group animate-if">
     <div class="row" style="margin-bottom:0px;">
         <div class=" form-group" id="weekdays" >
             <label class="col-md-2 control-label">Day(s) of Week</label>
             <div class="checkbox" >
-                <label class="checkbox-inline" name="weekdays" ng-repeat="offer.repeatoptions.weekday in offer.repeatoptions.weekdays">
-                    <input type="checkbox" value="">{{ offer.repeatoptions.weekday }}
+                <label class="checkbox-inline" name="weekdays" ng-repeat="weekday in weekdays">
+                    <input type="checkbox" value="" ng-model="offer.repeatoptions[weekday]">{{ weekday }}
                 </label>
             </div>
         </div>
         <div class="form-group" id="frequencies" >
             <label class="col-md-2 control-label">Frequency</label>
             <div class="checkbox" >
-                <label class="checkbox-inline" name="frequency">
-                    <input type="checkbox" value="">{{ offer.offer.repeatoptions.frequency }}
+                <label class="radio-inline" ng-repeat="frequency in frequencies">
+                    <input type="radio" ng-model="offer.repeatoptions.frequency" name="frequency" value="{{frequency}}">{{frequency}}
                 </label>
             </div>
         </div>
+        <div class="form-group">
+            <label for="endday" class="col-md-2 control-label">Until (mm/dd/yy)</label>
+            <div class="col-md-10">
+                <div class='input-group date'>
+                    <input type='text'
+                           class="enddaypicker form-control"
+                           id="endday"
+                           name="endday"
+                           required />
+                                <span class="input-group-addon" onclick="$('.enddaypicker').data('DateTimePicker').show();">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+
+                </div>
+
+                <div ng-if="interacted(Offer.enddate)" ng-messages="Offer.enddate.$error" role="alert">
+                    <div class="alert alert-danger" ng-message="required">Please select the time of your offered services</div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</div>-->
 
 
 <!--###############################################
@@ -74,13 +94,12 @@
     -->
 <div class="form-group" >
     <label for="typeofcare">Amount of care:</label>
-    <select ng-model="offer.typeofcare"
+    <select ng-model="offers.typeofcare"
             ng-options="typeofcare for typeofcare in typeofcares"
             type="text"
             class="form-control"
             id="typeofcare"
             name="typeofcare"
-            placeholder="Basic"
             required
     >
         <option ng-show="true" value="">- Please Choose -</option>
@@ -99,7 +118,7 @@
 <div class="form-group">
     <label for="wage">Wage per hour in €/h</label>
     <div class="input-group">
-        <input ng-model="offer.wageperhour"
+        <input ng-model="offers.wageperhour"
                type="number"
                class="form-control"
                id="wage"
@@ -149,21 +168,21 @@
 <!--<div class="alert alert-danger" ng-message="minlength">This field can be at most 15 characters long.</div>-->
 <!--</div>-->
 
-
+<!--
 <div class ="row">
     <div class="form-group col-xs-6">
         <label for="searchbox">Supported area</label>
         <div id="searchBoxParent">
-            <!--<input type="text" class="form-control" id="searchbox" placeholder="Enter supported area">-->
+            &lt;!&ndash;<input type="text" class="form-control" id="searchbox" placeholder="Enter supported area">&ndash;&gt;
         </div>
-        <!--<div ng-if="interacted(Offer.supportedarea)" ng-messages="Offer.supportedarea.$error" role="alert">-->
-        <!--<div class="alert alert-danger" ng-message="required">Please enter a value for this field.</div>-->
-        <!--<div class="alert alert-danger" ng-message="minlength">This field can be at most 15 characters long.</div>-->
-        <!--</div>-->
+        &lt;!&ndash;<div ng-if="interacted(Offer.supportedarea)" ng-messages="Offer.supportedarea.$error" role="alert">&ndash;&gt;
+        &lt;!&ndash;<div class="alert alert-danger" ng-message="required">Please enter a value for this field.</div>&ndash;&gt;
+        &lt;!&ndash;<div class="alert alert-danger" ng-message="minlength">This field can be at most 15 characters long.</div>&ndash;&gt;
+        &lt;!&ndash;</div>&ndash;&gt;
     </div>
     <div class="form-group col-xs-6" >
         <label for="radius">Radius</label>
-        <input type="number" required ng-pattern="/^[0-9]+$/" rangemaps ng-model="offer.radius" type="number" name="radius" class="form-control" id="radius" onkeydown="if (event.keyCode == 13) {event.preventDefault(); event.stopPropagation();}">
+        <input type="number" required ng-pattern="/^[0-9]+$/" rangemaps ng-model="offers.location.radius" type="number" name="radius" class="form-control" id="radius" onkeydown="if (event.keyCode == 13) {event.preventDefault(); event.stopPropagation();}">
         <div  ng-if="interacted(Offer.radius)" ng-messages="Offer.radius.$error" role="alert">
             <div class="alert alert-danger" ng-message="required">Please enter a value for this field.</div>
             <div class="alert alert-danger" ng-message="pattern">
@@ -175,7 +194,7 @@
         </div>
     </div>
 </div>
-<!-- TODO Einheit! -->
+&lt;!&ndash; TODO Einheit! &ndash;&gt;
 <div class="form-group div-wrapper" data-tap-disabled="true">
 
     <ui-gmap-google-map id="gmap" center='map.center' zoom='map.zoom' events="map.events" options="map.options">
@@ -202,7 +221,7 @@
         </ui-gmap-circle>
     </ui-gmap-google-map>
 
-</div>
+</div>-->
 
 
 
@@ -212,14 +231,14 @@
     -->
 <div class="form-group">
     <label for="notes">Notes (max. 400 chars)</label>
-                <textarea ng-model="offer.offer.notes"
+                <textarea ng-model="offers.notes"
                           class="form-control"
                           name="notes"
                           rows="5"
                           id="notes"
                           ng-maxlength="400";
                           placeholder="Enter your additional notes regarding your offer"></textarea>
-    <div ng-if="interacted(Offer.offer.notes)" ng-messages="Offer.notes.$error" role="alert">
+    <div ng-if="interacted(Offer.notes)" ng-messages="Offer.notes.$error" role="alert">
         <div class="alert alert-danger" ng-message="maxlength">Please explain your offer in less than 400 characters.</div>
     </div>
 </div>

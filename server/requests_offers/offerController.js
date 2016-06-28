@@ -244,10 +244,16 @@ module.exports.getmyOffer = function (req, res) {
     })
 };
 
+//DELETE HANDLER
 module.exports.deletemyOffer = function (req, res) {
     console.log("deletemyOffer aufgerufen!");
-    console.log(req.body.id);
-    var id = req.body.id;
+    console.log(req.params.offers_id);
+    var id = req.params.offers_id;
+    //delete : of id
+    while(id.charAt(0) === ':')
+        id = id.substr(1);
+
+    console.log(id);
     Offer.findByIdAndRemove(id, function (err, offer) {
         if (err) {
             throw err;
@@ -260,11 +266,15 @@ module.exports.deletemyOffer = function (req, res) {
 };
 
 module.exports.updatemyOffer = function (req, res) {
-    console.log("updatemyOffer aufgerufen!");
+    console.log("deletemyOffer aufgerufen!");
+    console.log(req.params.offers_id);
     console.log(req.body);
+    var id = req.params.offers_id;
+    //delete : of id
+    while(id.charAt(0) === ':')
+        id = id.substr(1);
 
     //rename for easier usage
-    var id = req.body.id;
     console.log(id);
     var timeframe = req.body.timeframe;
     var typeofcare = req.body.typeofcare;
@@ -274,9 +284,9 @@ module.exports.updatemyOffer = function (req, res) {
     var longitude = req.body.longitude;
     var radius = req.body.radius;
     var notes = req.body.notes;
-    console.log(location);
-    console.log(radius);
-    console.log(createdDate);
+  //  console.log(location);
+  //  console.log(radius);
+  //  console.log(createdDate);
 
     Offer.findByIdAndUpdate(id, {
         timeframe: timeframe,
