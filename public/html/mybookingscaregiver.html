@@ -15,7 +15,8 @@
 
     <div class="row bookingitem"  ng-repeat="booking in bookings | orderBy:'timestamp': app.recent">
         <div class="col-md-2 col-sm-2 image">
-            <img src="../images/clint.jpg" class="img-rounded img-responsive"  >
+            <img ng-show="booking.user.firstName == 'John'" src="../images/harrison.jpg" class="img-rounded img-responsive"  >
+            <img ng-show="booking.user.firstName == 'Layla'" src="../images/queen.jpg" class="img-rounded img-responsive"  >
         </div>
         <div class="col-sm-6 col-md-6">
             <div class="media">

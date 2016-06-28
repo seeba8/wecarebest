@@ -7,11 +7,20 @@ angular.module("myApp")
         var app = this;
         var url = 'http://localhost:3000';
         var config = {};
+        var result = [];
 
         $scope.initFirst=function()
         {
             console.log("BookingCtrl loaded.");
             $http.get(url + "/mybookings").success(function (bookings) {
+
+                for(booking in bookings){
+                    result[booking] = bookings[booking];
+                    bookings[booking] = bookings[booking].booking;
+                    bookings[booking].user = result[booking].user;
+                    bookings[booking].offer = result[booking].offer;
+                }
+
                 console.log("Get Bookings...");
                 console.log(bookings);
                 //bookings.forEach(statusNumberToText());

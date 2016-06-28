@@ -59,6 +59,8 @@ module.exports.postCreateRequest = function(req, res) {
 module.exports.getMyBookings = function(req, res) {
     var resultingBookings = [];
     var secretOrKey = config.secret;
+
+
     console.log("in new function");
 
     conditions = {}; //empty conditions array
@@ -131,11 +133,6 @@ module.exports.getMyBookings = function(req, res) {
              })
 
 
-            // var arrayLength = offers.length;
-            // thingwithcallback(arrayLength,offers,function(bookings, callback){
-            //     resultingBookings.push(bookings);
-            // });
-            //console.log("5");
         })
     }
 
@@ -152,46 +149,71 @@ module.exports.getMyBookings = function(req, res) {
         //Invoke function.
         getBookings(sendBookings);
 
-        // //caregiver
-        // //got to look into offer table first to find match
-        // console.log("Type 1");
-        // var condOffers = {};
-        // condOffers["createdBy"] = userid;
-        // console.log(condOffers);
-        // Offer.find(condOffers, function(err, offers) {
-        //     console.log("find suitable offers to match bookings");
-        //     console.log("offer: " + offers);
-        //
-        //     var arrayLength = offers.length;
-        //     for (var i = 0; i < arrayLength; i++) {
-        //         console.log("find bookings matching the offer ids");
-        //         conditions["offer"] = offers[i].id;
-        //         //console.log(conditions);
-        //         Booking.find(conditions, function (err, bookings) {
-        //             console.log("print bookings for caregiver");
-        //             //console.log(bookings);
-        //             //resultingBookings += bookings;
-        //             resultingBookings.push(bookings);
-        //             console.log("resulting bookings " + i +" : " + resultingBookings);
-        //         });
-        //     }
-        //     console.log("resulting bookings for type caregiver");
-        //     console.log("Final: " + resultingBookings);
-        //     res.send(resultingBookings);
-        // })
     } else {
+        var offersarr = [];
+        var usersarr = [];
+        var useridsarr = [];
+        var result = [];
         //careseeker
         //directly use _id tag
         conditions["createdBy"] = userid;
         console.log(conditions);
         Booking.find(conditions, function (err, bookings) {
             console.log("print bookings for careseeker");
-            console.log(bookings);
+            for(booking in bookings){
+                offersarr.push(bookings[booking].offer);
+            }
+
+            console.log(offersarr);
+
+            Offer.find({
+                '_id': { $in: offersarr}}, function(err, offers){
+                console.log("-------------------------1");
+                for(offer in offers){
+                    useridsarr.push(offers[offer].createdBy);
+                }
+                //console.log(useridsarr);
+
+                User.find({
+                    '_id': { $in: useridsarr}}, function(err, users){
+                    console.log("-------------------------2");
+                    //console.log(users);
+                    for(user in users){
+                        usersarr.push(users[user]);
+                    }
+                    console.log(usersarr);
+
+                    for(booking in bookings){
+                        console.log("-------------------------4");
+                        for(user in users){
+                            console.log("-------------------------5");
+                            console.log(bookings[booking].offer);
+                            console.log(offers[offer]._id);
+                            console.log(offers[offer].createdBy);
+                            console.log(users[user]._id);
+                            if(bookings[booking].offer = offers[offer]._id && offers[offer].createdBy == users[user]._id){
+                                //console.log(bookings[booking]._id + " und " + users[user]._id );
+                                b = bookings[booking];
+                                u = users[user];
+                                o = offers[offer];
+                                console.log(booking);
+                                result.push({booking:b, user:u, offer:o});
+                                console.log("-------------------------6");
+                                console.log(result[0]);
+                            }
+                        }
+                    }
+                    res.send(result);
+
+                });
+            });
+
+            //console.log(bookings);
             //resultingBookings += bookings;
             resultingBookings.push(bookings);
             console.log("resulting bookings");
-            console.log(resultingBookings);
-            res.send(bookings);
+            //console.log(resultingBookings);
+            //res.send(bookings);
             //console.log(resultingBookings);
         })
     }
