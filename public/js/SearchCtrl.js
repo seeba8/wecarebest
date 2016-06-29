@@ -180,7 +180,7 @@ angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$ht
             //app.maps.event.trigger($scope.map.control.getGMap(),'resize');
             setTimeout(function () {
                 app.maps.event.trigger($scope.map.control.getGMap(),'resize');
-            }, 100);
+            }, 50);
         }
 
     });

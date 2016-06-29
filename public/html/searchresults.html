@@ -21,7 +21,7 @@
                 </div>-->
                 <div class="row" id="basicsearch">
 
-                    <div class="form-group col-sm-12 col-xs-12" style="margin-top:10px;">
+                    <div class="form-group col-sm-12 col-xs-12" id="typeofcaretext">
                         <label for="typeofcare">Type of care</label>
                         <select ng-model="searchParams.typeofcare"
                                 ng-options="typeofcare for typeofcare in typeofcares"
@@ -110,7 +110,7 @@
 
                 <div class="form-group col-sm-4 col-xs-4">
                     <br>
-                    <label for="advanced" style="margin-left:10px;margin-top:10px;">
+                    <label for="advanced" id="advancedlabel">
                         Advanced Search
                     </label>
                     <div class="form-group col-sm-2 col-xs-2">
@@ -124,11 +124,11 @@
                 <div class="col-xs-12"></div>
                 <div class="well form-group" ng-show="search.advanced">
                     <!--ng-show="search.advanced"-->
-                    <div class="row" style="margin-bottom:0px;">
+                    <div class="row" id="searchrow">
                         <div class="form-group col-sm-8 col-xs-8">
                             <label>Price</label><br>
                                 <rzslider
-                                        style="width: 100%"
+                                        id="rzslider"
                                         rz-slider-model="searchParams.priceMin"
                                         rz-slider-high="searchParams.priceMax"
                                         rz-slider-options="slider.options"></rzslider>
@@ -144,7 +144,9 @@
                             <!--</div>-->
                         <!--</div>-->
                         <div class="form-group col-sm-12 col-xs-12">
+                            <label for="gmap">Supported area</label>
                             <div class="form-group div-wrapper" data-tap-disabled="true" ng-if="!map.refresh">
+
                                 <ui-gmap-google-map id="gmap" center='map.center' zoom='map.zoom' events="map.events"
                                                     options="map.options" control="map.control">
 
@@ -172,17 +174,19 @@
                 <div class="col-sm-12"></div>
 
                 <div id="bookedcheck" class="row form-group col-sm-4 col-xs-4">
-                    <label for="booked" id="bookedlabel">
+                    <label for="unbooked" id="bookedlabel">
                         Include booked offers
                     </label>
                     <div class="form-group col-sm-2 col-xs-2">
-                        <input type="checkbox" class="form-control" ng-model="searchParams.booked" ng-init="searchParams.booked=true"
-                               id="booked"/>
+                        <input type="checkbox" class="form-control" ng-model="searchParams.unbooked" ng-init="searchParams.unbooked=true"
+                               id="unbooked"/>
+
                     </div>
                 </div>
 
                 <div class="form-group col-sm-12 col-xs-12">
-                    <button data-toggle="collapse" data-target="#criteria, #newsearch" type="submit" class="btn btn-success">Search</button>
+                    <!--{{searchParams}}-->
+                    <button data-toggle="collapse" data-target="#criteria, #newsearch" type="submit" class="btn btn-success" ng-click="app.search()">Search</button>
                     <button type="reset" class="btn btn-danger" ng-click="app.reset()">Reset</button>
                     <br><br>
 
@@ -194,16 +198,16 @@
             </div>
 
         <div class="col-md-12 col-sm-12" id="results">
-            <div class="row" ng-repeat="result in results" style="margin-bottom: 30px;">
+            <div class="row" ng-repeat="result in results" id="resultsrow">
                 <div class="col-md-2 col-sm-2">
-                        <img style="max-height:10em;" src="{{result.user.picture}}" class="img-rounded img-responsive">
+                        <img src="{{result.user.picture}}" class="img-rounded img-responsive defaultimg">
                 </div>
                 <div class="col-md-7 col-sm-7">
                     <div class="media">
                         <div class="media-body">
                             <ul class="list-group">
                                 <h4 class="media-heading list-group-item-heading"
-                                    style="background-color: #2b669a;padding:10px;color:white;margin-bottom: 0px;">
+                                    id="resultsheading">
                                     Name: <i>{{result.user.firstname}} {{result.user.lastname}}</i><br/>
                                     Timeframe:
                                     <span ng-show="!result.offer.repeating">
@@ -231,10 +235,10 @@
                     </div>
                 </div>
                 <div class="col-sm-3 col-md-3 pull-right">
-                    <a href="/#/singleOffer/{{result.offer._id}}/{{searchParams.startday}}/{{searchParams.starttime}}/{{searchParams.endtime}}" class="btn btn-primary btn-success"
-                       style="min-width:80%;margin-top:10px;"><span
+                    <a href="/#/singleOffer/{{result.offer._id}}/{{searchParams.startday}}/{{searchParams.starttime}}/{{searchParams.endtime}}" class="btn btn-primary btn-success offerdetail"
+                       ><span
                             class="glyphicon glyphicon-ok"></span> View</a>
-                    <a href="/#/createRequest/{{result.offer._id}}/{{searchParams.startday}}/{{searchParams.starttime}}/{{searchParams.endtime}}" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;">
+                    <a href="/#/createRequest/{{result.offer._id}}/{{searchParams.startday}}/{{searchParams.starttime}}/{{searchParams.endtime}}" class="btn btn-primary btn-info offerdetail">
                         <span class="glyphicon glyphicon-envelope"></span> Book
                     </a>
                 </div>

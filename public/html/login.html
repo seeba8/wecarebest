@@ -14,7 +14,7 @@
     <div class="col-sm-6 col-sm-offset-3">
         <form name="login" role="form" ng-submit="app.login(app.email, app.pwd)" novalidate>
 
-            <h1><span class="fa fa-sign-in"></span> Login</h1>
+            <h2><span class="fa fa-sign-in"></span> Login</h2>
 
             <div class="form-group">
                 <label>Email</label>
@@ -25,12 +25,12 @@
                 <input type="password" class="form-control" ng-model="app.pwd">
             </div>
 
-            <button type="submit"  class="btn btn-warning btn-lg">Login</button>
+            <button type="submit"  class="btn btn-primary btn-lg">Login</button>
             <!--ng-click="app.login(app.email, app.pwd)" -->
             <hr>
 
-            <p>Need an account? <a href="/signup">Signup</a></p>
-            <p>Or go <a href="/">home</a>.</p>
+            <p>Need an account? <a href="#/addUser">Signup</a></p>
+            <p>Or go <a href="#/">home</a>.</p>
         </form>
     </div>
 </div>

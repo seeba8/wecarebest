@@ -4,6 +4,10 @@ body {
     background-color: #f4f4f4;
 }
 
+h2,
+h3{
+    font-family: Montserrat, Arial, sans-serif;
+}
 
 .row.content {
     height: 570px;
@@ -11,6 +15,10 @@ body {
 
 #content{
     background-color: white;
+}
+
+#contentdiv{
+    background-color:#f4f4f4;
 }
 
 .whitebg{
@@ -112,7 +120,10 @@ hr{
 #offerbtn.btn.btn-default.btn-lg a{
     color: #428BCA !important;
 }*/
-
+#offerbtn{
+    color:#428BCA !important;
+    font-weight:bold;
+}
 
 
 /*BY MS DO NOT DELETE*/
@@ -155,15 +166,63 @@ hr{
     color: #428BCA;
 }
 
-/*#basicsearch{*/
-    /*background-color: #DCDCDC;*/
-/*}*/
 
-#newsearch{
-    margin-bottom:30px;
+#newsearch {
+    margin-bottom: 30px;
 }
+
+/*#criteria{*/
+    /*margin-bottom:-100px;*/
+/*}*/
 
 #bookedlabel{
     margin-left: 10px;
+    margin-top:10px;
+}
+
+#panel-heading{
+    background-color:#428bca;
+    color:white;
+}
+
+.defaultimg{
+    max-height:10em;
+}
+
+.panel-footer{
+    background-color:white;
+}
+
+#offerrow,
+#searchrow{
+    margin-bottom:0px;
+}
+
+#resultsrow{
+    margin-bottom: 30px;
+}
+
+#rzslider{
+    width: 100%;
+}
+
+#resultsheading{
+    background-color: #2b669a;
+    padding:10px;
+    color:white;
+    margin-bottom: 0px;
+}
+
+.offerdetail{
+    min-width:80%;
+    margin-top:10px;
+}
+
+#typeofcaretext{
+    margin-top:10px;
+}
+
+#advancedlabel{
+    margin-left:10px;
     margin-top:10px;
 }

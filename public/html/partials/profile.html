@@ -12,7 +12,7 @@
             <div class="col-xs-12 toppad" >
 
                 <div class="panel panel-info">
-                    <div class="panel-heading" style="background-color:#428bca;color:white;">
+                    <div class="panel-heading" id="panel-heading">
                         <h3 class="panel-title">Thorsten Thorstenson</h3>
                     </div>
                     <div class="panel-body">
@@ -21,7 +21,7 @@
                                 <div ng-controller="AppCtrl as app">
                                     <label>Profile picture</label><br>
                                     <div id="defaultpic">
-                                        <img style="max-height:10em;" src="../../images/clint.jpg" class="img-rounded img-responsive">
+                                        <img class="defaultimg" src="../../images/clint.jpg" class="img-rounded img-responsive">
                                     </div><br>
                                     <form ng-submit="app.updateProfile()">
                                         <input type="file" id="profilepicture"><br>
@@ -82,7 +82,7 @@
                             </div>
                         </div>
 
-                    <div class="panel-footer" style="background-color:white;">
+                    <div class="panel-footer">
                         <span class="pull-right">
                             <a href="#/" data-original-title="Edit profile" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning glyphicon glyphicon-edit"><i></i></a>
                         </span>
