@@ -199,46 +199,87 @@
 
         <div class="col-md-12 col-sm-12" id="results">
             <div class="row" ng-repeat="result in results" id="resultsrow">
-                <div class="col-md-2 col-sm-2">
+                <div class="col-md-3 col-sm-3 image">
                         <img src="{{result.user.picture}}" class="img-rounded img-responsive defaultimg">
                 </div>
                 <div class="col-md-7 col-sm-7">
                     <div class="media">
                         <div class="media-body">
                             <ul class="list-group">
-                                <h4 class="media-heading list-group-item-heading"
-                                    id="resultsheading">
-                                    Name: <i>{{result.user.firstname}} {{result.user.lastname}}</i><br/>
-                                    Timeframe:
-                                    <span ng-show="!result.offer.repeating">
-                                        {{result.offer.startday}},
-                                    </span>
-                                    <i>{{result.offer.starttime}}</i> &mdash; <i>{{result.offer.endtime}}</i>
-
-                                </h4>
-                                <li class="list-group-item"><b>Amount of care:</b> {{result.offer.typeofcare}}</li>
+                                <h3 id="resultstitle">Name: {{result.user.firstname}} {{result.user.lastname}}<br /></h3>
+                                <hr>
+                                <li class="list-group-item">
+                                    <span class="glyphicon glyphicon-plus" style="width:24px;"></span>
+                                    <b>Type of care:</b> {{result.offer.typeofcare}}
+                                </li>
+                                <li class="list-group-item" >
+                                    <img src="../images/icons/date.png" title="Date" title="Calendar" width="24">
+                                    <b>Start: </b>
+                                    {{result.offer.starttime}}
+                                    -
+                                    <b>Time: </b>
+                                    {{result.offer.starttime}} until {{result.offer.endtime}}
+                                </li>
                                 <li ng-show="result.offer.repeating == true" class="list-group-item">
-                                    <b>Repeating:</b> {{result.offer.repeatoptions.frequency}} between
-                                    {{result.offer.startday}} and {{result.offer.endday}}
+                                    <img src="../images/icons/repeating.png" title="Repeating true" width="24">
+                                    <b>Repeating:</b>
+                                    {{result.offer.repeatoptions.frequency}}
+                                    -
+                            <span ng-show="result.offer.repeating == true"><b>Days:</b>
+                            <span ng-show="val == true" ng-repeat="(key,val) in result.offer.repeatoptions">{{key | cut:true:2}}<span ng-show="!$last"> | </span></span>
+                        </span>
                                 </li>
-                                <li ng-show="result.offer.repeating == true" class="list-group-item"><b>Days:</b>
-                                    <span ng-show="val == true"
-                                          ng-repeat="(key,val) in result.offer.repeatoptions">{{key}}
-                                        <span ng-show="!$last"> |</span>
-                                    </span>
+                                <li class="list-group-item">
+                                    <img src="../images/icons/location.png" title="Location" width="24">
+                                    <b>City: </b>{{result.offer.location.name}}
                                 </li>
-                                <li class="list-group-item"><b>Wage:</b> {{result.offer.wageperhour}}&euro; / h</li>
-                                <li class="list-group-item"><b>Notes:</b> {{result.offer.notes}}</li>
-                                <li class="list-group-item"><b>Last Activity:</b> {{result.offer.createdDate}}</li>
+                                <li class="list-group-item">
+                                    <span class="glyphicon glyphicon-euro" style="width:24px;"></span>
+                                    <b>Price:</b> {{result.offer.wageperhour}}&euro; / h
+                                </li>
+                                <li class="list-group-item">
+                                    <img src="../images/icons/notes.png" title="Notes" width="24">
+                                    <b>Notes:</b> {{result.offer.notes}}
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="glyphicon glyphicon-time" style="width:24px;"></span>
+                                    <b>Last Activity:</b> {{result.offer.createdDate}}
+                                </li>
+
+
+                                <!--<h4 class="media-heading list-group-item-heading"-->
+                                    <!--id="resultsheading">-->
+                                    <!--Name: <i>{{result.user.firstname}} {{result.user.lastname}}</i><br/>-->
+                                    <!--Timeframe:-->
+                                    <!--<span ng-show="!result.offer.repeating">-->
+                                        <!--{{result.offer.startday}},-->
+                                    <!--</span>-->
+                                    <!--<i>{{result.offer.starttime}}</i> &mdash; <i>{{result.offer.endtime}}</i>-->
+
+                                <!--</h4>-->
+                                <!--<li class="list-group-item"><b>Amount of care:</b> {{result.offer.typeofcare}}</li>-->
+                                <!--<li ng-show="result.offer.repeating == true" class="list-group-item">-->
+                                    <!--<b>Repeating:</b> {{result.offer.repeatoptions.frequency}} between-->
+                                    <!--{{result.offer.startday}} and {{result.offer.endday}}-->
+                                <!--</li>-->
+                                <!--<li ng-show="result.offer.repeating == true" class="list-group-item"><b>Days:</b>-->
+                                    <!--<span ng-show="val == true"-->
+                                          <!--ng-repeat="(key,val) in result.offer.repeatoptions">{{key}}-->
+                                        <!--<span ng-show="!$last"> |</span>-->
+                                    <!--</span>-->
+                                <!--</li>-->
+                                <!--<li class="list-group-item"><b>Wage:</b> {{result.offer.wageperhour}}&euro; / h</li>-->
+                                <!--<li class="list-group-item"><b>Notes:</b> {{result.offer.notes}}</li>-->
+                                <!--<li class="list-group-item"><b>Last Activity:</b> {{result.offer.createdDate}}</li>-->
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3 col-md-3 pull-right">
-                    <a href="/#/singleOffer/{{result.offer._id}}/{{searchParams.startday}}/{{searchParams.starttime}}/{{searchParams.endtime}}" class="btn btn-primary btn-success offerdetail"
+                <div class="col-sm-2 col-md-2 pull-right">
+                    <a href="/#/singleOffer/{{result.offer._id}}/{{searchParams.startday}}/{{searchParams.starttime}}/{{searchParams.endtime}}" class="btn btn-primary offerdetail"
                        ><span
-                            class="glyphicon glyphicon-ok"></span> View</a>
-                    <a href="/#/createRequest/{{result.offer._id}}/{{searchParams.startday}}/{{searchParams.starttime}}/{{searchParams.endtime}}" class="btn btn-primary btn-info offerdetail">
+                            class="glyphicon glyphicon-eye-open"></span> View</a>
+                    <a href="/#/createRequest/{{result.offer._id}}/{{searchParams.startday}}/{{searchParams.starttime}}/{{searchParams.endtime}}" class="btn btn-primary btn-success offerdetail">
                         <span class="glyphicon glyphicon-envelope"></span> Book
                     </a>
                 </div>

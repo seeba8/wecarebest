@@ -200,6 +200,15 @@ hr{
 
 #resultsrow{
     margin-bottom: 30px;
+    padding-top: 30px;
+    border-style: solid;
+    border-width: thin;
+    border-color: lightgrey;
+}
+
+#resultstitle{
+    margin-top:0px;
+    color: #428BCA;
 }
 
 #rzslider{
