@@ -3,7 +3,7 @@
  */
 var mongoose = require('mongoose');
 
-console.log("Booking Schema geladen.");
+console.log("Rating Schema geladen.");
 //define offer mongoose Schema
 var rateSchema = mongoose.Schema({
     booking : String,
@@ -20,6 +20,7 @@ var rateSchema = mongoose.Schema({
     Competence : { type: Number, min: 0, max: 5 },
     Punctuality : { type: Number, min: 0, max: 5 }
 });
+
 //define mongoose Model
 var Rating = mongoose.model('Rating', rateSchema);
 

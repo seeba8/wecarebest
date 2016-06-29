@@ -106,6 +106,7 @@ myApp.config(function($routeProvider) {
             .when('/contact', {templateUrl: '../html/partials/contact.html'})
             .when('/imprint', {templateUrl: '../html/partials/imprint.html'})
             .when('/terms', {templateUrl: '../html/partials/terms.html'})
+            .when('/rate', {templateUrl: '../html/rate.html'})
             .otherwise({ redirectTo: '/'});
     });
 

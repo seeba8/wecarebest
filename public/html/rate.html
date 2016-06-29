@@ -1,10 +1,135 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- views/signup.ejs -->
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <title>Node Authentication</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <link rel="stylesheet" href="../css/main.css">
 
+</head>
+<body ng-app="myApp">
+<div>
+
+    <div class="container" ng-controller="RateCtrl as app">
+        <form name="Rating" role="form" novalidate>
+            <h1><span class="fa fa-sign-in"></span> Signup</h1>
+
+            <h2>Rating</h2>
+            <div class="row">
+                <div class="form-group col-sm-12">
+                    <label for="Friendliness">Overall Satisfaction</label>
+                    <div star-rating ng-model="app.overallSatisfaction" max="5" on-rating-select="app.rateFunction(app)"></div>
+                    <label for="Friendliness">Friendliness</label>
+                    <div star-rating ng-model="app.Friendliness" max="5" on-rating-select="app.rateFunction(app)"></div>
+                    <label for="Friendliness">Competence</label>
+                    <div star-rating ng-model="app.Competence" max="5" on-rating-select="app.rateFunction(app)"></div>
+                    <label for="Friendliness">Punctuality</label>
+                    <div star-rating ng-model="app.Punctuality" max="5" on-rating-select="app.rateFunction(app)"></div>
+
+                    <div><strong>Friendliness:</strong> {{app.Friendliness}}</div>
+                    <div><strong>Punctuality:</strong> {{app.Punctuality}}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-12">
+                    <label for="overallSatisfaction">Type (required)</label>
+                    <!--<input type="text" class="form-control" ng-model="app.type" required>-->
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                        <select
+                                id="overallSatisfaction"
+                                ng-model="app.overallSatisfaction"
+                                type="text"
+                                name="type"
+                                class="form-control"
+                                required
+                        >
+                            <option ng-show="true" value="" style="color:rgb(204, 204, 204);">- Please Choose -</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div ng-if="interacted(app.overallSatisfaction)" ng-messages="app.overallSatisfaction.$error" role="alert">
+                        <div class="alert alert-danger" ng-message="required">Please select your offered type of service.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!--###############################################
+                ########FORM INPUT FOR notes ##################
+                ###############################################
+                -->
+            <div class="form-group">
+                <label for="otherRemarks">Other remarks (max. 2000 chars)</label>
+                <textarea ng-model="app.otherRemarks"
+                          class="form-control"
+                          name="otherRemarks"
+                          rows="5"
+                          id="otherRemarks"
+                          ng-maxlength="2000"
+                          placeholder="Please enter some information, which will then be published online"></textarea>
+                <div ng-if="interacted(app.otherRemarks)" ng-messages="app.otherRemarks.$error" role="alert">
+                    <div class="alert alert-danger" ng-message="maxlength">Please explain your offer in less than 2000 characters.</div>
+                </div>
+            </div>
+
+            <!--###############################################
+                ########FORM INPUT FOR notes ##################
+                ###############################################
+                -->
+            <div class="form-group">
+                <label for="personalFeedback">Personal Feedback (max. 2000 chars)</label>
+                <textarea ng-model="app.personalFeedback"
+                          class="form-control"
+                          name="notes"
+                          rows="5"
+                          id="personalFeedback"
+                          ng-maxlength="2000"
+                          placeholder="Please enter a message for the caregiver, which only he/she shall read"></textarea>
+                <div ng-if="interacted(app.personalFeedback)" ng-messages="app.personalFeedback.$error" role="alert">
+                    <div class="alert alert-danger" ng-message="maxlength">Please explain your offer in less than 2000 characters.</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label for="caregiver">First Name (required)</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                        <input
+                                id="caregiver"
+                                name="caregiver"
+                                type="text"
+                                class="form-control"
+                                placeholder="Caregiver ID"
+                                ng-model="app.caregiver"
+                                minlength="2"
+                                required
+                        >
+                    </div>
+                    <div ng-if="interacted(app.Caregiver)" ng-messages="app.caregiver.$error" role="alert">
+                        <div class="alert alert-danger" ng-message="required">Please enter your first name</div>
+                        <div class="alert alert-danger" ng-message="minlength">At least two characters</div>
+                    </div>
+                </div>
+
+
+                <button ng-click="app.saveRating(app.caregiver, app.otherRemarks, app.personalFeedback, app.overallSatisfaction, app.Friendliness, app.Competence, app.Punctuality)" class="btn btn-primary btn-lg">Rate</button>
+
+                <div class="row col-sm-12">
+                    <hr class="colorgraph">
+                </div>
+
+
+                <p>Already have an account? <b><a href="/login">Login</a></b></p>
+                <p>Or go <b><a href="/landingpage">home</a></b>.</p>
+        </form>
+    </div>
+
+</div>
 </body>
 </html>
