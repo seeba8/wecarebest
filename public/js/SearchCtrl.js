@@ -169,12 +169,18 @@ angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$ht
         app.maps = maps;
 
     });
-    
+
+
+
     $scope.$watch("search.advanced", function() {
-        console.log("test");
+        console.log("advanced");
+
         if(typeof app.maps != "undefined"){
             console.log($scope.map.control.getGMap());
-            app.maps.event.trigger($scope.map.control.getGMap(),'resize');
+            //app.maps.event.trigger($scope.map.control.getGMap(),'resize');
+            setTimeout(function () {
+                app.maps.event.trigger($scope.map.control.getGMap(),'resize');
+            }, 100);
         }
 
     });
@@ -215,7 +221,8 @@ angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$ht
         options: {
             scaleControl: true,
             mapTypeControl: false,
-            streetViewControl: false
+            streetViewControl: false,
+            refresh: false
         },
         events: {
             click: function (mapModel, eventName, originalEventArgs) {
@@ -244,16 +251,6 @@ angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$ht
         }
     };
 
-    // $scope.$watch('selected', function () {
-    //     $scope.google.maps.event.trigger(map, 'resize');
-    //
-    // });
-
-
-    // app.showMap = function()  {
-    //
-    //         google.maps.event.trigger(map, 'resize');
-    //     };
 
     $scope.circle = {
         stroke: {
@@ -289,11 +286,6 @@ angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$ht
         'Sunday'
     ];
 
-    // $timeout(function () {
-    //     // // in my case
-    //     // initializeMap();
-    //     // OR this case:
-    //     google.maps.event.trigger(map, 'resize');
-    // });
+
 
 }]);
