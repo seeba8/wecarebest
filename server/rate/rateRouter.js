@@ -20,7 +20,7 @@ function rateRoutes(passport) {
     });
 
     //add new Rating
-    router.post('/createRating', passport.authenticate('jwt', {session: false}, rateController.postCreateRating));
+    router.post('/createRating', passport.authenticate('jwt', {session: false}), rateController.postCreateRating);
     //retrieve stars for booking
     router.post('/shortRating', rateController.postShortRating);
     //always use post, as we need to transmit information in the body which alters the outcome (get would violate HTTP1.1 rules)

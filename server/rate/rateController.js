@@ -27,7 +27,7 @@ module.exports.postCreateRating = function(req, res) {
             console.log(err);
         } else {
             console.log("Saved rating to database");
-            res.send();
+            res.status(200).send("OK");
         }
     });
 };

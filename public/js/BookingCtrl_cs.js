@@ -20,7 +20,7 @@ angular.module("myApp")
                     bookings[booking].user = result[booking].user;
                     bookings[booking].offer = result[booking].offer;
                 }
-
+        
                 console.log("Get Bookings...");
                 console.log(bookings);
                 //bookings.forEach(statusNumberToText());

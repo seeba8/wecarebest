@@ -1,9 +1,9 @@
 function authInterceptor(API, auth) {
     return {
         // automatically attach Authorization header
-        request: function(config) {
+        request: function (config) {
             var token = auth.getToken();
-            if(token) {
+            if (token) {
                 config.headers.Authorization = 'JWT ' + token;
             }
 
@@ -11,8 +11,8 @@ function authInterceptor(API, auth) {
         },
 
         // If a token was sent back, save it
-        response: function(res) {
-            if(res.data.token) {
+        response: function (res) {
+            if (res.data.token) {
                 auth.saveToken(res.data.token);
             }
             return res;
@@ -22,13 +22,13 @@ function authInterceptor(API, auth) {
 
 function authService($window) {
     var self = this;
-    self.getToken = function() {
+    self.getToken = function () {
         return $window.localStorage['jwtToken'];
     };
 
-    self.isAuthed = function() {
+    self.isAuthed = function () {
         var token = self.getToken();
-        if(token) {
+        if (token) {
             /* var params = self.parseJwt(token);
              return Math.round(new Date().getTime() / 1000) <= params.exp;*/
             return true;
@@ -37,7 +37,7 @@ function authService($window) {
         }
     };
 
-    self.isCaregiver = function() {
+    self.isCaregiver = function () {
         //console.log("in is caregiver");
         if (!self.isAuthed()) {
             return false; //user is currently not logged in
@@ -48,10 +48,10 @@ function authService($window) {
         //console.log(token);
         //console.log(token.type);
         //console.log(token.type == 1);
-        return(token.type == 1);
+        return (token.type == 1);
     };
 
-    self.isCareseeker = function() {
+    self.isCareseeker = function () {
         if (!self.isAuthed()) {
             return false; //user is currently not logged in
         }
@@ -59,14 +59,14 @@ function authService($window) {
         //console.log(token);
         //console.log(token.type);
         //console.log(token.type == 2);
-        return(token.type == 2);
+        return (token.type == 2);
     };
 
-    self.saveToken = function(token) {
+    self.saveToken = function (token) {
         $window.localStorage['jwtToken'] = token;
     };
 
-    self.parseJwt = function(token) {
+    self.parseJwt = function (token) {
         var base64Url = token.split('.')[1];
         var base64 = base64Url.replace('-', '+').replace('_', '/');
         return JSON.parse($window.atob(base64));
@@ -83,42 +83,43 @@ function userService($http, API, auth) {
 
 }
 
-var myApp = angular.module('myApp',['ngRoute','ui.bootstrap.showErrors', 'ngMessages',"uiGmapgoogle-maps", "countrySelect", "rzModule", "geolocation"]);
-myApp.config(function($routeProvider) {
-        $routeProvider
-            .when('/', { templateUrl: '../html/partials/home.html' })
-            .when('/search', { templateUrl: '../html/searchresults.html' })
-            .when('/bookingsrequests', { templateUrl: '../html/myoffers.html' })
-            .when('/offerservice', {
-                templateUrl: '../html/offerservice.html',
-                title: "Offer Service",
-                controller: "CreateOfferCtrl"
-            })
-            .when('/about', { templateUrl: '../html/partials/home.html' })
-            .when('/profile', { templateUrl: '../html/partials/profile.html' })
-            .when('/login', {templateUrl: '../html/login.html'})
-            .when('/addUser', {templateUrl: '../html/registration.html'})
-            .when('/myoffers', {templateUrl: '../html/myoffers.html'})
-            .when('/singleOffer/:offerid/:startday?/:starttime?/:endtime?', {templateUrl: '../html/singleOffer.html'})
-            .when('/mybookingscareseeker', {templateUrl: '../html/mybookingscareseeker.html'})
-            .when('/mybookingscaregiver', {templateUrl: '../html/mybookingscaregiver.html'})
-            .when('/createRequest/:offerid/:startday?/:starttime?/:endtime?', {templateUrl: '../html/createRequest.html'})
-            .when('/contact', {templateUrl: '../html/partials/contact.html'})
-            .when('/imprint', {templateUrl: '../html/partials/imprint.html'})
-            .when('/terms', {templateUrl: '../html/partials/terms.html'})
-            .when('/rate', {templateUrl: '../html/rate.html'})
-            .otherwise({ redirectTo: '/'});
-    });
+var myApp = angular.module('myApp', ['ngRoute', 'ui.bootstrap.showErrors', 'ngMessages', "uiGmapgoogle-maps", "countrySelect", "rzModule", "geolocation", "angular-input-stars"]);
+
+myApp.config(function ($routeProvider) {
+    $routeProvider
+        .when('/', {templateUrl: '../html/partials/home.html'})
+        .when('/search', {templateUrl: '../html/searchresults.html'})
+        .when('/bookingsrequests', {templateUrl: '../html/myoffers.html'})
+        .when('/offerservice', {
+            templateUrl: '../html/offerservice.html',
+            title: "Offer Service",
+            controller: "CreateOfferCtrl"
+        })
+        .when('/about', {templateUrl: '../html/partials/home.html'})
+        .when('/profile', {templateUrl: '../html/partials/profile.html'})
+        .when('/login', {templateUrl: '../html/login.html'})
+        .when('/addUser', {templateUrl: '../html/registration.html'})
+        .when('/myoffers', {templateUrl: '../html/myoffers.html'})
+        .when('/singleOffer/:offerid/:startday?/:starttime?/:endtime?', {templateUrl: '../html/singleOffer.html'})
+        .when('/mybookingscareseeker', {templateUrl: '../html/mybookingscareseeker.html'})
+        .when('/mybookingscaregiver', {templateUrl: '../html/mybookingscaregiver.html'})
+        .when('/createRequest/:offerid/:startday?/:starttime?/:endtime?', {templateUrl: '../html/createRequest.html'})
+        .when('/contact', {templateUrl: '../html/partials/contact.html'})
+        .when('/imprint', {templateUrl: '../html/partials/imprint.html'})
+        .when('/terms', {templateUrl: '../html/partials/terms.html'})
+        .when('/rate/:caregiverid/:bookingid', {templateUrl: '../html/rate.html'})
+        .otherwise({redirectTo: '/'});
+});
 
 myApp.factory('authInterceptor', authInterceptor)
     .service('user', userService)
     .service('auth', authService)
     .constant('API', 'http://localhost:3000')
-    .config(function($httpProvider) {
+    .config(function ($httpProvider) {
         $httpProvider.interceptors.push('authInterceptor');
     });
 
-myApp.config(['showErrorsConfigProvider', function(showErrorsConfigProvider) {
+myApp.config(['showErrorsConfigProvider', function (showErrorsConfigProvider) {
     console.log("Hi2");
     showErrorsConfigProvider.showSuccess(true);
 }]);
@@ -137,30 +138,34 @@ myApp.run(['$templateCache', function ($templateCache) {
     // onkeydown="if(event.keyCode == 13) {event.preventDefault(); event.stopPropagation();}"
 }]);
 
-myApp.directive("range", function() {
+myApp.directive("range", function () {
     return {
         restrict: "A",
         require: "ngModel",
-        link: function(scope, element, attributes, ngModel) {
-            ngModel.$validators.range = function(modelValue) {
-               return modelValue<=100 && modelValue>0 || modelValue == null;
+        link: function (scope, element, attributes, ngModel) {
+            ngModel.$validators.range = function (modelValue) {
+                return modelValue <= 100 && modelValue > 0 || modelValue == null;
             }
         }
     };
 });
 
-myApp.filter('datetime1', function($filter) {
-    return (function(input) {
-        if(input == null){ return ""; }
+myApp.filter('datetime1', function ($filter) {
+    return (function (input) {
+        if (input == null) {
+            return "";
+        }
         var _date = $filter('date')(new Date(input),
             'MM/dd/yyyy - HH:mm UTC');
         return _date.toUpperCase();
     });
 });
 
-myApp.filter('datenotime', function($filter) {
-    return (function(input) {
-        if(input == null){ return ""; }
+myApp.filter('datenotime', function ($filter) {
+    return (function (input) {
+        if (input == null) {
+            return "";
+        }
         var _date = $filter('date')(new Date(input),
             'MM/dd/yyyy');
         return _date.toUpperCase();
@@ -168,9 +173,11 @@ myApp.filter('datenotime', function($filter) {
 });
 
 
-myApp.filter('datetotime', function($filter) {
-    return (function(input) {
-        if(input == null){ return ""; }
+myApp.filter('datetotime', function ($filter) {
+    return (function (input) {
+        if (input == null) {
+            return "";
+        }
         var _date = $filter('date')(new Date(input),
             'HH:mm UTC');
         return _date.toUpperCase();
@@ -190,7 +197,7 @@ myApp.filter('cut', function () {
             var lastspace = value.lastIndexOf(' ');
             if (lastspace != -1) {
                 //Also remove . and , so its gives a cleaner result.
-                if (value.charAt(lastspace-1) == '.' || value.charAt(lastspace-1) == ',') {
+                if (value.charAt(lastspace - 1) == '.' || value.charAt(lastspace - 1) == ',') {
                     lastspace = lastspace - 1;
                 }
                 value = value.substr(0, lastspace);
