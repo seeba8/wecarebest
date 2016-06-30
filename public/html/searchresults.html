@@ -208,9 +208,9 @@
                         <div class="media-body">
                             <ul class="list-group">
                                 <h3 id="resultstitle">Name: {{result.user.firstname}} {{result.user.lastname}}<br /></h3>
-                                <hr>
+
                                 <li class="list-group-item">
-                                    <img src="../images/icons/doctor.png" title="Repeating true" width="24">
+                                    <img src="../images/icons/doctor.png" title="typeofcare" width="24">
                                     <b>Type of care:</b> {{result.offer.typeofcare}}
                                 </li>
                                 <li class="list-group-item" >
@@ -276,7 +276,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-2 col-md-2 pull-right">
+                <div class="col-sm-2 col-md-2 pull-right" id="resultactions">
                     <a href="/#/singleOffer/{{result.offer._id}}/{{searchParams.startday}}/{{searchParams.starttime}}/{{searchParams.endtime}}" class="btn btn-primary btn-round-lg offerdetail"
                        ><span
                             class="glyphicon glyphicon-eye-open"></span> View</a>

@@ -189,7 +189,12 @@ hr{
 }
 
 .defaultimg{
-    max-height:10em;
+    max-height:20em;
+    max-width:20em;
+}
+
+#profilepicture{
+    margin-left: 20px;
 }
 
 .panel-footer{
@@ -201,6 +206,10 @@ hr{
     margin-bottom:0px;
 }
 
+#resultactions{
+    margin-top: 10px;
+}
+
 #resultsrow{
     margin-bottom: 30px;
     padding-top: 30px;
@@ -209,9 +218,14 @@ hr{
     border-color: lightgrey;
 }
 
-#resultstitle{
+#resultstitle,
+#offertitle{
     margin-top:0px;
     color: #428BCA;
+}
+
+.offerinfo{
+    background-color: #f5f5f5;
 }
 
 #rzslider{
@@ -257,4 +271,8 @@ hr{
     padding-right:0px;
     margin-right:0px;
     width:40px;
+}
+
+#ratingtable{
+    width:60%;
 }

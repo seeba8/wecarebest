@@ -2,7 +2,8 @@
 <div class="container whitebg" ng-controller="SearchCtrl as app">
     <div class="row">
         <div class="col-sm-6 col-md-6">
-            <h2>{{results[0].user.firstname}} {{results[0].user.lastname}}</h2>
+            <h2>Offer Details</h2>
+            <!--<h2>{{results[0].user.firstname}} {{results[0].user.lastname}}</h2>-->
         </div>
     </div>
     <hr class="colorgraph">
@@ -11,26 +12,41 @@
             <img id="caregiverimg" src="../images/clint.jpg" class="img-rounded img-responsive">
         </div>
         <div class="col-md-8 col-sm-12">
-            <p>Name: {{results[0].user.firstname}} {{results[0].user.lastname}} </br>
-                Type of care: {{results[0].offer.typeofcare}}</br>
-                Location: {{results[0].offer.location.name}}</br>
-            </p>
+            <div class="media">
+                <div class="media-body">
+                    <ul class="list-group">
+                        <h3 id="offertitle">Caregiver: {{results[0].user.firstname}} {{results[0].user.lastname}} <br /></h3>
+                        <li class="list-group-item">
+                            <img src="../images/icons/doctor.png" title="typeofcare" width="24">
+                            <b>Type of care:</b> {{results[0].offer.typeofcare}}
+                        </li>
+                        <li class="list-group-item">
+                            <img src="../images/icons/location.png" title="location" width="24">
+                            <b>Location:</b> {{results[0].offer.location.name}} | <b>Radius:</b> {{results[0].offer.location.radius}} m
+                        </li>
+                        <li class="list-group-item">
+                            <img src="../images/icons/notes.png" title="Notes" width="24">
+                            <b>Notes:</b> {{results[0].offer.notes}}
+                        </li>
+                        </ul>
+                </div>
+            </div>
         </div>
         <div class="col-md-2 col-sm-9">
-            <a href="/#/createRequest/{{results[0].offer._id}}" class="btn btn-primary btn-success" style="min-width:80%;margin-top:10px;"><span
+            <a href="/#/createRequest/{{results[0].offer._id}}" class="btn btn-success" style="min-width:80%;margin-top:10px;"><span
                     class="glyphicon glyphicon-ok"></span> Book</a>
             <a onclick="alert('I\'m sorry Dave, I\'m afraid I can\'t do that.')" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;">
                 <span class="glyphicon glyphicon-star-empty"></span> Rate</a>
-
         </div>
     </div>
 
 
-    <div class="row">
-        <div class="col-md-offset-2 col-md-10 well">
-            {{results[0].offer.notes}}
-        </div>
-    </div>
+    <!--<div class="row">-->
+        <!--<div class="col-md-offset-2 col-md-10 well">-->
+            <!--<label>Notes:</label>-->
+            <!--{{results[0].offer.notes}}-->
+        <!--</div>-->
+    <!--</div>-->
 
     <div class="row">
         <div class="col-md-offset-2 col-md-10 well">
@@ -53,13 +69,14 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-offset-2 col-md-10 well staroverall">
-            <table style="width:50%">
+        <div class="col-md-offset-2 col-md-10 col-sm-12 well staroverall">
+            <label>Client Rating:</label>
+            <table id="ratingtable">
                 <tr>
-                    <td>Overall Satisfaction</td>
+                    <td class="col-md-4">Overall Satisfaction</td>
                     <td>
                         <span ng-if="overallSatisfaction == null">
-                        No rating available.
+                            No rating available.
                             </span>
                         <span ng-if="overallSatisfaction >= 0 && overallSatisfaction < 0.5">
                             <i class="glyphicon glyphicon-star-empty"></i>
@@ -106,7 +123,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Friendliness</td>
+                    <td class="col-md-4">Friendliness</td>
                     <td>
                         <span ng-if="Friendliness == null">
                         No rating available.
@@ -156,7 +173,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Competence</td>
+                    <td class="col-md-4">Competence</td>
                     <td>
                         <span ng-if="Competence == null">
                         No rating available.
@@ -206,7 +223,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Punctuality</td>
+                    <td class="col-md-4">Punctuality</td>
                     <td>
                         <span ng-if="Punctuality == null">
                         No rating available.
@@ -258,7 +275,11 @@
             </table>
         </div>
     </div>
-    <div class="row" ng-repeat="rating in ratings" style="margin-bottom: 30px;">
+
+    <div class="row">
+        <!--<label>Client Ratings:</label>-->
+        <div class="col-md-offset-2 col-md-10 well" ng-repeat="rating in ratings" style="margin-bottom: 20px;">
+
         <div class="col-md-2 stardetail">
             <span ng-if="rating.overallSatisfaction == null">
             No rating available.
@@ -306,9 +327,10 @@
                 <i class="glyphicon glyphicon-star"></i>
             </span>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-9">
             {{rating.otherRemarks}}
         </div>
+    </div>
     </div>
 
 
