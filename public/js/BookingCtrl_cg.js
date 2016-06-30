@@ -4,95 +4,115 @@
 angular.module("myApp")
     .controller("BookingCtrl_cg", ["$scope", "$http", "$window", "user", "auth", function ($scope, $http, $window, user, auth) {
 
-         var app = this;
-         var url = 'http://localhost:3000';
-         var config = {};
-         var result = [];
+        var app = this;
+        var url = 'http://localhost:3000';
+        var config = {};
+        var result = [];
+        $scope.bookingStatuses = {
+            0: "",
+            1: "Waiting for answer",
+            2: "To be paid",
+            3: "Ready",
+            4: "Cancelled",
+            5: "In the past",
+            6: "Unbooked Offer"
+        };
+        $scope.resultsfilter = {};
 
-            $scope.initFirst=function()
-            {
-                console.log("BookingCtrl loaded.");
-                var caregiver_id = auth.parseJwt(auth.getToken())._id;
-
-                console.log("offers");
-                $http.get(url + "/offers", {params:{caregiver: caregiver_id, unbooked: true}}).success(function (offers) {
-                    console.log(offers.length);
-                    console.log(offers);
-                    $scope.offers = offers;
-                });
-                
-                
-                $http.get(url + "/mybookings").success(function (bookings) {
-
-
-                    console.log("Get Bookings...");
-                    //console.log(bookings);
-                    //bookings.forEach(statusNumberToText());
-
-                    for(booking in bookings){
-                        result[booking] = bookings[booking];
-                        bookings[booking] = bookings[booking].booking;
-                        bookings[booking].user = result[booking].user;
-                    }
-                    console.log(bookings);
-
-                    for(booking in bookings){
-                        switch(bookings[booking].status) {
-                            case 1:
-                                bookings[booking].statustext = "Waiting for answer";
-                                console.log(status);
-                                break;
-                            case 2:
-                                bookings[booking].statustext = "To be paid";
-                                console.log(status);
-                                break;
-                            case 3:
-                                var date = new Date();
-                                if(Date.parse(bookings[booking].endtime) < Date.parse(date)  ){
-                                    bookings[booking].statustext = "In the past";
-
-                                } else {
-                                    bookings[booking].statustext = "Ready";
-                                }
-                                break;
-                            case 4:
-                                bookings[booking].statustext = "Cancelled";
-                                console.log(status);
-                                break;
-                        };
-                    }
-
-                    $scope.bookings = bookings;
-                    //console.log(app.offerfinals);
-                });
-            };
-
-
-            $scope.changeBookingStatus = function(bookingItem, targetStatus){
-                console.log(targetStatus);
-                var data = bookingItem;
-                console.log(data);
-                data.targetStatus = targetStatus;
-
-                //send it as http post to backend in order to delete it in database
-                $http.post("../ChangeBookingStatus",  data).success(function () {
-                    console.log("CancelUpdate successfull");
-                    $scope.initFirst();
-                })
-                //IF error in HTTP POST then log it and show to user
-                    .error(function (data, status, header, config) {
-                        $scope.ResponseDetails = "Data: " + data +
-                            "<hr />status: " + status +
-                            "<hr />headers: " + header +
-                            "<hr />config: " + config;
-                        console.log($scope.ResponseDetails);
-                    });
+        $scope.customFilter = function (item) {
+            if (typeof $scope.resultsfilter.status != "undefined" && $scope.resultsfilter.status != "") {
+                if($scope.resultsfilter.status == "Unbooked Offer" && typeof item.offer._id != "undefined"){
+                    return true;
+                }
+                return item.statustext == $scope.resultsfilter.status;
             }
+            else{
+                return true;
+            }
+        };
+
+        $scope.initFirst = function () {
+            console.log("BookingCtrl loaded.");
+            var caregiver_id = auth.parseJwt(auth.getToken())._id;
+
+            console.log("offers");
+            $http.get(url + "/offers", {params: {caregiver: caregiver_id, unbooked: true}}).success(function (offers) {
+                console.log(offers.length);
+                console.log(offers);
+                $scope.offers = offers;
+            });
 
 
+            $http.get(url + "/mybookings").success(function (bookings) {
 
 
-        $scope.viewOffer = function(id) {
+                console.log("Get Bookings...");
+                //console.log(bookings);
+                //bookings.forEach(statusNumberToText());
+
+                for (booking in bookings) {
+                    result[booking] = bookings[booking];
+                    bookings[booking] = bookings[booking].booking;
+                    bookings[booking].user = result[booking].user;
+                }
+                console.log(bookings);
+
+                for (booking in bookings) {
+                    switch (bookings[booking].status) {
+                        case 1:
+                            bookings[booking].statustext = "Waiting for answer";
+                            console.log(status);
+                            break;
+                        case 2:
+                            bookings[booking].statustext = "To be paid";
+                            console.log(status);
+                            break;
+                        case 3:
+                            var date = new Date();
+                            if (Date.parse(bookings[booking].endtime) < Date.parse(date)) {
+                                bookings[booking].statustext = "In the past";
+
+                            } else {
+                                bookings[booking].statustext = "Ready";
+                            }
+                            break;
+                        case 4:
+                            bookings[booking].statustext = "Cancelled";
+                            console.log(status);
+                            break;
+                    }
+                    ;
+                }
+
+                $scope.bookings = bookings;
+                //console.log(app.offerfinals);
+            });
+        };
+
+
+        $scope.changeBookingStatus = function (bookingItem, targetStatus) {
+            console.log(targetStatus);
+            var data = bookingItem;
+            console.log(data);
+            data.targetStatus = targetStatus;
+
+            //send it as http post to backend in order to delete it in database
+            $http.post("../ChangeBookingStatus", data).success(function () {
+                console.log("CancelUpdate successfull");
+                $scope.initFirst();
+            })
+            //IF error in HTTP POST then log it and show to user
+                .error(function (data, status, header, config) {
+                    $scope.ResponseDetails = "Data: " + data +
+                        "<hr />status: " + status +
+                        "<hr />headers: " + header +
+                        "<hr />config: " + config;
+                    console.log($scope.ResponseDetails);
+                });
+        }
+
+
+        $scope.viewOffer = function (id) {
             console.log(id);
             var link = "/#/singleOffer/" + id;
             console.log(link);
@@ -104,7 +124,7 @@ angular.module("myApp")
          * ##### DELETE DOCUMENT BY ID FROM DATABASE AND ARRAY IN FRONTEND #############
          * #############################################################################
          * */
-        $scope.deleteOffer = function(id, index) {
+        $scope.deleteOffer = function (id, index) {
             console.log(index);
             //delete offer from array in frontend.
             $scope.offers.splice(index, 1);
@@ -114,7 +134,7 @@ angular.module("myApp")
             console.log(data);
 
             //send it as http post to backend in order to delete it in database
-            $http.delete(url + "/offers/:" + data.id).success(function(){
+            $http.delete(url + "/offers/:" + data.id).success(function () {
                 $scope.ServerResponse = data;
             })
             //IF error in HTTP POST then log it and show to user
@@ -128,7 +148,7 @@ angular.module("myApp")
 
 
         //UPDATE FUNCTIONALITY
-        $scope.updateOffer = function(offerItem, index) {
+        $scope.updateOffer = function (offerItem, index) {
 
             $scope.typeofcares = [
                 'Basic',
@@ -152,9 +172,8 @@ angular.module("myApp")
                 'Bi-weekly',
                 'Monthly'
             ];
-            
-            
-            
+
+
             // $scope.editing = {};
             offerItem.offer.starttime = new Date(offerItem.offer.starttime);
             offerItem.offer.endtime = new Date(offerItem.offer.endtime);
@@ -166,19 +185,18 @@ angular.module("myApp")
             $scope.offers.endtime = offerItem.offer.endtime;
             $scope.offers.typeofcare = offerItem.offer.typeofcare;
             $scope.offers.wageperhour = offerItem.offer.wageperhour;
-            if(offerItem.offer.notes){
+            if (offerItem.offer.notes) {
                 $scope.offers.notes = offerItem.offer.notes;
             }
             //$scope.offers.location.radius = offerItem.offer.location.radius;
             //$scope.offers.location.name = offerItem.offer.location.name;
 
 
-
-            $scope.saveUpdate = function(item){
+            $scope.saveUpdate = function (item) {
 
                 console.log(offerItem.offer);
                 console.log(item);
-                if($scope.Offer.$valid){
+                if ($scope.Offer.$valid) {
                     //item.location = item.center.name;
                     //item.latitude = item.center.latitude;
                     //item.longitude = item.center.longitude;
@@ -206,17 +224,12 @@ angular.module("myApp")
 
         };
 
-        app.updateOffer = function ( PushCandidate) {
+        app.updateOffer = function (PushCandidate) {
             $http.put(url + "/offers/:" + PushCandidate.offer.id, PushCandidate.offer).success(function () {
                 console.log("Updated successfully");
                 $('#myModal').modal('hide');
             })
         };
-
-
-
-
-
 
 
     }]);

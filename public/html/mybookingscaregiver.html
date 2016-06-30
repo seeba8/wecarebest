@@ -11,9 +11,17 @@
             <!--</div>-->
         </div>
     </div>
+    <div id="filter">
+        <label>
+            <select ng-model="resultsfilter.status" ng-options="val  for (key,val) in bookingStatuses track by key">
+            </select>
+            Status filter
+        </label>
+
+    </div>
     <hr class="colorgraph">
 
-    <div class="row bookingitem"  ng-repeat="booking in bookings | orderBy:'timestamp': app.recent">
+    <div class="row bookingitem"  ng-repeat="booking in bookings | orderBy:'timestamp': app.recent | filter:customFilter">
         <div class="col-md-2 col-sm-2 image">
             <img ng-show="booking.user.firstName == 'John'" src="../images/harrison.jpg" class="img-rounded img-responsive"  >
             <img ng-show="booking.user.firstName == 'Layla'" src="../images/queen.jpg" class="img-rounded img-responsive"  >
@@ -27,7 +35,7 @@
                         <li class="list-group-item" >
                             <img src="../images/icons/date.png" title="Date" title="Calendar" width="24">
                             <b>Start: </b>
-                            {{booking.starttime | datenotime}}
+                            {{booking.startday | datenotime}}
                             -
                             <b>Time: </b>
                             {{booking.starttime | datetotime}} until {{booking.endtime |  datetotime}}
@@ -76,7 +84,7 @@
     </div>
 
     <!--Unbooked Offers-->
-    <div class="row bookingitem"  ng-repeat="offer in offers">
+    <div class="row bookingitem"  ng-repeat="offer in offers |filter:customFilter">
         <div class="col-sm-8 col-md-8">
             <div class="media">
                 <div class="media-body">

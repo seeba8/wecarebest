@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/offerservice.css">
 
     <h2>Search for a caregiver</h2>
+    <pre>{{searchParams}}</pre>
     <hr class="colorgraph">
     <div class="row">
         <div class="col-sm-12 col-md-12">
@@ -178,7 +179,7 @@
                         Include booked offers
                     </label>
                     <div class="form-group col-sm-1 col-xs-4" id="unbookedbox">
-                        <input type="checkbox" class="form-control" ng-model="searchParams.unbooked" ng-init="searchParams.unbooked=true"
+                        <input type="checkbox" class="form-control" ng-model="searchParams.includeBooked" ng-init="searchParams.includeBooked=false"
                                id="unbooked"/>
 
                     </div>

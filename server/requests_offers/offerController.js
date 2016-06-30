@@ -140,7 +140,7 @@ module.exports.getOffers = function (req, res) {
     console.log("Search parameters: ", req.query);
     var searchParams = req.query;
     var conditions = {};
-    var unbooked = false;
+    var includeBooked = false;
     for (var param in searchParams) {
         switch (param) {
             case "locationname":
@@ -196,9 +196,9 @@ module.exports.getOffers = function (req, res) {
             case "_id":
                 conditions["_id"] = searchParams[param];
                 break;
-            case "unbooked":
+            case "includeBooked":
                 if(searchParams[param] == "false" || searchParams[param] == false){
-                    unbooked = true;
+                    includeBooked = true;
                 }
                 break;
             case "caregiver":
@@ -207,7 +207,7 @@ module.exports.getOffers = function (req, res) {
         }
 
     }
-    if(unbooked) {
+    if(includeBooked) {
         Booking.find().exec(function(err, results){
             var arr = results.map(function(item){ return item["offer"]});
             if(typeof conditions["_id"] == "undefined") {
