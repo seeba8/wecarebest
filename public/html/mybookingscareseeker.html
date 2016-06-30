@@ -73,7 +73,7 @@
             <!--<a href="" data-toggle="modal" data-target="#myModal" ng-click="updateOffer(booking, booking.$index)" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;"><span class="glyphicon glyphicon-envelope"></span> {{button3.name}}</a>-->
             <a href="#" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;" ><span class="glyphicon-envelope"></span> Contact</a>
             <a href="" ng-click="changeBookingStatus(booking, 2)" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;" ><span class="glyphicon-envelope"></span> VIEW</a>
-            <a href="/#/rate/{{booking.offer.createdBy}}/{{booking._id}}" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;"><span class="fa fa-star"></span> Rate</a>
+            <a href="/#/rate/{{booking.offer.createdBy}}/{{booking._id}}" ng-if="booking.status==3" class="btn btn-primary btn-info" style="min-width:80%;margin-top:10px;"><span class="fa fa-star"></span> Rate</a>
         </div>
 
     </div>
