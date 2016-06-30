@@ -62,9 +62,9 @@
                             </span>
                         </div>
                     </div>
-                    <div class="form-group col-sm-2">
-                    </div>
-                    <div class="form-group col-sm-3 col-xs-4">
+                    <!--<div class="form-group col-sm-2">-->
+                    <!--</div>-->
+                    <div class="form-group col-sm-4 col-xs-4">
                         <label for="starttime">Start time</label>
                         <div class='input-group date'>
                             <input
@@ -80,7 +80,7 @@
                             </span>
                         </div>
                     </div>
-                    <div class="form-group col-sm-3 col-xs-4">
+                    <div class="form-group col-sm-4 col-xs-4">
                         <label for="endtime">End time</label>
                         <div class='input-group date'>
                             <input
@@ -108,12 +108,12 @@
                     <!--</label>-->
                 <!--</div>-->
 
-                <div class="form-group col-sm-4 col-xs-4">
+                <div class="form-group col-sm-12 col-xs-12">
                     <br>
                     <label for="advanced" id="advancedlabel">
                         Advanced Search
                     </label>
-                    <div class="form-group col-sm-2 col-xs-2">
+                    <div class="form-group col-sm-1 col-xs-4" id="advancedbox">
                     <input type="checkbox" id="advanced" class="form-control align-left" ng-model="search.advanced" ng-click="map.refresh = true; map.refresh=false;"/>
                         <!--ng-model="search.advanced"-->
                     </div>
@@ -171,13 +171,13 @@
                 </div>
 
                 <hr class="colorgraph">
-                <div class="col-sm-12"></div>
+                <div class="col-xs-12"></div>
 
-                <div id="bookedcheck" class="row form-group col-sm-4 col-xs-4">
+                <div id="bookedcheck" class="row form-group col-sm-12 col-xs-12">
                     <label for="unbooked" id="bookedlabel">
                         Include booked offers
                     </label>
-                    <div class="form-group col-sm-2 col-xs-2">
+                    <div class="form-group col-sm-1 col-xs-4" id="unbookedbox">
                         <input type="checkbox" class="form-control" ng-model="searchParams.unbooked" ng-init="searchParams.unbooked=true"
                                id="unbooked"/>
 
@@ -186,13 +186,13 @@
 
                 <div class="form-group col-sm-12 col-xs-12">
                     <!--{{searchParams}}-->
-                    <button data-toggle="collapse" data-target="#criteria, #newsearch" type="submit" class="btn btn-success" ng-click="app.search()">Search</button>
-                    <button type="reset" class="btn btn-danger" ng-click="app.reset()">Reset</button>
+                    <button data-toggle="collapse" data-target="#criteria, #newsearch" type="submit" class="btn btn-round-lg btn-success" ng-click="app.search()">Search</button>
+                    <button type="reset" class="btn btn-round-lg btn-danger" ng-click="app.reset()">Reset</button>
                     <br><br>
 
                 </div>
                 </div>
-            <button id="newsearch" class="collapse btn btn-success" onClick="javascript:location.reload();">New Search</button>
+            <button id="newsearch" class="collapse btn btn-round-lg btn-success" onClick="javascript:location.reload();">New Search</button>
             </form>
 
             </div>
@@ -234,7 +234,7 @@
                                     <b>City: </b>{{result.offer.location.name}}
                                 </li>
                                 <li class="list-group-item">
-                                    <img src="../images/icons/money.png" title="Repeating true" width="24">
+                                    <img src="../images/icons/sell_property-24.png" title="Repeating true" width="24">
                                     <b>Price:</b> {{result.offer.wageperhour}}&euro; / h
                                 </li>
                                 <li class="list-group-item">
@@ -276,10 +276,10 @@
                     </div>
                 </div>
                 <div class="col-sm-2 col-md-2 pull-right">
-                    <a href="/#/singleOffer/{{result.offer._id}}/{{searchParams.startday}}/{{searchParams.starttime}}/{{searchParams.endtime}}" class="btn btn-primary offerdetail"
+                    <a href="/#/singleOffer/{{result.offer._id}}/{{searchParams.startday}}/{{searchParams.starttime}}/{{searchParams.endtime}}" class="btn btn-primary btn-round-lg offerdetail"
                        ><span
                             class="glyphicon glyphicon-eye-open"></span> View</a>
-                    <a href="/#/createRequest/{{result.offer._id}}/{{searchParams.startday}}/{{searchParams.starttime}}/{{searchParams.endtime}}" class="btn btn-primary btn-success offerdetail">
+                    <a href="/#/createRequest/{{result.offer._id}}/{{searchParams.startday}}/{{searchParams.starttime}}/{{searchParams.endtime}}" class="btn btn-primary btn-round-lg btn-success offerdetail">
                         <span class="glyphicon glyphicon-envelope"></span> Book
                     </a>
                 </div>

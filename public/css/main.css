@@ -171,6 +171,9 @@ hr{
     margin-bottom: 30px;
 }
 
+#basicsearch{
+    margin-bottom: -30px;
+}
 /*#criteria{*/
     /*margin-bottom:-100px;*/
 /*}*/
@@ -234,4 +237,24 @@ hr{
 #advancedlabel{
     margin-left:10px;
     margin-top:10px;
+}
+
+.btn-round-lg{
+    border-radius: 17px;
+    font-weight: bold;
+}
+
+#advanced,
+#unbooked{
+    width: 24px;
+    height:24px;
+    padding-right:0px;
+    margin-right:0px;
+}
+
+#advancedbox,
+#unbookedbox{
+    padding-right:0px;
+    margin-right:0px;
+    width:40px;
 }
