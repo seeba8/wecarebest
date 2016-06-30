@@ -29,6 +29,7 @@ function bookingRoutes(passport) {
     router.post('/mybookings', passport.authenticate('jwt', {session: false}), bookingController.postMyBookings);
     //router.get('/mybookings', passport.authenticate('jwt', {session: false}, bookingController.getMyBookings));
     router.get('/mybookings', bookingController.getMyBookings);
+    router.get("/bookings", passport.authenticate('jwt', {session: false}), bookingController.getBookings);
 
     //changes the booking status in the database (of an existing object)
     router.post('/ChangeBookingStatus', bookingController.postChangeBookingStatus);

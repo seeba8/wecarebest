@@ -15,6 +15,16 @@ angular.module("myApp")
         app.bookingid = $routeParams.bookingid;
         console.log("Loaded RateCtrl");
 
+        $http.get("/bookings", {
+            params: {
+                _id: app.bookingid,
+                caregiverid: app.caregiverid
+            }
+        }).success(function(bookings){
+           console.log(bookings);
+            $scope.booking = bookings;
+        });
+
         app.saveRating = function () {
             console.log("clicked: save rating");
             $http.post(url + '/createRating', {

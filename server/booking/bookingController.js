@@ -58,6 +58,29 @@ module.exports.postCreateRequest = function(req, res) {
         }
     });
 };
+module.exports.getBookings = function(req,res){
+    var searchParams = req.query;
+    var conditions = {};
+    if(typeof searchParams._id != "undefined"){
+        conditions._id = searchParams._id;
+    }
+
+    Booking.find(conditions, function(err, booking){
+        if(searchParams.caregiverid != "undefined"){
+            User.find({"_id":searchParams.caregiverid}, function(err, user){
+                var send = {
+                    booking: booking[0],
+                    caregiver: {
+                        firstName: user[0].firstName,
+                        lastName: user[0].name
+                    }
+                };
+
+                res.status(200).send(send);
+            });
+        }
+    });
+};
 
 module.exports.getMyBookings = function(req, res) {
     var resultingBookings = [];
