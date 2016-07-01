@@ -185,7 +185,8 @@ module.exports.getMyBookings = function(req, res) {
         conditions["createdBy"] = userid;
         console.log(conditions);
         Booking.find(conditions, function (err, bookings) {
-            console.log("print bookings for careseeker");
+            console.log("##################################print bookings for careseeker");
+            //console.log(bookings);
             for(booking in bookings){
                 offersarr.push(bookings[booking].offer);
             }
@@ -195,39 +196,48 @@ module.exports.getMyBookings = function(req, res) {
             Offer.find({
                 '_id': { $in: offersarr}}, function(err, offers){
                 console.log("-------------------------1");
+                console.log(offersarr);
+                console.log("##############1")
                 for(offer in offers){
                     useridsarr.push(offers[offer].createdBy);
                 }
-                //console.log(useridsarr);
+                console.log("-------------------------2");
+                console.log(useridsarr);
+                console.log("################2");
 
                 User.find({
                     '_id': { $in: useridsarr}}, function(err, users){
-                    console.log("-------------------------2");
+                    console.log("-------------------------3");
                     //console.log(users);
                     for(user in users){
                         usersarr.push(users[user]);
                     }
                     console.log(usersarr);
+                    console.log("################4");
 
                     for(booking in bookings){
+                    for(offer in offers){
                         console.log("-------------------------4");
                         for(user in users){
-                            console.log("-------------------------5");
-                            console.log(bookings[booking].offer);
-                            console.log(offers[offer]._id);
-                            console.log(offers[offer].createdBy);
-                            console.log(users[user]._id);
-                            if(bookings[booking].offer = offers[offer]._id && offers[offer].createdBy == users[user]._id){
+                            console.log("-------------------------5:" + user);
+                            console.log("Booking Offer ID:" + bookings[booking].offer);
+                            console.log("Offer ID: " + offers[offer]._id);
+                            console.log("Offer created by: " + offers[offer].createdBy);
+                            console.log("User ID: " + users[user]._id);
+                            if(bookings[booking].offer == offers[offer]._id && offers[offer].createdBy == users[user]._id){
                                 //console.log(bookings[booking]._id + " und " + users[user]._id );
                                 b = bookings[booking];
                                 u = users[user];
                                 o = offers[offer];
-                                console.log(booking);
+                                console.log("Match.");
                                 result.push({booking:b, user:u, offer:o});
                                 console.log("-------------------------6");
-                                console.log(result[0]);
+                                //console.log(result[0]);
+                            } else {
+                                console.log("No Match.")
                             }
                         }
+                    }
                     }
                     res.send(result);
 
