@@ -1,11 +1,22 @@
+<div class="mswork">
+    <!--<div class="bgmswork">-->
+    <!--<div class="msheadercontent container">-->
+    <!--What We Do-->
+    <!--</div>-->
+    <!--</div>-->
+</div>
 
-<div class="container mybookingscareseeker" ng-controller="BookingCtrl_cg as app" ng-init="initFirst()">
+<div class="container mybookingscareseeker mshome whitebg" ng-controller="BookingCtrl_cg as app" ng-init="initFirst()">
     <div class="row" >
         <div class="col-sm-6 col-md-9">
-            <h2>My Bookings & Requests {{Server.Response}}</h2>
+            <h1>My Bookings & Requests</h1>
+            <h2>
+                Manage your open bookings and unbooked offers.
+            </h2>
         </div>
         <div class="col-sm-6 col-md-3" id="filter">
-                <select
+            Filter entries
+            <select
                         class="form-control"
                         ng-model="resultsfilter.status"
                         ng-options="val  for (key,val) in bookingStatuses track by key">
