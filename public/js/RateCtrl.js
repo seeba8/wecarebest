@@ -8,8 +8,8 @@ angular.module("myApp")
         var app = this;
         var url = "http://localhost:3000";
         app.overallSatisfaction = 5;
-        app.Friendliness = 4;
-        app.Competence = 3;
+        app.Friendliness = 5;
+        app.Competence = 5;
         app.Punctuality = 5;
         app.caregiverid = $routeParams.caregiverid;
         app.bookingid = $routeParams.bookingid;

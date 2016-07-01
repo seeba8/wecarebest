@@ -1,10 +1,54 @@
 <div class="container" ng-controller="RateCtrl as app">
     <form name="Rating" role="form" ng-submit="app.saveRating()" novalidate>
-        <h2>Rating</h2>
+        <h2>My Rating for {{booking.caregiver.firstName}} {{booking.caregiver.lastName}}</h2>
         <div>
-            <!-- TODO: Namen Anzeigen oder so-->
-            TODO: Namen Anzeigen, oder so. Hier sind die Daten schon mal.<br />
-            {{booking}}
+            <div class="row bookingitem">
+                <div class="col-md-2 col-sm-2 image">
+                    <img src="../images/caregiver1.PNG" class="img-rounded img-responsive"  >
+                </div>
+                <div class="col-sm-8 col-md-8">
+                    <div class="media">
+                        <div class="media-body">
+                            <ul class="list-group">
+                                <li class="list-group-item" >
+                                    <img src="../images/icons/date.png" title="Date" title="Calendar" width="24">
+                                    <b>Start: </b>
+                                    {{booking.booking.starttime | datenotime}}
+                                    -
+                                    <b>Time: </b>
+                                    {{booking.booking.starttime | datetotime}} until {{booking.booking.endtime |  datetotime}}
+                                </li>
+                                <li ng-show="booking.booking.repeating == true" class="list-group-item">
+                                    <img src="../images/icons/repeating.png" title="Repeating true" width="24">
+                                    <b>Repeating:</b>
+                                    {{booking.booking.repeatoptions.frequency}}
+                                    -
+                            <span ng-show="booking.booking.repeating == true"><b>Days:</b>
+                            <span ng-show="val == true" ng-repeat="(key,val) in booking.booking.repeatoptions">{{key | cut:true:2}}<span ng-show="!$last"> | </span></span>
+                        </span>
+                                </li>
+                                <li class="list-group-item">
+                                    <img src="../images/icons/location.png" title="Location" width="24">
+                                    <b>City: </b>{{booking.booking.location.street}}, {{booking.booking.location.postalCode}} {{booking.booking.location.city}}
+                                </li>
+                                <li class="list-group-item">
+                                    <img src="../images/icons/notes.png" title="Notes" width="24">
+                                    <b>Notes:</b> {{booking.booking.notes}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2 status">
+                    <p>Status: </br>
+                        <img ng-if="booking.booking.status == 1" src="https://maxcdn.icons8.com/Color/PNG/96/Ecommerce/delivery-96.png" title="Delivery" width="96">
+                        <img ng-if="booking.booking.status == 2" src="https://maxcdn.icons8.com/Color/PNG/96/Finance/card_in_use-96.png" title="Card in Use" width="96">
+                        <img ng-if="booking.booking.status == 3" src="https://maxcdn.icons8.com/Color/PNG/96/Very_Basic/lock-96.png" title="Lock" width="96">
+                        <img ng-if="booking.booking.status == 4" src="https://maxcdn.icons8.com/Color/PNG/96/Computer_Hardware/system_report-96.png" title="System Report" width="96">
+                        </br>{{booking.booking.statustext}}
+                    </p>
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="form-group col-sm-12">
