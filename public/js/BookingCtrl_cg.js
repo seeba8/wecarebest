@@ -39,6 +39,14 @@ angular.module("myApp")
             $http.get(url + "/offers", {params: {caregiver: caregiver_id, unbooked: true}}).success(function (offers) {
                 console.log(offers.length);
                 console.log(offers);
+                for(offer in offers){
+                    if(offers[offer].offer.createdBy != caregiver_id){
+                         console.log("Wrong ID");
+                        console.log(offers[offer]);
+                        offers[offer] = null;
+                     }
+                }
+
                 $scope.offers = offers;
             });
 

@@ -77,8 +77,8 @@ angular.module("myApp")
                     console.log($scope.ResponseDetails);
                 });
         }
-        
 
+            
     }
 
 ]);
