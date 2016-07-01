@@ -1,5 +1,5 @@
 body {
-    padding-top: 60px;
+    padding-top: 50px;
     font-family: Montserrat, Arial, sans-serif;
     background-color: #f4f4f4;
 }
@@ -275,4 +275,16 @@ hr{
 
 #ratingtable{
     width:60%;
+}
+
+/*NAVIGATION MOBILE BUTTON*/
+.navbar-default .navbar-toggle .icon-bar {
+    background-color:white !important;
+}
+.navbar-default .navbar-toggle {
+    border-color: white !important;
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+    background-color:#003399;
 }
