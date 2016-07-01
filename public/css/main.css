@@ -127,6 +127,13 @@ hr{
 
 
 /*BY MS DO NOT DELETE*/
+/*Careseeker */
+.mybookingscareseeker #filter{
+    float:right;
+    margin-top:20px;
+}
+
+
 .mybookingscareseeker .bookingitem {
     margin-bottom: 30px;
     background-color:white;

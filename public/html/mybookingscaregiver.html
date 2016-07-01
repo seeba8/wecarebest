@@ -1,23 +1,21 @@
 
 <div class="container mybookingscareseeker" ng-controller="BookingCtrl_cg as app" ng-init="initFirst()">
     <div class="row" >
-        <div class="col-sm-6 col-md-6">
+        <div class="col-sm-6 col-md-9">
             <h2>My Bookings & Requests {{Server.Response}}</h2>
         </div>
-        <div class="col-sm-6 col-md-6 pull-right">
+        <div class="col-sm-6 col-md-3" id="filter">
+                <select
+                        class="form-control"
+                        ng-model="resultsfilter.status"
+                        ng-options="val  for (key,val) in bookingStatuses track by key">
+                    <option value="" disabled selected>Select Status Filter</option>
+                </select>
+            </div>
             <!--<div class="btn-group" style="float:right">-->
                 <!--<a href="#" ng-click="app.recent = !app.recent" class="btn btn-primary btn-primary"><span class="glyphicon glyphicon-export"></span> Show recent entries</a>-->
                 <!--<a href="#" class="btn btn-primary btn-info"><span class="glyphicon glyphicon-stats"></span> Filter entries</a>-->
             <!--</div>-->
-        </div>
-    </div>
-    <div id="filter">
-        <label>
-            <select ng-model="resultsfilter.status" ng-options="val  for (key,val) in bookingStatuses track by key">
-            </select>
-            Status filter
-        </label>
-
     </div>
     <hr class="colorgraph">
 
