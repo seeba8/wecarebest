@@ -1,12 +1,21 @@
-<div class="container" ng-controller="RateCtrl as app">
+<div class="mswork">
+    <!--<div class="bgmswork">-->
+    <!--<div class="msheadercontent container">-->
+    <!--What We Do-->
+    <!--</div>-->
+    <!--</div>-->
+</div>
+<div class="container  mshome whitebg" ng-controller="RateCtrl as app">
     <form name="Rating" role="form" ng-submit="app.saveRating()" novalidate>
-        <h2>My Rating for {{booking.caregiver.firstName}} {{booking.caregiver.lastName}}</h2>
+        <h1>My Rating for {{booking.caregiver.firstName}} {{booking.caregiver.lastName}}</h1>
+        <h2>Rate your caregiver.</h2>
+        <hr class="colorgraph">
         <div>
             <div class="row bookingitem">
-                <div class="col-md-2 col-sm-2 image">
-                    <img src="../images/caregiver1.PNG" class="img-rounded img-responsive"  >
+                <div class="col-md-3 col-sm-2 image">
+                    <img src="../images/caregiver5.jpg" class="img-rounded img-responsive"  >
                 </div>
-                <div class="col-sm-8 col-md-8">
+                <div class="col-sm-8 col-md-7">
                     <div class="media">
                         <div class="media-body">
                             <ul class="list-group">
@@ -31,7 +40,7 @@
                                     <img src="../images/icons/location.png" title="Location" width="24">
                                     <b>City: </b>{{booking.booking.location.street}}, {{booking.booking.location.postalCode}} {{booking.booking.location.city}}
                                 </li>
-                                <li class="list-group-item">
+                                <li class="list-group-item" ng-show="booking.booking.notes">
                                     <img src="../images/icons/notes.png" title="Notes" width="24">
                                     <b>Notes:</b> {{booking.booking.notes}}
                                 </li>
@@ -39,7 +48,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-2 status">
+                <div class="col-sm-2 status text-center">
                     <p>Status: </br>
                         <img ng-if="booking.booking.status == 1" src="https://maxcdn.icons8.com/Color/PNG/96/Ecommerce/delivery-96.png" title="Delivery" width="96">
                         <img ng-if="booking.booking.status == 2" src="https://maxcdn.icons8.com/Color/PNG/96/Finance/card_in_use-96.png" title="Card in Use" width="96">
@@ -50,7 +59,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row well msspace">
             <div class="form-group col-sm-12">
                 <label>Overall Satisfaction
                     <input-stars max="5" ng-model="app.overallSatisfaction"></input-stars>
@@ -74,7 +83,7 @@
             ########FORM INPUT FOR notes ##################
             ###############################################
             -->
-        <div class="form-group">
+        <div class="form-group row msrow">
             <label for="otherRemarks">Other remarks (max. 2000 chars)</label>
                 <textarea ng-model="app.otherRemarks"
                           class="form-control"
@@ -90,7 +99,7 @@
             ########FORM INPUT FOR notes ##################
             ###############################################
             -->
-        <div class="form-group">
+        <div class="form-group row msrow">
             <label for="personalFeedback">Personal Feedback (max. 2000 chars)</label>
                 <textarea ng-model="app.personalFeedback"
                           class="form-control"
@@ -100,8 +109,9 @@
                           ng-maxlength="2000"
                           placeholder="Please enter a message for the caregiver, which only he/she shall read"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary btn-lg">Rate
+        <hr class="colorgraph">
+        <button type="submit" class="btn btn-round-lg btn-success">Rate
         </button>
-
+        <hr class="colorgraph">
     </form>
 </div>

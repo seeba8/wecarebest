@@ -301,7 +301,7 @@ hr{
 
 /*HEADER */
 .mswork {
-    height:350px !important;
+    height:250px !important;
     background-image: url(../images/header.jpg);
     background-position:center;
     background-size:cover;
@@ -356,3 +356,17 @@ footer a {
     color:white;
 }
 
+.msspace {
+    margin-top:20px;
+}
+.msspace .form-group {
+    margin-bottom: 0px;
+}
+
+.msspace ul {
+    margin-bottom:0px;
+}
+
+.msrow {
+    margin-top:30px;
+}
