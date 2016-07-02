@@ -12,7 +12,7 @@ angular.module("myApp")
 
         uiGmapGoogleMapApi.then(function (maps) {
             geocoder = new maps.Geocoder;
-            console.log("Then");
+
 
         });
         geolocation.getLocation().then(function(data){
@@ -82,15 +82,14 @@ angular.module("myApp")
         }).success(function (offers) {
             console.log("Got Offers.");
             console.log(offers);
-            for (var offerID in offers) {
-                var offer = offers[offerID].offer;
-                offer.startday = moment(offer.startday).format("L");
-                offer.starttime = moment(offer.starttime).format("LT");
-                offer.endtime = moment(offer.endtime).format("LT");
-                offer.repeatoptions.endday = offer.repeating ? moment(offer.repeatoptions.endday).format("L") : "";
-                offer.createdDate = offer.createdDate ? moment(offer.createdDate).format("L") : moment("2016 01 01", "YYYY MM DD").format("L");
-            }
             offer = offers[0].offer;
+            offer.startday = moment(offer.startday).format("L");
+            offer.starttime = moment(offer.starttime).format("LT");
+            offer.endtime = moment(offer.endtime).format("LT");
+            offer.repeatoptions.endday = offer.repeating ? moment(offer.repeatoptions.endday).format("L") : "";
+            offer.createdDate = offer.createdDate ? moment(offer.createdDate).format("L") : moment("2016 01 01", "YYYY MM DD").format("L");
+
+
             $scope.request = {
                 offerid: $routeParams.offerid,
                 startday: $routeParams.startday || offer.startday,
@@ -98,6 +97,8 @@ angular.module("myApp")
                 endtime: $routeParams.endtime || offer.endtime,
                 location: {}
             };
+
+
 
             /*if(offer.endday) $('.startdaypicker').data("DateTimePicker").maxDate(moment(offer.endday));
             $('.startdaypicker').data("DateTimePicker").minDate(moment(offer.startday));
@@ -116,7 +117,6 @@ angular.module("myApp")
                     $scope.request.location.longitude = results[0].geometry.location.lng();
                     $scope.map.center = $scope.request.location;
                     $scope.marker.coords = $scope.map.center;
-                    $scope.$apply();
                 }
             });
         };
@@ -130,27 +130,27 @@ angular.module("myApp")
                 .on('dp.change', function (e) {
                     $('.enddaypicker').data("DateTimePicker").minDate(e.date);
                     $scope.request.startday = e.date.toDate();
-                    $scope.$apply();
+                    $scope.$applyAsync();
                 });
         });
 
         $(function () {
             $('.starttimepicker').datetimepicker({
-                format: "LT"
+                format: "HH:mm"
             })
                 .on('dp.change', function (e) {
                     $scope.request.starttime = e.date.toDate();
-                    $scope.$apply();
+                    $scope.$applyAsync();
                 });
         });
 
         $(function () {
             $('.endtimepicker').datetimepicker({
-                format: "LT"
+                format: "HH:mm"
             })
                 .on('dp.change', function (e) {
                     $scope.request.endtime = e.date.toDate();
-                    $scope.$apply();
+                    $scope.$applyAsync();
                 });
         });
 
@@ -164,7 +164,7 @@ angular.module("myApp")
                 .on('dp.change', function (e) {
                     $('.startdaypicker').data("DateTimePicker").maxDate(e.date);
                     $scope.request.repeatoptions.endday = e.date.toDate();
-                    $scope.$apply();
+                    $scope.$applyAsync();
                 });
         });
 
