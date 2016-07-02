@@ -40,9 +40,13 @@ passport.deserializeUser(function(id, done) {
         done(err, user);
     });
 });
+if(mongo.username != "" && mongo.password != ""){
+    var mongostring =  "mongodb://" + mongo.username + ":" + mongo.password + "@" + mongo.url;
+}
+else{
+    var mongostring = "mongodb://" + mongo.url;
+}
 
-var mongostring =  "mongodb://" + mongo.username + ":" + mongo.password + "@" +
-    mongo.url;
 
 var mongoose = require("mongoose");
 mongoose.connect(mongostring);

@@ -34,7 +34,7 @@ module.exports.postCreateRequest = function(req, res) {
     console.log("End Request Body");
 
     var booking = new Booking({
-        startDay :      req.body.startday,
+        startday :      req.body.startday,
         starttime :     req.body.starttime,
         endtime :       req.body.endtime,
         repeating:      req.body.repeating || false,

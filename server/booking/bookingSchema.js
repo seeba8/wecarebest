@@ -19,9 +19,9 @@ var bookingSchema = mongoose.Schema({
         Friday:     {type: Boolean, default: false},
         Saturday:   {type: Boolean, default: false},
         Sunday:     {type: Boolean, default: false},
-        frequency:  {type: String, enum: frequencies},
-        endday :    Date
+        frequency:  {type: String, enum: frequencies}
     },
+    endday :    Date,
     location:       {
         latitude:   Number,
         longitude:  Number,

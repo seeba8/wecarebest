@@ -163,7 +163,7 @@ angular.module("myApp")
                 })
                 .on('dp.change', function (e) {
                     $('.startdaypicker').data("DateTimePicker").maxDate(e.date);
-                    $scope.request.repeatoptions.endday = e.date.toDate();
+                    $scope.request.endday = e.date.toDate();
                     $scope.$applyAsync();
                 });
         });

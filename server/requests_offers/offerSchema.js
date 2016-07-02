@@ -20,9 +20,9 @@ var offerSchema = mongoose.Schema({
         Friday:     {type: Boolean, default: false},
         Saturday:   {type: Boolean, default: false},
         Sunday:     {type: Boolean, default: false},
-        frequency:  {type: String, enum: frequencies},
-        endday:    Date
+        frequency:  {type: String, enum: frequencies}
     },
+    endday:    Date,
     typeofcare:    {type: String, enum: typesofcare},
     wageperhour:    {type: Number, min: 0, max: 100},
     location:       {
