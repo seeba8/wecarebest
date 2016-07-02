@@ -45,7 +45,8 @@ module.exports.postCreateRequest = function(req, res) {
         lastActivity:   req.body.createdDate, //when did the status change the last time?
         createdBy:      careseeker, //Careseeker
         offer :         req.body.offerid,
-        status :        1
+        status :        1,
+        endday:        req.body.endday
     });
     booking.save(function (err) {
         if (err) {
