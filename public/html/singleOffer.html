@@ -17,7 +17,8 @@
     <hr class="colorgraph">
     <div class="row">
         <div class="col-md-2 col-sm-2">
-            <img id="caregiverimg" src="../images/clint.jpg" class="img-rounded img-responsive">
+            <img ng-if="results[0].user.firstname === 'Sebastian'" id="caregiverimg" src="../images/caregiver5.jpg" class="img-rounded img-responsive">
+            <img ng-if="results[0].user.firstname !== 'Sebastian'" id="caregiverimg" src="../images/caregiver_male2.jpg" class="img-rounded img-responsive">
         </div>
         <div class="col-md-8 col-sm-12">
             <div class="media">

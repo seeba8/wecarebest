@@ -52,7 +52,7 @@ angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$ht
                 offer.endtime = moment(offer.endtime).format("LT");
                 offer.endday = offer.repeating ? moment(offer.endday).format("L") : "";
                 offer.createdDate = offer.createdDate ? moment(offer.createdDate).format("L") : moment("2016 01 01", "YYYY MM DD").format("L");
-                offers[offerID].user.picture = offers[offerID].user.picture || "../images/clint.jpg"
+                offers[offerID].user.picture = offers[offerID].user.picture || "../images/caregiver_male2.jpg"
             }
             $scope.results = offers;
             if(isSingleOffer){
