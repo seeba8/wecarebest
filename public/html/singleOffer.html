@@ -33,7 +33,7 @@
                             <img src="../images/icons/location.png" title="location" width="24">
                             <b>Location:</b> {{results[0].offer.location.name}} | <b>Radius:</b> {{results[0].offer.location.radius}} m
                         </li>
-                        <li class="list-group-item">
+                        <li class="list-group-item" ng-show="results[0].offer.notes">
                             <img src="../images/icons/notes.png" title="Notes" width="24">
                             <b>Notes:</b> {{results[0].offer.notes}}
                         </li>
