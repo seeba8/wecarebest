@@ -370,3 +370,7 @@ footer a {
 .msrow {
     margin-top:30px;
 }
+
+.bootstrap-datetimepicker-widget a span{
+    color:#337ab7;
+}
