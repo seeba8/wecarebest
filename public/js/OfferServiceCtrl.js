@@ -74,7 +74,7 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
     });
     $(function () {
         $('.starttimepicker').datetimepicker({
-            format: "LT"
+            format: "HH:mm"
         })
             .on('dp.change', function (e) {
                 $scope.offer.starttime = e.date.toDate();
@@ -84,7 +84,7 @@ angular.module('myApp').controller('CreateOfferCtrl', ['$interval', '$scope', '$
 
     $(function () {
         $('.endtimepicker').datetimepicker({
-            format: "LT"
+            format: "HH:mm"
         })
             .on('dp.change', function (e) {
                 $scope.offer.endtime = e.date.toDate();

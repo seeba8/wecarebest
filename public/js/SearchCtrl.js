@@ -98,7 +98,7 @@ angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$ht
     });
     $(function () {
         $('.starttimepicker').datetimepicker({
-            format: "LT",
+            format: "HH:mm",
             useCurrent: false
         })
             .on('dp.change', function (e) {
@@ -108,7 +108,7 @@ angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$ht
     });
     $(function () {
         $('.endtimepicker').datetimepicker({
-            format: "LT",
+            format: "HH:mm",
             useCurrent: false
         })
             .on('dp.change', function (e) {
