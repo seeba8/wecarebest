@@ -111,6 +111,7 @@ myApp.config(function ($routeProvider) {
         .otherwise({redirectTo: '/'});
 });
 
+
 myApp.factory('authInterceptor', authInterceptor)
     .service('user', userService)
     .service('auth', authService)

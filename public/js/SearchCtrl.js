@@ -2,6 +2,7 @@ angular.module('myApp').controller('SearchCtrl', ['$scope', "$routeParams", '$ht
     var app = this;
     var url = 'http://localhost:3000';
     console.log("Loaded Searchcontroller");
+    
     var isSingleOffer = false;
     $scope.search = {advanced: true};
     $scope.showMap = true;
