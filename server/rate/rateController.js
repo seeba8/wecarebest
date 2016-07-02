@@ -110,6 +110,7 @@ module.exports.postLongRating = function(req, res) {
     conditions["caregiver"] = caregiver;
     console.log("long ratings in Backend Controller");
     Rating.find(conditions, function(err, ratings){
+        
         //Objekt zurückgeben
         console.log(ratings);
         res.send(ratings);

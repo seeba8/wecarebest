@@ -374,3 +374,14 @@ footer a {
 .bootstrap-datetimepicker-widget a span{
     color:#337ab7;
 }
+
+.msschlicht {
+    border-top:1px solid lightgrey;
+}
+
+.ratingtext {
+    font-family:Open Sans;
+    color: #999999;
+    font-weight:200;
+    margin-bottom:10px;
+}

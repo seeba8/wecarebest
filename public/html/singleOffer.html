@@ -77,10 +77,12 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row msrow">
+        <div class="col-md-offset-2 col-md-10 col-sm-12">
+            <h4><b>Rating Summary</b></h4>
+        </div>
         <div class="col-md-offset-2 col-md-10 col-sm-12 well table-responsive staroverall">
-                    <label>Client Rating:</label>
-            <table id="ratingtable" class="table">
+            <table id="ratingtable" >
                 <tr>
                     <td class="col-md-4">Overall Satisfaction</td>
                     <td class="text-center">
@@ -285,59 +287,73 @@
         </div>
     </div>
 
-    <div class="row">
-        <!--<label>Client Ratings:</label>-->
-        <div class="col-md-offset-2 col-md-10 well" ng-repeat="rating in ratings" style="margin-bottom: 20px;">
-
-        <div class="col-md-2 stardetail">
-            <span ng-if="rating.overallSatisfaction == null">
-            No rating available.
-                </span>
-            <span ng-if="rating.overallSatisfaction == 0">
-                <i class="glyphicon glyphicon-star-empty"></i>
-                <i class="glyphicon glyphicon-star-empty"></i>
-                <i class="glyphicon glyphicon-star-empty"></i>
-                <i class="glyphicon glyphicon-star-empty"></i>
-                <i class="glyphicon glyphicon-star-empty"></i>
-            </span>
-            <span ng-if="rating.overallSatisfaction == 1">
-                <i class="glyphicon glyphicon-star"></i>
-                <i class="glyphicon glyphicon-star-empty"></i>
-                <i class="glyphicon glyphicon-star-empty"></i>
-                <i class="glyphicon glyphicon-star-empty"></i>
-                <i class="glyphicon glyphicon-star-empty"></i>
-            </span>
-            <span ng-if="rating.overallSatisfaction == 2">
-                <i class="glyphicon glyphicon-star"></i>
-                <i class="glyphicon glyphicon-star"></i>
-                <i class="glyphicon glyphicon-star-empty"></i>
-                <i class="glyphicon glyphicon-star-empty"></i>
-                <i class="glyphicon glyphicon-star-empty"></i>
-            </span>
-            <span ng-if="rating.overallSatisfaction == 3">
-                <i class="glyphicon glyphicon-star"></i>
-                <i class="glyphicon glyphicon-star"></i>
-                <i class="glyphicon glyphicon-star"></i>
-                <i class="glyphicon glyphicon-star-empty"></i>
-                <i class="glyphicon glyphicon-star-empty"></i>
-            </span>
-            <span ng-if="rating.overallSatisfaction == 4">
-                <i class="glyphicon glyphicon-star"></i>
-                <i class="glyphicon glyphicon-star"></i>
-                <i class="glyphicon glyphicon-star"></i>
-                <i class="glyphicon glyphicon-star"></i>
-                <i class="glyphicon glyphicon-star-empty"></i>
-            </span>
-            <span ng-if="rating.overallSatisfaction == 5">
-                <i class="glyphicon glyphicon-star"></i>
-                <i class="glyphicon glyphicon-star"></i>
-                <i class="glyphicon glyphicon-star"></i>
-                <i class="glyphicon glyphicon-star"></i>
-                <i class="glyphicon glyphicon-star"></i>
-            </span>
+    <div class="row msrow">
+        <div class="col-md-offset-2 col-md-10">
+            <h4><b>Detailed Feedback</b></h4>
         </div>
-        <div class="col-md-9">
-            {{rating.otherRemarks}}
+        <!--<label>Client Ratings:</label>-->
+        <div class="col-md-offset-2 col-md-10" ng-repeat="rating in ratings" style="margin-bottom: 20px;">
+            <div class="row msrow">
+                <div class="col-md-2 stardetail">
+                    <div class="row" style="margin-left:0px;">
+                        <p class="ratingtext text-left">Rating</p>
+                    </div>
+                <span ng-if="rating.overallSatisfaction == null">
+                No rating available.
+                    </span>
+                <span ng-if="rating.overallSatisfaction == 0">
+                    <i class="glyphicon glyphicon-star-empty"></i>
+                    <i class="glyphicon glyphicon-star-empty"></i>
+                    <i class="glyphicon glyphicon-star-empty"></i>
+                    <i class="glyphicon glyphicon-star-empty"></i>
+                    <i class="glyphicon glyphicon-star-empty"></i>
+                </span>
+                <span ng-if="rating.overallSatisfaction == 1">
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star-empty"></i>
+                    <i class="glyphicon glyphicon-star-empty"></i>
+                    <i class="glyphicon glyphicon-star-empty"></i>
+                    <i class="glyphicon glyphicon-star-empty"></i>
+                </span>
+                <span ng-if="rating.overallSatisfaction == 2">
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star-empty"></i>
+                    <i class="glyphicon glyphicon-star-empty"></i>
+                    <i class="glyphicon glyphicon-star-empty"></i>
+                </span>
+                <span ng-if="rating.overallSatisfaction == 3">
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star-empty"></i>
+                    <i class="glyphicon glyphicon-star-empty"></i>
+                </span>
+                <span ng-if="rating.overallSatisfaction == 4">
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star-empty"></i>
+                </span>
+                <span ng-if="rating.overallSatisfaction == 5">
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                </span>
+            </div>
+                <div class="col-md-9">
+                    <div class="row" style="margin-left:0px;">
+                        <p class="ratingtext text-left">
+                            Feedback from {{rating.createdDate | datenotime}}
+                        </p>
+                    </div>
+                {{rating.otherRemarks}}
+            </div>
+            </div>
+            <hr class="msschlicht">
         </div>
     </div>
     </div>
