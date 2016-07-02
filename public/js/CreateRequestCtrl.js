@@ -58,7 +58,7 @@ angular.module("myApp")
         app.submit = function() {
             $http.post(url + "/createRequest", $scope.request).success(function () {
                 console.log("...Inserted Successfully!");
-                $window.location.href = "/#/bookingsrequests";
+                $window.location.href = "/#/mybookingscareseeker";
             })
         };
 
