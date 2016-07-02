@@ -7,7 +7,7 @@ var app = express();
 
 //This tells express to log via morgan
 //and morgan to log in the "combined" pre-defined format
-app.use(morgan('combined'));
+app.use(morgan('tiny'));
 
 
 var cors = require("cors");
@@ -89,6 +89,9 @@ app.get("/failure", function(req,res) {
 app.get("/", function(req,res) {
     res.sendFile("/html/index.html", { root: path.join(__dirname, '/../public') });
 });
+app.get("/*",function(req,res){
+    res.sendFile("/html/partials/404.html", { root: path.join(__dirname, '/../public') });
+})
 
 app.listen(3000);
 module.exports = app;
